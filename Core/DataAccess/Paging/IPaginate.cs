@@ -8,6 +8,7 @@ namespace Core.DataAccess.Paging
 {
     public interface IPaginate<T>
     {
+        //2233
         int From { get; }
         int Index { get; }
         int Size { get; }
