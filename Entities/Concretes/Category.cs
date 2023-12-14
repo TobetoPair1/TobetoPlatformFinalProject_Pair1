@@ -9,6 +9,8 @@ namespace Entities.Concretes
 {
     public class Category:Entity<Guid>
     {
+        //test verisi
         public string Name { get; set; }
+        //denemeler
     }
 }
