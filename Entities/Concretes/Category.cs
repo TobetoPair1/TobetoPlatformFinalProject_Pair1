@@ -12,5 +12,6 @@ namespace Entities.Concretes
         //test verisi
         public string Name { get; set; }
         //denemeler
+        //test verisi 2
     }
 }
