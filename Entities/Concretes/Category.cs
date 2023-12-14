@@ -9,12 +9,12 @@ namespace Entities.Concretes
 {
     public class Category:Entity<Guid>
     {
-        //test verisi
         public string Name { get; set; }
-        //denemeler
-        //test verisi 2
-        //test3
-        //test4
-        //test5
+        public Guid? LiveContentId { get; set; }
+        public Guid? AsyncContentId { get; set; }
+        public Guid? CourseId { get; set; }
+        public List<Course>? Courses { get; set; }
+        public List<LiveContent>? LiveContents { get; set; }
+        public List<AsyncContent>? AsyncContents { get; set; }
     }
 }

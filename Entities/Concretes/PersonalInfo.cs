@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Entities.Concretes
 {
-    public class PersonalInfo:Entity<Guid>
+    public class PersonalInfo : Entity<Guid>
     {
         public string PhoneNumber { get; set; }
         public DateTime BirthDate { get; set; }
@@ -18,5 +18,6 @@ namespace Entities.Concretes
         public string Address { get; set; }
         public string About { get; set; }
         public string ProfileImageUrl { get; set; }
+        public User User { get; set; }
     }
 }

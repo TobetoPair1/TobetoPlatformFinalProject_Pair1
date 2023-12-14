@@ -10,5 +10,6 @@ namespace Entities.Concretes
     public class Skill:Entity<Guid>
     {
         public string Name { get; set; }
+        public List<User> Users { get; set; }
     }
 }
