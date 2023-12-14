@@ -1,5 +1,4 @@
 ﻿using Core.Entities;
-using Entities.Concretes.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Entities.Concretes
 {
-    public class Instructor:User
+    public class Instructor:Entity<Guid>
     {
-        public Guid SessionInstructorId { get; set; }
-        public List<SessionInstructor> Sessions {  get; set; }
+        public string FullName { get; set; }
+        public List<Session> Sessions { get; set; }
     }
 }

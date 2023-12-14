@@ -10,8 +10,8 @@ namespace Entities.Concretes
 {
     public class LiveContent :Content
     {
-        public Guid SessionId { get; set; }
-        public List<Session> SessionList { get; set; }
-
+        public Guid CourseId { get; set; }
+        public List<Session> Sessions { get; set; }
+        public Course Course { get; set; }
     }
 }

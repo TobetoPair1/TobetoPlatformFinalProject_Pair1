@@ -9,9 +9,10 @@ namespace Entities.Concretes
 {
     public class Session:Entity<Guid>
     {
-        public Guid SessionInstructorId { get; set; }
-        public List<SessionInstructor> Instructors { get; set; }
+        public string RecordUrl { get; set; }
+        public string SessionLinkUrl { get; set; }
         public DateTime StartOfTime { get; set; }
-        public DateTime EndOfTime { get; set; } 
+        public DateTime EndOfTime { get; set; }
+        public List<Instructor> Instructors { get; set; }
     }
 }

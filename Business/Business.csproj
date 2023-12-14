@@ -6,4 +6,11 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Abstracts\" />
+    <Folder Include="Concretes\" />
+    <Folder Include="Constants\" />
+    <Folder Include="CCS\" />
+  </ItemGroup>
+
 </Project>
