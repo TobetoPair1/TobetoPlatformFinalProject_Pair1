@@ -12,6 +12,7 @@ namespace Core.DataAccess.Paging
         {
             Items = Array.Empty<T>();
         }
+
         public int Size { get; set; }
         public int Index { get; set; }
         public int Count { get; set; }
