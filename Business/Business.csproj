@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
@@ -7,10 +7,19 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Abstracts\" />
-    <Folder Include="Concretes\" />
-    <Folder Include="Constants\" />
-    <Folder Include="CCS\" />
+    <Compile Remove="CCS\**" />
+    <EmbeddedResource Remove="CCS\**" />
+    <None Remove="CCS\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Core\Core.csproj" />
+    <ProjectReference Include="..\DataAccess\DataAccess.csproj" />
+    <ProjectReference Include="..\Entities\Entities.csproj" />
   </ItemGroup>
 
 </Project>
