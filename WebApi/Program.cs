@@ -1,6 +1,7 @@
 using Business;
 using Core.CrossCuttingConcerns.Exceptions.Extensions;
 using DataAccess;
+using WebApi.Controllers;
 
 var builder = WebApplication.CreateBuilder(args);
 

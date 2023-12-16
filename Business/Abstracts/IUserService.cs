@@ -15,6 +15,6 @@ namespace Business.Abstracts
         Task<IPaginate<GetListUserResponse>> GetListAsync(PageRequest pageRequest);
         Task<DeletedUserResponse> DeleteAsync(DeleteUserRequest deleteUserRequest);
         Task<UpdatedUserResponse> UpdateAsync(UpdateUserRequest updateUserRequest);
-        Task<GetUserResponse> GetByIdAsync(Guid id);
+        Task<GetUserResponse> GetByIdAsync(GetUserRequest getUserRequest);
     }
 }

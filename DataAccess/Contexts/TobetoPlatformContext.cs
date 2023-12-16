@@ -15,6 +15,7 @@ namespace DataAccess.Contexts
         protected IConfiguration Configuration { get; set; }
 
         public DbSet<User> Users { get; set; }
+        public DbSet<PersonalInfo> PersonalInfos { get; set; }
 
 
         public TobetoPlatformContext(DbContextOptions options, IConfiguration configuration):base(options)

@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace Business.Dtos.Requests.User
 {
-    public class DeleteUserRequest
+	public class DeleteUserRequest
     {
+        //ilişkili tablolardan verileri silecek mi?
         public Guid Id { get; set; }
     }
 }
