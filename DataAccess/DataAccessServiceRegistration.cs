@@ -4,11 +4,6 @@ using DataAccess.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataAccess
 {
@@ -18,6 +13,7 @@ namespace DataAccess
         {
             services.AddDbContext<TobetoPlatformContext>(options => options.UseSqlServer(configuration.GetConnectionString("TobetoPlatform")));
             services.AddScoped<IUserDal, EfUserDal>();
+            services.AddScoped<IPersonalInfoDal, EfPersonalInfoDal>();
 
             return services;
         }

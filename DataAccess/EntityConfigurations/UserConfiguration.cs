@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.EntityConfigurations
 {
-    public class UserConfiguration : IEntityTypeConfiguration<User>
+	public class UserConfiguration : IEntityTypeConfiguration<User>
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {
@@ -22,6 +22,7 @@ namespace DataAccess.EntityConfigurations
             builder.Property(u=>u.Email).HasColumnName("Email").IsRequired();
 
             builder.HasQueryFilter(u => !u.DeletedDate.HasValue);
+            builder.HasOne(u=>u.PersonalInfo);
         }
     }
 }

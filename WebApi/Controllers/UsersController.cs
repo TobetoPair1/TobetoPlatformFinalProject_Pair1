@@ -6,13 +6,13 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers
 {
-    [Route("api/[controller]")]
+	[Route("api/[controller]")]
     [ApiController]
     public class UsersController : ControllerBase
     {
-        IUserService _userService;
 
-        public UsersController(IUserService userService)
+        IUserService _userService;
+		public UsersController(IUserService userService)
         {
             _userService = userService;
         }
@@ -24,11 +24,29 @@ namespace WebApi.Controllers
             return Ok(result);
         }
 
-        [HttpGet]
+        [HttpGet("GetAll")]
         public async Task<IActionResult> GetList([FromQuery] PageRequest pageRequest)
         {
             var result = await _userService.GetListAsync(pageRequest);
             return Ok(result);
         }
-    }
+		[HttpGet("Get")]
+		public async Task<IActionResult> Get([FromQuery]GetUserRequest getUserRequest)
+		{
+			var result = await _userService.GetByIdAsync(getUserRequest);
+			return Ok(result);
+		}
+		[HttpDelete]
+		public async Task<IActionResult> Delete([FromBody] DeleteUserRequest deleteUserRequest)
+		{
+			var result = await _userService.DeleteAsync(deleteUserRequest);
+			return Ok(result);
+		}
+		[HttpPut]
+		public async Task<IActionResult> Update([FromBody] UpdateUserRequest UpdateUserRequest)
+		{
+			var result = await _userService.UpdateAsync(UpdateUserRequest);
+			return Ok(result);
+		}
+	}
 }

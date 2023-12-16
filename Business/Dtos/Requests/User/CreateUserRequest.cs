@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Business.Dtos.Requests.User
 {
-    public class CreateUserRequest
+	public class CreateUserRequest
     {
         public string Name { get; set; }
         public string LastName { get; set; }

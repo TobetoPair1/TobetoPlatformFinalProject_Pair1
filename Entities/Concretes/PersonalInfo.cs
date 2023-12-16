@@ -17,7 +17,7 @@ namespace Entities.Concretes
         public string City { get; set; }
         public string District { get; set; }
         public string Address { get; set; }
-        public string About { get; set; }
+        public string? About { get; set; }
         public string ProfileImageUrl { get; set; }
         public User User { get; set; }
     }

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Concretes.EntityFramework
 {
-    public class EfUserDal : EfRepositoryBase<User, Guid, TobetoPlatformContext>, IUserDal
+	public class EfUserDal : EfRepositoryBase<User, Guid, TobetoPlatformContext>, IUserDal
     {
         public EfUserDal(TobetoPlatformContext context) : base(context)
         {
