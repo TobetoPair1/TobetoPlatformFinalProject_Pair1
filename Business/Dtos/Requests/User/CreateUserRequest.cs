@@ -6,12 +6,15 @@ using System.Threading.Tasks;
 
 namespace Business.Dtos.Requests.User
 {
-	public class CreateUserRequest
+    public class CreateUserRequest
     {
-        public string Name { get; set; }
+        public string Name { get; init; } // immutable 
         public string LastName { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
         public bool IsInstructor { get; set; }
     }
+
+
+
 }

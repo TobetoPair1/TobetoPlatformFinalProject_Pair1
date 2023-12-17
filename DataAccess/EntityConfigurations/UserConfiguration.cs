@@ -23,6 +23,7 @@ namespace DataAccess.EntityConfigurations
 
             builder.HasQueryFilter(u => !u.DeletedDate.HasValue);
             builder.HasOne(u=>u.PersonalInfo);
+            builder.HasMany(u=>u.Certificates);
         }
     }
 }
