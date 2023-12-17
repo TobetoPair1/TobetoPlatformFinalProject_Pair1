@@ -22,3 +22,4 @@ namespace Entities.Concretes
         public User User { get; set; }
     }
 }
+//test2
