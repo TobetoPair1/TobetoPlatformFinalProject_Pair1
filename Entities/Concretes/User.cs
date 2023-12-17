@@ -33,3 +33,4 @@ namespace Entities.Concretes
         //public List<ForeignLanguage> ForeignLanguages { get; set; }//Muhammet
     }
 }
+//test
