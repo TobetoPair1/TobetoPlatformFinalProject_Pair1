@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Entities.Concretes
 {
-    public class Experience:Entity<int>
+    public class Experience:Entity<Guid>
     {
         public Guid UserId { get; set; }
         public string OrganizationName { get; set; }

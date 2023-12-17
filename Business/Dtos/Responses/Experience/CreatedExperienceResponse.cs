@@ -9,7 +9,7 @@ namespace Business.Dtos.Responses.Experience
     public class CreatedExperienceResponse
     {
         
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         
         public Guid UserId { get; set; }
         public string OrganizationName { get; set; }
