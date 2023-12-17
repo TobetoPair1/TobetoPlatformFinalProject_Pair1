@@ -16,6 +16,9 @@ namespace DataAccess.Contexts
 
         public DbSet<User> Users { get; set; }
         public DbSet<PersonalInfo> PersonalInfos { get; set; }
+        public DbSet<SocialMedia> SocialMedias { get; set; }
+        public DbSet<Certificate> Certificates { get; set; }
+        public DbSet<Experience> Experiences { get; set; }
 
 
         public TobetoPlatformContext(DbContextOptions options, IConfiguration configuration):base(options)

@@ -16,16 +16,17 @@ namespace Business.Profiles
     {
         public ExperienceProfile()
         {
-            CreateMap<ExperienceProfile, CreateExperienceRequest>().ReverseMap();
-            CreateMap<ExperienceProfile, CreatedExperienceResponse>().ReverseMap();
+            CreateMap<Experience, CreateExperienceRequest>().ReverseMap();
+            CreateMap<Experience, CreatedExperienceResponse>().ReverseMap();
 
-            CreateMap<ExperienceProfile, UpdateExperienceRequest>().ReverseMap();
-            CreateMap<ExperienceProfile, UpdatedExperienceResponse>().ReverseMap();
+            CreateMap<Experience, UpdateExperienceRequest>().ReverseMap();
+            CreateMap<Experience, UpdatedExperienceResponse>().ReverseMap();
 
-            CreateMap<ExperienceProfile, DeleteExperienceRequest>().ReverseMap();
-            CreateMap<ExperienceProfile, DeletedExperienceResponse>().ReverseMap();
+            CreateMap<Experience, DeleteExperienceRequest>().ReverseMap();
+            CreateMap<Experience, DeletedExperienceResponse>().ReverseMap();
 
             CreateMap<IPaginate<Experience>, Paginate<GetListExperienceResponse>>();
+            CreateMap<Experience, GetListExperienceResponse>();
 
             CreateMap<Experience, GetExperienceResponse>().ReverseMap();
 

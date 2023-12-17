@@ -8,6 +8,6 @@ namespace Business.Dtos.Requests.Experience
 {
     public class GetExperienceRequest
     {
-        public Guid UserId { get; set; }
+        public Guid Id { get; set; }
     }
 }

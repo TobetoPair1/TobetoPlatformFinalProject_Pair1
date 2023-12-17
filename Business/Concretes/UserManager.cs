@@ -39,6 +39,7 @@ namespace Business.Concretes
 			CreatedUserResponse result = _mapper.Map<CreatedUserResponse>(createdUser);
 			//Bunu konfigrasyonda otomatik ekleyebilir miyiz?
 			await _personalInfoService.AddAsync(new CreatePersonalInfoRequest { UserId = result.Id });
+			
 			return result;
 		}
 

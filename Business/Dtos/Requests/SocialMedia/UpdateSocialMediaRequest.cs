@@ -2,7 +2,7 @@ namespace Business.Dtos.Requests.SocialMedia;
 
 public class UpdateSocialMediaRequest
 {
-    public Guid UserId { get; set; }
+    public Guid Id { get; set; }
     public string? Name { get; set; }
     public string? Url { get; set; }
     //public User User { get; set; }

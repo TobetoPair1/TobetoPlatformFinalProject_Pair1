@@ -10,7 +10,7 @@ namespace Entities.Concretes
 {
     public class User : Entity<Guid>
     {
-        // duyuru
+        // duyuru  
         // sınav
         // anket
         // başvurular
@@ -25,12 +25,12 @@ namespace Entities.Concretes
 
         public PersonalInfo PersonalInfo { get; set; }
         //public List<Skill> Skills { get; set; }//Furkan
-        //public List<Certificate> Certificates { get; set; }//Sabır
-        //public List<SocialMedia> SocialMedias { get; set; }//Mehmet
+        public List<Certificate> Certificates { get; set; }//Sabır
+        public List<SocialMedia> SocialMedias { get; set; }//Mehmet, Asenkron 
         //public List<Course> Courses { get; set; } //DAL'da bakılacak. ID'si yok. Migration. ÇOK-ÇOK İlişki.
-        //public List<Education> Educations { get; set; }//Atilla
-        //public List<Experience> Experiences { get; set; }//Rümeysa
-        //public List<ForeignLanguage> ForeignLanguages { get; set; }//Muhammet
+        //public List<Education> Educations { get; set; }//Atilla, session da alındı
+        public List<Experience> Experiences { get; set; }//Rümeysa Instructor alındı
+        //public List<ForeignLanguage> ForeignLanguages { get; set; }// Furkan, Category da alındı
     }
 }
 //test

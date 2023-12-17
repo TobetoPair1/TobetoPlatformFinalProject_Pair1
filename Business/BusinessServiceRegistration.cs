@@ -12,6 +12,9 @@ namespace Business
         {
             services.AddScoped<IUserService, UserManager>();
             services.AddScoped<IPersonalInfoService, PersonalInfoManager>();
+            services.AddScoped<ISocialMediaService, SocialMediaManager>();
+            services.AddScoped<IExperienceService, ExperienceManager>();
+            services.AddScoped<ICertificateService, CertificateManager>();
 
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
 

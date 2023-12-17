@@ -30,7 +30,7 @@ namespace Business.Concretes
         public async Task<CreatedExperienceResponse> AddAsync(CreateExperienceRequest createExperienceRequest)
         {
             Experience experience = _mapper.Map<Experience>(createExperienceRequest);
-            var createdExperience = await _experienceDal.AddAsync(experience);
+            var createdExperience = await _experienceDal.AddAsync(experience); // ?? is necessary  --> record
             CreatedExperienceResponse result = _mapper.Map<CreatedExperienceResponse>(experience);
             return result;
         }

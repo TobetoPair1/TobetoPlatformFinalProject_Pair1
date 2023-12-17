@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Concretes.EntityFramework
 {
-    public class EfExperienceDal : EfRepositoryBase<Experience, Guid, TobetoPlatformContext>, IExperienceDal
+    public class EfExperienceDal : EfRepositoryBase<Experience, int, TobetoPlatformContext>, IExperienceDal
     {
         public EfExperienceDal(TobetoPlatformContext context) : base(context)
         {

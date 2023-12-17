@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Abstracts
 {
-    public interface IExperienceDal:IAsyncRepository<Experience, Guid>, IRepository<Experience, Guid> 
+    public interface IExperienceDal:IAsyncRepository<Experience, int>, IRepository<Experience, int> 
     {
     }
 }
