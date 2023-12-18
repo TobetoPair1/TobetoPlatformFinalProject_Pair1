@@ -3,6 +3,7 @@ using Business.Abstracts;
 using Business.Dtos.Requests.Experience;
 using Business.Dtos.Requests.PersonalInfo;
 using Business.Dtos.Responses.Experience;
+using Business.Dtos.Responses.Instructor;
 using Business.Dtos.Responses.PersonalInfo;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
@@ -35,24 +36,33 @@ namespace Business.Concretes
             return result;
         }
 
-        public Task<DeletedExperienceResponse> DeleteAsync(DeleteExperienceRequest deleteExperienceResquest)
+        public async Task<DeletedExperienceResponse> DeleteAsync(DeleteExperienceRequest deleteExperienceRequest)
         {
-            throw new NotImplementedException();
+            Experience experience = await _experienceDal.GetAsync(e => e.Id == deleteExperienceRequest.Id);
+            var deletedExperience = await _experienceDal.DeleteAsync(experience);
+            DeletedExperienceResponse deletedExperienceResponse = _mapper.Map<DeletedExperienceResponse>(deletedExperience);
+            return deletedExperienceResponse;
         }
 
-        public Task<GetExperienceResponse> GetByIdAsync(GetExperienceRequest getExperienceRequest)
+        public async Task<GetExperienceResponse> GetByIdAsync(GetExperienceRequest getExperienceRequest)
         {
-            throw new NotImplementedException();
+            var result = await _experienceDal.GetAsync(i => i.Id == getExperienceRequest.Id);
+            return _mapper.Map<GetExperienceResponse>(result);
         }
 
-        public Task<IPaginate<GetListExperienceResponse>> GetListAsync(PageRequest pageRequest)
+        public async Task<IPaginate<GetListExperienceResponse>> GetListAsync(PageRequest pageRequest)
         {
-            throw new NotImplementedException();
+            var result = await _experienceDal.GetListAsync(index: pageRequest.PageIndex, size: pageRequest.PageSize);
+            return _mapper.Map<Paginate<GetListExperienceResponse>>(result);
         }
 
-        public Task<UpdatedExperienceResponse> UpdateAsync(UpdateExperienceRequest updateExperienceRequest)
+        public async Task<UpdatedExperienceResponse> UpdateAsync(UpdateExperienceRequest updateExperienceRequest)
         {
-            throw new NotImplementedException();
+            Experience experience = _mapper.Map<Experience>(updateExperienceRequest);
+            var updatedExperience= await _experienceDal.UpdateAsync(experience);
+            UpdatedExperienceResponse updatedExperienceResponse=_mapper.Map<UpdatedExperienceResponse>(updatedExperience);
+            return updatedExperienceResponse;
+
         }
     }
 }

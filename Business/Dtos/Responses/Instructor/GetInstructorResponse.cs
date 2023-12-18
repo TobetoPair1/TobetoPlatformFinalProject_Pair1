@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Business.Dtos.Requests.Experience
+namespace Business.Dtos.Responses.Instructor
 {
-    public class DeleteExperienceRequest
+    public class GetInstructorResponse
     {
         public Guid Id { get; set; }
-        public Guid UserId { get; set; }
+        public string FullName { get; set; }
     }
 }

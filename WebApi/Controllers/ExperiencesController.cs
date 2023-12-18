@@ -25,11 +25,33 @@ namespace WebApi.Controllers
             return Ok(result);
         }
 
-        [HttpGet]
+        [HttpGet("GetAll")]
         public async Task<IActionResult> GetList([FromQuery] PageRequest pageRequest)
         {
             var result = await _experienceService.GetListAsync(pageRequest);
             return Ok(result);
         }
+
+        [HttpGet("Get")]
+        public async Task<IActionResult> Get([FromQuery] GetExperienceRequest getExperienceRequest)
+        {
+            var result =await _experienceService.GetByIdAsync(getExperienceRequest);
+            return Ok(result);
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> Delete([FromBody] DeleteExperienceRequest deleteExperienceRequest)
+        {
+            var result = await _experienceService.DeleteAsync(deleteExperienceRequest);
+            return Ok(result);
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> Update([FromBody] UpdateExperienceRequest updateExperienceRequest)
+        {
+            var result = await _experienceService.UpdateAsync(updateExperienceRequest);
+            return Ok(result);
+        }
+
     }
 }
