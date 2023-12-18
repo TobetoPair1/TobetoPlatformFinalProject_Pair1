@@ -20,9 +20,9 @@ namespace DataAccess.EntityConfigurations
             builder.Property(e => e.EducationLevel).HasColumnName("EducationLevel").IsRequired();
             builder.Property(e => e.University).HasColumnName("University").IsRequired();
             builder.Property(e => e.Department).HasColumnName("Department").IsRequired();
-            builder.Property(e => e.StartOfDate).HasColumnName("StartofDate").IsRequired(false);
+            builder.Property(e => e.StartOfDate).HasColumnName("StartofDate").IsRequired();
             builder.Property(e => e.GraduationYear).HasColumnName("GraduationYear").IsRequired();
-            builder.Property(e => e.IsContinued).HasColumnName("IsContinued").IsRequired(false);
+            builder.Property(e => e.IsContinued).HasColumnName("IsContinued").IsRequired();
 
 
             builder.HasQueryFilter(e => !e.DeletedDate.HasValue);
