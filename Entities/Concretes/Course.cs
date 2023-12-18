@@ -20,7 +20,7 @@ namespace Entities.Concretes
         public int ContentCount { get; set; }
         public string ProducingCompany { get; set; }
         public Category Category { get; set; }
-        public List<User> Users { get; set; }
-        public List<Content> Contents { get; set; }
+        public ICollection<User> Users { get; set; }
+        public ICollection<Content> Contents { get; set; }
     }
 }

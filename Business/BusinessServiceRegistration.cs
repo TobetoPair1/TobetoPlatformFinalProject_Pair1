@@ -1,6 +1,7 @@
 ﻿using Business.Abstracts;
 using Business.Concretes;
 using Core.Business.Rules;
+using DataAccess.Abstracts;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 
@@ -15,6 +16,9 @@ namespace Business
             services.AddScoped<ISocialMediaService, SocialMediaManager>();
             services.AddScoped<IExperienceService, ExperienceManager>();
             services.AddScoped<ICertificateService, CertificateManager>();
+            services.AddScoped<IEducationService, EducationManager>();
+            services.AddScoped<ISkillService, SkillManager>();
+            services.AddScoped<IUserSkillService, UserSkillManager>();
 
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
 

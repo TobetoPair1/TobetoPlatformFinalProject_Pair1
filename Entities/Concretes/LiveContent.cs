@@ -11,7 +11,7 @@ namespace Entities.Concretes
     public class LiveContent :Content
     {
         public Guid CourseId { get; set; }
-        public List<Session> Sessions { get; set; }
+        public ICollection<Session> Sessions { get; set; }
         public Course Course { get; set; }
     }
 }
