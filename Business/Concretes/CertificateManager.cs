@@ -2,6 +2,7 @@
 using Business.Abstracts;
 using Business.Dtos.Requests.Certificate;
 using Business.Dtos.Responses.Certificate;
+using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
 using Entities.Concretes;
 using System;
@@ -24,9 +25,26 @@ namespace Business.Concretes
         public async Task<CreatedCertificateResponse> AddAsync(CreateCertificateRequest createCertificateRequest)
         {
             Certificate certificate = _mapper.Map<Certificate>(createCertificateRequest);
-            await _certificateDal.AddAsync(certificate);
-            CreatedCertificateResponse createdCertificateResponse = _mapper.Map<CreatedCertificateResponse>(certificate);
-            return createdCertificateResponse;
+            return _mapper.Map<CreatedCertificateResponse>(await _certificateDal.AddAsync(certificate));
+        }
+
+        public async Task<DeletedCertificateResponse> DeleteAsync(DeleteCertificateRequest deleteCertificateRequest)
+        {
+            Certificate deletedCertificate = await _certificateDal.GetAsync(c => c.Id == deleteCertificateRequest.Id);
+            await _certificateDal.DeleteAsync(deletedCertificate, true);
+            return _mapper.Map<DeletedCertificateResponse>(deletedCertificate);
+        }
+
+        public async Task<GetCertificateResponse> GetAsync(GetCertificateRequest getCertificateRequest)
+        {
+            Certificate certificate = await _certificateDal.GetAsync(c => c.Id == getCertificateRequest.id);
+            return _mapper.Map<GetCertificateResponse>(certificate);
+
+        }
+        public async Task<IPaginate<GetListCertificateResponse>> GetListAsync(PageRequest pageRequest)
+        {
+            var result = await _certificateDal.GetListAsync(index: pageRequest.PageIndex, size: pageRequest.PageSize);
+            return _mapper.Map<Paginate<GetListCertificateResponse>>(result);
         }
     }
 }
