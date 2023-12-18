@@ -26,6 +26,7 @@ namespace DataAccess
             services.AddScoped<ISkillDal, EfSkillDal>();
             services.AddScoped<IUserSkillDal, EfUserSkillDal>();
             services.AddScoped<ICertificateDal, EfCertificateDal>();
+            services.AddScoped<IForeignLanguageDal, EfForeignLanguageDal>();
 
 
             return services;
