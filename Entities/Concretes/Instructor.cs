@@ -10,6 +10,6 @@ namespace Entities.Concretes
     public class Instructor:Entity<Guid>
     {
         public string FullName { get; set; }
-        public List<Session> Sessions { get; set; }
+        public ICollection<Session> Sessions { get; set; }
     }
 }

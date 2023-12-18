@@ -1,0 +1,33 @@
+﻿using Entities.Concretes;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace DataAccess.EntityConfigurations
+{
+    public class EducationConfiguration : IEntityTypeConfiguration<Education>
+    {
+        public void Configure(EntityTypeBuilder<Education> builder)
+        {
+            builder.ToTable("Educations").HasKey(e => e.Id);
+
+            builder.Property(e => e.Id).HasColumnName("Id").IsRequired();
+            builder.Property(e => e.UserId).HasColumnName("UserId").IsRequired();
+            builder.Property(e => e.EducationLevel).HasColumnName("EducationLevel").IsRequired();
+            builder.Property(e => e.University).HasColumnName("University").IsRequired();
+            builder.Property(e => e.Department).HasColumnName("Department").IsRequired();
+            builder.Property(e => e.StartOfDate).HasColumnName("StartofDate").IsRequired(false);
+            builder.Property(e => e.GraduationYear).HasColumnName("GraduationYear").IsRequired();
+            builder.Property(e => e.IsContinued).HasColumnName("IsContinued").IsRequired(false);
+
+
+            builder.HasQueryFilter(e => !e.DeletedDate.HasValue);
+
+            builder.HasOne(e => e.User);
+        }
+    }
+}

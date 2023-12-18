@@ -13,6 +13,6 @@ namespace Entities.Concretes
         public string SessionLinkUrl { get; set; }
         public DateTime StartOfTime { get; set; }
         public DateTime EndOfTime { get; set; }
-        public List<Instructor> Instructors { get; set; }
+        public ICollection<Instructor> Instructors { get; set; }
     }
 }

@@ -22,7 +22,11 @@ namespace DataAccess
             services.AddScoped<IPersonalInfoDal, EfPersonalInfoDal>();
             services.AddScoped<ISocialMediaDal, EfSocialMediaDal>();
             services.AddScoped<IExperienceDal, EfExperienceDal>();
+            services.AddScoped<IEducationDal, EfEducationDal>();
+            services.AddScoped<ISkillDal, EfSkillDal>();
+            services.AddScoped<IUserSkillDal, EfUserSkillDal>();
             services.AddScoped<ICertificateDal, EfCertificateDal>();
+
 
             return services;
         }
