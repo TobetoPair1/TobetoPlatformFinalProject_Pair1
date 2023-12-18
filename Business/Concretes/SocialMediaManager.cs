@@ -5,6 +5,7 @@ using Business.Dtos.Responses.SocialMedia;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
 using DataAccess.Concretes.EntityFramework;
+using Entities.Concretes;
 
 namespace Business.Concretes;
 
@@ -19,28 +20,44 @@ public class SocialMediaManager: ISocialMediaService
         _socialMediaDal = socialMediaDal;
     }
     
-    public Task<CreatedSocialMediaResponse> AddAsync(CreateSocialMediaRequest createSocialMediaRequest)
+    public async Task<CreatedSocialMediaResponse> AddAsync(CreateSocialMediaRequest createSocialMediaRequest)
     {
-        throw new NotImplementedException();
+        SocialMedia socialMedia = _mapper.Map<SocialMedia>(createSocialMediaRequest);
+        var createdSocialMedia = await _socialMediaDal.AddAsync(socialMedia);
+        CreatedSocialMediaResponse createdSocialMediaResponse = _mapper.Map<CreatedSocialMediaResponse>(createdSocialMedia);
+        return createdSocialMediaResponse;
     }
 
-    public Task<IPaginate<GetListSocialMediaResponse>> GetListAsync(PageRequest pageRequest)
+
+    public async Task<IPaginate<GetListSocialMediaResponse>> GetListAsync(PageRequest pageRequest)
     {
-        throw new NotImplementedException();
+        var result = await _socialMediaDal.GetListAsync(index: pageRequest.PageIndex, size: pageRequest.PageSize);
+        return _mapper.Map<Paginate<GetListSocialMediaResponse>>(result);
     }
 
-    public Task<DeletedSocialMediaResponse> DeleteAsync(DeleteSocialMediaRequest deleteSocialMediaRequest)
+
+    public async Task<DeletedSocialMediaResponse> DeleteAsync(DeleteSocialMediaRequest deleteSocialMediaRequest)
     {
-        throw new NotImplementedException();
+        SocialMedia socialMedia = await _socialMediaDal.GetAsync(s => s.Id == deleteSocialMediaRequest.Id);
+        var deletedSocialMedia = await _socialMediaDal.DeleteAsync(socialMedia);
+        DeletedSocialMediaResponse deletedSocialMediaResponse = _mapper.Map<DeletedSocialMediaResponse>(deletedSocialMedia);
+        return deletedSocialMediaResponse;
     }
 
-    public Task<UpdatedSocialMediaResponse> UpdateAsync(UpdateSocialMediaRequest updateSocialMediaRequest)
+
+    public async Task<UpdatedSocialMediaResponse> UpdateAsync(UpdateSocialMediaRequest updateSocialMediaRequest)
     {
-        throw new NotImplementedException();
+        SocialMedia socialMedia = _mapper.Map<SocialMedia>(updateSocialMediaRequest);
+        var updatedSocialMedia = await _socialMediaDal.UpdateAsync(socialMedia);
+        UpdatedSocialMediaResponse updatedSocialMediaResponse = _mapper.Map<UpdatedSocialMediaResponse>(updatedSocialMedia);
+        return updatedSocialMediaResponse;
     }
 
-    public Task<GetSocialMediaResponse> GetByIdAsync(GetSocialMediaRequest getSocialMediaRequest)
+
+    public async Task<GetSocialMediaResponse> GetByIdAsync(GetSocialMediaRequest getSocialMediaRequest)
     {
-        throw new NotImplementedException();
+        var result = await _socialMediaDal.GetAsync(sm => sm.Id == getSocialMediaRequest.Id);
+        return _mapper.Map<GetSocialMediaResponse>(result);
     }
+
 }
