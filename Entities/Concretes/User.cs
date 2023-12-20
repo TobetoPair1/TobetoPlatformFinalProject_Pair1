@@ -23,13 +23,12 @@ namespace Entities.Concretes
 
 
         public PersonalInfo PersonalInfo { get; set; }
-        public Skill Skill { get; set; }//Furkan
+        public ICollection<UserSkill> Skills { get; set; }//Furkan
         public ICollection<Certificate> Certificates { get; set; }//Sabır
         public ICollection<SocialMedia> SocialMedias { get; set; }//Mehmet, Asenkron
         //public List<Course> Courses { get; set; } //DAL'da bakılacak. ID'si yok. Migration. ÇOK-ÇOK İlişki.
         public ICollection<Education> Educations { get; set; }//Atilla, session da alındı
         public ICollection<Experience> Experiences { get; set; }//Rümeysa Instructor alındı
-        //public ICollection<ForeignLanguage> ForeignLanguages { get; set; }// Furkan, Category da alındı
+        public ICollection<ForeignLanguage> ForeignLanguages { get; set; }// Furkan, Category da alındı
     }
 }
-//test

@@ -20,7 +20,7 @@ namespace DataAccess.EntityConfigurations
 
             builder.HasQueryFilter(i => !i.DeletedDate.HasValue);
 
-            builder.HasMany(i => i.Sessions).WithOne().HasForeignKey(s => s.Id);
+            //builder.HasMany(i => i.Sessions).WithMany(s=>s.Instructors);
         }
     }
 }

@@ -8,16 +8,18 @@ namespace DataAccess.EntityConfigurations
 	{
 		public void Configure(EntityTypeBuilder<UserSkill> builder)
 		{
-			builder.ToTable("UserSkills").HasKey(s => s.Id);
+			builder.Ignore(us => us.Id);
+			builder.HasKey(us => new {us.UserId,us.SkillId});
+			
+			builder.Property(us => us.UserId).HasColumnName("UserId").IsRequired();
+			builder.Property(us => us.SkillId).HasColumnName("SkillId").IsRequired();
 
-			builder.Property(s => s.Id).HasColumnName("Id").IsRequired();
-			builder.Property(s => s.UserId).HasColumnName("UserId").IsRequired();
-			builder.Property(s => s.SkillId).HasColumnName("SkillId").IsRequired();
+			builder.HasQueryFilter(us => !us.DeletedDate.HasValue);
 
-			builder.HasQueryFilter(s => !s.DeletedDate.HasValue);
-
-			builder.HasOne(s=>s.User);
-			builder.HasOne(s=>s.Skill);
+			builder.HasOne(us => us.User);
+			builder.HasOne(us => us.Skill);
+			//builder.HasOne(us => us.User).WithMany(u => u.Skills).HasForeignKey(us => us.UserId);
+			//builder.HasOne(us => us.Skill).WithMany(s => s.Users).HasForeignKey(us => us.SkillId);
 		}
 	}
 }

@@ -26,8 +26,9 @@ namespace DataAccess.EntityConfigurations
             builder.HasMany(u=>u.Certificates);
             builder.HasMany(u=>u.SocialMedias);
             builder.HasMany(u=>u.Experiences);
-            
-            
-        }
-    }
+			builder.HasMany(u => u.Skills);
+
+
+		}
+	}
 }
