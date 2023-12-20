@@ -1,4 +1,6 @@
 ﻿using Core.Entities;
+using Entities.Concretes.CrossTable;
+using Entities.Concretes.CrossTables;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,10 +12,6 @@ namespace Entities.Concretes
 {
     public class User : Entity<Guid>
     {
-        // duyuru
-        // sınav
-        // anket
-        // başvurular
         public string Name { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
@@ -21,14 +19,19 @@ namespace Entities.Concretes
         public bool IsInstructor { get; set; }
 
 
-
         public PersonalInfo PersonalInfo { get; set; }
-        public ICollection<UserSkill> Skills { get; set; }//Furkan
-        public ICollection<Certificate> Certificates { get; set; }//Sabır
-        public ICollection<SocialMedia> SocialMedias { get; set; }//Mehmet, Asenkron
-        //public List<Course> Courses { get; set; } //DAL'da bakılacak. ID'si yok. Migration. ÇOK-ÇOK İlişki.
-        public ICollection<Education> Educations { get; set; }//Atilla, session da alındı
-        public ICollection<Experience> Experiences { get; set; }//Rümeysa Instructor alındı
-        public ICollection<ForeignLanguage> ForeignLanguages { get; set; }// Furkan, Category da alındı
+        public ICollection<UserCourse> Courses { get; set; }
+        public ICollection<UserSkill> Skills { get; set; }
+        public ICollection<Certificate> Certificates { get; set; }
+        public ICollection<SocialMedia> SocialMedias { get; set; }
+        public ICollection<Education> Educations { get; set; }
+        public ICollection<Experience> Experiences { get; set; }
+        public ICollection<ForeignLanguage> ForeignLanguages { get; set; }
+        public ICollection<UserApplication> Applications { get; set; }
+        public ICollection<UserExam> Exams { get; set; }
+        public ICollection<UserSurvey> Surveys { get; set; }
+        public ICollection<UserLike> Likes { get; set; }
+        public ICollection<UserFavourite> Favorites { get; set; }
+        public ICollection<File> Files { get; set; }
     }
 }

@@ -10,11 +10,11 @@ namespace Entities.Concretes
     public class Category:Entity<Guid>
     {
         public string Name { get; set; }
-        public Guid? LiveContentId { get; set; }
-        public Guid? AsyncContentId { get; set; }
-        public Guid? CourseId { get; set; }
-        public ICollection<Course>? Courses { get; set; }
-        public ICollection<LiveContent>? LiveContents { get; set; }
-        public ICollection<AsyncContent>? AsyncContents { get; set; }
+        public Guid LiveContentId { get; set; }
+        public Guid AsyncContentId { get; set; }
+        public Guid CourseId { get; set; }
+        public ICollection<Course> Courses { get; set; }
+        public ICollection<LiveContent> LiveContents { get; set; }
+        public ICollection<AsyncContent> AsyncContents { get; set; }
     }
 }

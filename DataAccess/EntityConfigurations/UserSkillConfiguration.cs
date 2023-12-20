@@ -1,10 +1,10 @@
-﻿using Entities.Concretes;
+﻿using Entities.Concretes.CrossTable;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace DataAccess.EntityConfigurations
 {
-	public class UserSkillConfiguration : IEntityTypeConfiguration<UserSkill>
+    public class UserSkillConfiguration : IEntityTypeConfiguration<UserSkill>
 	{
 		public void Configure(EntityTypeBuilder<UserSkill> builder)
 		{

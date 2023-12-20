@@ -5,14 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Entities.Concretes
+namespace Entities.Concretes.CrossTable
 {
-    public class Certificate:Entity<Guid>
+    public class UserSurvey : Entity<Guid>
     {
-        public string Name { get; set; }
         public Guid UserId { get; set; }
-        public string FilePath { get; set; }
-        public string FileType { get; set; }
+        public Guid SurveyId { get; set; }
         public User User { get; set; }
+        public Survey Survey { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Core.Entities;
+using Entities.Concretes.CrossTables;
 using Entities.Concretes.Models;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,6 @@ namespace Entities.Concretes
         public string Company { get; set; }
         public string Description { get; set; }
         public Category Category { get; set; }
-        public Course Course { get; set; }
+        public ICollection<CourseAsyncContent> Courses { get; set; }
     }
 }

@@ -2,11 +2,11 @@
 using Business.Dtos.Requests.UserSkill;
 using Business.Dtos.Responses.UserSkill;
 using Core.DataAccess.Paging;
-using Entities.Concretes;
+using Entities.Concretes.CrossTable;
 
 namespace Business.Profiles
 {
-	public class UserSkillProfile : Profile
+    public class UserSkillProfile : Profile
 	{
 		public UserSkillProfile()
 		{

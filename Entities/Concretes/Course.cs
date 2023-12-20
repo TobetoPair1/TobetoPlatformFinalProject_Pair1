@@ -1,4 +1,6 @@
 ﻿using Core.Entities;
+using Entities.Concretes.CrossTable;
+using Entities.Concretes.CrossTables;
 using Entities.Concretes.Models;
 using System;
 using System.Collections.Generic;
@@ -20,7 +22,11 @@ namespace Entities.Concretes
         public int ContentCount { get; set; }
         public string ProducingCompany { get; set; }
         public Category Category { get; set; }
-        public ICollection<User> Users { get; set; }
-        public ICollection<Content> Contents { get; set; }
+        public ICollection<UserCourse> Users { get; set; }
+        public ICollection<CourseAsyncContent> AsyncContents { get; set; }
+        public ICollection<CourseLiveContent> LiveContents { get; set; }
+        public ICollection<Homework> Homeworks { get; set; }
+        public ICollection<Assignment> Assignment { get; set; }
+        public Like Like { get; set; }
     }
 }

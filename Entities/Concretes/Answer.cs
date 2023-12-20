@@ -7,9 +7,11 @@ using System.Threading.Tasks;
 
 namespace Entities.Concretes
 {
-    public class Announcement : Entity<Guid>
+    public class Answer : Entity<Guid>
     {
-        public string Header { get; set; }
+        public Guid QuestionId { get; set; }
         public string Description { get; set; }
+        public string ImageUrl { get; set; }
+        public Question Question { get; set; }
     }
 }

@@ -11,6 +11,6 @@ namespace Business.Dtos.Responses.Instructor
     {
         public Guid Id { get; set; }
         public string FullName { get; set; }
-        public List<Session> Sessions { get; set; } //eğitmenin oturumlarını listeler.
+        public List<Entities.Concretes.Session> Sessions { get; set; } //eğitmenin oturumlarını listeler.
     }
 }

@@ -6,7 +6,7 @@ using Business.Dtos.Responses.Skill;
 using Business.Dtos.Responses.UserSkill;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
-using Entities.Concretes;
+using Entities.Concretes.CrossTable;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace Business.Concretes
 {
-	public class UserSkillManager : IUserSkillService
+    public class UserSkillManager : IUserSkillService
 	{
 		IUserSkillDal _userSkillDal;
 		IMapper _mapper;
