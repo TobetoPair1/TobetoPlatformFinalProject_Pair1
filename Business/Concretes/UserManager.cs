@@ -43,6 +43,12 @@ namespace Business.Concretes
 			return result;
 		}
 
+		public async Task<GetUserResponse> CheckUserAsync(GetUserRequest getUserRequest)
+		{
+			var result = await _userDal.GetAsync(u => u.Email==getUserRequest.Email && u.Password==getUserRequest.Password);
+			return _mapper.Map<GetUserResponse>(result);
+		}
+
 		public async Task<DeletedUserResponse> DeleteAsync(DeleteUserRequest deleteUserRequest)
 		{
 			User user = await _userDal.GetAsync(u => u.Id == deleteUserRequest.Id);
