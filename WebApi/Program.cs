@@ -6,7 +6,14 @@ using WebApi.Controllers;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
+builder.Services.AddCors(option =>
+{
+    option.AddDefaultPolicy(configure =>
+    {
+        configure.AllowAnyOrigin();
+        configure.AllowAnyHeader();
+    });
+});
 builder.Services.AddControllers();
 builder.Services.AddBusinessServices();
 builder.Services.AddDataAccessServices(builder.Configuration);
@@ -24,6 +31,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors();
 
 app.UseAuthorization();
 

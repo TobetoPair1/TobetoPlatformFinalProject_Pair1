@@ -17,5 +17,6 @@ namespace Business.Abstracts
         Task<DeletedUserResponse> DeleteAsync(DeleteUserRequest deleteUserRequest);
         Task<UpdatedUserResponse> UpdateAsync(UpdateUserRequest updateUserRequest);
         Task<GetUserResponse> GetByIdAsync(GetUserRequest getUserRequest);
+        Task<GetUserResponse> CheckUserAsync(GetUserRequest getUserRequest);
     }
 }

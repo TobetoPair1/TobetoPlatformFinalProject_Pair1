@@ -1,6 +1,7 @@
 ﻿using Business.Abstracts;
 using Business.Dtos.Requests.User;
 using Core.DataAccess.Paging;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,6 +9,7 @@ namespace WebApi.Controllers
 {
 	[Route("api/[controller]")]
     [ApiController]
+	[EnableCors]
     public class UsersController : ControllerBase
     {
 
@@ -17,14 +19,20 @@ namespace WebApi.Controllers
             _userService = userService;
         }
 
-        [HttpPost]
+        [HttpPost("Add")]
         public async Task<IActionResult> Add([FromBody] CreateUserRequest createUserRequest)
         {
             var result = await _userService.AddAsync(createUserRequest);
             return Ok(result);
         }
+		[HttpPost("CheckUser")]
+		public async Task<IActionResult> CheckUser([FromBody] GetUserRequest getUserRequest)
+		{
+			var result = await _userService.CheckUserAsync(getUserRequest);
+			return Ok(result);
+		}
 
-        [HttpGet("GetAll")]
+		[HttpGet("GetAll")]
         public async Task<IActionResult> GetList([FromQuery] PageRequest pageRequest)
         {
             var result = await _userService.GetListAsync(pageRequest);
