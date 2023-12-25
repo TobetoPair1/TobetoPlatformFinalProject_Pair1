@@ -10,15 +10,17 @@ using System.Threading.Tasks;
 
 namespace Entities.Concretes
 {
-    public class User : Entity<Guid>
+    public class User : Entity<Guid>,IUser
     {
-        public string Name { get; set; }
+        public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string Email { get; set; }//uniqe olacak
-        public string Password { get; set; }
+        public string Email { get; set; }
+        public byte[] PasswordSalt { get; set; }
+        public byte[] PasswordHash { get; set; }
+        public bool Status { get; set; }
         public bool IsInstructor { get; set; }
 
-
+        public ICollection<UserOperationClaim> Claims { get; set; }
         public PersonalInfo PersonalInfo { get; set; }
         //public ICollection<UserCourse> Courses { get; set; }
         public ICollection<UserSkill> Skills { get; set; }

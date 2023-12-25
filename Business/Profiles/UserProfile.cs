@@ -1,13 +1,10 @@
 ﻿using AutoMapper;
+using Business.Dtos.Requests.Auth.Request;
 using Business.Dtos.Requests.User;
+using Business.Dtos.Responses.Auth;
 using Business.Dtos.Responses.User;
 using Core.DataAccess.Paging;
 using Entities.Concretes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Business.Profiles
 {
@@ -25,6 +22,16 @@ namespace Business.Profiles
 			CreateMap<IPaginate<User>, Paginate<GetListUserResponse>>();
 			CreateMap<User, GetListUserResponse>().ReverseMap();
 			CreateMap<User, GetUserResponse>().ReverseMap();
-		}
+
+			CreateMap<GetUserResponse,LoginResponse>().ReverseMap();
+			CreateMap<CreatedUserResponse, RegisterResponse>();
+
+
+            CreateMap<User, RegisterRequest>()
+				.ReverseMap()
+				.ForMember(destinationMember: u => u.PasswordHash, memberOptions: opt => opt.MapFrom(r => r._passwordHash))
+				.ForMember(destinationMember: u => u.PasswordSalt, memberOptions: opt => opt.MapFrom(r => r._passwordSalt));
+
+        }
 	}
 }

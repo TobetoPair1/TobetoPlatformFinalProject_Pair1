@@ -20,6 +20,7 @@ namespace Business
             services.AddScoped<ISkillService, SkillManager>();
             services.AddScoped<IUserSkillService, UserSkillManager>();
             services.AddScoped<IForeignLanguageService, ForeignLanguageManager>();
+            services.AddScoped<IAuthService, AuthManager>();
 
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
 

@@ -25,6 +25,8 @@ namespace DataAccess.Contexts
         public DbSet<UserSkill> UserSkills { get; set; }
         //public DbSet<Instructor> Instructors { get; set; }
         public DbSet<ForeignLanguage> ForeignLanguages { get; set; }
+        public DbSet<OperationClaim> OperationClaims { get; set; }
+        public DbSet<UserOperationClaim> UserOperationClaims { get; set; }
 
 
         public TobetoPlatformContext(DbContextOptions options, IConfiguration configuration):base(options)

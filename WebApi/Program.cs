@@ -2,6 +2,7 @@ using Business;
 using Core.CrossCuttingConcerns.Exceptions.Extensions;
 using DataAccess;
 using WebApi.Controllers;
+using Core;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +18,7 @@ builder.Services.AddCors(option =>
 builder.Services.AddControllers();
 builder.Services.AddBusinessServices();
 builder.Services.AddDataAccessServices(builder.Configuration);
+builder.Services.AddCoreServices(builder.Configuration);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

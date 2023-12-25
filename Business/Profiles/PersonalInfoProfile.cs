@@ -24,7 +24,7 @@ namespace Business.Profiles
 			CreateMap<IPaginate<PersonalInfo>, Paginate<GetListPersonalInfoResponse>>();
 
 			CreateMap<PersonalInfo, GetListPersonalInfoResponse>()
-				.ForMember(destinationMember:pi=>pi.Name,memberOptions:opt=>opt.MapFrom(pi=>pi.User.Name))
+				.ForMember(destinationMember:pi=>pi.Name,memberOptions:opt=>opt.MapFrom(pi=>pi.User.FirstName))
 				.ForMember(destinationMember:pi=>pi.LastName,memberOptions:opt=>opt.MapFrom(pi=>pi.User.LastName))
 				.ForMember(destinationMember:pi=>pi.Email,memberOptions:opt=>opt.MapFrom(pi=>pi.User.Email))
 				.ReverseMap();

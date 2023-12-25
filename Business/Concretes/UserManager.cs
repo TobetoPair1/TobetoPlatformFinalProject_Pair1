@@ -43,11 +43,11 @@ namespace Business.Concretes
 			return result;
 		}
 
-		public async Task<GetUserResponse> CheckUserAsync(GetUserRequest getUserRequest)
-		{
-			var result = await _userDal.GetAsync(u => u.Email==getUserRequest.Email && u.Password==getUserRequest.Password);
-			return _mapper.Map<GetUserResponse>(result);
-		}
+		//public async Task<GetUserResponse> CheckUserAsync(GetUserRequest getUserRequest)
+		//{
+		//	var result = await _userDal.GetAsync(u => u.Email==getUserRequest.Email && u.Password==getUserRequest.Password);
+		//	return _mapper.Map<GetUserResponse>(result);
+		//}
 
 		public async Task<DeletedUserResponse> DeleteAsync(DeleteUserRequest deleteUserRequest)
 		{
@@ -57,13 +57,20 @@ namespace Business.Concretes
 			return deletedUserResponse;
 		}
 
-		public async Task<GetUserResponse> GetByIdAsync(GetUserRequest getUserRequest)
+		public async Task<GetUserResponse> GetByIdAsync(Guid? id)
 		{
-			var result = await _userDal.GetAsync(u=>u.Id==getUserRequest.Id);
+			var result = await _userDal.GetAsync(u=>u.Id==id);
 			return _mapper.Map<GetUserResponse>(result);
 		}
 
-		public async Task<IPaginate<GetListUserResponse>> GetListAsync(PageRequest pageRequest)
+        public async Task<GetUserResponse> GetByMailAsync(string mail)
+        {
+			var result = await _userDal.GetAsync(u => u.Email == mail);
+
+            return _mapper.Map<GetUserResponse>(result);
+        }
+
+        public async Task<IPaginate<GetListUserResponse>> GetListAsync(PageRequest pageRequest)
 		{
 			//var result = await _userDal.GetListAsync((u=>u.Name.Length==2), null, null, pageRequest.PageIndex, pageRequest.PageSize);
 			var result = await _userDal.GetListAsync(index: pageRequest.PageIndex, size: pageRequest.PageSize);

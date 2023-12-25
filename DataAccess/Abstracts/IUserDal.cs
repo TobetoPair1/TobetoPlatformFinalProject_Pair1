@@ -10,5 +10,6 @@ namespace DataAccess.Abstracts
 {
 	public interface IUserDal: IAsyncRepository<User,Guid>,IRepository<User,Guid>
     {
-    }
+        List<OperationClaim> GetClaims(User user);
+    }	
 }

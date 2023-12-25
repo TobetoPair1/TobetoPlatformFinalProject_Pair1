@@ -25,12 +25,12 @@ namespace WebApi.Controllers
             var result = await _userService.AddAsync(createUserRequest);
             return Ok(result);
         }
-		[HttpPost("CheckUser")]
-		public async Task<IActionResult> CheckUser([FromBody] GetUserRequest getUserRequest)
-		{
-			var result = await _userService.CheckUserAsync(getUserRequest);
-			return Ok(result);
-		}
+		//[HttpPost("CheckUser")]
+		//public async Task<IActionResult> CheckUser([FromBody] GetUserRequest getUserRequest)
+		//{
+		//	var result = await _userService.CheckUserAsync(getUserRequest);
+		//	return Ok(result);
+		//}
 
 		[HttpGet("GetAll")]
         public async Task<IActionResult> GetList([FromQuery] PageRequest pageRequest)
@@ -41,7 +41,7 @@ namespace WebApi.Controllers
 		[HttpGet("Get")]
 		public async Task<IActionResult> Get([FromQuery]GetUserRequest getUserRequest)
 		{
-			var result = await _userService.GetByIdAsync(getUserRequest);
+			var result = await _userService.GetByIdAsync(getUserRequest.Id);
 			return Ok(result);
 		}
 		[HttpDelete]
