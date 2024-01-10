@@ -19,18 +19,12 @@ namespace WebApi.Controllers
         [HttpPost("login")]
         public async Task<ActionResult> Login(LoginRequest loginRequest)
         {
-            var result = await _authService.Login(loginRequest);
-            if (result == null)
+            var userToLogin = await _authService.Login(loginRequest);
+            if (userToLogin == null)
             {
                 return BadRequest("giriş başarısız");
             }
-
-            //var result = _authService.CreateAccessToken(userToLogin.Data);
-            //if (result.Success)
-            //{
-            //    return Ok(result.Data);
-            //}
-
+            var result = _authService.CreateAccessToken(userToLogin);
             return Ok(result);
         }
 
@@ -43,9 +37,10 @@ namespace WebApi.Controllers
                 return BadRequest("kullanıcı mevcut");
             }
 
-            var result =await _authService.Register(registerRequest);
+            var registeredUser =await _authService.Register(registerRequest);
+			var result = _authService.CreateAccessToken(registeredUser);
 
-            return Ok(result);
+			return Ok(result);
         }
     }
 }

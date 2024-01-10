@@ -5,6 +5,7 @@ using Business.Dtos.Requests.User;
 using Business.Dtos.Responses.User;
 using Business.Rules;
 using Core.DataAccess.Paging;
+using Core.Entities;
 using DataAccess.Abstracts;
 using Entities.Concretes;
 using System;
@@ -63,11 +64,11 @@ namespace Business.Concretes
 			return _mapper.Map<GetUserResponse>(result);
 		}
 
-        public async Task<GetUserResponse> GetByMailAsync(string mail)
+        public async Task<User> GetByMailAsync(string mail)
         {
 			var result = await _userDal.GetAsync(u => u.Email == mail);
 
-            return _mapper.Map<GetUserResponse>(result);
+			return result;
         }
 
         public async Task<IPaginate<GetListUserResponse>> GetListAsync(PageRequest pageRequest)
@@ -83,6 +84,11 @@ namespace Business.Concretes
 			var updatedUser = await _userDal.UpdateAsync(user);
 			UpdatedUserResponse updatedUserResponse = _mapper.Map<UpdatedUserResponse>(updatedUser);
 			return updatedUserResponse;
+		}
+
+		public List<IOperationClaim> GetClaims(IUser user)
+		{
+			return _userDal.GetClaims(user);
 		}
 	}
 }

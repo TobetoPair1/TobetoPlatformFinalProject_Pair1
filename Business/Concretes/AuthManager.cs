@@ -4,6 +4,7 @@ using Business.Dtos.Requests.Auth.Request;
 using Business.Dtos.Requests.User;
 using Business.Dtos.Responses.Auth;
 using Business.Dtos.Responses.User;
+using Core.Entities;
 using Core.Utilities.Security.Hashing;
 using Core.Utilities.Security.Jwt;
 using Entities.Concretes;
@@ -14,19 +15,17 @@ namespace Business.Concretes
     {
         IUserService _userService;
         IMapper _mapper;
+        ITokenHelper _tokenHelper;
 
-        public AuthManager(IUserService userService, IMapper mapper)
-        {
-            _userService = userService;
-            _mapper = mapper;
-        }
+		public AuthManager(IUserService userService, IMapper mapper, ITokenHelper tokenHelper)
+		{
+			_userService = userService;
+			_mapper = mapper;
+			_tokenHelper = tokenHelper;
+		}
+		
 
-        public Task<AccessToken> CreateAccessToken(User user)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<LoginResponse> Login(LoginRequest loginRequest)
+        public async Task<IUser> Login(LoginRequest loginRequest)
         {
             var userToCheck = await _userService.GetByMailAsync(loginRequest.Email);
             if (userToCheck == null)
@@ -37,17 +36,16 @@ namespace Business.Concretes
             {
                 return null;
             }
-            return _mapper.Map<LoginResponse>(userToCheck);
+            return userToCheck;
         }
 
-        public async Task<RegisterResponse> Register(RegisterRequest registerRequest)
+        public async Task<IUser> Register(RegisterRequest registerRequest)
         {
             HashingHelper.CreatePasswordHash(registerRequest.Password, out registerRequest._passwordHash, out registerRequest._passwordSalt);
             User user = _mapper.Map<User>(registerRequest);
             CreateUserRequest createUserRequest = _mapper.Map<CreateUserRequest>(user);
-
-            var result = await _userService.AddAsync(createUserRequest);
-            return _mapper.Map<RegisterResponse>(result);
+            await _userService.AddAsync(createUserRequest);
+            return user;
 
 
         }
@@ -60,5 +58,11 @@ namespace Business.Concretes
             }
             return true;
         }
-    }
+		public AccessToken CreateAccessToken(IUser user)
+		{
+			var claims = _userService.GetClaims(user);
+			var accessToken = _tokenHelper.CreateToken(user, claims);
+            return accessToken;
+		}
+	}
 }

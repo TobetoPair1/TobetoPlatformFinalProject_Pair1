@@ -1,4 +1,5 @@
 ﻿using Core.DataAccess.Repositories;
+using Core.Entities;
 using Entities.Concretes;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,6 @@ namespace DataAccess.Abstracts
 {
 	public interface IUserDal: IAsyncRepository<User,Guid>,IRepository<User,Guid>
     {
-        List<OperationClaim> GetClaims(User user);
+        List<IOperationClaim> GetClaims(IUser user);
     }	
 }

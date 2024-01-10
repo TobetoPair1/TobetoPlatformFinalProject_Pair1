@@ -1,6 +1,7 @@
 ﻿using Business.Abstracts;
 using Business.Concretes;
 using Core.Business.Rules;
+using Core.Utilities.Security.Jwt;
 using DataAccess.Abstracts;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
@@ -21,7 +22,7 @@ namespace Business
             services.AddScoped<IUserSkillService, UserSkillManager>();
             services.AddScoped<IForeignLanguageService, ForeignLanguageManager>();
             services.AddScoped<IAuthService, AuthManager>();
-
+            services.AddScoped<ITokenHelper, JwtHelper>();
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
             services.AddSubClassesOfType(Assembly.GetExecutingAssembly(), typeof(BaseBusinessRules));
