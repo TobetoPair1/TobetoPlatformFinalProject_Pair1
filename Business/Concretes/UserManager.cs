@@ -38,17 +38,12 @@ namespace Business.Concretes
 			User user = _mapper.Map<User>(createUserRequest);
 			var createdUser = await _userDal.AddAsync(user);
 			CreatedUserResponse result = _mapper.Map<CreatedUserResponse>(createdUser);
-			//Bunu konfigrasyonda otomatik ekleyebilir miyiz?
+
+			//Bunu konfigrasyonda otomatik ekleyebilir miyiz??
 			await _personalInfoService.AddAsync(new CreatePersonalInfoRequest { UserId = result.Id });
 			
 			return result;
 		}
-
-		//public async Task<GetUserResponse> CheckUserAsync(GetUserRequest getUserRequest)
-		//{
-		//	var result = await _userDal.GetAsync(u => u.Email==getUserRequest.Email && u.Password==getUserRequest.Password);
-		//	return _mapper.Map<GetUserResponse>(result);
-		//}
 
 		public async Task<DeletedUserResponse> DeleteAsync(DeleteUserRequest deleteUserRequest)
 		{
@@ -73,7 +68,6 @@ namespace Business.Concretes
 
         public async Task<IPaginate<GetListUserResponse>> GetListAsync(PageRequest pageRequest)
 		{
-			//var result = await _userDal.GetListAsync((u=>u.Name.Length==2), null, null, pageRequest.PageIndex, pageRequest.PageSize);
 			var result = await _userDal.GetListAsync(index: pageRequest.PageIndex, size: pageRequest.PageSize);
 			return _mapper.Map<Paginate<GetListUserResponse>>(result);
 		}

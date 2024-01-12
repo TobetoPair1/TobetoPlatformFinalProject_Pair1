@@ -10,11 +10,11 @@ namespace Core.CrossCuttingConcerns.Exceptions.HttpProblemDetails;
 
 public class BusinessProblemDetails : ProblemDetails
 {
-    public BusinessProblemDetails(string detail)
+    public BusinessProblemDetails(string detail, string title)
     {
-        Title = "Rule Violation";
+        Title = title;
         Detail = detail;
-        Status = StatusCodes.Status400BadRequest;
-        Type = "https://example.com/probs/business";
+        Status = StatusCodes.Status401Unauthorized;
+        Type = "Business Exception";
     }
 }

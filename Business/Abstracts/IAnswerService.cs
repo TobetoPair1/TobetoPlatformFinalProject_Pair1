@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Business.Abstracts
 {
-    public class IAnswerService
+    public interface IAnswerService
     {
     }
 }

@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
 using Business.Abstracts;
+using Business.Constants.Messages;
 using Business.Dtos.Requests.Auth.Request;
 using Business.Dtos.Requests.User;
 using Business.Dtos.Responses.Auth;
 using Business.Dtos.Responses.User;
+using Core.CrossCuttingConcerns.Exceptions.Types;
 using Core.Entities;
 using Core.Utilities.Security.Hashing;
 using Core.Utilities.Security.Jwt;
@@ -23,19 +25,12 @@ namespace Business.Concretes
 			_mapper = mapper;
 			_tokenHelper = tokenHelper;
 		}
-		
-
         public async Task<IUser> Login(LoginRequest loginRequest)
         {
             var userToCheck = await _userService.GetByMailAsync(loginRequest.Email);
-            if (userToCheck == null)
-            {
-                return null;
-            }
-            if (!HashingHelper.VerifyPasswordHash(loginRequest.Password, userToCheck.PasswordHash, userToCheck.PasswordSalt))
-            {
-                return null;
-            }
+
+            if (userToCheck == null || !HashingHelper.VerifyPasswordHash(loginRequest.Password, userToCheck.PasswordHash, userToCheck.PasswordSalt))
+                throw new BusinessException(BusinessMessages.LoginError, BusinessTitles.LoginError);
             return userToCheck;
         }
 
@@ -47,16 +42,12 @@ namespace Business.Concretes
             await _userService.AddAsync(createUserRequest);
             return user;
 
-
         }
 
-        public async Task<bool> UserExists(string email)
+        public async Task UserExists(string email)
         {
             if (await _userService.GetByMailAsync(email) == null)
-            {
-                return false;
-            }
-            return true;
+                throw new BusinessException(BusinessMessages.UserExists, BusinessTitles.RegisterError);
         }
 		public AccessToken CreateAccessToken(IUser user)
 		{

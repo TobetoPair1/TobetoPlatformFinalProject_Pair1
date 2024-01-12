@@ -1,6 +1,9 @@
 ﻿using Business.Constants.Messages;
+using Business.Dtos.Requests.Auth.Request;
 using Core.Business.Rules;
 using Core.CrossCuttingConcerns.Exceptions.Types;
+using Core.Entities;
+using Core.Utilities.Security.Hashing;
 using DataAccess.Abstracts;
 using System;
 using System.Collections.Generic;
@@ -24,8 +27,10 @@ namespace Business.Rules
 
             if(result.Count >= 5)
             {
-                throw new BusinessException(BusinessMessages.UserLimit);
+                throw new BusinessException(BusinessMessages.UserLimit,"");
             }
         }
+
+
     }
 }

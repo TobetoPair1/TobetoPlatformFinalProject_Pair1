@@ -11,7 +11,7 @@ namespace Business.Abstracts
     {
         Task<IUser> Register(RegisterRequest registerRequest);
         Task<IUser> Login(LoginRequest loginRequest);
-        Task<bool> UserExists(string email);
+        Task UserExists(string email);
         AccessToken CreateAccessToken(IUser user);
     }
 }
