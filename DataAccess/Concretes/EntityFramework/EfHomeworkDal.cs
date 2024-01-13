@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Abstracts
 {
-	internal class EfHomeworkDal : EfRepositoryBase<Homework, Guid, TobetoPlatformContext>, IHomeworkDal
+	public class EfHomeworkDal : EfRepositoryBase<Homework, Guid, TobetoPlatformContext>, IHomeworkDal
 	{
 		public EfHomeworkDal(TobetoPlatformContext context) : base(context)
 		{

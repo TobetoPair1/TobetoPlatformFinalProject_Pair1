@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Core.DataAccess.Repositories;
+using Entities.Concretes;
 
 namespace DataAccess.Abstracts
 {
-    internal interface IHomeworkFileDal
-    {
+	public interface IHomeworkFileDal: IAsyncRepository<Homework, Guid>, IRepository<Homework, Guid>
+	{
     }
 }

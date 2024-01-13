@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Abstracts
 {
-    internal interface ICategoryDal
-    {
+	public interface ICategoryDal: IAsyncRepository<Category, Guid>, IRepository<Category, Guid>
+	{
     }
 }

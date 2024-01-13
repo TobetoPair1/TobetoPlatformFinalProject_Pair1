@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Abstracts
 {
-    internal interface IAnswerDal
-    {
+	public interface IAnswerDal: IAsyncRepository<Answer, Guid>, IRepository<Answer, Guid>
+	{
     }
 }

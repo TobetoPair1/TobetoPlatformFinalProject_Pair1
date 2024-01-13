@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Abstracts
 {
-    internal interface IAssignmentDal
-    {
+	public interface IAssignmentDal: IAsyncRepository<Assignment, Guid>, IRepository<Assignment, Guid>
+	{
     }
 }

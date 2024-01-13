@@ -6,12 +6,9 @@ namespace DataAccess.Abstracts
 {
     public class EfUserFavouriteDal : EfRepositoryBase<UserFavourite, Guid, TobetoPlatformContext>, IUserFavouriteDal
     {
-        TobetoPlatformContext _context;
         public EfUserFavouriteDal(TobetoPlatformContext context) : base(context)
         {
-            _context = context;
+            
         }
-    }
-    {
     }
 }
