@@ -1,12 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using File = Entities.Concretes.File;
+
 
 namespace DataAccess.EntityConfigurations
 {
-    internal class FileConfiguration
+    public class FileConfiguration : IEntityTypeConfiguration<File>
     {
+        public void Configure(EntityTypeBuilder<File> builder)
+        {
+            builder.ToTable("Files").HasKey(f => f.Id);
+
+            builder.Property(f => f.Id).HasColumnName("Id").IsRequired();
+            builder.Property(f => f.AssignmentId).HasColumnName("AssignmentId").IsRequired();
+            builder.Property(f => f.UserId).HasColumnName("UserId").IsRequired();
+            builder.Property(f => f.FilePath).HasColumnName("FilePath").IsRequired();
+
+            
+            builder.HasOne(f => f.Assignment);
+
+            builder.HasMany(f => f.Homeworks);
+
+            builder.HasQueryFilter(f => !f.DeletedDate.HasValue);
+        }
     }
+
 }
