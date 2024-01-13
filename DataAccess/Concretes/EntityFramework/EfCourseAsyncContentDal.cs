@@ -6,10 +6,9 @@ namespace DataAccess.Abstracts
 {
     public class EfCourseAsyncContentDal : EfRepositoryBase<CourseAsyncContent, Guid, TobetoPlatformContext>, ICourseAsyncContentDal
     {
-        TobetoPlatformContext _context;
         public EfCourseAsyncContentDal(TobetoPlatformContext context) : base(context)
         {
-            _context = context;
+            
         }
     }
 }

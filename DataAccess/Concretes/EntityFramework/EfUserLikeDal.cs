@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Core.DataAccess.Repositories;
+using DataAccess.Contexts;
+using Entities.Concretes.CrossTables;
 
 namespace DataAccess.Abstracts
 {
-    internal class EfUserLikeDal
+    public class EfUserLikeDal : EfRepositoryBase<UserLike, Guid, TobetoPlatformContext>, IUserLikeDal
     {
+        public EfUserLikeDal(TobetoPlatformContext context) : base(context)
+        {
+        }
     }
 }
