@@ -1,6 +1,9 @@
+using Core.DataAccess.Repositories;
+using Entities.Concretes;
+
 namespace DataAccess.Abstracts;
 
-public class IAsyncContentDal
+public interface IAsyncContentDal:IAsyncRepository<AsyncContent,Guid>,IRepository<AsyncContent, Guid>
 {
     
 }
