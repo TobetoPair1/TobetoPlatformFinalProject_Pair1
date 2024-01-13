@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Core.DataAccess.Repositories;
+using Entities.Concretes.CrossTables;
 
 namespace DataAccess.Abstracts
 {
-    internal interface ICourseLiveContentDal
-    {
+	public interface ICourseLiveContentDal: IAsyncRepository<CourseLiveContent, Guid>, IRepository<CourseLiveContent, Guid>
+	{
     }
 }

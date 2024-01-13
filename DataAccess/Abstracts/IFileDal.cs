@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Core.DataAccess.Repositories;
+using File = Entities.Concretes.File;
 
 namespace DataAccess.Abstracts
 {
-    internal interface IFileDal
-    {
+	public interface IFileDal: IAsyncRepository<File, Guid>, IRepository<File, Guid>
+	{
     }
 }

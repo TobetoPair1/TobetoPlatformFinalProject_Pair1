@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Core.DataAccess.Repositories;
+using Entities.Concretes.CrossTable;
 
 namespace DataAccess.Abstracts
 {
-    internal interface IUserCourseDal
-    {
+	public interface IUserCourseDal: IAsyncRepository<UserCourse, Guid>, IRepository<UserCourse, Guid>
+	{
     }
 }

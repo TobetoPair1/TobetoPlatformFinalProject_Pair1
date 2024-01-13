@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Core.DataAccess.Repositories;
+using DataAccess.Contexts;
+using Entities.Concretes;
 
 namespace DataAccess.Abstracts
 {
-    internal class EfSurveyDal
+    public class EfSurveyDal : EfRepositoryBase<Survey, Guid, TobetoPlatformContext>, ISurveyDal
     {
+        public EfSurveyDal(TobetoPlatformContext context) : base(context)
+        {
+        }
     }
 }
