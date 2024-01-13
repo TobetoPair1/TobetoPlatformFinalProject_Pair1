@@ -3,7 +3,7 @@ using Entities.Concretes;
 
 namespace DataAccess.Abstracts
 {
-	public interface ISurveyDal: IAsyncRepository<Homework, Guid>, IRepository<Homework, Guid>
+	public interface ISurveyDal: IAsyncRepository<Survey, Guid>, IRepository<Survey, Guid>
 	{
     }
 }

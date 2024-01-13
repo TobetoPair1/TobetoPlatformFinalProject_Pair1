@@ -3,7 +3,7 @@ using Entities.Concretes;
 
 namespace DataAccess.Abstracts
 {
-	public interface ILiveContentDal: IAsyncRepository<Homework, Guid>, IRepository<Homework, Guid>
+	public interface ILiveContentDal: IAsyncRepository<LiveContent, Guid>, IRepository<LiveContent, Guid>
 	{
     }
 }

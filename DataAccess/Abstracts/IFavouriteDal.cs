@@ -3,7 +3,7 @@ using Entities.Concretes;
 
 namespace DataAccess.Abstracts
 {
-	public interface IFavouriteDal: IAsyncRepository<AsyncContent, Guid>, IRepository<AsyncContent, Guid>
+	public interface IFavouriteDal: IAsyncRepository<Favourite, Guid>, IRepository<Favourite, Guid>
 	{
     }
 }
