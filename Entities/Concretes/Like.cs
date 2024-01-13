@@ -15,9 +15,9 @@ namespace Entities.Concretes
         public Guid AsyncContentId { get; set; }
         public Guid LiveContentId { get; set; }
         public int Count { get; set; }
-        //public ICollection<UserLike> Users { get; set; }
-        //public Course Course { get; set;}
-        //public AsyncContent AsyncContent { get; set; }
-        //public LiveContent LiveContent { get; set; }
+        public ICollection<UserLike> Users { get; set; }
+        public Course Course { get; set;}
+        public AsyncContent AsyncContent { get; set; }
+        public LiveContent LiveContent { get; set; }
     }
 }
