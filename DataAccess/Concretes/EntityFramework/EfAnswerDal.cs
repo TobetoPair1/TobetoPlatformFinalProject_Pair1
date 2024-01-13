@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Abstracts
 {
-    internal class EfAnswerDal
+    public class EfAnswerDal
     {
     }
 }
