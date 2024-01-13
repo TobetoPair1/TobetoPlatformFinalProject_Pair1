@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.EntityConfigurations
 {
-    internal class ExamConfiguration
+    public class ExamConfiguration
     {
         public void Configure(EntityTypeBuilder<Exam> builder)
         {
