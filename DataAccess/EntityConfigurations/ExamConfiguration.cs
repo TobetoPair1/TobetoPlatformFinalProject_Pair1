@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Entities.Concretes;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace DataAccess.EntityConfigurations
 {
-    internal class ExamConfiguration
+    public class ExamConfiguration : IEntityTypeConfiguration<Exam>
     {
         public void Configure(EntityTypeBuilder<Exam> builder)
         {
