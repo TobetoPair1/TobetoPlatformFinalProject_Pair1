@@ -1,6 +1,12 @@
-﻿namespace DataAccess.EntityConfigurations
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace DataAccess.EntityConfigurations
 {
-    public class HomeworkConfiguration
+    internal class HomeworkConfiguration
     {
     }
 }

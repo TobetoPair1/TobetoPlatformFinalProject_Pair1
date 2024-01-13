@@ -1,12 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Core.DataAccess.Repositories;
+using DataAccess.Contexts;
+using Entities.Concretes;
 
 namespace DataAccess.Abstracts
 {
-    internal class EfApplicationDal
+    public class EfApplicationDal : EfRepositoryBase<Application, Guid, TobetoPlatformContext>, IApplicationDal
     {
+        TobetoPlatformContext _context;
+        public EfApplicationDal(TobetoPlatformContext context) : base(context)
+        {
+            _context = context;
+        }
     }
 }
