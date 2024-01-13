@@ -1,9 +1,9 @@
 ﻿using Core.DataAccess.Repositories;
-using Entities.Concretes;
+using Entities.Concretes.CrossTables;
 
 namespace DataAccess.Abstracts
 {
-	public interface ICourseLiveContentDal: IAsyncRepository<AsyncContent, Guid>, IRepository<AsyncContent, Guid>
+	public interface ICourseLiveContentDal: IAsyncRepository<CourseLiveContent, Guid>, IRepository<CourseLiveContent, Guid>
 	{
     }
 }

@@ -1,9 +1,9 @@
 ﻿using Core.DataAccess.Repositories;
-using Entities.Concretes;
+using File = Entities.Concretes.File;
 
 namespace DataAccess.Abstracts
 {
-	internal interface IFileDal: IAsyncRepository<AsyncContent, Guid>, IRepository<AsyncContent, Guid>
+	public interface IFileDal: IAsyncRepository<File, Guid>, IRepository<File, Guid>
 	{
     }
 }
