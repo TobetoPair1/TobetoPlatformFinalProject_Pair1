@@ -1,9 +1,9 @@
 ﻿using Core.DataAccess.Repositories;
-using Entities.Concretes;
+using Entities.Concretes.CrossTables;
 
 namespace DataAccess.Abstracts
 {
-	public interface IHomeworkFileDal: IAsyncRepository<Homework, Guid>, IRepository<Homework, Guid>
+	public interface IHomeworkFileDal: IAsyncRepository<HomeworkFile, Guid>, IRepository<HomeworkFile, Guid>
 	{
     }
 }
