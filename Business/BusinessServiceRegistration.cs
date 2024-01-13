@@ -23,13 +23,43 @@ namespace Business
             services.AddScoped<IForeignLanguageService, ForeignLanguageManager>();
             services.AddScoped<IAuthService, AuthManager>();
             services.AddScoped<ITokenHelper, JwtHelper>();
+
+            //services.AddScoped<IAnnouncementService, AnnouncementManager>();
+            //services.AddScoped<IAnswerService, AnswerManager>();
+            //services.AddScoped<IApplicationService, ApplicationManager>();
+            //services.AddScoped<IAssignmentService, AssignmentManager>();
+            //services.AddScoped<IAsyncContentService, AsyncContentManager>();
+            //services.AddScoped<ICategoryService, CategoryManager>();
+            //services.AddScoped<ICourseLiveContentService, CourseLiveContenManager>();
+            //services.AddScoped<ICourseService, CourseManager>();
+            //services.AddScoped<IExamQuestionService, ExamQuestionManager>();
+            //services.AddScoped<IFavouriteService, FavouriteManager>();
+            //services.AddScoped<IFileService, FileManager>();
+            //services.AddScoped<IHomeworkFileService, HomeworkFileManager>();
+            //services.AddScoped<IHomeworkService, HomeworkManager>();
+            //services.AddScoped<ICourseAsyncContentService, CourseAsyncContentManager>();
+            //services.AddScoped<IInstructorService, InstructorManager>();
+            //services.AddScoped<ILikeService, LikeManager>();
+            //services.AddScoped<ILiveContentService, LiveContentManager>();
+            //services.AddScoped<IQuestionService, QuestionManager>();
+            //services.AddScoped<ISessionService, SessionManager>();
+            //services.AddScoped<ISurveyService, SurveyManager>();
+            //services.AddScoped<IUserApplicationService, UserApplicationManager>();
+            //services.AddScoped<IUserCourseService, UserCourseManager>();
+            //services.AddScoped<IUserExamService, UserExamManager>();
+            //services.AddScoped<IUserFavouriteService, UserFavouriteManager>();
+            //services.AddScoped<IUserLikeService, UserLikeManager>();
+            //services.AddScoped<IUserExamService, UserCourseManager>();
+            //services.AddScoped<IUserSurveyService, UserSurveyManager>();
+
+
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
             services.AddSubClassesOfType(Assembly.GetExecutingAssembly(), typeof(BaseBusinessRules));
 
-            
+
             return services;
-        }       
+        }
 
         public static IServiceCollection AddSubClassesOfType(
                 this IServiceCollection services,
