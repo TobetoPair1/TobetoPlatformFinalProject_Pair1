@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Core.DataAccess.Repositories;
+using Entities.Concretes;
 
 namespace DataAccess.Abstracts
 {
-    internal interface IFavouriteDal
-    {
+	public interface IFavouriteDal: IAsyncRepository<AsyncContent, Guid>, IRepository<AsyncContent, Guid>
+	{
     }
 }
