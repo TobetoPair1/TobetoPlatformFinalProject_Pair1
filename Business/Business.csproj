@@ -24,7 +24,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Dtos\Requests\Announcement\" />
     <Folder Include="Dtos\Requests\Answer\" />
     <Folder Include="Dtos\Requests\Application\" />
     <Folder Include="Dtos\Requests\Assignment\" />
@@ -48,7 +47,6 @@
     <Folder Include="Dtos\Requests\UserCourse\" />
     <Folder Include="Dtos\Requests\Survey\" />
     <Folder Include="Dtos\Requests\Question\" />
-    <Folder Include="Dtos\Responses\Announcement\" />
     <Folder Include="Dtos\Responses\Answer\" />
     <Folder Include="Dtos\Responses\Application\" />
     <Folder Include="Dtos\Responses\Assignment\" />
