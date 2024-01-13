@@ -1,12 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Core.DataAccess.Repositories;
+using DataAccess.Contexts;
+using Entities.Concretes;
 
 namespace DataAccess.Abstracts
 {
-    internal class EfLikeDal
+    public class EfLikeDal : EfRepositoryBase<Like, Guid, TobetoPlatformContext>, ILikeDal
     {
+        TobetoPlatformContext _context;
+        public EfLikeDal(TobetoPlatformContext context) : base(context)
+        {
+            _context = context;
+        }
     }
 }

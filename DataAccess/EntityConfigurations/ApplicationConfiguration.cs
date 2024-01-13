@@ -1,12 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Entities.Concretes;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace DataAccess.EntityConfigurations
 {
-    internal class ApplicationConfiguration
+    public class ApplicationConfiguration : IEntityTypeConfiguration<Application>
     {
+        public void Configure(EntityTypeBuilder<Application> builder)
+        {
+            builder.ToTable("Applications").HasKey(a => a.Id);
+
+            builder.Property(a => a.Id).HasColumnName("Id").IsRequired();
+            builder.Property(a => a.Title).HasColumnName("Title").IsRequired();
+            builder.Property(a => a.FormUrl).HasColumnName("FormUrl").IsRequired();
+            builder.Property(a => a.State).HasColumnName("State").IsRequired();
+
+            builder.HasMany(a => a.Users);
+
+            builder.HasQueryFilter(a => !a.DeletedDate.HasValue);
+        }
     }
 }
