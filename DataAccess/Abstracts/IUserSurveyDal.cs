@@ -1,9 +1,9 @@
 ﻿using Core.DataAccess.Repositories;
-using Entities.Concretes;
+using Entities.Concretes.CrossTable;
 
 namespace DataAccess.Abstracts
 {
-	public interface IUserSurveyDal: IAsyncRepository<Homework, Guid>, IRepository<Homework, Guid>
+	public interface IUserSurveyDal: IAsyncRepository<UserSurvey, Guid>, IRepository<UserSurvey, Guid>
 	{
     }
 }
