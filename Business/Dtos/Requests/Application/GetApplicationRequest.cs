@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Business.Dtos.Requests.Session
+namespace Business.Dtos.Requests.Application
 {
-    public class GetSessionRequest
+    public class GetApplicationRequest
     {
         public Guid Id { get; set; }
+
     }
 }
