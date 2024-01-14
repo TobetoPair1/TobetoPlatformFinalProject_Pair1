@@ -1,12 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Business.Dtos.Requests.Category;
+using Business.Dtos.Responses.Category;
+using Core.DataAccess.Paging;
 
-namespace Business.Abstracts
+namespace Business.Abstracts;
+
+public interface ICategoryService
 {
-    internal interface ICategoryService
-    {
-    }
+    Task<CreatedCategoryResponse> AddAsync(CreateCategoryRequest createCategoryRequest);
+    Task<IPaginate<GetListCategoryResponse>> GetListAsync(PageRequest pageRequest);
+    Task<DeletedCategoryResponse> DeleteAsync(DeleteCategoryRequest deleteCategoryRequest);
+    Task<UpdatedCategoryResponse> UpdateAsync(UpdateCategoryRequest updateCategoryRequest);
+    Task<GetCategoryResponse> GetByIdAsync(Guid id);
 }
+

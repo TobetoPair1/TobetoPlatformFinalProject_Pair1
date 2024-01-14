@@ -1,12 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AutoMapper;
+using Business.Dtos.Requests.Category;
+using Business.Dtos.Responses.Category;
+using Core.DataAccess.Paging;
+using Entities.Concretes;
 
-namespace Business.Profiles
+namespace Business.Profiles;
+
+public class CategoryProfile : Profile
 {
-    internal class CategoryProfile
+    public CategoryProfile()
     {
+        CreateMap<CreateCategoryRequest, Category>().ReverseMap();
+        CreateMap<Category, CreatedCategoryResponse>().ReverseMap();
+
+        CreateMap<DeleteCategoryRequest, Category>().ReverseMap();
+        CreateMap<Category, DeletedCategoryResponse>().ReverseMap();
+
+        CreateMap<Category, GetCategoryResponse>().ReverseMap();
+
+        CreateMap<Paginate<Category>, Paginate<GetListCategoryResponse>>().ReverseMap();
+
     }
 }
+

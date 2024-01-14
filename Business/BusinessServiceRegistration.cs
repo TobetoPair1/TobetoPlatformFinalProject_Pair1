@@ -29,7 +29,8 @@ namespace Business
             //services.AddScoped<IApplicationService, ApplicationManager>();
             //services.AddScoped<IAssignmentService, AssignmentManager>();
             //services.AddScoped<IAsyncContentService, AsyncContentManager>();
-            //services.AddScoped<ICategoryService, CategoryManager>();
+            services.AddScoped<ICategoryService, CategoryManager>();
+            services.AddScoped<ICourseAsyncContentService, CourseAsyncContentManager>();
             //services.AddScoped<ICourseLiveContentService, CourseLiveContenManager>();
             //services.AddScoped<ICourseService, CourseManager>();
             //services.AddScoped<IExamQuestionService, ExamQuestionManager>();
