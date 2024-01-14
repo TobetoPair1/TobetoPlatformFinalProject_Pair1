@@ -28,7 +28,6 @@
     <Folder Include="Dtos\Requests\Application\" />
     <Folder Include="Dtos\Requests\Assignment\" />
     <Folder Include="Dtos\Requests\Course\" />
-    <Folder Include="Dtos\Requests\Exam\" />
     <Folder Include="Dtos\Requests\Favourite\" />
     <Folder Include="Dtos\Requests\File\" />
     <Folder Include="Dtos\Requests\Homework\" />
@@ -43,7 +42,6 @@
     <Folder Include="Dtos\Requests\UserExam\" />
     <Folder Include="Dtos\Requests\UserApplication\" />
     <Folder Include="Dtos\Requests\UserCourse\" />
-    <Folder Include="Dtos\Requests\Survey\" />
     <Folder Include="Dtos\Requests\Question\" />
     <Folder Include="Dtos\Responses\Answer\" />
     <Folder Include="Dtos\Responses\Application\" />
@@ -51,7 +49,6 @@
     <Folder Include="Dtos\Responses\CourseLiveContent\" />
     <Folder Include="Dtos\Responses\Course\" />
     <Folder Include="Dtos\Responses\ExamQuestion\" />
-    <Folder Include="Dtos\Responses\Exam\" />
     <Folder Include="Dtos\Responses\Favourite\" />
     <Folder Include="Dtos\Responses\File\" />
     <Folder Include="Dtos\Responses\HomeworkFile\" />
@@ -59,7 +56,6 @@
     <Folder Include="Dtos\Responses\Like\" />
     <Folder Include="Dtos\Responses\LiveContent\" />
     <Folder Include="Dtos\Responses\Question\" />
-    <Folder Include="Dtos\Responses\Survey\" />
     <Folder Include="Dtos\Responses\UserApplication\" />
     <Folder Include="Dtos\Responses\UserCourse\" />
     <Folder Include="Dtos\Responses\UserExam\" />

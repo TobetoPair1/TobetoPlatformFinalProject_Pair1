@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Business.Abstracts
+namespace Business.Dtos.Requests.AsyncContent
 {
-    public class IUserSurveyService
+    public class DeleteAsyncContentRequest
     {
+        public Guid Id { get; set; }
     }
 }

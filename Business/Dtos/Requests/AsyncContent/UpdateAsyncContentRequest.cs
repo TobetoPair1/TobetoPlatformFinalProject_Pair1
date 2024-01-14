@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Business.Dtos.Responses.AsyncContent
+namespace Business.Dtos.Requests.AsyncContent
 {
-    public class GetListAsyncContentResponse
+    public class UpdateAsyncContentRequest
     {
         public Guid Id { get; set; }
         public string VideoUrl { get; set; }

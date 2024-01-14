@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Business.Abstracts
+namespace Business.Dtos.Requests.OperationClaim
 {
-    public class IUserSurveyService
+    public class GetOperationClaimRequest
     {
+        public Guid Id { get; set; }
     }
 }

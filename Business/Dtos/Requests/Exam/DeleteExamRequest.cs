@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Entities
+namespace Business.Dtos.Requests.Exam
 {
-    public interface IOperationClaim
+    public class DeleteExamRequest
     {
-		string Name { get; set; }
-	}
+        public Guid Id { get; set; }
+    }
 }
