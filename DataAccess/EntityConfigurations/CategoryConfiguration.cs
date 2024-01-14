@@ -17,13 +17,10 @@ namespace DataAccess.EntityConfigurations
 
             builder.Property(c => c.Id).HasColumnName("Id").IsRequired();
             builder.Property(c => c.Name).HasColumnName("Name").IsRequired();
-            builder.Property(c => c.LiveContentId).HasColumnName("LiveContentId").IsRequired();
-            builder.Property(c => c.AsyncContentId).HasColumnName("AsyncContentId").IsRequired();
-            builder.Property(c => c.CourseId).HasColumnName("CourseId").IsRequired();
 
-            builder.HasMany(c => c.Courses).WithOne(co => co.Category).HasForeignKey(co => co.CategoryId);
-            builder.HasMany(c => c.LiveContents).WithOne(lc => lc.Category).HasForeignKey(lc => lc.CategoryId);
-            builder.HasMany(c => c.AsyncContents).WithOne(ac => ac.Category).HasForeignKey(ac => ac.CategoryId);
+            builder.HasMany(c => c.Courses);
+            builder.HasMany(c => c.LiveContents);
+            builder.HasMany(c => c.AsyncContents);
 
             builder.HasQueryFilter(c => !c.DeletedDate.HasValue);
         }

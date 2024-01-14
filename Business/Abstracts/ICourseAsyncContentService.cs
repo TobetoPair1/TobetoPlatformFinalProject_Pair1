@@ -1,12 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Business.Dtos.Requests.CourseAsyncContent;
+using Business.Dtos.Responses.CourseAsyncContent;
+using Core.DataAccess.Paging;
 
-namespace Business.Abstracts
+namespace Business.Abstracts;
+
+public interface ICourseAsyncContentService
 {
-    internal interface ICourseAsyncContentService
-    {
-    }
+    Task<CreatedCourseAsyncContentResponse> AddAsync(CreateCourseAsyncContentRequest createCourseAsyncContentRequest);
+    Task<IPaginate<GetListCourseAsyncContentResponse>> GetListAsync(PageRequest pageRequest);
+    Task<GetCourseAyncContentResponse> GetAsync(Guid id);
+    Task<UpdatedCourseAsyncContentResponse> UpdateAsync(UpdateCourseAsyncContentRequest updateCourseAsyncContentRequest);
+    Task<DeletedCourseAsyncContentResponse> DeleteAsync(DeleteCourseAsyncContentRequest deleteCourseAsyncContentRequest);
 }
+
