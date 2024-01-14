@@ -23,8 +23,8 @@
     <ProjectReference Include="..\Entities\Entities.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Dtos\Requests\Answer\" />
+  <ItemGroup>    
+    <Folder Include="Dtos\Requests\Application\" />
     <Folder Include="Dtos\Requests\Assignment\" />
     <Folder Include="Dtos\Requests\Course\" />
     <Folder Include="Dtos\Requests\Favourite\" />
@@ -33,7 +33,6 @@
     <Folder Include="Dtos\Requests\Like\" />
     <Folder Include="Dtos\Requests\LiveContent\" />
     <Folder Include="Dtos\Requests\CourseLiveContent\" />
-    <Folder Include="Dtos\Requests\ExamQuestion\" />
     <Folder Include="Dtos\Requests\HomeworkFile\" />
     <Folder Include="Dtos\Requests\UserSurvey\" />
     <Folder Include="Dtos\Requests\UserLike\" />
@@ -46,6 +45,7 @@
     <Folder Include="Dtos\Responses\Assignment\" />
     <Folder Include="Dtos\Responses\CourseLiveContent\" />
     <Folder Include="Dtos\Responses\Course\" />
+    <Folder Include="Dtos\Responses\Exam\" />
     <Folder Include="Dtos\Responses\ExamQuestion\" />
     <Folder Include="Dtos\Responses\Favourite\" />
     <Folder Include="Dtos\Responses\File\" />
