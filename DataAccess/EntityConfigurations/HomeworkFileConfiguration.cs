@@ -18,7 +18,6 @@ namespace DataAccess.EntityConfigurations
             builder.HasQueryFilter(h => !h.DeletedDate.HasValue);
 
             builder.HasOne(h => h.File);
-            builder.HasOne(h => h.Homework);
         }
     }
 }

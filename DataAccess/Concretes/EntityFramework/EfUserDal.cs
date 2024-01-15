@@ -15,17 +15,13 @@ namespace DataAccess.Concretes.EntityFramework
         }
 
         public List<IOperationClaim> GetClaims(IUser user)
-        {
-            using (_context)
-            {
+        {            
                 var result = from operationClaim in _context.OperationClaims
                              join userOperationClaim in _context.UserOperationClaims
                                  on operationClaim.Id equals userOperationClaim.OperationClaimId
                              where userOperationClaim.UserId == user.Id
-                             select (IOperationClaim)(new OperationClaim { Name = operationClaim.Name });
-				//Id = operationClaim.Id, bu gerekli mi?
+                             select (IOperationClaim)(new OperationClaim { Name = operationClaim.Name });				
                 return result.ToList();
-            }
         }
     }
 }

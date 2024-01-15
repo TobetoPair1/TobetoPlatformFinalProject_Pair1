@@ -1,11 +1,6 @@
 ﻿using Entities.Concretes;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataAccess.EntityConfigurations
 {
@@ -17,6 +12,7 @@ namespace DataAccess.EntityConfigurations
 
 			builder.Property(c => c.Id).HasColumnName("Id").IsRequired();
 			builder.Property(c => c.CategoryId).HasColumnName("CategoryId").IsRequired();
+			builder.Property(c => c.LikeId).HasColumnName("LikeId").IsRequired();
 			builder.Property(c => c.Name).HasColumnName("Name").IsRequired();
 			builder.Property(c => c.ImageUrl).HasColumnName("ImageUrl").IsRequired();
 			builder.Property(c => c.StartOfDate).HasColumnName("StartOfDate").IsRequired();
@@ -30,10 +26,8 @@ namespace DataAccess.EntityConfigurations
 			builder.HasOne(c => c.Category);
 			builder.HasOne(c => c.Like);
 			builder.HasMany(c => c.Users);
-			builder.HasMany(c => c.AsyncContents);
-			builder.HasMany(c => c.LiveContents);
-			builder.HasMany(c => c.Homeworks);
-			builder.HasMany(c => c.Assignments);
+			builder.HasMany(c => c.AsyncContents).WithOne(c=>c.Course).HasForeignKey(c=>c.CourseId).OnDelete(DeleteBehavior.Restrict);
+			builder.HasMany(c => c.LiveContents).WithOne(cl => cl.Course).HasForeignKey(cl => cl.CourseId).OnDelete(DeleteBehavior.Restrict);
 		}
 	}
 }
