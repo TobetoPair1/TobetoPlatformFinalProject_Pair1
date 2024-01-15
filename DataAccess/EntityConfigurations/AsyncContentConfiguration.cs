@@ -1,11 +1,6 @@
 ﻿using Entities.Concretes;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataAccess.EntityConfigurations
 {
@@ -17,7 +12,6 @@ namespace DataAccess.EntityConfigurations
 
 			builder.Property(ac => ac.Id).HasColumnName("Id").IsRequired();
 			builder.Property(ac => ac.CategoryId).HasColumnName("CategoryId").IsRequired();
-			builder.Property(ac => ac.CourseId).HasColumnName("CourseId").IsRequired();
 			builder.Property(ac => ac.VideoUrl).HasColumnName("VideoUrl").IsRequired();
 			builder.Property(ac => ac.Language).HasColumnName("Language").IsRequired();
 			builder.Property(ac => ac.SubType).HasColumnName("SubType").IsRequired();

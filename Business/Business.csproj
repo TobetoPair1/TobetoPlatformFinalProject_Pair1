@@ -1,61 +1,61 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net7.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <Compile Remove="CCS\**" />
-    <EmbeddedResource Remove="CCS\**" />
-    <None Remove="CCS\**" />
-  </ItemGroup>
+	<ItemGroup>
+		<Compile Remove="CCS\**" />
+		<EmbeddedResource Remove="CCS\**" />
+		<None Remove="CCS\**" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="AutoMapper" Version="12.0.1" />
-    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="AutoMapper" Version="12.0.1" />
+		<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Core\Core.csproj" />
-    <ProjectReference Include="..\DataAccess\DataAccess.csproj" />
-    <ProjectReference Include="..\Entities\Entities.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Core\Core.csproj" />
+		<ProjectReference Include="..\DataAccess\DataAccess.csproj" />
+		<ProjectReference Include="..\Entities\Entities.csproj" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Dtos\Requests\Answer\" />
-    <Folder Include="Dtos\Requests\Assignment\" />
-    <Folder Include="Dtos\Requests\Course\" />
-    <Folder Include="Dtos\Requests\Favourite\" />
-    <Folder Include="Dtos\Requests\File\" />
-    <Folder Include="Dtos\Requests\Homework\" />
-    <Folder Include="Dtos\Requests\Like\" />
-    <Folder Include="Dtos\Requests\ExamQuestion\" />
-    <Folder Include="Dtos\Requests\HomeworkFile\" />
-    <Folder Include="Dtos\Requests\UserSurvey\" />
-    <Folder Include="Dtos\Requests\UserLike\" />
-    <Folder Include="Dtos\Requests\UserFavourite\" />
-    <Folder Include="Dtos\Requests\UserExam\" />
-    <Folder Include="Dtos\Requests\UserApplication\" />
-    <Folder Include="Dtos\Requests\UserCourse\" />
-    <Folder Include="Dtos\Requests\Question\" />
-    <Folder Include="Dtos\Responses\Answer\" />
-    <Folder Include="Dtos\Responses\Assignment\" />
-    <Folder Include="Dtos\Responses\Course\" />
-    <Folder Include="Dtos\Responses\ExamQuestion\" />
-    <Folder Include="Dtos\Responses\Favourite\" />
-    <Folder Include="Dtos\Responses\File\" />
-    <Folder Include="Dtos\Responses\HomeworkFile\" />
-    <Folder Include="Dtos\Responses\Homework\" />
-    <Folder Include="Dtos\Responses\Like\" />
-    <Folder Include="Dtos\Responses\Question\" />
-    <Folder Include="Dtos\Responses\UserApplication\" />
-    <Folder Include="Dtos\Responses\UserCourse\" />
-    <Folder Include="Dtos\Responses\UserExam\" />
-    <Folder Include="Dtos\Responses\UserFavourite\" />
-    <Folder Include="Dtos\Responses\UserLike\" />
-    <Folder Include="Dtos\Responses\UserSurvey\" />
-  </ItemGroup>
+	<ItemGroup>
+		<Folder Include="Dtos\Requests\Application\" />
+		<Folder Include="Dtos\Requests\Course\" />
+		<Folder Include="Dtos\Requests\Favourite\" />
+		<Folder Include="Dtos\Requests\Homework\" />
+		<Folder Include="Dtos\Requests\Like\" />
+		<Folder Include="Dtos\Requests\LiveContent\" />
+		<Folder Include="Dtos\Requests\HomeworkFile\" />
+		<Folder Include="Dtos\Requests\UserSurvey\" />
+		<Folder Include="Dtos\Requests\UserLike\" />
+		<Folder Include="Dtos\Requests\UserFavourite\" />
+		<Folder Include="Dtos\Requests\UserExam\" />
+		<Folder Include="Dtos\Requests\UserApplication\" />
+		<Folder Include="Dtos\Requests\UserCourse\" />
+		<Folder Include="Dtos\Requests\Question\" />
+		<Folder Include="Dtos\Responses\Answer\" />
+		<Folder Include="Dtos\Responses\Assignment\" />
+		<Folder Include="Dtos\Responses\CourseLiveContent\" />
+		<Folder Include="Dtos\Responses\Course\" />
+		<Folder Include="Dtos\Responses\Exam\" />
+		<Folder Include="Dtos\Responses\ExamQuestion\" />
+		<Folder Include="Dtos\Responses\Favourite\" />
+		<Folder Include="Dtos\Responses\HomeworkFile\" />
+		<Folder Include="Dtos\Responses\Homework\" />
+		<Folder Include="Dtos\Responses\Like\" />
+		<Folder Include="Dtos\Responses\Question\" />
+		<Folder Include="Dtos\Responses\UserApplication\" />
+		<Folder Include="Dtos\Responses\UserCourse\" />
+		<Folder Include="Dtos\Responses\UserExam\" />
+		<Folder Include="Dtos\Responses\UserFavourite\" />
+		<Folder Include="Dtos\Responses\UserLike\" />
+		<Folder Include="Dtos\Responses\UserSurvey\" />
+		<Folder Include="Dtos\Responses\File\" />
+	</ItemGroup>
 
 </Project>

@@ -10,19 +10,19 @@ namespace Business.Concretes;
 
 public class CategoryManager : ICategoryService
 {
-    ICategoryDal _categoryManager;
+    ICategoryDal _categoryDal;
     IMapper _mapper;
 
     public CategoryManager(ICategoryDal categoryManager, IMapper mapper)
     {
-        _categoryManager = categoryManager;
+        _categoryDal = categoryManager;
         _mapper = mapper;
     }
 
     public async Task<CreatedCategoryResponse> AddAsync(CreateCategoryRequest createCategoryRequest)
     {
         Category cat = _mapper.Map<Category>(createCategoryRequest);
-        Category createdCat = await _categoryManager.AddAsync(cat);
+        Category createdCat = await _categoryDal.AddAsync(cat);
 
         CreatedCategoryResponse createdCatResponse = _mapper.Map<CreatedCategoryResponse>(createdCat);
         return createdCatResponse;
@@ -31,7 +31,7 @@ public class CategoryManager : ICategoryService
     public async Task<DeletedCategoryResponse> DeleteAsync(DeleteCategoryRequest deleteCategoryRequest)
     {
         Category cat = _mapper.Map<Category>(deleteCategoryRequest);
-        Category deletedCat = await _categoryManager.DeleteAsync(cat, true);
+        Category deletedCat = await _categoryDal.DeleteAsync(cat, true);
 
         DeletedCategoryResponse deletedCatResponse = _mapper.Map<DeletedCategoryResponse>(deletedCat);
         return deletedCatResponse;
@@ -39,14 +39,14 @@ public class CategoryManager : ICategoryService
 
     public async Task<GetCategoryResponse> GetByIdAsync(Guid id)
     {
-        Category cat = await _categoryManager.GetAsync(c => c.Id == id);
+        Category cat = await _categoryDal.GetAsync(c => c.Id == id);
         return _mapper.Map<GetCategoryResponse>(cat);
 
     }
 
     public async Task<IPaginate<GetListCategoryResponse>> GetListAsync(PageRequest pageRequest)
     {
-        var categories = await _categoryManager.GetListAsync(index: pageRequest.PageIndex, size: pageRequest.PageSize);
+        var categories = await _categoryDal.GetListAsync(index: pageRequest.PageIndex, size: pageRequest.PageSize);
         return _mapper.Map<Paginate<GetListCategoryResponse>>(categories);
 
     }
@@ -54,7 +54,7 @@ public class CategoryManager : ICategoryService
     public async Task<UpdatedCategoryResponse> UpdateAsync(UpdateCategoryRequest updateCategoryRequest)
     {
         Category cat = _mapper.Map<Category>(updateCategoryRequest);
-        Category updateDcat = await _categoryManager.UpdateAsync(cat);
+        Category updateDcat = await _categoryDal.UpdateAsync(cat);
 
         UpdatedCategoryResponse updateDcatResponse = _mapper.Map<UpdatedCategoryResponse>(updateDcat);
         return updateDcatResponse;
