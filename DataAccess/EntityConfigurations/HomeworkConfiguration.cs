@@ -21,9 +21,9 @@ namespace DataAccess.EntityConfigurations
             builder.Property(h => h.InstructorDescription).HasColumnName("InstructorDescription");
             builder.Property(h => h.StudentDescription).HasColumnName("StudentDescription");
 
-            builder.HasOne(h => h.Course).WithMany(c => c.Homeworks).HasForeignKey(h => h.CourseId);
+            builder.HasOne(h => h.Course).WithMany(c => c.Homeworks).HasForeignKey(h => h.CourseId).OnDelete(DeleteBehavior.Restrict);
 
-            builder.HasMany(h => h.Files).WithOne(f => f.Homework).HasForeignKey(f => f.HomeworkId);
+            builder.HasMany(h => h.Files).WithOne(f => f.Homework).HasForeignKey(f => f.HomeworkId).OnDelete(DeleteBehavior.Restrict);
 
             builder.HasQueryFilter(h => !h.DeletedDate.HasValue);
         }

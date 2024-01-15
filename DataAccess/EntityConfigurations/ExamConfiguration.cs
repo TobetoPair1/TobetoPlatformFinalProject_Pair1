@@ -29,8 +29,8 @@ namespace DataAccess.EntityConfigurations
             builder.Property(e => e.FalseCount).HasColumnName("FalseCount").IsRequired();
             builder.Property(e => e.EmptyCount).HasColumnName("EmptyCount").IsRequired();
 
-            builder.HasMany(e => e.Questions).WithOne().HasForeignKey(q => q.ExamId);
-            builder.HasMany(e => e.Users).WithOne().HasForeignKey(u => u.ExamId);
+            builder.HasMany(e => e.Questions);
+            builder.HasMany(e => e.Users);
 
             builder.HasQueryFilter(e => !e.DeletedDate.HasValue);
         }

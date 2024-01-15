@@ -1,18 +1,13 @@
 ﻿using Core.Entities;
 using Entities.Concretes.CrossTable;
 using Entities.Concretes.CrossTables;
-using Entities.Concretes.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Entities.Concretes
 {
-    public class Course:Entity<Guid>
+	public class Course:Entity<Guid>
     {
         public Guid CategoryId { get; set; }
+        public Guid LikeId { get; set; }
         public string Name { get; set; }
         public string ImageUrl { get; set; }
         public DateTime StartOfDate { get; set; }

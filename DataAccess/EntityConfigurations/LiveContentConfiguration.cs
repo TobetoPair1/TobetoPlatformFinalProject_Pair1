@@ -23,7 +23,7 @@ namespace DataAccess.EntityConfigurations
             builder.HasOne(l => l.Category);
             builder.HasOne(l => l.Like);
             builder.HasMany(l => l.Sessions);
-            builder.HasMany(l => l.Courses);
+            builder.HasMany(l => l.Courses).WithOne(cl=>cl.LiveContent).HasForeignKey(cl=>cl.LiveContentId).OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

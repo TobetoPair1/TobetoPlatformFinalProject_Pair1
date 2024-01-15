@@ -3,16 +3,11 @@ using Entities.Concretes.CrossTable;
 using Entities.Concretes.CrossTables;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataAccess.Contexts
 {
-    public class TobetoPlatformContext:DbContext
+	public class TobetoPlatformContext:DbContext
     {
         protected IConfiguration Configuration { get; set; }
 

@@ -49,7 +49,7 @@ namespace Business.Concretes
 
         public async Task UserExists(string email)
         {
-            if (await _userService.GetByMailAsync(email) == null)
+            if (await _userService.GetByMailAsync(email) != null)
                 throw new BusinessException(BusinessMessages.UserExists, BusinessTitles.RegisterError);
         }
 		public AccessToken CreateAccessToken(IUser user)

@@ -1,17 +1,20 @@
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
 using Business;
-using Core.CrossCuttingConcerns.Exceptions.Extensions;
-using DataAccess;
-using WebApi.Controllers;
 using Core;
-using Microsoft.OpenApi.Models;
+using Core.CrossCuttingConcerns.Exceptions.Extensions;
+using Core.Utilities.Security.Encyption;
 using Core.Utilities.Security.Jwt;
+using DataAccess;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
-using Core.Utilities.Security.Encyption;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
+builder.Host.ConfigureContainer<ContainerBuilder>(myBuilder => myBuilder.RegisterModule(new AutofacBusinessModule()));
 builder.Services.AddCors(option =>
 {
     option.AddDefaultPolicy(configure =>

@@ -10,8 +10,7 @@ namespace DataAccess.EntityConfigurations
 		{
 			builder.Ignore(ue=>ue.Id);
 			builder.ToTable("UserExams").HasKey(ue => new { ue.ExamId,ue.UserId});
-
-			builder.Property(ue => ue.Id).HasColumnName("Id").IsRequired();
+			
 			builder.Property(ue => ue.UserId).HasColumnName("UserId").IsRequired();
 			builder.Property(ue => ue.ExamId).HasColumnName("ExamId").IsRequired();
 

@@ -1,5 +1,6 @@
 ﻿using Castle.DynamicProxy;
 using Core.Utilities.Interceptors;
+using Microsoft.Extensions.DependencyInjection;
 using System.Diagnostics;
 
 namespace Core.Aspects.Autofac.Performance
@@ -12,7 +13,7 @@ namespace Core.Aspects.Autofac.Performance
 		public PerformanceAspect(int interval)
 		{
 			_interval = interval;
-			_stopwatch = new Stopwatch();//böyle çalışır mı?
+			_stopwatch = CoreServiceRegistration.ServiceProvider.GetService<Stopwatch>();
 		}
 
 

@@ -31,8 +31,17 @@ namespace DataAccess.EntityConfigurations
             builder.HasMany(u=>u.Certificates);
             builder.HasMany(u=>u.SocialMedias);
             builder.HasMany(u=>u.Experiences);
+            builder.HasMany(u=>u.Educations);
+            builder.HasMany(u=>u.ForeignLanguages);
+            builder.HasMany(u=>u.Applications);
+            builder.HasMany(u=>u.Exams);
+            builder.HasMany(u=>u.Surveys);
+            builder.HasMany(u=>u.Courses);
+            builder.HasMany(u=>u.Likes);
 			builder.HasMany(u => u.Skills);
+			builder.HasMany(u => u.Favorites);
 			builder.HasMany(u => u.Claims);
+			builder.HasMany(u => u.Files);
 
 
 		}

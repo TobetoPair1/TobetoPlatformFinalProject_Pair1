@@ -17,8 +17,7 @@ namespace DataAccess.EntityConfigurations
 
             builder.HasQueryFilter(ca => !ca.DeletedDate.HasValue);
 
-            builder.HasOne(ca => ca.Course);
-            builder.HasOne(ca => ca.AsyncContent);
+           
 
         }
     }
