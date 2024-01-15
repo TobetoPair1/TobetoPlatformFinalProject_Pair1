@@ -9,7 +9,6 @@ namespace Core.Entities
 {
     public interface IOperationClaim
     {
-		//public Guid Id { get; set; }
 		string Name { get; set; }
 	}
 }

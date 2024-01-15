@@ -1,12 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Business.Dtos.Requests.Announcement;
+using Business.Dtos.Requests.Application;
+using Business.Dtos.Responses.Application;
+using Core.DataAccess.Paging;
 
 namespace Business.Abstracts
 {
-    public class IApplicationService
+    public interface IApplicationService
     {
+        Task<CreatedApplicationResponse> AddAsync(CreateApplicationRequest createApplicationRequest);
+        Task<DeletedApplicationResponse> DeleteAsync(DeleteApplicationRequest deleteApplicationRequest);
+        Task<UpdatedApplicationResponse> UpdateAsync(UpdateApplicationRequest updateApplicationRequest);
+        Task<IPaginate<GetListApplicationResponse>> GetListAsync(PageRequest pageRequest);
+        Task<GetApplicationResponse> GetByIdAsync(GetApplicationRequest getApplicationRequest);
     }
 }

@@ -12,9 +12,14 @@ public class AsyncContentProfile: Profile
     {
         CreateMap<AsyncContent, CreateAsyncContentRequest>().ReverseMap();
         CreateMap<AsyncContent, CreatedAsyncContentResponse>().ReverseMap();
-    
-        CreateMap<IPaginate<AsyncContent>, Paginate<GetListAsyncContentResponse>>();
-        CreateMap<AsyncContent, GetListAsyncContentResponse>().ReverseMap();
+
+        CreateMap<AsyncContent, DeleteAsyncContentRequest>().ReverseMap();
+        CreateMap<AsyncContent, DeletedAsyncContentResponse>().ReverseMap();
+
+        CreateMap<AsyncContent, UpdateAsyncContentRequest>().ReverseMap();
+        CreateMap<AsyncContent, UpdatedAsyncContentResponse>().ReverseMap();
+
+        CreateMap<AsyncContent, GetAsyncContentRequest>().ReverseMap();
         CreateMap<AsyncContent, GetAsyncContentResponse>().ReverseMap();
 
         CreateMap<AsyncContent, GetListAsyncContentResponse>().ReverseMap();

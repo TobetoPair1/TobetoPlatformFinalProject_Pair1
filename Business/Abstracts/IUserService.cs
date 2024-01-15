@@ -21,6 +21,5 @@ namespace Business.Abstracts
         Task<GetUserResponse> GetByIdAsync(Guid? id);
         Task<User> GetByMailAsync(string mail);
         List<IOperationClaim> GetClaims(IUser user);
-		//Task<GetUserResponse> CheckUserAsync(GetUserRequest getUserRequest);
 	}
 }

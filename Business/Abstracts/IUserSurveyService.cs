@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Business.Abstracts
 {
-    internal class IUserSurveyService
+    public class IUserSurveyService
     {
     }
 }
