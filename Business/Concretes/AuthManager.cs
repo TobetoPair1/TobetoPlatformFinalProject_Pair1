@@ -5,6 +5,8 @@ using Business.Dtos.Requests.Auth.Request;
 using Business.Dtos.Requests.User;
 using Business.Dtos.Responses.Auth;
 using Business.Dtos.Responses.User;
+using Business.ValudationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
 using Core.CrossCuttingConcerns.Exceptions.Types;
 using Core.Entities;
 using Core.Utilities.Security.Hashing;
@@ -25,6 +27,7 @@ namespace Business.Concretes
 			_mapper = mapper;
 			_tokenHelper = tokenHelper;
 		}
+        [ValidationAspect(typeof(LoginValidator))]
         public async Task<IUser> Login(LoginRequest loginRequest)
         {
             var userToCheck = await _userService.GetByMailAsync(loginRequest.Email);
@@ -33,8 +36,8 @@ namespace Business.Concretes
                 throw new BusinessException(BusinessMessages.LoginError, BusinessTitles.LoginError);
             return userToCheck;
         }
-
-        public async Task<IUser> Register(RegisterRequest registerRequest)
+		[ValidationAspect(typeof(RegisterValidator))]
+		public async Task<IUser> Register(RegisterRequest registerRequest)
         {
             HashingHelper.CreatePasswordHash(registerRequest.Password, out registerRequest._passwordHash, out registerRequest._passwordSalt);
             User user = _mapper.Map<User>(registerRequest);
