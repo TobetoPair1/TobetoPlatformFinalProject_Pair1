@@ -20,6 +20,8 @@ public class CategoryProfile : Profile
 
         CreateMap<Paginate<Category>, Paginate<GetListCategoryResponse>>().ReverseMap();
 
+        CreateMap<Category, GetListCategoryResponse>().ReverseMap();
+
     }
 }
 

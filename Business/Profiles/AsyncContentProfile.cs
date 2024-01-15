@@ -16,6 +16,8 @@ public class AsyncContentProfile: Profile
         CreateMap<IPaginate<AsyncContent>, Paginate<GetListAsyncContentResponse>>();
         CreateMap<AsyncContent, GetListAsyncContentResponse>().ReverseMap();
         CreateMap<AsyncContent, GetAsyncContentResponse>().ReverseMap();
+
+        CreateMap<AsyncContent, GetListAsyncContentResponse>().ReverseMap();
     }
 
 }
