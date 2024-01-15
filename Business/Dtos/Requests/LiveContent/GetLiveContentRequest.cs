@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Business.Concretes
+namespace Business.Dtos.Requests.LiveContent
 {
-    internal class CourseLiveContenManager
+    public class GetLiveContentRequest
     {
+        public Guid Id { get; set; }
     }
 }
