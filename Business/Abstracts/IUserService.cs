@@ -20,7 +20,6 @@ namespace Business.Abstracts
         Task<UpdatedUserResponse> UpdateAsync(UpdateUserRequest updateUserRequest);
         Task<GetUserResponse> GetByIdAsync(Guid? id);
         Task<User> GetByMailAsync(string mail);
-        List<IOperationClaimService> GetClaims(IUser user);
-		//Task<GetUserResponse> CheckUserAsync(GetUserRequest getUserRequest);
+        List<IOperationClaim> GetClaims(IUser user);
 	}
 }

@@ -1,13 +1,11 @@
 ﻿using Business.Abstracts;
-using Business.Dtos.Requests.Announcement;
 using Business.Dtos.Requests.Survey;
 using Core.DataAccess.Paging;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers
 {
-    [Route("api/[controller]")]
+	[Route("api/[controller]")]
     [ApiController]
     public class SurveyController : ControllerBase
     {

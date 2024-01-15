@@ -57,7 +57,7 @@ namespace Business.Concretes
 		public async Task<UpdatedAnswerResponse> UpdateAsync(UpdateAnswerRequest updateAnswerRequest)
 		{
 			Answer answer = _mapper.Map<Answer>(updateAnswerRequest);
-			var updatedAnswer = await _answerDal.UpdateAsyncanswer);
+			var updatedAnswer = await _answerDal.UpdateAsync(answer);
 			UpdatedAnswerResponse updatedAnswerResponse = _mapper.Map<UpdatedAnswerResponse>(updatedAnswer);
 			return updatedAnswerResponse;
 		}
