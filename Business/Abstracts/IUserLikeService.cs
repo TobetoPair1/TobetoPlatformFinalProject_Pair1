@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Business.Dtos.Requests.UserLike;
+using Business.Dtos.Responses.UserLike;
+using Core.DataAccess.Paging;
 
-namespace Business.Abstracts
+
+namespace Business.Abstracts;
+public interface IUserLikeService
 {
-    public class IUserLikeService
-    {
-    }
+    Task<CreatedUserLikeResponse> AddAsync(CreateUserLikeRequest createUserLikeRequest);
+    Task<IPaginate<GetListUserLikeResponse>> GetListAsync(PageRequest pageRequest);
+    Task<DeletedUserLikeResponse> DeleteAsync(DeleteUserLikeRequest deleteUserLikeRequest);
+    Task<GetUserLikeResponse> GetByIdAsync(GetUserLikeRequest getUserLikeRequest);
 }
