@@ -35,7 +35,6 @@
 		<Folder Include="Dtos\Requests\UserFavourite\" />
 		<Folder Include="Dtos\Requests\UserExam\" />
 		<Folder Include="Dtos\Requests\UserCourse\" />
-		<Folder Include="Dtos\Requests\Question\" />
 		<Folder Include="Dtos\Responses\Answer\" />
 		<Folder Include="Dtos\Responses\Assignment\" />
 		<Folder Include="Dtos\Responses\CourseLiveContent\" />
@@ -46,7 +45,6 @@
 		<Folder Include="Dtos\Responses\HomeworkFile\" />
 		<Folder Include="Dtos\Responses\Homework\" />
 		<Folder Include="Dtos\Responses\Like\" />
-		<Folder Include="Dtos\Responses\Question\" />
 		<Folder Include="Dtos\Responses\UserCourse\" />
 		<Folder Include="Dtos\Responses\UserExam\" />
 		<Folder Include="Dtos\Responses\UserFavourite\" />
