@@ -1,30 +1,12 @@
-﻿using Autofac;
-using Autofac.Core;
-using Autofac.Extras.DynamicProxy;
-using Business.Abstracts;
+﻿using Business.Abstracts;
 using Business.Concretes;
-using Castle.DynamicProxy;
 using Core.Business.Rules;
-using Core.Utilities.Interceptors;
 using Core.Utilities.Security.Jwt;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 
 namespace Business
 {
-    public class AutofacBusinessModule: Autofac.Module
-    {
-		protected override void Load(ContainerBuilder builder)
-		{
-			var assembly = Assembly.GetExecutingAssembly();			
-
-			builder.RegisterAssemblyTypes(assembly).AsImplementedInterfaces()
-				.EnableInterfaceInterceptors(new ProxyGenerationOptions()
-				{
-					Selector = new AspectInterceptorSelector()
-				}).SingleInstance();
-		}
-	}
 	public static class BusinessServiceRegistration
     {
         public static IServiceCollection AddBusinessServices(this IServiceCollection services)
