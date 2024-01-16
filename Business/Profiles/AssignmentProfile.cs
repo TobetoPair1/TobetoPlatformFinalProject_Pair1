@@ -15,7 +15,7 @@ public class AssignmentProfile : Profile
             .ForMember(destinationMember: ca => ca.CourseName, memberOptions: opt => opt.MapFrom(a => a.Course.Name))
             .ReverseMap();
 
-        CreateMap<DeleteAssigmentRequest,Assignment>().ReverseMap();
+        CreateMap<DeleteAssigmentRequest, Assignment>().ReverseMap();
         CreateMap<Assignment, DeletedAssigmentResponse>()
             .ForMember(destinationMember: da => da.CourseName, memberOptions: opt => opt.MapFrom(a => a.Course.Name))
             .ReverseMap();
@@ -26,7 +26,7 @@ public class AssignmentProfile : Profile
 
         CreateMap<UpdateAssigmentRequest, Assignment>().ReverseMap();
         CreateMap<Assignment, UpdatedAssigmentResponse>()
-            .ForMember(destinationMember: ua=>ua.CourseName, memberOptions: opt=>opt.MapFrom(a => a.Course.Name))
+            .ForMember(destinationMember: ua => ua.CourseName, memberOptions: opt => opt.MapFrom(a => a.Course.Name))
             .ReverseMap();
 
         CreateMap<Paginate<Assignment>, Paginate<GetListAssigmentResponse>>().ReverseMap();

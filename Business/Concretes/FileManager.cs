@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using Business.Abstracts;
 using Business.Dtos.Requests.File;
 using Business.Dtos.Responses.File;

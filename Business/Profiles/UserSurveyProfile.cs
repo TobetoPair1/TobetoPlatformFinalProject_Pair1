@@ -6,25 +6,24 @@ using Business.Dtos.Responses.UserSurvey;
 using Core.DataAccess.Paging;
 using Entities.Concretes.CrossTable;
 
-namespace Business.Profiles
+namespace Business.Profiles;
+
+public class UserSurveyProfile : Profile
 {
-    public class UserSurveyProfile:Profile
+    public UserSurveyProfile()
     {
-        public UserSurveyProfile()
-        {
-            CreateMap<UserSurvey, CreateUserSurveyRequest>().ReverseMap();
-            CreateMap<UserSurvey, CreatedUserSurveyResponse>().ReverseMap();
+        CreateMap<UserSurvey, CreateUserSurveyRequest>().ReverseMap();
+        CreateMap<UserSurvey, CreatedUserSurveyResponse>().ReverseMap();
 
-            CreateMap<UserSurvey, DeleteUserSurveyRequest>().ReverseMap();
-            CreateMap<UserSurvey, DeletedUserSurveyResponse>().ReverseMap();
+        CreateMap<UserSurvey, DeleteUserSurveyRequest>().ReverseMap();
+        CreateMap<UserSurvey, DeletedUserSurveyResponse>().ReverseMap();
 
-            CreateMap<IPaginate<UserSurvey>, Paginate<GetListUserSurveyResponse>>();
-            CreateMap<UserSurvey, GetListUserSurveyResponse>()
-                .ForMember(destinationMember: us => us.SurveyTitle, memberOptions: opt => opt.MapFrom(us => us.Survey.Title))
-                .ReverseMap();
+        CreateMap<IPaginate<UserSurvey>, Paginate<GetListUserSurveyResponse>>();
+        CreateMap<UserSurvey, GetListUserSurveyResponse>()
+            .ForMember(destinationMember: us => us.SurveyTitle, memberOptions: opt => opt.MapFrom(us => us.Survey.Title))
+            .ReverseMap();
 
-            CreateMap<UserSurvey, GetUserSkillRequest>().ReverseMap();
-            CreateMap<UserSurvey, GetUserSkillResponse>().ReverseMap();
-        }
+        CreateMap<UserSurvey, GetUserSkillRequest>().ReverseMap();
+        CreateMap<UserSurvey, GetUserSkillResponse>().ReverseMap();
     }
 }

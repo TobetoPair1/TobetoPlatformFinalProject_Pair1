@@ -8,7 +8,7 @@ public interface ICourseAsyncContentService
 {
     Task<CreatedCourseAsyncContentResponse> AddAsync(CreateCourseAsyncContentRequest createCourseAsyncContentRequest);
     Task<IPaginate<GetListCourseAsyncContentResponse>> GetListAsync(PageRequest pageRequest);
-    Task<GetCourseAyncContentResponse> GetAsync(Guid id);
+    Task<GetCourseAyncContentResponse> GetAsync(GetCourseAyncContentRequest getCourseAyncContentRequest);
     Task<UpdatedCourseAsyncContentResponse> UpdateAsync(UpdateCourseAsyncContentRequest updateCourseAsyncContentRequest);
     Task<DeletedCourseAsyncContentResponse> DeleteAsync(DeleteCourseAsyncContentRequest deleteCourseAsyncContentRequest);
 }

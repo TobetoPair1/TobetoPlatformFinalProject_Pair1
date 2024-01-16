@@ -1,56 +1,56 @@
 ﻿using AutoMapper;
 using Business.Abstracts;
 using Business.Dtos.Requests.PersonalInfo;
-using Business.Dtos.Requests.User;
 using Business.Dtos.Responses.PersonalInfo;
-using Business.Dtos.Responses.User;
-using Business.Rules;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
-using DataAccess.Concretes.EntityFramework;
 using Entities.Concretes;
 using Microsoft.EntityFrameworkCore;
 
-namespace Business.Concretes
+namespace Business.Concretes;
+
+public class PersonalInfoManager : IPersonalInfoService
 {
-	public class PersonalInfoManager : IPersonalInfoService
-	{
-		IMapper _mapper;
-		IPersonalInfoDal _personalInfoDal;
+    IMapper _mapper;
+    IPersonalInfoDal _personalInfoDal;
 
-		public PersonalInfoManager(IMapper mapper, IPersonalInfoDal personalInfoDal)
-		{
-			_mapper = mapper;
-			_personalInfoDal = personalInfoDal;
-		}
+    public PersonalInfoManager(IMapper mapper, IPersonalInfoDal personalInfoDal)
+    {
+        _mapper = mapper;
+        _personalInfoDal = personalInfoDal;
+    }
 
-		public async Task<CreatedPersonalInfoResponse> AddAsync(CreatePersonalInfoRequest createPersonalInfoRequest)
-		{			
-			PersonalInfo personalInfo = _mapper.Map<PersonalInfo>(createPersonalInfoRequest);
-			var createdPersonalInfo = await _personalInfoDal.AddAsync(personalInfo);
-			CreatedPersonalInfoResponse result = _mapper.Map<CreatedPersonalInfoResponse>(personalInfo);
-			return result;
-		}
+    public async Task<CreatedPersonalInfoResponse> AddAsync(CreatePersonalInfoRequest createPersonalInfoRequest)
+    {
+        PersonalInfo personalInfo = _mapper.Map<PersonalInfo>(createPersonalInfoRequest);
+        var createdPersonalInfo = await _personalInfoDal.AddAsync(personalInfo);
+        CreatedPersonalInfoResponse result = _mapper.Map<CreatedPersonalInfoResponse>(createdPersonalInfo);
+        return result;
+    }
 
-		public Task<DeletedPersonalInfoResponse> DeleteAsync(DeletePersonalInfoRequest DeletePersonalInfoRequest)
-		{
-			throw new NotImplementedException();
-		}
+    public async Task<DeletedPersonalInfoResponse> DeleteAsync(DeletePersonalInfoRequest deletePersonalInfoRequest)
+    {
+        PersonalInfo personalInfo = _mapper.Map<PersonalInfo>(deletePersonalInfoRequest);
+        PersonalInfo deletedPersonalInfo = await _personalInfoDal.DeleteAsync(personalInfo);
+        return _mapper.Map<DeletedPersonalInfoResponse>(deletedPersonalInfo);
+    }
 
-		public Task<GetPersonalInfoResponse> GetByIdAsync(GetPersonalInfoRequest getPersonalInfoRequest)
-		{
-			throw new NotImplementedException();
-		}
+    public async Task<GetPersonalInfoResponse> GetByIdAsync(GetPersonalInfoRequest getPersonalInfoRequest)
+    {
+        PersonalInfo personalInfo = await _personalInfoDal.GetAsync(p => p.Id == getPersonalInfoRequest.Id);
+        return _mapper.Map<GetPersonalInfoResponse>(personalInfo);
+    }
 
-		public async Task<IPaginate<GetListPersonalInfoResponse>> GetListAsync(PageRequest pageRequest)
-		{			
-			var result = await _personalInfoDal.GetListAsync(include:pi=> pi.Include(pi=>pi.User), index: pageRequest.PageIndex, size: pageRequest.PageSize);
-			return _mapper.Map<Paginate<GetListPersonalInfoResponse>>(result);
-		}
+    public async Task<IPaginate<GetListPersonalInfoResponse>> GetListAsync(PageRequest pageRequest)
+    {
+        var result = await _personalInfoDal.GetListAsync(include: pi => pi.Include(pi => pi.User), index: pageRequest.PageIndex, size: pageRequest.PageSize);
+        return _mapper.Map<Paginate<GetListPersonalInfoResponse>>(result);
+    }
 
-		public Task<UpdatedPersonalInfoResponse> UpdateAsync(UpdatePersonalInfoRequest UpdatePersonalInfoRequest)
-		{
-			throw new NotImplementedException();
-		}
-	}
+    public async Task<UpdatedPersonalInfoResponse> UpdateAsync(UpdatePersonalInfoRequest updatePersonalInfoRequest)
+    {
+        PersonalInfo personalInfo = _mapper.Map<PersonalInfo>(updatePersonalInfoRequest);
+        PersonalInfo updatedPersonalInfo = await _personalInfoDal.UpdateAsync(personalInfo);
+        return _mapper.Map<UpdatedPersonalInfoResponse>(updatedPersonalInfo);
+    }
 }

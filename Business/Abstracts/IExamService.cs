@@ -2,14 +2,13 @@
 using Business.Dtos.Responses.Exam;
 using Core.DataAccess.Paging;
 
-namespace Business.Abstracts
+namespace Business.Abstracts;
+
+public interface IExamService
 {
-    public interface IExamService
-    {
-        Task<CreatedExamResponse> AddAsync(CreateExamRequest createExamRequest);
-        Task<IPaginate<GetListExamResponse>> GetListAsync(PageRequest pageRequest);
-        Task<DeletedExamResponse> DeleteAsync(DeleteExamRequest deleteExamRequest);
-        Task<UpdatedExamResponse> UpdateAsync(UpdateExamRequest updateExamRequest);
-        Task<GetExamResponse> GetByIdAsync(GetExamRequest getExamRequest);
-    }
+    Task<CreatedExamResponse> AddAsync(CreateExamRequest createExamRequest);
+    Task<IPaginate<GetListExamResponse>> GetListAsync(PageRequest pageRequest);
+    Task<DeletedExamResponse> DeleteAsync(DeleteExamRequest deleteExamRequest);
+    Task<UpdatedExamResponse> UpdateAsync(UpdateExamRequest updateExamRequest);
+    Task<GetExamResponse> GetByIdAsync(GetExamRequest getExamRequest);
 }

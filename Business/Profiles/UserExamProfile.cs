@@ -5,23 +5,22 @@ using Core.DataAccess.Paging;
 using Entities.Concretes.CrossTable;
 using Entities.Concretes.CrossTables;
 
-namespace Business.Profiles
+namespace Business.Profiles;
+
+public class UserExamProfile : Profile
 {
-    public class UserExamProfile:Profile
+    public UserExamProfile()
     {
-        public UserExamProfile()
-        {
-            CreateMap<UserExam, CreateUserExamRequest>().ReverseMap();
-            CreateMap<UserExam, CreatedUserExamResponse>().ReverseMap();
+        CreateMap<UserExam, CreateUserExamRequest>().ReverseMap();
+        CreateMap<UserExam, CreatedUserExamResponse>().ReverseMap();
 
-            CreateMap<UserExam, DeleteUserExamRequest>().ReverseMap();
-            CreateMap<UserExam, DeletedUserExamResponse>().ReverseMap();
+        CreateMap<UserExam, DeleteUserExamRequest>().ReverseMap();
+        CreateMap<UserExam, DeletedUserExamResponse>().ReverseMap();
 
-            CreateMap<UserExam, GetUserExamRequest>().ReverseMap();
-            CreateMap<UserExam, GetUserExamResponse>().ReverseMap();
+        CreateMap<UserExam, GetUserExamRequest>().ReverseMap();
+        CreateMap<UserExam, GetUserExamResponse>().ReverseMap();
 
-            CreateMap<IPaginate<UserExam>, Paginate<GetListUserExamResponse>>().ReverseMap();
-            CreateMap<UserExam, GetListUserExamResponse>().ForMember(destinationMember: ue => ue.ExamTitle, memberOptions: opt => opt.MapFrom(ue => ue.Exam.Title)).ReverseMap();
-        }
+        CreateMap<IPaginate<UserExam>, Paginate<GetListUserExamResponse>>().ReverseMap();
+        CreateMap<UserExam, GetListUserExamResponse>().ForMember(destinationMember: ue => ue.ExamTitle, memberOptions: opt => opt.MapFrom(ue => ue.Exam.Title)).ReverseMap();
     }
 }

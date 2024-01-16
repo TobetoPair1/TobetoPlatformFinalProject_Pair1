@@ -34,9 +34,9 @@ public class CourseManager : ICourseService
         return _mapper.Map<DeletedCourseResponse>(deletedCourse);
     }
 
-    public async Task<GetCourseResponse> GetByIdAsync(Guid id)
+    public async Task<GetCourseResponse> GetByIdAsync(GetCourseRequest getCourseRequest)
     {
-        Course course = await _courseDal.GetAsync(c=>c.Id == id , include: c=>c.Include(c=>c.Category).Include(c=>c.Like));
+        Course course = await _courseDal.GetAsync(c=>c.Id == getCourseRequest.Id, include: c=>c.Include(c=>c.Category).Include(c=>c.Like));
         return _mapper.Map<GetCourseResponse>(course);
     }
 

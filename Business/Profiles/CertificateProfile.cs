@@ -2,20 +2,14 @@
 using Business.Dtos.Requests.Certificate;
 using Business.Dtos.Responses.Certificate;
 using Entities.Concretes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Business.Profiles
+namespace Business.Profiles;
+
+public class CertificateProfile : Profile
 {
-    public class CertificateProfile:Profile
+    public CertificateProfile()
     {
-        public CertificateProfile()
-        {
-            CreateMap<CreateCertificateRequest,Certificate>().ReverseMap();
-            CreateMap<Certificate,CreatedCertificateResponse>().ReverseMap();
-        }
+        CreateMap<CreateCertificateRequest, Certificate>().ReverseMap();
+        CreateMap<Certificate, CreatedCertificateResponse>().ReverseMap();
     }
 }

@@ -25,7 +25,6 @@
 
 	<ItemGroup>
 		<Folder Include="Dtos\Requests\Application\" />
-		<Folder Include="Dtos\Requests\Favourite\" />
 		<Folder Include="Dtos\Requests\Like\" />
 		<Folder Include="Dtos\Requests\LiveContent\" />
 		<Folder Include="Dtos\Requests\HomeworkFile\" />

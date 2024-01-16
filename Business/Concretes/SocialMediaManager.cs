@@ -4,7 +4,6 @@ using Business.Dtos.Requests.SocialMedia;
 using Business.Dtos.Responses.SocialMedia;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
-using DataAccess.Concretes.EntityFramework;
 using Entities.Concretes;
 
 namespace Business.Concretes;

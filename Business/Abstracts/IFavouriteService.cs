@@ -10,6 +10,6 @@ public interface IFavouriteService
     Task<IPaginate<GetListFavoriteResponse>> GetListAsync(PageRequest pageRequest);
     Task<DeletedFavouriteResponse> DeleteAsync(DeleteFavouriteRequest deleteFavouriteRequest);
     Task<UpdatedFavouriteResponse> UpdateAsync(UpdateFavouriteRequest updateFvouriteRequest);
-    Task<GetFavouriteResponse> GetByIdAsync(Guid id);
+    Task<GetFavouriteResponse> GetByIdAsync(GetFavouriteRequest getFavouriteRequest);
 }
 

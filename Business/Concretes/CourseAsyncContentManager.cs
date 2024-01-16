@@ -35,9 +35,9 @@ public class CourseAsyncContentManager : ICourseAsyncContentService
         return _mapper.Map<DeletedCourseAsyncContentResponse>(deletedAsyncContent);
     }
 
-    public async Task<GetCourseAyncContentResponse> GetAsync(Guid id)
+    public async Task<GetCourseAyncContentResponse> GetAsync(GetCourseAyncContentRequest getCourseAyncContentRequest)
     {
-        CourseAsyncContent asyncContent = await _courseAsyncDal.GetAsync(asc => asc.Id == id);
+        CourseAsyncContent asyncContent = await _courseAsyncDal.GetAsync(asc => asc.Id == getCourseAyncContentRequest.Id);
         return _mapper.Map<GetCourseAyncContentResponse>(asyncContent);
     }
 

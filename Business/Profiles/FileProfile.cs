@@ -1,35 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using Business.Dtos.Requests.File;
 using Business.Dtos.Responses.File;
 using Core.DataAccess.Paging;
 using File = Entities.Concretes.File;
 
-namespace Business.Profiles
+namespace Business.Profiles;
+
+public class FileProfile : Profile
 {
-    public class FileProfile : Profile
+    public FileProfile()
     {
-        public FileProfile()
-        {
-            CreateMap<File, CreateFileRequest>().ReverseMap();
-            CreateMap<File, CreatedFileResponse>().ReverseMap();
+        CreateMap<File, CreateFileRequest>().ReverseMap();
+        CreateMap<File, CreatedFileResponse>().ReverseMap();
 
-            CreateMap<File, UpdateFileRequest>().ReverseMap();
-            CreateMap<File, UpdatedFileResponse>().ReverseMap();
+        CreateMap<File, UpdateFileRequest>().ReverseMap();
+        CreateMap<File, UpdatedFileResponse>().ReverseMap();
 
-            CreateMap<File, DeleteFileRequest>().ReverseMap();
-            CreateMap<File, DeletedFileResponse>().ReverseMap();
+        CreateMap<File, DeleteFileRequest>().ReverseMap();
+        CreateMap<File, DeletedFileResponse>().ReverseMap();
 
-            CreateMap<IPaginate<File>, Paginate<GetListFileResponse>>();
-            CreateMap<File, GetListFileResponse>().ReverseMap();
+        CreateMap<IPaginate<File>, Paginate<GetListFileResponse>>();
+        CreateMap<File, GetListFileResponse>().ReverseMap();
 
-            CreateMap<File, GetFileRequest>().ReverseMap();
-            CreateMap<File, GetFileResponse>().ReverseMap();
-        }
+        CreateMap<File, GetFileRequest>().ReverseMap();
+        CreateMap<File, GetFileResponse>().ReverseMap();
     }
-
 }

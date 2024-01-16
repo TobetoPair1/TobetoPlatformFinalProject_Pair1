@@ -29,9 +29,9 @@ public class CategoriesController : ControllerBase
     }
 
     [HttpGet("get")]
-    public async Task<IActionResult> Get(Guid id)
+    public async Task<IActionResult> Get(GetCategoryRequest getCategoryRequest)
     {
-        return Ok(await _categoryService.GetByIdAsync(id));
+        return Ok(await _categoryService.GetByIdAsync(getCategoryRequest));
     }
 
     [HttpDelete]

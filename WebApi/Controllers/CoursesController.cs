@@ -23,9 +23,9 @@ public class CoursesController : ControllerBase
     }
 
     [HttpGet("get")]
-    public async Task<IActionResult> GetByIdAsync([FromQuery] Guid id)
+    public async Task<IActionResult> GetByIdAsync([FromQuery] GetCourseRequest getCourseRequest)
     {
-        var result = await _courseService.GetByIdAsync(id);
+        var result = await _courseService.GetByIdAsync(getCourseRequest);
         return Ok(result);
     }
 
