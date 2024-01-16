@@ -1,12 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Business.Dtos.Requests.UserExam;
+using Business.Dtos.Responses.UserExam;
+using Core.DataAccess.Paging;
 
 namespace Business.Abstracts
 {
-    internal interface IUserExamService
+    public interface IUserExamService
     {
+        Task<CreatedUserExamResponse> AddAsync(CreateUserExamRequest createUserExamRequest);
+        Task<DeletedUserExamResponse> DeleteAsync(DeleteUserExamRequest deleteUserExamRequest);
+        Task<GetUserExamResponse> GetByIdAsync(GetUserExamRequest getUserExamRequest);
+        Task<IPaginate<GetListUserExamResponse>> GetListAsync(PageRequest pageRequest);
+
     }
 }
