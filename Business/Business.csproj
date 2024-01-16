@@ -40,11 +40,10 @@
 		<Folder Include="Dtos\Responses\Exam\" />
 		<Folder Include="Dtos\Responses\ExamQuestion\" />
 		<Folder Include="Dtos\Responses\Favourite\" />
-		<Folder Include="Dtos\Responses\HomeworkFile\" />
-		<Folder Include="Dtos\Responses\Homework\" />
-		<Folder Include="Dtos\Responses\Question\" />
 		<Folder Include="Dtos\Responses\UserCourse\" />
 		<Folder Include="Dtos\Responses\UserFavourite\" />
+		<Folder Include="Dtos\Responses\UserExam\" />
+		<Folder Include="Dtos\Responses\Homework\" />
 		<Folder Include="Dtos\Responses\File\" />
 		<Folder Include="Dtos\Responses\Like\" />
 
