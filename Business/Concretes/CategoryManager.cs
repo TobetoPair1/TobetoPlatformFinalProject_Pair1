@@ -37,9 +37,9 @@ public class CategoryManager : ICategoryService
         return deletedCatResponse;
     }
 
-    public async Task<GetCategoryResponse> GetByIdAsync(Guid id)
+    public async Task<GetCategoryResponse> GetByIdAsync(GetCategoryRequest getCategoryRequest)
     {
-        Category cat = await _categoryDal.GetAsync(c => c.Id == id);
+        Category cat = await _categoryDal.GetAsync(c => c.Id == getCategoryRequest.Id);
         return _mapper.Map<GetCategoryResponse>(cat);
 
     }

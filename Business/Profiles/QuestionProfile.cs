@@ -4,25 +4,24 @@ using Business.Dtos.Responses.Question;
 using Core.DataAccess.Paging;
 using Entities.Concretes;
 
-namespace Business.Profiles
+namespace Business.Profiles;
+
+public class QuestionProfile : Profile
 {
-    public class QuestionProfile:Profile
+    public QuestionProfile()
     {
-        public QuestionProfile()
-        {
-            CreateMap<Question, CreateQuestionRequest>().ReverseMap();
-            CreateMap<Question, CreatedQuestionResponse>().ReverseMap();
+        CreateMap<Question, CreateQuestionRequest>().ReverseMap();
+        CreateMap<Question, CreatedQuestionResponse>().ReverseMap();
 
-            CreateMap<Question, UpdateQuestionRequest>().ReverseMap();
-            CreateMap<Question, UpdatedQuestionResponse>().ReverseMap();
+        CreateMap<Question, UpdateQuestionRequest>().ReverseMap();
+        CreateMap<Question, UpdatedQuestionResponse>().ReverseMap();
 
-            CreateMap<Question, DeleteQuestionRequest>().ReverseMap();
-            CreateMap<Question, DeletedQuestionResponse>().ReverseMap();
+        CreateMap<Question, DeleteQuestionRequest>().ReverseMap();
+        CreateMap<Question, DeletedQuestionResponse>().ReverseMap();
 
-            CreateMap<IPaginate<Question>, Paginate<GetListQuestionResponse>>().ReverseMap();
-            CreateMap<Question, GetListQuestionResponse>().ReverseMap();
+        CreateMap<IPaginate<Question>, Paginate<GetListQuestionResponse>>().ReverseMap();
+        CreateMap<Question, GetListQuestionResponse>().ReverseMap();
 
-            CreateMap<Question, GetQuestionResponse>().ReverseMap();
-        }
+        CreateMap<Question, GetQuestionResponse>().ReverseMap();
     }
 }

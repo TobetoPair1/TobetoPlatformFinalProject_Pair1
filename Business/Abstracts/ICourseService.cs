@@ -10,6 +10,7 @@ public interface ICourseService
     Task<IPaginate<GetListCourseResponse>> GetListAsync(PageRequest pageRequest);
     Task<DeletedCourseResponse> DeleteAsync(DeleteCourseRequest deleteCourseRequest);
     Task<UpdatedCourseResponse> UpdateAsync(UpdateCourseRequest updateCourseRequest);
-    Task<GetCourseResponse> GetByIdAsync(Guid id);
+    Task<GetCourseResponse> GetByIdAsync(GetCourseRequest getCourseRequest);
 }
+
 

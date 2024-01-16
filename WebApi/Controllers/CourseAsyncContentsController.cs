@@ -29,9 +29,9 @@ public class CourseAsyncContentsController : ControllerBase
     }
 
     [HttpGet("get")]
-    public async Task<IActionResult> Get(Guid id)
+    public async Task<IActionResult> Get(GetCourseAyncContentRequest getCourseAyncContentRequest)
     {
-        return Ok(await _courseAsyncContentService.GetAsync(id));
+        return Ok(await _courseAsyncContentService.GetAsync(getCourseAyncContentRequest));
     }
 
     [HttpPut]

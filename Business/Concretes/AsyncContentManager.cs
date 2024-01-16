@@ -1,8 +1,6 @@
 using AutoMapper;
 using Business.Abstracts;
-using Business.Dtos.Requests.Announcement;
 using Business.Dtos.Requests.AsyncContent;
-using Business.Dtos.Responses.Announcement;
 using Business.Dtos.Responses.AsyncContent;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;

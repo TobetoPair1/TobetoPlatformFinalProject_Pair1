@@ -6,21 +6,20 @@ using Business.Dtos.Responses.ExamQuestion;
 using Core.DataAccess.Paging;
 using Entities.Concretes.CrossTable;
 
-namespace Business.Profiles
+namespace Business.Profiles;
+
+public class ExamQuestionProfile : Profile
 {
-    public class ExamQuestionProfile:Profile
+    public ExamQuestionProfile()
     {
-        public ExamQuestionProfile()
-        {
-			CreateMap<ExamQuestion, CreateExamQuestionRequest>().ReverseMap();
-			CreateMap<ExamQuestion, CreatedAnnouncementResponse>().ReverseMap();
+        CreateMap<ExamQuestion, CreateExamQuestionRequest>().ReverseMap();
+        CreateMap<ExamQuestion, CreatedAnnouncementResponse>().ReverseMap();
 
-			CreateMap<ExamQuestion, DeleteExamQuestionRequest>().ReverseMap();
-			CreateMap<ExamQuestion, DeletedExamQuestionResponse>().ReverseMap();
+        CreateMap<ExamQuestion, DeleteExamQuestionRequest>().ReverseMap();
+        CreateMap<ExamQuestion, DeletedExamQuestionResponse>().ReverseMap();
 
-			CreateMap<IPaginate<ExamQuestion>, Paginate<GetListExamQuestionResponse>>().ReverseMap();
-			CreateMap<ExamQuestion, GetListExamQuestionResponse>().ReverseMap();
-			
-		}
+        CreateMap<IPaginate<ExamQuestion>, Paginate<GetListExamQuestionResponse>>().ReverseMap();
+        CreateMap<ExamQuestion, GetListExamQuestionResponse>().ReverseMap();
+
     }
 }

@@ -34,9 +34,9 @@ public class FavouriteManager : IFavouriteService
         return _mapper.Map<DeletedFavouriteResponse>(deletedFav);
     }
 
-    public async Task<GetFavouriteResponse> GetByIdAsync(Guid id)
+    public async Task<GetFavouriteResponse> GetByIdAsync(GetFavouriteRequest getFavouriteRequest)
     {
-        Favourite fav = await _favouriteDal.GetAsync(f => f.Id == id, include: f => f.Include(f => f.Course));
+        Favourite fav = await _favouriteDal.GetAsync(f => f.Id == getFavouriteRequest.Id, include: f => f.Include(f => f.Course));
         return _mapper.Map<GetFavouriteResponse>(fav);
     }
 

@@ -4,7 +4,6 @@ using Business.Dtos.Requests.CourseLiveContent;
 using Business.Dtos.Responses.CourseLiveContent;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
-using Entities.Concretes;
 using Entities.Concretes.CrossTables;
 
 namespace Business.Concretes;
@@ -33,9 +32,9 @@ public class CourseLiveContentManager:ICourseLiveContentService
         return _mapper.Map<DeletedCourseLiveContentResponse>(deletedCourseLiveContent);
 
     }
-    public async Task<GetCourseLiveContentResponse> GetAsync(Guid Id)
+    public async Task<GetCourseLiveContentResponse> GetAsync(GetCourseLiveContentRequest courseLiveContentRequest)
     {
-        CourseLiveContent courseLiveContent = await _courseLiveContentDal.GetAsync(cl => cl.Id == Id);
+        CourseLiveContent courseLiveContent = await _courseLiveContentDal.GetAsync(cl => cl.Id == courseLiveContentRequest.Id);
         return _mapper.Map<GetCourseLiveContentResponse>(courseLiveContent);
     }
 

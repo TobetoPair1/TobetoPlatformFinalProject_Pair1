@@ -3,53 +3,52 @@ using Business.Dtos.Requests.Like;
 using Core.DataAccess.Paging;
 using Microsoft.AspNetCore.Mvc;
 
-namespace WebApi.Controllers
+namespace WebApi.Controllers;
+
+[Route("api/[controller]")]
+[ApiController]
+public class LikesController : ControllerBase
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class LikesController : ControllerBase
+    ILikeService _likeService;
+
+    public LikesController(ILikeService likeService)
     {
-        ILikeService _likeService;
+        _likeService = likeService;
+    }
 
-        public LikesController(ILikeService likeService)
-        {
-            _likeService = likeService;
-        }
+    [HttpPost]
+    public async Task<IActionResult> Add([FromBody] CreateLikeRequest createLikeRequest)
+    {
+        var result = await _likeService.AddAsync(createLikeRequest);
+        return Ok(result);
+    }
 
-        [HttpPost]
-        public async Task<IActionResult> Add([FromBody] CreateLikeRequest createLikeRequest)
-        {
-            var result = await _likeService.AddAsync(createLikeRequest);
-            return Ok(result);
-        }
+    [HttpGet("GetAll")]
+    public async Task<IActionResult> GetList([FromQuery] PageRequest pageRequest)
+    {
+        var result = await _likeService.GetListAsync(pageRequest);
+        return Ok(result);
+    }
 
-        [HttpGet("GetAll")]
-        public async Task<IActionResult> GetList([FromQuery] PageRequest pageRequest)
-        {
-            var result = await _likeService.GetListAsync(pageRequest);
-            return Ok(result);
-        }
+    [HttpGet("Get")]
+    public async Task<IActionResult> Get([FromQuery] GetLikeRequest getLikeRequest)
+    {
+        var result = await _likeService.GetByIdAsync(getLikeRequest);
+        return Ok(result);
+    }
 
-        [HttpGet("Get")]
-        public async Task<IActionResult> Get([FromQuery] GetLikeRequest getLikeRequest)
-        {
-            var result = await _likeService.GetByIdAsync(getLikeRequest);
-            return Ok(result);
-        }
+    [HttpDelete]
+    public async Task<IActionResult> Delete([FromBody] DeleteLikeRequest deleteLikeRequest)
+    {
+        var result = await _likeService.DeleteAsync(deleteLikeRequest);
+        return Ok(result);
+    }
 
-        [HttpDelete]
-        public async Task<IActionResult> Delete([FromBody] DeleteLikeRequest deleteLikeRequest)
-        {
-            var result = await _likeService.DeleteAsync(deleteLikeRequest);
-            return Ok(result);
-        }
-
-        [HttpPut]
-        public async Task<IActionResult> Update([FromBody] UpdateLikeRequest updateLikeRequest)
-        {
-            var result = await _likeService.UpdateAsync(updateLikeRequest);
-            return Ok(result);
-        }
+    [HttpPut]
+    public async Task<IActionResult> Update([FromBody] UpdateLikeRequest updateLikeRequest)
+    {
+        var result = await _likeService.UpdateAsync(updateLikeRequest);
+        return Ok(result);
     }
 }
 

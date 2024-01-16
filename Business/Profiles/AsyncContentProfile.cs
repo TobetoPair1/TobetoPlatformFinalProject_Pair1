@@ -1,12 +1,11 @@
 using AutoMapper;
 using Business.Dtos.Requests.AsyncContent;
 using Business.Dtos.Responses.AsyncContent;
-using Core.DataAccess.Paging;
 using Entities.Concretes;
 
 namespace Business.Profiles;
 
-public class AsyncContentProfile: Profile
+public class AsyncContentProfile : Profile
 {
     public AsyncContentProfile()
     {
