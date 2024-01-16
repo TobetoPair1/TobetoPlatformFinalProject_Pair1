@@ -13,4 +13,4 @@ namespace Business.Dtos.Responses.UserFavourite
         public Guid FavouriteId { get; set; }
     }
 }
-}
+
