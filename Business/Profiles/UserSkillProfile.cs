@@ -19,7 +19,9 @@ namespace Business.Profiles
 
 			CreateMap<IPaginate<UserSkill>, Paginate<GetListUserSkillResponse>>();
 			CreateMap<UserSkill, GetListUserSkillResponse>()
-				.ForMember(destinationMember:us=>us.SkillName,memberOptions:opt=>opt.MapFrom(us=>us.Skill.Name))
+				.ForMember(destinationMember:us=>
+					us.SkillName,memberOptions:opt=>
+					opt.MapFrom(us=>us.Skill.Name))
 				.ReverseMap();
 
 			CreateMap<UserSkill, GetUserSkillRequest>().ReverseMap();
