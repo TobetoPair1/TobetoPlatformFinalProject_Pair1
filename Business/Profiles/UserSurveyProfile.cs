@@ -4,7 +4,7 @@ using Business.Dtos.Requests.UserSurvey;
 using Business.Dtos.Responses.UserSkill;
 using Business.Dtos.Responses.UserSurvey;
 using Core.DataAccess.Paging;
-using Entities.Concretes.CrossTable;
+using Entities.Concretes.CrossTables;
 
 namespace Business.Profiles;
 

@@ -2,7 +2,6 @@
 using Business.Dtos.Requests.UserCourse;
 using Business.Dtos.Responses.UserCourse;
 using Core.DataAccess.Paging;
-using Entities.Concretes.CrossTable;
 using Entities.Concretes.CrossTables;
 
 namespace Business.Profiles;

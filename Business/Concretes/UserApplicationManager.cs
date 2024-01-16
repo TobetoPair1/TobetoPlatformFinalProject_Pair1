@@ -4,7 +4,6 @@ using Business.Dtos.Requests.UserApplication;
 using Business.Dtos.Responses.UserApplication;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
-using Entities.Concretes.CrossTable;
 using Entities.Concretes.CrossTables;
 using Microsoft.EntityFrameworkCore;
 
