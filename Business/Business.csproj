@@ -25,18 +25,15 @@
 
 	<ItemGroup>
 		<Folder Include="Dtos\Requests\Application\" />
-		<Folder Include="Dtos\Requests\Course\" />
 		<Folder Include="Dtos\Requests\Favourite\" />
 		<Folder Include="Dtos\Requests\Homework\" />
 		<Folder Include="Dtos\Requests\LiveContent\" />
-		<Folder Include="Dtos\Requests\HomeworkFile\" />
 		<Folder Include="Dtos\Requests\UserFavourite\" />
 		<Folder Include="Dtos\Requests\UserCourse\" />
 		<Folder Include="Dtos\Requests\Question\" />
 		<Folder Include="Dtos\Responses\Answer\" />
 		<Folder Include="Dtos\Responses\Assignment\" />
 		<Folder Include="Dtos\Responses\CourseLiveContent\" />
-		<Folder Include="Dtos\Responses\Course\" />
 		<Folder Include="Dtos\Responses\Exam\" />
 		<Folder Include="Dtos\Responses\ExamQuestion\" />
 		<Folder Include="Dtos\Responses\Favourite\" />
