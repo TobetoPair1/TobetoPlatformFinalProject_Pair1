@@ -1,7 +1,5 @@
 ﻿using AutoMapper;
-using Business.Dtos.Requests.Announcement;
 using Business.Dtos.Requests.Answer;
-using Business.Dtos.Responses.Announcement;
 using Business.Dtos.Responses.Answer;
 using Core.DataAccess.Paging;
 using Entities.Concretes;
