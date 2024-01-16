@@ -5,6 +5,7 @@ using Business.Dtos.Responses.Announcement;
 using Business.Dtos.Responses.ExamQuestion;
 using Core.DataAccess.Paging;
 using Entities.Concretes.CrossTable;
+using Entities.Concretes.CrossTables;
 
 namespace Business.Profiles
 {

@@ -1,6 +1,6 @@
 ﻿using Core.Entities;
 
-namespace Entities.Concretes.CrossTable
+namespace Entities.Concretes.CrossTables
 {
 	public class UserCourse : Entity<Guid>
     {

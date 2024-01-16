@@ -1,5 +1,4 @@
 ﻿using Core.Entities;
-using Entities.Concretes.CrossTable;
 using Entities.Concretes.CrossTables;
 
 namespace Entities.Concretes

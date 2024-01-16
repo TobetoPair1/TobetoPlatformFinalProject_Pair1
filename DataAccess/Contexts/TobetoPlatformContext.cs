@@ -1,5 +1,4 @@
 ﻿using Entities.Concretes;
-using Entities.Concretes.CrossTable;
 using Entities.Concretes.CrossTables;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;

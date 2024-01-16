@@ -5,6 +5,7 @@ using Business.Dtos.Responses.UserExam;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
 using Entities.Concretes.CrossTable;
+using Entities.Concretes.CrossTables;
 using Microsoft.EntityFrameworkCore;
 
 namespace Business.Concretes

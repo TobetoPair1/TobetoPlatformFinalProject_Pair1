@@ -1,14 +1,9 @@
 ﻿using Core.DataAccess.Repositories;
+using DataAccess.Abstracts;
 using DataAccess.Contexts;
-using Entities.Concretes;
-using Entities.Concretes.CrossTable;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Entities.Concretes.CrossTables;
 
-namespace DataAccess.Abstracts
+namespace DataAccess.Concretes.EntityFramework
 {
     public class EfExamQuestionDal : EfRepositoryBase<ExamQuestion, Guid, TobetoPlatformContext>, IExamQuestionDal
     {

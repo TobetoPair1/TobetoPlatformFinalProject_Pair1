@@ -3,6 +3,7 @@ using Business.Dtos.Requests.UserExam;
 using Business.Dtos.Responses.UserExam;
 using Core.DataAccess.Paging;
 using Entities.Concretes.CrossTable;
+using Entities.Concretes.CrossTables;
 
 namespace Business.Profiles
 {
