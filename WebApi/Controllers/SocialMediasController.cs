@@ -7,10 +7,8 @@ namespace WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class SocialMediasController : ControllerBase
+    public class SocialMediaController : ControllerBase
     {
-        public class SocialMediaController : ControllerBase
-        {
             ISocialMediaService _socialMediaService;
 
             public SocialMediaController(ISocialMediaService socialMediaService)
@@ -52,7 +50,5 @@ namespace WebApi.Controllers
                 var result = await _socialMediaService.UpdateAsync(updateSocialMediaRequest);
                 return Ok(result);
             }
-        }
-
-    }
+     }
 }
