@@ -1,6 +1,7 @@
 ﻿using Business.Abstracts;
-using Business.Dtos.Requests.Auth.Request;
+using Business.Constants.Messages;
 using Core.Business.Rules;
+using Core.CrossCuttingConcerns.Exceptions.Types;
 
 namespace Business.Rules;
 
@@ -13,8 +14,9 @@ public class AuthBusinessRules : BaseBusinessRules
         _userService = userService;
     }
 
-    public async Task CheckUser(LoginRequest loginRequest)
+    public async Task UserExists(string email)
     {
-
+        if (await _userService.GetByMailAsync(email) != null)
+            throw new BusinessException(BusinessMessages.UserExists, BusinessTitles.RegisterError);
     }
 }

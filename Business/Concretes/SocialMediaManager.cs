@@ -2,6 +2,7 @@ using AutoMapper;
 using Business.Abstracts;
 using Business.Dtos.Requests.SocialMedia;
 using Business.Dtos.Responses.SocialMedia;
+using Business.Rules;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
 using Entities.Concretes;
@@ -12,15 +13,18 @@ public class SocialMediaManager: ISocialMediaService
 {
     IMapper _mapper;
     ISocialMediaDal _socialMediaDal;
+    SocialMediaBusinessRules _socialMediaBusinessRules;
 
-    public SocialMediaManager(IMapper mapper, ISocialMediaDal socialMediaDal)
+    public SocialMediaManager(IMapper mapper, ISocialMediaDal socialMediaDal, SocialMediaBusinessRules socialMediaBusinessRules) 
     {
         _mapper = mapper;
         _socialMediaDal = socialMediaDal;
+        _socialMediaBusinessRules = socialMediaBusinessRules;
     }
     
     public async Task<CreatedSocialMediaResponse> AddAsync(CreateSocialMediaRequest createSocialMediaRequest)
     {
+        await _socialMediaBusinessRules.MaxCountAsync(createSocialMediaRequest.UserId);
         SocialMedia socialMedia = _mapper.Map<SocialMedia>(createSocialMediaRequest);
         var createdSocialMedia = await _socialMediaDal.AddAsync(socialMedia);
         CreatedSocialMediaResponse createdSocialMediaResponse = _mapper.Map<CreatedSocialMediaResponse>(createdSocialMedia);

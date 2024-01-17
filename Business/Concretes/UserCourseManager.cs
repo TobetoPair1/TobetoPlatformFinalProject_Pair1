@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using Business.Abstracts;
+using Business.Dtos.Requests.SocialMedia;
 using Business.Dtos.Requests.UserCourse;
 using Business.Dtos.Responses.UserCourse;
+using Business.Rules;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
 using Entities.Concretes.CrossTables;
@@ -13,15 +15,18 @@ public class UserCourseManager : IUserCourseService
 {
     IUserCourseDal _userCourseDal;
     IMapper _mapper;
+    UserCourseBusinessRules _userCourseBusinessRules;
 
-    public UserCourseManager(IUserCourseDal userCourseDal, IMapper mapper)
+    public UserCourseManager(IUserCourseDal userCourseDal, IMapper mapper, UserCourseBusinessRules userCourseBusinessRules)
     {
         _userCourseDal = userCourseDal;
         _mapper = mapper;
+        _userCourseBusinessRules = userCourseBusinessRules;
     }
 
     public async Task<CreatedUserCourseResponse> AddAsync(CreateUserCourseRequest createUserCourseRequest)
     {
+        await _userCourseBusinessRules.AlreadyExists(createUserCourseRequest);
         UserCourse userCourse = _mapper.Map<UserCourse>(createUserCourseRequest);
         var createdUserCourse = await _userCourseDal.AddAsync(userCourse);
         CreatedUserCourseResponse createdUserCourseResponse = _mapper.Map<CreatedUserCourseResponse>(createdUserCourse);

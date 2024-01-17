@@ -3,6 +3,7 @@ using Business.Abstracts;
 using Business.Constants.Messages;
 using Business.Dtos.Requests.Auth.Request;
 using Business.Dtos.Requests.User;
+using Business.Rules;
 using Business.ValudationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
 using Core.CrossCuttingConcerns.Exceptions.Types;
@@ -18,13 +19,16 @@ public class AuthManager : IAuthService
 	IUserService _userService;
 	IMapper _mapper;
 	ITokenHelper _tokenHelper;
+	AuthBusinessRules _authbusinessRules;
 
-	public AuthManager(IUserService userService, IMapper mapper, ITokenHelper tokenHelper)
+	public AuthManager(IUserService userService, IMapper mapper, ITokenHelper tokenHelper, AuthBusinessRules authBusinessRules)
 	{
 		_userService = userService;
 		_mapper = mapper;
 		_tokenHelper = tokenHelper;
-	}
+		_authbusinessRules = authBusinessRules;
+
+    }
 	[ValidationAspect(typeof(LoginValidator))]
 	public async Task<IUser> Login(LoginRequest loginRequest)
 	{
@@ -37,6 +41,7 @@ public class AuthManager : IAuthService
 	[ValidationAspect(typeof(RegisterValidator))]
 	public async Task<IUser> Register(RegisterRequest registerRequest)
 	{
+		await _authbusinessRules.UserExists(registerRequest.Email);
 		HashingHelper.CreatePasswordHash(registerRequest.Password, out registerRequest._passwordHash, out registerRequest._passwordSalt);
 		User user = _mapper.Map<User>(registerRequest);
 		CreateUserRequest createUserRequest = _mapper.Map<CreateUserRequest>(user);
@@ -45,11 +50,6 @@ public class AuthManager : IAuthService
 
 	}
 
-	public async Task UserExists(string email)
-	{
-		if (await _userService.GetByMailAsync(email) != null)
-			throw new BusinessException(BusinessMessages.UserExists, BusinessTitles.RegisterError);
-	}
 	public AccessToken CreateAccessToken(IUser user)
 	{
 		var claims = _userService.GetClaims(user);

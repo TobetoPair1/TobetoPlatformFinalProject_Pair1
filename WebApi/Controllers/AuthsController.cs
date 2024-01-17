@@ -27,8 +27,6 @@ public class AuthsController : ControllerBase
     [HttpPost("register")]
     public async Task<IActionResult> Register(RegisterRequest registerRequest)
     {
-        await _authService.UserExists(registerRequest.Email);
-
 
         var registeredUser = await _authService.Register(registerRequest);
         var result = _authService.CreateAccessToken(registeredUser);

@@ -9,8 +9,8 @@ public class UpdatedCourseResponse
     public string ImageUrl { get; set; }
     public DateTime StartOfDate { get; set; }
     public DateTime EndOfDate { get; set; }
-    public TimeSpan TimeSpent { get; set; }
-    public TimeSpan EstimatedTime { get; set; }
+    public ulong TimeSpent { get; set; }
+    public ulong EstimatedTime { get; set; }
     public int ContentCount { get; set; }
     public string ProducingCompany { get; set; }
 }
