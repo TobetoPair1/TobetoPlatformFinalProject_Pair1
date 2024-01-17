@@ -1,5 +1,6 @@
 ﻿using Business.Dtos.Requests.Auth.Request;
 using FluentValidation;
+using System.Text.RegularExpressions;
 
 namespace Business.ValudationRules.FluentValidation;
 
@@ -12,8 +13,6 @@ public class RegisterValidator : AbstractValidator<RegisterRequest>
         RuleFor(p => p.Password).NotEmpty();
         RuleFor(p => p.Password).MinimumLength(8);
         RuleFor(p => p.Password).MaximumLength(32);
-        RuleFor(p => p.Password).Matches("^[a-zA-Z0-9]+$");
-        //^[a-zA-Z0-9]+$
-        //RuleFor(p => p.Password).Matches(@" ^ (?=.[a-z])(?=.[A-Z])(?=.\d)(?=.[^a-zA-Z\d]).{8,}$");
-    }
+        RuleFor(p => p.Password).Matches("^(?=.*\\d)(?=.*[a-zA-Z])(?=.*[A-Z])(?=.*[-\\#\\$\\.\\%\\&\\*])(?=.*[a-zA-Z]).{8,16}$");
+    }    
 }
