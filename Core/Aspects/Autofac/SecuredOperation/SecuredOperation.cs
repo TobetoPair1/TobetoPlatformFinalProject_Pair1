@@ -3,7 +3,7 @@ using Core.Extensions;
 using Core.Utilities.Interceptors;
 using Microsoft.AspNetCore.Http;
 
-namespace Business.BusinessAspects.Autofac
+namespace Core.Aspects.Autofac.SecuredOperation
 {
 	public class SecuredOperation : MethodInterception
 	{
@@ -27,7 +27,7 @@ namespace Business.BusinessAspects.Autofac
 					return;
 				}
 			}
-			throw new Exception("Erişim engellendi.");
+			throw new System.Exception("Erişim engellendi.");
 		}
 	}
 }
