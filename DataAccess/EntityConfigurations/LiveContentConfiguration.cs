@@ -8,10 +8,9 @@ namespace DataAccess.EntityConfigurations
     {
         public void Configure(EntityTypeBuilder<LiveContent> builder)
         {
-            builder.ToTable("LiveContent").HasKey(l => l.Id);
+            builder.ToTable("LiveContents").HasKey(l => l.Id);
 
             builder.Property(l => l.Id).HasColumnName("Id").IsRequired();
-            builder.Property(l => l.CourseId).HasColumnName("CourseId").IsRequired();
             builder.Property(l => l.CategoryId).HasColumnName("CategoryId").IsRequired();
             builder.Property(l => l.LikeId).HasColumnName("LikeId").IsRequired();
             builder.Property(l => l.Title).HasColumnName("Title").IsRequired();
@@ -19,11 +18,9 @@ namespace DataAccess.EntityConfigurations
             builder.Property(l => l.IsCompleted).HasColumnName("IsCompleted").IsRequired();
 
             builder.HasQueryFilter(l => !l.DeletedDate.HasValue);
-
-            builder.HasOne(l => l.Category);
-            builder.HasOne(l => l.Like);
-            builder.HasMany(l => l.Sessions);
-            builder.HasMany(l => l.Courses).WithOne(cl=>cl.LiveContent).HasForeignKey(cl=>cl.LiveContentId).OnDelete(DeleteBehavior.Restrict);
+            
+            builder.HasMany(l => l.Sessions).WithOne(s => s.LiveContent).HasForeignKey(s => s.LiveContentId);
+			builder.HasMany(l => l.Courses).WithOne(cl => cl.LiveContent).HasForeignKey(cl => cl.LiveContentId);
         }
     }
 }

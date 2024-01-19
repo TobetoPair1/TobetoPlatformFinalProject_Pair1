@@ -13,12 +13,15 @@ namespace DataAccess.EntityConfigurations
             builder.Property(c => c.Id).HasColumnName("Id").IsRequired();
             builder.Property(c => c.Name).HasColumnName("Name").IsRequired();
 
-            builder.HasMany(c => c.Courses);
-            builder.HasMany(c => c.LiveContents);
-            builder.HasMany(c => c.AsyncContents);
+			builder.HasIndex(u => u.Name, "UK_Categories_Name").IsUnique();
 
-            builder.HasQueryFilter(c => !c.DeletedDate.HasValue);
-        }
+			builder.HasQueryFilter(c => !c.DeletedDate.HasValue);
+
+			builder.HasMany(c => c.Courses).WithOne(c => c.Category).HasForeignKey(c => c.CategoryId);
+			builder.HasMany(c => c.LiveContents).WithOne(lc => lc.Category).HasForeignKey(lc => lc.CategoryId);
+			builder.HasMany(c => c.AsyncContents).WithOne(ac => ac.Category).HasForeignKey(ac => ac.CategoryId);
+			builder.HasMany(c => c.Assignments).WithOne(a => a.Category).HasForeignKey(a => a.CategoryId);
+		}
     }
 
 }

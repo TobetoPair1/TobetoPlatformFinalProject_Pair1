@@ -16,10 +16,6 @@ namespace DataAccess.EntityConfigurations
 				builder.Property(f => f.Level).HasColumnName("Level").IsRequired();
 
 				builder.HasQueryFilter(f => !f.DeletedDate.HasValue);
-
-                builder.HasOne(f=>f.User);
-
-
 			}
 		}
 }

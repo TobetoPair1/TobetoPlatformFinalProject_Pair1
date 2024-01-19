@@ -9,7 +9,7 @@ namespace Entities.Concretes
         public string Description { get; set; }
         public DateTime StartOfDate { get; set; }
         public DateTime EndOfTime { get; set; }
-        public TimeSpan Time { get; set; }
+        public ulong Time { get; set; }
         public bool IsCompleted { get; set; }
         public int QuestionCount { get; set; }
         public int Score { get; set; }

@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace DataAccess.EntityConfigurations
 {
-    public class InstructorConfiguration : IEntityTypeConfiguration<Instructor>
+	public class InstructorConfiguration : IEntityTypeConfiguration<Instructor>
     {
         public void Configure(EntityTypeBuilder<Instructor> builder)
         {
@@ -15,7 +15,7 @@ namespace DataAccess.EntityConfigurations
 
             builder.HasQueryFilter(i => !i.DeletedDate.HasValue);
 
-            builder.HasMany(i => i.Sessions);
+            builder.HasMany(i => i.Sessions).WithOne(ins=>ins.Instructor).HasForeignKey(ins=>ins.InstructorId);
         }
     }
 }

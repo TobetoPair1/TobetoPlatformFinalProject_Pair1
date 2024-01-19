@@ -15,9 +15,6 @@ namespace DataAccess.EntityConfigurations
             builder.Property(u => u.SurveyId).HasColumnName("SurveyId").IsRequired();
 
             builder.HasQueryFilter(u => !u.DeletedDate.HasValue);
-
-            builder.HasOne(u => u.User);
-            builder.HasOne(u => u.Survey);
         }
     }
 }

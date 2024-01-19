@@ -13,13 +13,12 @@ namespace DataAccess.EntityConfigurations
             builder.Property(q => q.Id).HasColumnName("Id").IsRequired();
             builder.Property(q => q.TrueAnswerId).HasColumnName("TrueAnswerId").IsRequired();
             builder.Property(q => q.Description).HasColumnName("Description").IsRequired();
-            builder.Property(q => q.ImageUrl).HasColumnName("ImageUrl");
-            
-
-            builder.HasMany(q => q.Answers).WithOne(a => a.Question).HasForeignKey(a => a.QuestionId);
-            builder.HasMany(q => q.Exams).WithOne(eq => eq.Question).HasForeignKey(eq => eq.QuestionId);
+            builder.Property(q => q.ImageUrl).HasColumnName("ImageUrl");  
 
             builder.HasQueryFilter(q => !q.DeletedDate.HasValue);
-        }
+
+			builder.HasMany(q => q.Answers).WithOne(a => a.Question).HasForeignKey(a => a.QuestionId);
+			builder.HasMany(q => q.Exams).WithOne(eq => eq.Question).HasForeignKey(eq => eq.QuestionId);
+		}
     }
 }

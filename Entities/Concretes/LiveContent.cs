@@ -4,8 +4,7 @@ using Entities.Concretes.Models;
 namespace Entities.Concretes
 {
     public class LiveContent :Content
-    {
-        public Guid CourseId { get; set; }
+    {        
         public ICollection<Session> Sessions { get; set; }
         public ICollection<CourseLiveContent> Courses { get; set; }
     }

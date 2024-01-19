@@ -10,7 +10,7 @@ namespace DataAccess.EntityConfigurations
         {
 
             builder.Ignore(ca => ca.Id);
-            builder.HasKey(ca => new { ca.CourseId, ca.AsyncContentId });
+            builder.ToTable("CourseAsyncContents").HasKey(ca => new { ca.CourseId, ca.AsyncContentId });
 
             builder.Property(ca => ca.CourseId).HasColumnName("CourseId").IsRequired();
             builder.Property(ca => ca.AsyncContentId).HasColumnName("AsyncContentId").IsRequired();

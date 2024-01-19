@@ -13,6 +13,7 @@ namespace DataAccess.EntityConfigurations
 			builder.Property(ac => ac.Id).HasColumnName("Id").IsRequired();
 			builder.Property(ac => ac.CategoryId).HasColumnName("CategoryId").IsRequired();
 			builder.Property(ac => ac.LikeId).HasColumnName("LikeId").IsRequired();
+			builder.Property(ac => ac.Name).HasColumnName("Name").IsRequired();
 			builder.Property(ac => ac.Title).HasColumnName("Title").IsRequired();
 			builder.Property(ac => ac.IsCompleted).HasColumnName("IsCompleted").IsRequired();
 			builder.Property(ac => ac.VideoUrl).HasColumnName("VideoUrl").IsRequired();
@@ -22,10 +23,8 @@ namespace DataAccess.EntityConfigurations
 			builder.Property(ac => ac.Description).HasColumnName("Description").IsRequired();
 
 			builder.HasQueryFilter(ac => !ac.DeletedDate.HasValue);
-
-			builder.HasOne(ac => ac.Category);
-			builder.HasOne(ac => ac.Like);
-			builder.HasMany(ac => ac.Courses).WithOne(ac=>ac.AsyncContent).HasForeignKey(ac=>ac.AsyncContentId).OnDelete(DeleteBehavior.Restrict);
+			
+			builder.HasMany(ac => ac.Courses).WithOne(ca => ca.AsyncContent).HasForeignKey(ca => ca.AsyncContentId);
 		}
 	}
 }

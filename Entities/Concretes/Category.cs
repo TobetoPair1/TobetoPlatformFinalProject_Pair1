@@ -8,5 +8,6 @@ namespace Entities.Concretes
         public ICollection<Course> Courses { get; set; }
         public ICollection<LiveContent> LiveContents { get; set; }
         public ICollection<AsyncContent> AsyncContents { get; set; }
+        public ICollection<Assignment> Assignments { get; set; }
     }
 }

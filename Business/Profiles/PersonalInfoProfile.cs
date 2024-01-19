@@ -13,7 +13,9 @@ public class PersonalInfoProfile : Profile
         CreateMap<PersonalInfo, CreatePersonalInfoRequest>().ReverseMap();
         CreateMap<PersonalInfo, CreatedPersonalInfoResponse>().ReverseMap();
 
-        CreateMap<PersonalInfo, UpdatePersonalInfoRequest>().ReverseMap();
+        CreateMap<PersonalInfo, UpdatePersonalInfoRequest>()
+            .ReverseMap()
+            .ForMember(destinationMember:p=>p.UserId,memberOptions:opt=>opt.UseDestinationValue());
         CreateMap<PersonalInfo, UpdatedPersonalInfoResponse>().ReverseMap();
 
         CreateMap<PersonalInfo, DeletePersonalInfoRequest>().ReverseMap();

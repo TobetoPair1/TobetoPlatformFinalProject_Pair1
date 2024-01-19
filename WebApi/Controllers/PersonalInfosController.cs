@@ -30,14 +30,20 @@ public class PersonalInfosController : ControllerBase
         return Ok(result);
     }
 
-    [HttpGet("get")]
-    public async Task<IActionResult> Get([FromQuery] GetPersonalInfoRequest getPersonalInfoRequest)
+    [HttpGet("getbyid")]
+    public async Task<IActionResult> GetById([FromQuery] GetPersonalInfoRequest getPersonalInfoRequest)
     {
         var result = await _personalInfoService.GetByIdAsync(getPersonalInfoRequest);
         return Ok(result);
     }
+	[HttpGet("getbyuserid")]
+	public async Task<IActionResult> GetUserId([FromQuery] GetPersonalInfoRequest getPersonalInfoRequest)
+	{
+		var result = await _personalInfoService.GetByUserIdAsync(getPersonalInfoRequest);
+		return Ok(result);
+	}
 
-    [HttpDelete]
+	[HttpDelete]
     public async Task<IActionResult> Delete([FromBody] DeletePersonalInfoRequest deletePersonalInfoRequest)
     {
         var result = await _personalInfoService.DeleteAsync(deletePersonalInfoRequest);

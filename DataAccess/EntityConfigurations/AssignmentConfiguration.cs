@@ -25,10 +25,7 @@ namespace DataAccess.EntityConfigurations
 
 			builder.HasQueryFilter(a => !a.DeletedDate.HasValue);
 
-			builder.HasMany(a => a.File);
-            builder.HasOne(a=>a.Course).WithMany(a=>a.Assignments).HasForeignKey(a=>a.CourseId).OnDelete(DeleteBehavior.Restrict);
-            builder.HasOne(a=>a.Category);
-            builder.HasOne(a=>a.Like);         
+			builder.HasMany(a => a.Files).WithOne(f=>f.Assignment).HasForeignKey(f=>f.AssignmentId);
            
         }
     }

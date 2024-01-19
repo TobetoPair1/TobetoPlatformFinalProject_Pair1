@@ -22,9 +22,6 @@ namespace DataAccess.EntityConfigurations
 			builder.Property(pi => pi.ProfileImageUrl).HasColumnName("ProfileImageUrl").IsRequired(false);
 
 			builder.HasQueryFilter(pi => !pi.DeletedDate.HasValue);
-
-			builder.HasOne(pi => pi.User);
-
 		}
 	}
 }

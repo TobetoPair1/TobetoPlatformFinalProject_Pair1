@@ -9,15 +9,12 @@ namespace DataAccess.EntityConfigurations
         public void Configure(EntityTypeBuilder<UserApplication> builder)
         {
             builder.Ignore(ua => ua.Id);
-            builder.HasKey(ua => new { ua.UserId, ua.ApplicationId });
+            builder.ToTable("UserApplications").HasKey(ua => new { ua.UserId, ua.ApplicationId });
 
             builder.Property(ua => ua.UserId).HasColumnName("UserId").IsRequired();
             builder.Property(ua => ua.ApplicationId).HasColumnName("ApplicationId").IsRequired();
 
             builder.HasQueryFilter(us => !us.DeletedDate.HasValue);
-
-            builder.HasOne(ua => ua.User);
-            builder.HasOne(ua => ua.Application);
         }
     }
 

@@ -16,8 +16,6 @@ namespace DataAccess.EntityConfigurations
             builder.Property(a => a.ImageUrl).HasColumnName("ImageUrl").IsRequired();
 
             builder.HasQueryFilter(a => !a.DeletedDate.HasValue);
-
-            builder.HasOne(a => a.Question);
         }
     }
 }

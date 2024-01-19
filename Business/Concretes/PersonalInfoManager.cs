@@ -30,8 +30,8 @@ public class PersonalInfoManager : IPersonalInfoService
 
     public async Task<DeletedPersonalInfoResponse> DeleteAsync(DeletePersonalInfoRequest deletePersonalInfoRequest)
     {
-        PersonalInfo personalInfo = _mapper.Map<PersonalInfo>(deletePersonalInfoRequest);
-        PersonalInfo deletedPersonalInfo = await _personalInfoDal.DeleteAsync(personalInfo);
+		PersonalInfo personalInfo = await _personalInfoDal.GetAsync(p => p.Id == deletePersonalInfoRequest.Id);
+		PersonalInfo deletedPersonalInfo = await _personalInfoDal.DeleteAsync(personalInfo);
         return _mapper.Map<DeletedPersonalInfoResponse>(deletedPersonalInfo);
     }
 
@@ -41,7 +41,13 @@ public class PersonalInfoManager : IPersonalInfoService
         return _mapper.Map<GetPersonalInfoResponse>(personalInfo);
     }
 
-    public async Task<IPaginate<GetListPersonalInfoResponse>> GetListAsync(PageRequest pageRequest)
+	public async Task<GetPersonalInfoResponse> GetByUserIdAsync(GetPersonalInfoRequest getPersonalInfoRequest)
+	{
+		PersonalInfo personalInfo = await _personalInfoDal.GetAsync(p => p.UserId == getPersonalInfoRequest.UserId);
+		return _mapper.Map<GetPersonalInfoResponse>(personalInfo);
+	}
+
+	public async Task<IPaginate<GetListPersonalInfoResponse>> GetListAsync(PageRequest pageRequest)
     {
         var result = await _personalInfoDal.GetListAsync(include: pi => pi.Include(pi => pi.User), index: pageRequest.PageIndex, size: pageRequest.PageSize);
         return _mapper.Map<Paginate<GetListPersonalInfoResponse>>(result);
@@ -49,7 +55,8 @@ public class PersonalInfoManager : IPersonalInfoService
 
     public async Task<UpdatedPersonalInfoResponse> UpdateAsync(UpdatePersonalInfoRequest updatePersonalInfoRequest)
     {
-        PersonalInfo personalInfo = _mapper.Map<PersonalInfo>(updatePersonalInfoRequest);
+		PersonalInfo personalInfo = await _personalInfoDal.GetAsync(p => p.Id == updatePersonalInfoRequest.Id);
+		_mapper.Map(updatePersonalInfoRequest,personalInfo);
         PersonalInfo updatedPersonalInfo = await _personalInfoDal.UpdateAsync(personalInfo);
         return _mapper.Map<UpdatedPersonalInfoResponse>(updatedPersonalInfo);
     }

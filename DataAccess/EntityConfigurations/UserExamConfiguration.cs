@@ -15,9 +15,7 @@ namespace DataAccess.EntityConfigurations
 			builder.Property(ue => ue.ExamId).HasColumnName("ExamId").IsRequired();
 
 			builder.HasQueryFilter(u => !u.DeletedDate.HasValue);
-
-			builder.HasOne(ue => ue.User);
-			builder.HasOne(ue => ue.Exam);
+						
 		}
 	}
 }

@@ -15,9 +15,9 @@ namespace DataAccess.EntityConfigurations
             builder.Property(a => a.FormUrl).HasColumnName("FormUrl").IsRequired();
             builder.Property(a => a.State).HasColumnName("State").IsRequired();
 
-            builder.HasMany(a => a.Users);
-
             builder.HasQueryFilter(a => !a.DeletedDate.HasValue);
-        }
-    }
+
+			builder.HasMany(a => a.Users).WithOne(ua => ua.Application).HasForeignKey(ua => ua.ApplicationId);
+		}
+	}
 }

@@ -22,16 +22,16 @@ public class AnnouncementManager : IAnnouncementService
     {
         Announcement announcement = _mapper.Map<Announcement>(createAnnouncementRequest);
         var createdAnnouncement = await _announcementDal.AddAsync(announcement);
-        CreatedAnnouncementResponse result = _mapper.Map<CreatedAnnouncementResponse>(announcement);
-        return result;
+        CreatedAnnouncementResponse createdAnnouncementResponse = _mapper.Map<CreatedAnnouncementResponse>(createdAnnouncement);
+        return createdAnnouncementResponse;
     }
 
     public async Task<DeletedAnnouncementResponse> DeleteAsync(DeleteAnnouncementRequest deleteAnnouncementRequest)
     {
         Announcement announcement = await _announcementDal.GetAsync(a => a.Id == deleteAnnouncementRequest.Id);
         var deletedAnnouncement = await _announcementDal.DeleteAsync(announcement);
-        DeletedAnnouncementResponse result = _mapper.Map<DeletedAnnouncementResponse>(deletedAnnouncement);
-        return result; 
+        DeletedAnnouncementResponse deletedAnnouncementResponse = _mapper.Map<DeletedAnnouncementResponse>(deletedAnnouncement);
+        return deletedAnnouncementResponse; 
     }
 
     public async Task<GetAnnouncementResponse> GetByIdAsync(GetAnnouncementRequest getAnnouncementRequest)
@@ -48,7 +48,8 @@ public class AnnouncementManager : IAnnouncementService
 
     public async Task<UpdatedAnnouncementResponse> UpdateAsync(UpdateAnnouncementRequest updateAnnouncementRequest)
     {
-        Announcement announcement = _mapper.Map<Announcement>(updateAnnouncementRequest);
+		Announcement announcement = await _announcementDal.GetAsync(a => a.Id == updateAnnouncementRequest.Id);
+		_mapper.Map(updateAnnouncementRequest,announcement);
         var updatedAnnouncement = await _announcementDal.UpdateAsync(announcement);
         UpdatedAnnouncementResponse updatedAnnouncementResponse = _mapper.Map<UpdatedAnnouncementResponse>(updatedAnnouncement);
         return updatedAnnouncementResponse;

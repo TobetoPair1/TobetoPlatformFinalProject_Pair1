@@ -10,15 +10,13 @@ namespace DataAccess.EntityConfigurations
         {
             builder.ToTable("Certificates").HasKey(c=>c.Id);
 
+            builder.Property(c=>c.Id).HasColumnName("Id").IsRequired();
             builder.Property(c=>c.Name).HasColumnName("Name").IsRequired();
             builder.Property(c=>c.UserId).HasColumnName("UserId").IsRequired();
             builder.Property(c=>c.FilePath).HasColumnName("FilePath").IsRequired();
             builder.Property(c=>c.FileType).HasColumnName("FileType").IsRequired();
 
             builder.HasQueryFilter(c => !c.DeletedDate.HasValue);
-
-            builder.HasOne(pi => pi.User);
-
         }
     }
 }

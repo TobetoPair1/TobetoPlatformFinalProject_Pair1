@@ -16,13 +16,10 @@ namespace DataAccess.EntityConfigurations
             builder.Property(f => f.UserId).HasColumnName("UserId").IsRequired();
             builder.Property(f => f.FilePath).HasColumnName("FilePath").IsRequired();
 
-            
-            builder.HasOne(f => f.Assignment);
-
-            builder.HasMany(f => f.Homeworks);
-
             builder.HasQueryFilter(f => !f.DeletedDate.HasValue);
-        }
+
+			builder.HasMany(f => f.Homeworks).WithOne(hm=>hm.File).HasForeignKey(hm=>hm.FileId);
+		}
     }
 
 }

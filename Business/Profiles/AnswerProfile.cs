@@ -13,7 +13,9 @@ public class AnswerProfile : Profile
         CreateMap<Answer, CreateAnswerRequest>().ReverseMap();
         CreateMap<Answer, CreatedAnswerResponse>().ReverseMap();
 
-        CreateMap<Answer, UpdateAnswerRequest>().ReverseMap();
+        CreateMap<Answer, UpdateAnswerRequest>()
+            .ReverseMap()
+            .ForMember(destinationMember:a=>a.QuestionId,memberOptions:opt=>opt.UseDestinationValue());
         CreateMap<Answer, UpdatedAnswerResponse>().ReverseMap();
 
         CreateMap<Answer, DeleteAnswerRequest>().ReverseMap();

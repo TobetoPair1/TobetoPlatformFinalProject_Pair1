@@ -12,16 +12,19 @@ namespace DataAccess.EntityConfigurations
 
             builder.Property(h => h.Id).HasColumnName("Id").IsRequired();
             builder.Property(h => h.CourseId).HasColumnName("CourseId").IsRequired();
+            builder.Property(h => h.LikeId).HasColumnName("LikeId").IsRequired();
+			builder.Property(h => h.CategoryId).HasColumnName("CategoryId").IsRequired();
+			builder.Property(h => h.Name).HasColumnName("Name");
+			builder.Property(h => h.Title).HasColumnName("Title");
+			builder.Property(h => h.IsCompleted).HasColumnName("IsCompleted");
             builder.Property(h => h.EndOfDate).HasColumnName("EndOfDate").IsRequired();
             builder.Property(h => h.InstructorDescription).HasColumnName("InstructorDescription");
             builder.Property(h => h.StudentDescription).HasColumnName("StudentDescription");
 
-            builder.HasOne(h => h.Course).WithMany(c => c.Homeworks).HasForeignKey(h => h.CourseId).OnDelete(DeleteBehavior.Restrict);
-
-            builder.HasMany(h => h.Files).WithOne(f => f.Homework).HasForeignKey(f => f.HomeworkId).OnDelete(DeleteBehavior.Restrict);
-
             builder.HasQueryFilter(h => !h.DeletedDate.HasValue);
-        }
+
+			builder.HasMany(h => h.Files).WithOne(hm => hm.Homework).HasForeignKey(hm => hm.HomeworkId).OnDelete(DeleteBehavior.NoAction);
+		}
     }
 
 }

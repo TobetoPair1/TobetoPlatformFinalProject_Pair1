@@ -17,7 +17,7 @@ namespace DataAccess.EntityConfigurations
 
             builder.HasQueryFilter(s => !s.DeletedDate.HasValue);
 
-            builder.HasMany(s => s.Users);
-        }
-    }
+			builder.HasMany(s => s.Users).WithOne(us => us.Survey).HasForeignKey(us => us.SurveyId);
+		}
+	}
 }

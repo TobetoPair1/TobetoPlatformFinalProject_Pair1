@@ -1,4 +1,5 @@
 ﻿using Core.Entities;
+using Entities.Concretes.CrossTables;
 
 namespace Entities.Concretes
 {
@@ -9,7 +10,7 @@ namespace Entities.Concretes
         public string SessionLinkUrl { get; set; }
         public DateTime StartOfTime { get; set; }
         public DateTime EndOfTime { get; set; }
-        public ICollection<Instructor> Instructors { get; set; }
+        public ICollection<InstructorSession> Instructors { get; set; }
         public LiveContent LiveContent { get; set; }
     }
 }

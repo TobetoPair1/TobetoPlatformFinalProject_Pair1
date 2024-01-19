@@ -22,12 +22,14 @@ namespace DataAccess.EntityConfigurations
 			builder.Property(c => c.ProducingCompany).HasColumnName("ProducingCompany").IsRequired();
 
 			builder.HasQueryFilter(c => !c.DeletedDate.HasValue);
+			
+			builder.HasMany(c => c.Homeworks).WithOne(h => h.Course).HasForeignKey(h => h.CourseId).OnDelete(DeleteBehavior.NoAction);
+			builder.HasMany(c => c.Assignments).WithOne(a => a.Course).HasForeignKey(a => a.CourseId).OnDelete(DeleteBehavior.NoAction);
 
-			builder.HasOne(c => c.Category);
-			builder.HasOne(c => c.Like);
-			builder.HasMany(c => c.Users);
-			builder.HasMany(c => c.AsyncContents).WithOne(c=>c.Course).HasForeignKey(c=>c.CourseId).OnDelete(DeleteBehavior.Restrict);
-			builder.HasMany(c => c.LiveContents).WithOne(cl => cl.Course).HasForeignKey(cl => cl.CourseId).OnDelete(DeleteBehavior.Restrict);
+			//crosstables
+			builder.HasMany(c => c.Users).WithOne(uc => uc.Course).HasForeignKey(uc => uc.CourseId);
+			builder.HasMany(c => c.AsyncContents).WithOne(ca => ca.Course).HasForeignKey(ca => ca.CourseId).OnDelete(DeleteBehavior.NoAction);
+			builder.HasMany(c => c.LiveContents).WithOne(cl => cl.Course).HasForeignKey(cl => cl.CourseId).OnDelete(DeleteBehavior.NoAction);
 		}
 	}
 }

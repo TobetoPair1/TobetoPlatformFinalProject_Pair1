@@ -16,14 +16,11 @@ namespace DataAccess.EntityConfigurations
             builder.Property(e=>e.Position).HasColumnName("Position").IsRequired();
             builder.Property(e=>e.Sector).HasColumnName("Sector").IsRequired();
             builder.Property(e=>e.City).HasColumnName("City").IsRequired(false);
-            //builder.Property(e => e.StartOfDate).HasColumnName("StartOfDate").IsRequired();
-            //builder.Property(e => e.EndOfDate).HasColumnName("EndOfDate").IsRequired();
+            builder.Property(e => e.StartOfDate).HasColumnName("StartOfDate").IsRequired();
+            builder.Property(e => e.EndOfDate).HasColumnName("EndOfDate").IsRequired();
             builder.Property(e=>e.Description).HasColumnName("Description").IsRequired(false);
 
-
             builder.HasQueryFilter(e => !e.DeletedDate.HasValue);
-
-            builder.HasOne(e => e.User);
         }
     }
 }
