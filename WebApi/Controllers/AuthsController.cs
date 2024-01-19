@@ -29,9 +29,14 @@ public class AuthsController : ControllerBase
     {
 
         var registeredUser = await _authService.Register(registerRequest);
-        var result = _authService.CreateAccessToken(registeredUser);
+        if (registeredUser==null)
+        {
+			//kullanıcı aktifleştirilsin mi sor?
+		    return Ok(null);
+		}
+		var result = _authService.CreateAccessToken(registeredUser);
+		return Ok(result);
 
-        return Ok(result);
-    }
+	}
 }
 

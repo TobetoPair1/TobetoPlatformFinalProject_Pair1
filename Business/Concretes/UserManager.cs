@@ -8,6 +8,7 @@ using Core.DataAccess.Paging;
 using Core.Entities;
 using DataAccess.Abstracts;
 using Entities.Concretes;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Business.Concretes;
 
@@ -54,10 +55,9 @@ public class UserManager : IUserService
         return _mapper.Map<GetUserResponse>(result);
     }
 
-    public async Task<User> GetByMailAsync(string mail)
+    public async Task<User> GetByMailAsync(string mail,bool withDeleted)
     {
-        var result = await _userDal.GetAsync(u => u.Email == mail);
-
+        var result = await _userDal.GetAsync(u => u.Email == mail,withDeleted: withDeleted);        
         return result;
     }
 
@@ -74,8 +74,15 @@ public class UserManager : IUserService
         UpdatedUserResponse updatedUserResponse = _mapper.Map<UpdatedUserResponse>(updatedUser);
         return updatedUserResponse;
     }
+	public async Task<bool> ActivateUserAsync(string email)
+	{
+		User user = await _userDal.GetAsync(u => u.Email == email,withDeleted:true);
+		user.DeletedDate = null;
+		await _userDal.UpdateAsync(user);     
+		return true;
+	}
 
-    public List<IOperationClaim> GetClaims(IUser user)
+	public List<IOperationClaim> GetClaims(IUser user)
     {
         return _userDal.GetClaims(user);
     }

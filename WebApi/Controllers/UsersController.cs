@@ -24,12 +24,6 @@ public class UsersController : ControllerBase
         var result = await _userService.AddAsync(createUserRequest);
         return Ok(result);
     }
-    //[HttpPost("CheckUser")]
-    //public async Task<IActionResult> CheckUser([FromBody] GetUserRequest getUserRequest)
-    //{
-    //	var result = await _userService.CheckUserAsync(getUserRequest);
-    //	return Ok(result);
-    //}
 
     [HttpGet("GetAll")]
     public async Task<IActionResult> GetList([FromQuery] PageRequest pageRequest)
@@ -43,7 +37,13 @@ public class UsersController : ControllerBase
         var result = await _userService.GetByIdAsync(getUserRequest.Id);
         return Ok(result);
     }
-    [HttpDelete]
+	[HttpGet("Activate")]
+	public async Task<IActionResult> Activate([FromQuery] string email)
+	{
+		var result = await _userService.ActivateUserAsync(email);
+		return Ok(result);
+	}
+	[HttpDelete]
     public async Task<IActionResult> Delete([FromBody] DeleteUserRequest deleteUserRequest)
     {
         var result = await _userService.DeleteAsync(deleteUserRequest);
