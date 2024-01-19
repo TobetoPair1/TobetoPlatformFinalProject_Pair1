@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Core.DataAccess.Paging
+﻿namespace Core.DataAccess.Paging
 {
     public interface IPaginate<T>
     {
-        //223345
+        
         int From { get; }
         int Index { get; }
         int Size { get; }

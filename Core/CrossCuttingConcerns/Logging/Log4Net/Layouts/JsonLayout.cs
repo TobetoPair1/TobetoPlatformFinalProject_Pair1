@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text;
-using log4net.Core;
+﻿using log4net.Core;
 using log4net.Layout;
 using Newtonsoft.Json;
 
