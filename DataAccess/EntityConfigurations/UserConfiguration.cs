@@ -38,6 +38,7 @@ namespace DataAccess.EntityConfigurations
 			builder.HasMany(u => u.Favorites).WithOne(uf => uf.User).HasForeignKey(uf => uf.UserId);
 			builder.HasMany(u => u.Claims).WithOne(uc => uc.User).HasForeignKey(uc => uc.UserId);
 			builder.HasMany(u => u.Files).WithOne(f => f.User).HasForeignKey(f => f.UserId);
+			builder.HasMany(u => u.Calenders).WithOne(uc => uc.User).HasForeignKey(uc => uc.UserId);
 		}
 	}
 }

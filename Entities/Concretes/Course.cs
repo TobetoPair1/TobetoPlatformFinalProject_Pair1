@@ -1,5 +1,6 @@
 ﻿using Core.Entities;
 using Entities.Concretes.CrossTables;
+using System.Globalization;
 
 namespace Entities.Concretes
 {
@@ -21,6 +22,7 @@ namespace Entities.Concretes
         public ICollection<CourseLiveContent> LiveContents { get; set; }
         public ICollection<Homework> Homeworks { get; set; }
         public ICollection<Assignment> Assignments { get; set; }
+        public ICollection<Calendar> Calendars { get; set; }
         public Like Like { get; set; }
     }
 }

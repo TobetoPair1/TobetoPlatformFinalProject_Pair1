@@ -47,6 +47,9 @@ namespace DataAccess.Contexts
         public DbSet<UserExam> UserExams { get; set; }
         public DbSet<UserFavourite> UserFavourites { get; set; }
         public DbSet<UserLike> UserLikes { get; set; }
+        public DbSet<Calendar> Calendars { get; set; }
+        public DbSet<UserCalendar> UserCalendars { get; set; }
+        public DbSet<InstructorSession> InstructorSessions { get; set; }
 
 
 

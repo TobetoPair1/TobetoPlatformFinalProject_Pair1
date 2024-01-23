@@ -28,5 +28,6 @@ namespace Entities.Concretes
         public ICollection<UserLike> Likes { get; set; }
         public ICollection<UserFavourite> Favorites { get; set; }
         public ICollection<File> Files { get; set; }
+        public ICollection<UserCalendar> Calenders { get; set; }
     }
 }

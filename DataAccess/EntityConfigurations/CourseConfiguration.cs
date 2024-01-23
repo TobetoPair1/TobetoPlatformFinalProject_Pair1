@@ -27,9 +27,10 @@ namespace DataAccess.EntityConfigurations
 			builder.HasMany(c => c.Assignments).WithOne(a => a.Course).HasForeignKey(a => a.CourseId).OnDelete(DeleteBehavior.NoAction);
 
 			//crosstables
-			builder.HasMany(c => c.Users).WithOne(uc => uc.Course).HasForeignKey(uc => uc.CourseId);
+			builder.HasMany(c => c.Users).WithOne(uc => uc.Course).HasForeignKey(uc => uc.CourseId).OnDelete(DeleteBehavior.NoAction);
 			builder.HasMany(c => c.AsyncContents).WithOne(ca => ca.Course).HasForeignKey(ca => ca.CourseId).OnDelete(DeleteBehavior.NoAction);
 			builder.HasMany(c => c.LiveContents).WithOne(cl => cl.Course).HasForeignKey(cl => cl.CourseId).OnDelete(DeleteBehavior.NoAction);
+			builder.HasMany(c => c.Calendars).WithOne(c => c.Course).HasForeignKey(c => c.CourseId);
 		}
 	}
 }

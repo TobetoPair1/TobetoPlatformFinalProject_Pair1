@@ -53,6 +53,9 @@ namespace DataAccess
             services.AddScoped<IUserFavouriteDal, EfUserFavouriteDal>();
             services.AddScoped<IUserLikeDal, EfUserLikeDal>();
             services.AddScoped<IUserOperationClaimDal, EfUserOperationClaimDal>();
+            services.AddScoped<ICalendarDal, EfCalendarDal>();
+            services.AddScoped<IUserCalendarDal, EfUserCalendarDal>();
+            services.AddScoped<IInstructorSessionDal, EfInstructorSessionDal>();
 
 
             return services;
