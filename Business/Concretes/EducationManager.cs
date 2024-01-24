@@ -21,7 +21,7 @@ public class EducationManager : IEducationService
     {
         Education education = _mapper.Map<Education>(createEducationRequest);
         var createdEducation = await _educationDal.AddAsync(education);
-        CreatedEducationResponse result = _mapper.Map<CreatedEducationResponse>(education);
+        CreatedEducationResponse result = _mapper.Map<CreatedEducationResponse>(createdEducation);
         return result;
     }
 
