@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Business.Dtos.Requests.UserCalendarr;
+using Business.Dtos.Requests.UserCalendar;
 using Business.Dtos.Responses.UserCalendar;
 using Core.DataAccess.Paging;
 using Entities.Concretes.CrossTables;
