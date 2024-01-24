@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Business.Dtos.Responses.Experience
+﻿namespace Business.Dtos.Responses.Experience
 {
-    public class UpdatedExperienceResponse
+	public class UpdatedExperienceResponse
     {
         public Guid Id { get; set; }
         public Guid UserId { get; set; }

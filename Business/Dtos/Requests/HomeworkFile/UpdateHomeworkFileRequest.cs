@@ -2,6 +2,6 @@
 
 public class UpdateHomeworkFileRequest
 {
-    public Guid? FileId { get; set; }
-    public Guid? HomeworkId { get; set; }
+    public Guid FileId { get; set; }
+    public Guid HomeworkId { get; set; }
 }

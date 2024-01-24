@@ -17,7 +17,7 @@ public class AnnouncementManager : IAnnouncementService
     {
         _mapper = mapper;
         _announcementDal = announcementDal;
-    }
+    }    
     public async Task<CreatedAnnouncementResponse> AddAsync(CreateAnnouncementRequest createAnnouncementRequest)
     {
         Announcement announcement = _mapper.Map<Announcement>(createAnnouncementRequest);

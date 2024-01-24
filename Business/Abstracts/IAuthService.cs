@@ -1,4 +1,4 @@
-﻿using Business.Dtos.Requests.Auth.Request;
+﻿using Business.Dtos.Requests.Auth;
 using Core.Entities;
 using Core.Utilities.Security.Jwt;
 

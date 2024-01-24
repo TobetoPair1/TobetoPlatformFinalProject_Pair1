@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Business.Dtos.Responses.Education
+﻿namespace Business.Dtos.Responses.Education
 {
-    public class DeletedEducationResponse
+	public class DeletedEducationResponse
     {
         public Guid Id { get; set; }
         public Guid UserId { get; set; }

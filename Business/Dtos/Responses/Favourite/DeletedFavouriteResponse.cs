@@ -3,7 +3,7 @@
 public class DeletedFavouriteResponse
 {
     public Guid Id { get; set; }
-    public string CourseId { get; set; }
+    public Guid CourseId { get; set; }
     public int Count { get; set; }
 }
 

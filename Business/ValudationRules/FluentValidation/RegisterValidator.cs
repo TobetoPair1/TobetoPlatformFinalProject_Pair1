@@ -1,6 +1,5 @@
-﻿using Business.Dtos.Requests.Auth.Request;
+﻿using Business.Dtos.Requests.Auth;
 using FluentValidation;
-using System.Text.RegularExpressions;
 
 namespace Business.ValudationRules.FluentValidation;
 

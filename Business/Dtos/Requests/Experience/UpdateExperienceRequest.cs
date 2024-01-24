@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Business.Dtos.Requests.Experience
+﻿namespace Business.Dtos.Requests.Experience
 {
-    public class UpdateExperienceRequest
+	public class UpdateExperienceRequest
     {
         public Guid Id { get; set; }
         public string? OrganizationName { get; set; }

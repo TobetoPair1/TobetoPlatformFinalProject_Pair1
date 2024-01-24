@@ -1,7 +1,6 @@
 ﻿using Business.Abstracts;
-using Business.Concretes;
 using Business.Constants.Messages;
-using Business.Dtos.Requests.Auth.Request;
+using Business.Dtos.Requests.Auth;
 using Core.Business.Rules;
 using Core.CrossCuttingConcerns.Exceptions.Types;
 using Core.Utilities.Security.Hashing;

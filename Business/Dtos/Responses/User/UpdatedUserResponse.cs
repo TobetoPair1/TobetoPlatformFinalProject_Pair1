@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Business.Dtos.Responses.User
+﻿namespace Business.Dtos.Responses.User
 {
-    public class UpdatedUserResponse
+	public class UpdatedUserResponse
     {
         public Guid Id { get; set; }
         public string FirstName { get; set; }

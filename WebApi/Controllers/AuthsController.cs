@@ -1,5 +1,5 @@
 ﻿using Business.Abstracts;
-using Business.Dtos.Requests.Auth.Request;
+using Business.Dtos.Requests.Auth;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers;

@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Business.Dtos.Requests.UserFavourite
+﻿namespace Business.Dtos.Requests.UserFavourite
 {
-    public class DeleteUserFavouriteRequest
+	public class DeleteUserFavouriteRequest
     {
         public Guid Id { get; set; }
     }

@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Business.Abstracts;
-using Business.Dtos.Requests.Auth.Request;
+using Business.Dtos.Requests.Auth;
 using Business.Dtos.Requests.User;
 using Business.Rules;
 using Business.ValudationRules.FluentValidation;

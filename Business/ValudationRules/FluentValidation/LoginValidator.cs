@@ -1,4 +1,4 @@
-﻿using Business.Dtos.Requests.Auth.Request;
+﻿using Business.Dtos.Requests.Auth;
 using FluentValidation;
 
 namespace Business.ValudationRules.FluentValidation;

@@ -1,7 +1,4 @@
-﻿using Entities.Concretes;
-using Entities.Concretes.CrossTables;
-
-namespace Business.Dtos.Responses.Favourite;
+﻿namespace Business.Dtos.Responses.Favourite;
 
 public class UpdatedFavouriteResponse
 {

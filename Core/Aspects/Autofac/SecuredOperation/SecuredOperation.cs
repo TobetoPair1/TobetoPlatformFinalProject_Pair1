@@ -2,6 +2,7 @@
 using Core.Extensions;
 using Core.Utilities.Interceptors;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Core.Aspects.Autofac.SecuredOperation
 {
@@ -10,10 +11,10 @@ namespace Core.Aspects.Autofac.SecuredOperation
 		private string[] _roles;
 		private IHttpContextAccessor _httpContextAccessor;
 
-		public SecuredOperation(IHttpContextAccessor httpContextAccessor, string roles)
+		public SecuredOperation(string roles)
 		{
 			_roles = roles.Split(',');
-			_httpContextAccessor = httpContextAccessor;
+			_httpContextAccessor = CoreServiceRegistration.ServiceProvider.GetService<IHttpContextAccessor>();
 
 		}
 

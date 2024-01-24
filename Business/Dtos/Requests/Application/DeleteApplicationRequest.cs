@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Business.Dtos.Requests.Application
+﻿namespace Business.Dtos.Requests.Application
 {
-    public class DeleteApplicationRequest
+	public class DeleteApplicationRequest
     {
         public Guid Id { get; set; }
 

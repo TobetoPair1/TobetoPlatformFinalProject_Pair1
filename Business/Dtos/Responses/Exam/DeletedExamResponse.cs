@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Business.Dtos.Responses.Exam
+﻿namespace Business.Dtos.Responses.Exam
 {
-    public class DeletedExamResponse
+	public class DeletedExamResponse
     {
         public Guid Id { get; set; }
         public string Title { get; set; }

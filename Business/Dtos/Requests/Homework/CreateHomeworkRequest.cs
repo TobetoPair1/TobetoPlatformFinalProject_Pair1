@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Business.Dtos.Requests.Homework
+﻿namespace Business.Dtos.Requests.Homework
 {
-    public class CreateHomeworkRequest
-    {
-        public Guid Id { get; set; }
+	public class CreateHomeworkRequest
+    {       
         public Guid CourseId { get; set; }
         public DateTime EndOfDate { get; set; }
         public string InstructorDescription { get; set; }

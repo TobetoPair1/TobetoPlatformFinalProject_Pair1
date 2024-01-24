@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Business.Dtos.Requests.Experience
+﻿namespace Business.Dtos.Requests.Experience
 {
-    public class CreateExperienceRequest
-    {
-        
+	public class CreateExperienceRequest
+    {        
         public Guid UserId { get; set; }
         public string OrganizationName { get; set; }
         public string Position { get; set; }

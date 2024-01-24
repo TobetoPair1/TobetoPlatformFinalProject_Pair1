@@ -2,7 +2,8 @@ namespace Business.Dtos.Responses.AsyncContent;
 
 public class CreatedAsyncContentResponse
 {
-    public string VideoUrl { get; set; }
+	public Guid Id { get; set; }
+	public string VideoUrl { get; set; }
     public string Language { get; set; }
     public string SubType { get; set; }
     public string Company { get; set; }

@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Business.Dtos.Responses.UserFavourite
+﻿namespace Business.Dtos.Responses.UserFavourite
 {
-    public class GetListUserFavouriteResponse
-    {
-        public Guid Id { get; set; }
+	public class GetListUserFavouriteResponse
+    {        
         public Guid UserId { get; set; }
         public Guid FavouriteId { get; set; }
     }

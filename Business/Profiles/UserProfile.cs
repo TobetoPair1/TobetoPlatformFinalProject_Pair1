@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Business.Dtos.Requests.Auth.Request;
+using Business.Dtos.Requests.Auth;
 using Business.Dtos.Requests.User;
 using Business.Dtos.Responses.Auth;
 using Business.Dtos.Responses.User;

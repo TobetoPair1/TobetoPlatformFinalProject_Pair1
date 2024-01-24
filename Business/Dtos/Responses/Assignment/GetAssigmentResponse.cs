@@ -2,7 +2,8 @@
 
 public class GetAssigmentResponse
 {
-    public string CourseName { get; set; }
+	public Guid Id { get; set; }
+	public string CourseName { get; set; }
     public string Description { get; set; }
     public int AssignmentTime { get; set; }
     public string AssignmentType { get; set; }

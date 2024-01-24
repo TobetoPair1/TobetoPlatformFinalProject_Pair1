@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Business.Dtos.Responses.ForeignLanguage
+﻿namespace Business.Dtos.Responses.ForeignLanguage
 {
 	public class CreatedForeignLanguageResponse
 	{

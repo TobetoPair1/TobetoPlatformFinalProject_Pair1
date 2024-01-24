@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Business.Dtos.Requests.Homework
+﻿namespace Business.Dtos.Requests.Homework
 {
-    public class GetHomeworkRequest
+	public class GetHomeworkRequest
     {
         public Guid Id { get; set; }
     }

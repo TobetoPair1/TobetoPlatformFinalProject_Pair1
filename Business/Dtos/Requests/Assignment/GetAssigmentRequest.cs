@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Business.Dtos.Requests.Assignment
+﻿namespace Business.Dtos.Requests.Assignment
 {
-    public class GetAssigmentRequest
+	public class GetAssigmentRequest
     {
         public Guid Id { get; set; }
     }

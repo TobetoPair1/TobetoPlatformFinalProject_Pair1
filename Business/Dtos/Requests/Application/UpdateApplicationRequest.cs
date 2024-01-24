@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Business.Dtos.Requests.Application
+﻿namespace Business.Dtos.Requests.Application
 {
-    public class UpdateApplicationRequest
+	public class UpdateApplicationRequest
     {
         public Guid Id { get; set; }
         public string? Title { get; set; }

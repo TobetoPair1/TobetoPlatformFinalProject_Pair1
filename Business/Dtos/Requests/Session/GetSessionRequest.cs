@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Business.Dtos.Requests.Session
+﻿namespace Business.Dtos.Requests.Session
 {
-    public class GetSessionRequest
+	public class GetSessionRequest
     {
         public Guid Id { get; set; }
     }
