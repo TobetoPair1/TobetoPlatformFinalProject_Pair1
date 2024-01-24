@@ -1,6 +1,6 @@
 namespace Business.Dtos.Requests.Calendar;
 
-public class DeleteCalenderRequest
+public class DeleteCalendarRequest
 {
     public Guid Id { get; set; }
 }
