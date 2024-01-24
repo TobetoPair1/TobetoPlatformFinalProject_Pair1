@@ -1,4 +1,4 @@
-﻿namespace Business.Dtos.Requests.UserCalendarr
+﻿namespace Business.Dtos.Requests.UserCalendar
 {
 	public class UpdateUserCalendarRequest
 	{

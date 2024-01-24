@@ -1,29 +1,28 @@
 ﻿using AutoMapper;
 using Business.Dtos.Requests.UserCalendarr;
-using Business.Dtos.Response.UserCalendar;
+using Business.Dtos.Responses.UserCalendar;
 using Core.DataAccess.Paging;
 using Entities.Concretes.CrossTables;
 
-namespace Business.Profiles
+namespace Business.Profiles;
+
+public class UserCalendarProfile : Profile
 {
-    public class UserCalendarProfile : Profile
+    public UserCalendarProfile()
     {
-        public UserCalendarProfile()
-        {
-            CreateMap<UserCalendar, CreateUserCalendarRequest>().ReverseMap();
-            CreateMap<UserCalendar, CreatedUserCalendarResponse>().ReverseMap();
+        CreateMap<UserCalendar, CreateUserCalendarRequest>().ReverseMap();
+        CreateMap<UserCalendar, CreatedUserCalendarResponse>().ReverseMap();
 
-            CreateMap<UserCalendar, DeleteUserCalendarRequest>().ReverseMap();
-            CreateMap<UserCalendar, DeletedUserCalendarResponse>().ReverseMap();
+        CreateMap<UserCalendar, DeleteUserCalendarRequest>().ReverseMap();
+        CreateMap<UserCalendar, DeletedUserCalendarResponse>().ReverseMap();
 
-            CreateMap<UserCalendar, UpdateUserCalendarRequest>().ReverseMap();
-            CreateMap<UserCalendar, UpdatedUserCalendarResponse>().ReverseMap();
+        CreateMap<UserCalendar, UpdateUserCalendarRequest>().ReverseMap();
+        CreateMap<UserCalendar, UpdatedUserCalendarResponse>().ReverseMap();
 
-            CreateMap<UserCalendar, GetUserCalendarRequest>().ReverseMap();
-            CreateMap<UserCalendar, GetUserCalendarResponse>().ReverseMap();
+        CreateMap<UserCalendar, GetUserCalendarRequest>().ReverseMap();
+        CreateMap<UserCalendar, GetUserCalendarResponse>().ReverseMap();
 
-            CreateMap<IPaginate<UserCalendar>, Paginate<GetListUserCalendarResponse>>();
-            CreateMap<UserCalendar, GetListUserCalendarResponse>();
-        }
+        CreateMap<IPaginate<UserCalendar>, Paginate<GetListUserCalendarResponse>>();
+        CreateMap<UserCalendar, GetListUserCalendarResponse>();
     }
 }
