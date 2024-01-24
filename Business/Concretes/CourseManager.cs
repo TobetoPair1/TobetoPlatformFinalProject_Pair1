@@ -13,14 +13,13 @@ public class CourseManager : ICourseService
 {
     ICourseDal _courseDal;
     IMapper _mapper;
+	public CourseManager(ICourseDal courseDal, IMapper mapper)
+	{
+		_courseDal = courseDal;
+		_mapper = mapper;
+	}
 
-    public CourseManager(ICourseDal courseDal, IMapper mapper)
-    {
-        _courseDal = courseDal;
-        _mapper = mapper;
-    }
-
-    public async Task<CreatedCourseResponse> AddAsync(CreateCourseRequest createCourseRequest)
+	public async Task<CreatedCourseResponse> AddAsync(CreateCourseRequest createCourseRequest)
     {
         Course course = _mapper.Map<Course>(createCourseRequest);
         Course addedCourse = await _courseDal.AddAsync(course);
@@ -38,11 +37,14 @@ public class CourseManager : ICourseService
     {
         Course course = await _courseDal.GetAsync(c=>c.Id == getCourseRequest.Id, include: c=>c.Include(c=>c.Category).Include(c=>c.Like));
         return _mapper.Map<GetCourseResponse>(course);
-    }
-
-    public async Task<IPaginate<GetListCourseResponse>> GetListAsync(PageRequest pageRequest)
+    }    	
+	public async Task<IPaginate<GetListCourseResponse>> GetListAsync(PageRequest pageRequest)
     {
-        var courses = await _courseDal.GetListAsync(index:  pageRequest.PageIndex, size: pageRequest.PageSize);
+        var courses = await _courseDal.GetListAsync(
+            index:pageRequest.PageIndex, 
+            size: pageRequest.PageSize,
+            include:c=>c.Include(c=>c.Category).Include(c=>c.Like)
+            );
         return _mapper.Map<Paginate<GetListCourseResponse>>(courses);
     }
 

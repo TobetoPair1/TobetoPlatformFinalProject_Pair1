@@ -12,16 +12,16 @@ public class ExamManager : IExamService
 {
     IMapper _mapper;
     IExamDal _examDal;
-    public ExamManager(IMapper mapper, IExamDal examDal)
-    {
-        _examDal = examDal;
-        _mapper = mapper;
-    }
-    public async Task<CreatedExamResponse> AddAsync(CreateExamRequest createExamRequest)
+	public ExamManager(IMapper mapper, IExamDal examDal)
+	{
+		_examDal = examDal;
+		_mapper = mapper;
+	}
+	public async Task<CreatedExamResponse> AddAsync(CreateExamRequest createExamRequest)
     {
         Exam exam = _mapper.Map<Exam>(createExamRequest);
         var createdExam = await _examDal.AddAsync(exam);
-        CreatedExamResponse result = _mapper.Map<CreatedExamResponse>(exam);
+        CreatedExamResponse result = _mapper.Map<CreatedExamResponse>(createdExam);
         return result;
     }
 
@@ -44,8 +44,7 @@ public class ExamManager : IExamService
         var result = await _examDal.GetListAsync(index: pageRequest.PageIndex, size: pageRequest.PageSize);
         return _mapper.Map<Paginate<GetListExamResponse>>(result);
     }
-
-    public async Task<UpdatedExamResponse> UpdateAsync(UpdateExamRequest updateExamRequest)
+	public async Task<UpdatedExamResponse> UpdateAsync(UpdateExamRequest updateExamRequest)
     {
         Exam exam = _mapper.Map<Exam>(updateExamRequest);
         var updatedExam = await _examDal.UpdateAsync(exam);

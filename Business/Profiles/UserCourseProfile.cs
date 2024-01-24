@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Business.Dtos.Requests.UserCourse;
+using Business.Dtos.Responses.Course;
 using Business.Dtos.Responses.UserCourse;
 using Core.DataAccess.Paging;
 using Entities.Concretes.CrossTables;
@@ -16,7 +17,8 @@ public class UserCourseProfile : Profile
         CreateMap<UserCourse, DeleteUserCourseRequest>().ReverseMap();
         CreateMap<UserCourse, DeletedUserCourseResponse>().ReverseMap();
 
-        CreateMap<IPaginate<UserCourse>, Paginate<GetListUserCourseResponse>>().ReverseMap();
+        CreateMap<Paginate<UserCourse>, Paginate<GetListUserCourseResponse>>().ReverseMap();
+
         CreateMap<UserCourse, GetListUserCourseResponse>()
             .ForMember(
             destinationMember: gluc => gluc.CourseName,
@@ -25,10 +27,19 @@ public class UserCourseProfile : Profile
             .ReverseMap();
 
         CreateMap<UserCourse, GetUserCourseRequest>().ReverseMap();
-        CreateMap<UserCourse, GetUserCourseResponse>().ForMember(
+        CreateMap<UserCourse, GetUserCourseResponse>()
+            .ForMember(
             destinationMember: guc => guc.CourseName,
             memberOptions: opt => opt.MapFrom(uc => uc.Course.Name)
             )
             .ReverseMap();
-    }
+
+		CreateMap<UserCourse, GetListCourseResponse>()
+			.IncludeMembers(uc=>uc.Course)
+			.ForMember(destinationMember: lcr => lcr.Id, memberOptions: opt => opt.MapFrom(c => c.Course.Id))
+			.ReverseMap();
+
+		CreateMap<Paginate<UserCourse>, Paginate<GetListCourseResponse>>().ReverseMap();
+
+	}
 }

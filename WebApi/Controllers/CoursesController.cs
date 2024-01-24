@@ -27,9 +27,9 @@ public class CoursesController : ControllerBase
     {
         var result = await _courseService.GetByIdAsync(getCourseRequest);
         return Ok(result);
-    }
+    }	
 
-    [HttpGet("getall")]
+	[HttpGet("getall")]
     public async Task<IActionResult> GetAll([FromQuery] PageRequest pageRequest)
     {
         var result = await _courseService.GetListAsync(pageRequest);

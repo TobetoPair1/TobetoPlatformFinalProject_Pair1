@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Business.Abstracts;
-using Business.Dtos.Requests.SocialMedia;
 using Business.Dtos.Requests.UserCourse;
+using Business.Dtos.Responses.Course;
 using Business.Dtos.Responses.UserCourse;
 using Business.Rules;
 using Core.DataAccess.Paging;
@@ -60,4 +60,12 @@ public class UserCourseManager : IUserCourseService
         var result = await _userCourseDal.GetListAsync(index: pageRequest.PageIndex, size: pageRequest.PageSize, include: uc => uc.Include(uc => uc.Course));
         return _mapper.Map<Paginate<GetListUserCourseResponse>>(result);
     }
+
+	public async Task<IPaginate<GetListCourseResponse>> GetListByUserIdAsync(Guid userId,PageRequest pageRequest)
+	{
+        var usercourses =  await _userCourseDal.GetListAsync(uc=>uc.UserId==userId,include:uc=>uc.Include(uc=>uc.Course).Include(uc => uc.Course.Category).Include(uc => uc.Course.Like), index:pageRequest.PageIndex,size:pageRequest.PageSize);
+
+        var courses = _mapper.Map<Paginate<GetListCourseResponse>>(usercourses);
+		return courses;
+	}
 }

@@ -1,6 +1,7 @@
 ﻿using Castle.DynamicProxy;
 using Core.Extensions;
 using Core.Utilities.Interceptors;
+using Core.Utilities.Messages;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -28,7 +29,7 @@ namespace Core.Aspects.Autofac.SecuredOperation
 					return;
 				}
 			}
-			throw new System.Exception("Erişim engellendi.");
+			throw new System.Exception(AspectMessages.AccessDenied);
 		}
 	}
 }
