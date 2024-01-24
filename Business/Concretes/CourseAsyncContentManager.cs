@@ -37,7 +37,7 @@ public class CourseAsyncContentManager : ICourseAsyncContentService
 
     public async Task<GetCourseAyncContentResponse> GetAsync(GetCourseAyncContentRequest getCourseAyncContentRequest)
     {
-        CourseAsyncContent asyncContent = await _courseAsyncDal.GetAsync(asc => asc.Id == getCourseAyncContentRequest.Id);
+        CourseAsyncContent asyncContent = await _courseAsyncDal.GetAsync(asc => asc.AsyncContentId == getCourseAyncContentRequest.AsyncContentId && asc.CourseId == getCourseAyncContentRequest.CourseId);
         return _mapper.Map<GetCourseAyncContentResponse>(asyncContent);
     }
 

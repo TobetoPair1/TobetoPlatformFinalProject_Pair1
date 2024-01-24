@@ -34,7 +34,7 @@ public class CourseLiveContentManager:ICourseLiveContentService
     }
     public async Task<GetCourseLiveContentResponse> GetAsync(GetCourseLiveContentRequest courseLiveContentRequest)
     {
-        CourseLiveContent courseLiveContent = await _courseLiveContentDal.GetAsync(cl => cl.Id == courseLiveContentRequest.Id);
+        CourseLiveContent courseLiveContent = await _courseLiveContentDal.GetAsync(cl => cl.CourseId == courseLiveContentRequest.CourseId && cl.LiveContentId == courseLiveContentRequest.LiveContentId);
         return _mapper.Map<GetCourseLiveContentResponse>(courseLiveContent);
     }
 

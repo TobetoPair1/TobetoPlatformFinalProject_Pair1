@@ -25,11 +25,11 @@ public class EducationManager : IEducationService
         return result;
     }
 
-    public async Task<Dtos.Responses.Education.DeletedEducationResponse> DeleteAsync(DeleteEducationRequest deleteEducationRequest)
+    public async Task<DeletedEducationResponse> DeleteAsync(DeleteEducationRequest deleteEducationRequest)
     {
-        Education education = await _educationDal.GetAsync(e => e.Id == deleteEducationRequest.UserId);
+        Education education = await _educationDal.GetAsync(e => e.Id == deleteEducationRequest.Id);
         var deletedEducation = await _educationDal.DeleteAsync(education);
-        DeletedEducationResponse result = _mapper.Map<Dtos.Responses.Education.DeletedEducationResponse>(deletedEducation);
+        DeletedEducationResponse result = _mapper.Map<DeletedEducationResponse>(deletedEducation);
         return result;
     }
 

@@ -29,7 +29,7 @@ public class FileManager : IFileService
 
     public async Task<DeletedFileResponse> DeleteAsync(DeleteFileRequest deleteFileRequest)
     {
-        File file = await _fileDal.GetAsync(f => f.Id == deleteFileRequest.FileId);
+        File file = await _fileDal.GetAsync(f => f.Id == deleteFileRequest.Id);
         var deletedFile = await _fileDal.DeleteAsync(file);
         DeletedFileResponse deletedFileResponse = _mapper.Map<DeletedFileResponse>(deletedFile);
         return deletedFileResponse;
@@ -37,7 +37,7 @@ public class FileManager : IFileService
 
     public async Task<GetFileResponse> GetByIdAsync(GetFileRequest getFileRequest)
     {
-        var result = await _fileDal.GetAsync(f => f.Id == getFileRequest.FileId);
+        var result = await _fileDal.GetAsync(f => f.Id == getFileRequest.Id);
         return _mapper.Map<GetFileResponse>(result);
     }
 
