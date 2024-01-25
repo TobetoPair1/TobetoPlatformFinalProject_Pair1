@@ -37,7 +37,6 @@
 		<Folder Include="Dtos\Responses\Assignment\" />
 		<Folder Include="Dtos\Responses\CourseLiveContent\" />
 		<Folder Include="Dtos\Responses\ExamQuestion\" />
-		<Folder Include="Dtos\Responses\Favourite\" />
 		<Folder Include="Dtos\Responses\HomeworkFile\" />
 		<Folder Include="Dtos\Responses\Homework\" />
 		<Folder Include="Dtos\Responses\Like\" />

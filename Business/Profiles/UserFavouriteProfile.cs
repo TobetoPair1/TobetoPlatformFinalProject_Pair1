@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Business.Dtos.Requests.UserFavourite;
+using Business.Dtos.Responses.Favourite;
 using Business.Dtos.Responses.UserFavourite;
 using Core.DataAccess.Paging;
 using Entities.Concretes.CrossTables;
@@ -23,5 +24,13 @@ public class UserFavouriteProfile : Profile
         CreateMap<UserFavourite, GetListUserFavouriteResponse>().ReverseMap();
 
         CreateMap<UserFavourite, GetUserFavouriteResponse>().ReverseMap();
-    }
+
+		CreateMap<UserFavourite, GetListFavouriteResponse>()
+            .IncludeMembers(uf=>uf.Favourite)
+            .ForMember(destinationMember:glfr=>glfr.Id,memberOptions:opt=>opt.MapFrom(uf=>uf.FavouriteId))
+            .ReverseMap();
+
+		CreateMap<IPaginate<UserFavourite>, Paginate<GetListFavouriteResponse>>().ReverseMap();
+
+	}
 }

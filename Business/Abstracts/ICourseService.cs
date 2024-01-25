@@ -13,7 +13,7 @@ public interface ICourseService
     Task<DeletedCourseResponse> DeleteAsync(DeleteCourseRequest deleteCourseRequest);
     Task<UpdatedCourseResponse> UpdateAsync(UpdateCourseRequest updateCourseRequest);
     Task<GetCourseResponse> GetByIdAsync(GetCourseRequest getCourseRequest);
-	Task<IPaginate<GetListCourseResponse>> GetByUserId(Guid userId, PageRequest pageRequest);
+	Task<IPaginate<GetListCourseResponse>> GetListByUserIdAsync(Guid userId, PageRequest pageRequest);
 	Task<CreatedUserCourseResponse> AssignCourseAsync(CreateUserCourseRequest createUserCourseRequest);
 }
 

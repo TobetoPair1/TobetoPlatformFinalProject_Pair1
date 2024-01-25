@@ -1,4 +1,5 @@
 ﻿using Business.Dtos.Requests.UserFavourite;
+using Business.Dtos.Responses.Favourite;
 using Business.Dtos.Responses.UserFavourite;
 using Core.DataAccess.Paging;
 
@@ -11,4 +12,5 @@ public interface IUserFavouriteService
     Task<DeletedUserFavouriteResponse> DeleteAsync(DeleteUserFavouriteRequest deleteUserFavouriteRequest);
     Task<UpdatedUserFavouriteResponse> UpdateAsync(UpdateUserFavouriteRequest updateUserFavouriteRequest);
     Task<GetUserFavouriteResponse> GetByIdAsync(GetUserFavouriteRequest getUserFavouriteRequest);
+    Task<IPaginate<GetListFavouriteResponse>> GetListByUserIdAsync(Guid userId, PageRequest pageRequest);
 }

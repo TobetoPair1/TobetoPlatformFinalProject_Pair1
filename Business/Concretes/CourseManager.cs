@@ -48,7 +48,7 @@ public class CourseManager : ICourseService
         return _mapper.Map<GetCourseResponse>(course);
     }
 
-	public async Task<IPaginate<GetListCourseResponse>> GetByUserId(Guid userId, PageRequest pageRequest)
+	public async Task<IPaginate<GetListCourseResponse>> GetListByUserIdAsync(Guid userId, PageRequest pageRequest)
 	{
 		return await _userCourseService.GetListByUserIdAsync(userId, pageRequest);
 	}

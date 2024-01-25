@@ -1,10 +1,12 @@
 ﻿using AutoMapper;
 using Business.Abstracts;
 using Business.Dtos.Requests.UserFavourite;
+using Business.Dtos.Responses.Favourite;
 using Business.Dtos.Responses.UserFavourite;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
 using Entities.Concretes.CrossTables;
+using Microsoft.EntityFrameworkCore;
 
 namespace Business.Concretes;
 
@@ -45,7 +47,15 @@ public class UserFavouriteManager : IUserFavouriteService
         return _mapper.Map<Paginate<GetListUserFavouriteResponse>>(result);
     }
 
-    public async Task<UpdatedUserFavouriteResponse> UpdateAsync(UpdateUserFavouriteRequest updateUserFavouriteRequest)
+	public async Task<IPaginate<GetListFavouriteResponse>> GetListByUserIdAsync(Guid userId, PageRequest pageRequest)
+	{
+		var userFavourite = await _userFavouriteDal.GetListAsync(uc => uc.UserId == userId, include: uc => uc.Include(uc => uc.Favourite).Include(uc => uc.Favourite.Course), index: pageRequest.PageIndex, size: pageRequest.PageSize);
+
+		var favourite = _mapper.Map<Paginate<GetListFavouriteResponse>>(userFavourite);
+		return favourite;
+	}
+
+	public async Task<UpdatedUserFavouriteResponse> UpdateAsync(UpdateUserFavouriteRequest updateUserFavouriteRequest)
     {
         UserFavourite userFavourite = _mapper.Map<UserFavourite>(updateUserFavouriteRequest);
         var updatedUserFavourite = await _userFavouriteDal.UpdateAsync(userFavourite);

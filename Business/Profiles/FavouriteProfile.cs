@@ -20,8 +20,8 @@ public class FavouriteProfile : Profile
             .ForMember(destinationMember: gf => gf.CourseName, memberOptions: opt => opt.MapFrom(f => f.Course.Name))
             .ReverseMap();
 
-        CreateMap<Paginate<Favourite>, Paginate<GetListFavoriteResponse>>().ReverseMap();
-        CreateMap<Favourite, GetListFavoriteResponse>()
+        CreateMap<Paginate<Favourite>, Paginate<GetListFavouriteResponse>>().ReverseMap();
+        CreateMap<Favourite, GetListFavouriteResponse>()
             .ForMember(destinationMember: gf => gf.CourseName, memberOptions: opt => opt.MapFrom(f => f.Course.Name))
             .ReverseMap();
 

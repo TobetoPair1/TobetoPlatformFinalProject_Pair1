@@ -36,7 +36,7 @@ public class UserCourseProfile : Profile
 
 		CreateMap<UserCourse, GetListCourseResponse>()
 			.IncludeMembers(uc=>uc.Course)
-			.ForMember(destinationMember: lcr => lcr.Id, memberOptions: opt => opt.MapFrom(c => c.Course.Id))
+			.ForMember(destinationMember: lcr => lcr.Id, memberOptions: opt => opt.MapFrom(c => c.CourseId))
 			.ReverseMap();
 
 		CreateMap<Paginate<UserCourse>, Paginate<GetListCourseResponse>>().ReverseMap();

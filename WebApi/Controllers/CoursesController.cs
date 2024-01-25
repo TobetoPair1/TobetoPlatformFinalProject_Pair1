@@ -1,5 +1,6 @@
 ﻿using Business.Abstracts;
 using Business.Dtos.Requests.Course;
+using Business.Dtos.Requests.UserCourse;
 using Core.DataAccess.Paging;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,9 +21,15 @@ public class CoursesController : ControllerBase
     {
         var result = await _courseService.AddAsync(createCourseRequest);
         return Ok(result);
-    }
+	}
+	[HttpPost("assigntouser")]
+	public async Task<IActionResult> AssignCourseToUser([FromBody] CreateUserCourseRequest createUserCourseRequest)
+	{
+		var result = await _courseService.AssignCourseAsync(createUserCourseRequest);
+		return Ok(result);
+	}
 
-    [HttpGet("get")]
+	[HttpGet("get")]
     public async Task<IActionResult> GetByIdAsync([FromQuery] GetCourseRequest getCourseRequest)
     {
         var result = await _courseService.GetByIdAsync(getCourseRequest);
@@ -35,10 +42,10 @@ public class CoursesController : ControllerBase
         var result = await _courseService.GetListAsync(pageRequest);
         return Ok(result);
     }
-	[HttpGet("getbyuserid")]
-	public async Task<IActionResult> GetAll([FromQuery] PageRequest pageRequest, Guid userId)
+	[HttpGet("getlistbyuserid")]
+	public async Task<IActionResult> GetListByUserId([FromQuery] PageRequest pageRequest, Guid userId)
 	{
-		var result = await _courseService.GetByUserId(userId,pageRequest);
+		var result = await _courseService.GetListByUserIdAsync(userId,pageRequest);
 		return Ok(result);
 	}
 
