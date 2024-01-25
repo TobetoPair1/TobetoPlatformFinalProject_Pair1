@@ -1,5 +1,7 @@
 ﻿using Business.Abstracts;
+using Business.Dtos.Requests.Course;
 using Business.Dtos.Requests.Exam;
+using Business.Dtos.Requests.UserExam;
 using Core.DataAccess.Paging;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,10 +23,25 @@ public class ExamsController : ControllerBase
         var result = await _examService.AddAsync(examRequest);
         return Ok(result);
     }
+
+    [HttpPost("AssignToUser")]
+    public async Task<IActionResult> AssignToUser([FromBody] CreateUserExamRequest createUserExamRequest)
+    {
+        var result = await _examService.AssignExamAsync(createUserExamRequest);
+        return Ok(result);
+    }
+
     [HttpGet("Get")]
     public async Task<IActionResult> Get([FromQuery] GetExamRequest getExamRequest)
     {
         var result = await _examService.GetByIdAsync(getExamRequest);
+        return Ok(result);
+    }
+
+    [HttpGet("GetListByUserId")]
+    public async Task<IActionResult> GetListByUserIdAsync([FromQuery] PageRequest pageRequest, Guid userId)
+    {
+        var result = await _examService.GetListByUserIdAsync(userId, pageRequest);
         return Ok(result);
     }
 
