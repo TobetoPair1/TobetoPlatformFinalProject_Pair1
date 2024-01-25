@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Business.Abstracts;
 using Business.Dtos.Requests.UserSurvey;
+using Business.Dtos.Responses.Survey;
 using Business.Dtos.Responses.UserSurvey;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
@@ -45,5 +46,13 @@ public class UserSurveyManager : IUserSurveyService
     {
         var result = await _userSurveyDal.GetListAsync(index: pageRequest.PageIndex, size: pageRequest.PageSize, include: us => us.Include(us => us.Survey));
         return _mapper.Map<Paginate<GetListUserSurveyResponse>>(result);
+    }
+
+     public async Task<IPaginate<GetListSurveyResponse>> GetListByUserIdAsync(Guid userId, PageRequest pageRequest)
+    {
+        var userSurveys = await _userSurveyDal.GetListAsync(us => us.UserId == userId, include:us=>us.Include(us=>us.Survey), index: pageRequest.PageIndex, size: pageRequest.PageSize);
+
+        var surveys = _mapper.Map<Paginate<GetListSurveyResponse>>(userSurveys);
+        return surveys;
     }
 }

@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using Business.Abstracts;
 using Business.Dtos.Requests.Survey;
+using Business.Dtos.Requests.UserSurvey;
 using Business.Dtos.Responses.Survey;
+using Business.Dtos.Responses.UserSurvey;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
 using Entities.Concretes;
@@ -12,10 +14,12 @@ public class SurveyManager : ISurveyService
 {
     IMapper _mapper;
     ISurveyDal _surveyDal;
-    public SurveyManager(IMapper mapper, ISurveyDal surveyDal)
+    IUserSurveyService _userSurveyService;
+    public SurveyManager(IMapper mapper, ISurveyDal surveyDal, IUserSurveyService userSurveyService)
     {
         _mapper = mapper;
         _surveyDal = surveyDal;
+        _userSurveyService = userSurveyService;
     }
     public async Task<CreatedSurveyResponse> AddAsync(CreateSurveyRequest createSurveyRequest)
     {
@@ -23,6 +27,11 @@ public class SurveyManager : ISurveyService
         var createdSurvey = await _surveyDal.AddAsync(survey);
         CreatedSurveyResponse result = _mapper.Map<CreatedSurveyResponse>(survey);
         return result;
+    }
+
+    public async Task<CreatedUserSurveyResponse> AssignSurveyAsync(CreateUserSurveyRequest createUserSurveyRequest)
+    {
+        return await _userSurveyService.AddAsync(createUserSurveyRequest);
     }
 
     public async Task<DeletedSurveyResponse> DeleteAsync(DeleteSurveyRequest deleteSurveyRequest)
@@ -37,6 +46,11 @@ public class SurveyManager : ISurveyService
     {
         var result = await _surveyDal.GetAsync(s => s.Id == getSurveyRequest.Id);
         return _mapper.Map<GetSurveyResponse>(result);
+    }
+
+    public async Task<IPaginate<GetListSurveyResponse>> GetByUserId(Guid userId, PageRequest pageRequest)
+    {
+        return await _userSurveyService.GetListByUserIdAsync(userId, pageRequest);
     }
 
     public async Task<IPaginate<GetListSurveyResponse>> GetListAsync(PageRequest pageRequest)
