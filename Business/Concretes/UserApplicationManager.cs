@@ -1,9 +1,12 @@
 ﻿using AutoMapper;
 using Business.Abstracts;
 using Business.Dtos.Requests.UserApplication;
+using Business.Dtos.Responses.Application;
+using Business.Dtos.Responses.Course;
 using Business.Dtos.Responses.UserApplication;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
+using DataAccess.Concretes.EntityFramework;
 using Entities.Concretes.CrossTables;
 using Microsoft.EntityFrameworkCore;
 
@@ -45,5 +48,12 @@ public class UserApplicationManager : IUserApplicationService
     {
         var result = await _userApplicationDal.GetListAsync(index: pageRequest.PageIndex, size: pageRequest.PageSize, include: ap => ap.Include(ap => ap.Application));
         return _mapper.Map<Paginate<GetListUserApplicationResponse>>(result);
+    }
+
+    public async Task<IPaginate<GetListApplicationResponse>> GetListByUserIdAsync(Guid userId, PageRequest pageRequest)
+    {
+        var userApp = await _userApplicationDal.GetListAsync(ua => ua.UserId == userId, include: ua => ua.Include(ua => ua.Application), index: pageRequest.PageIndex, size: pageRequest.PageSize);
+        var apps = _mapper.Map<Paginate<GetListApplicationResponse>>(userApp);
+        return apps;
     }
 }

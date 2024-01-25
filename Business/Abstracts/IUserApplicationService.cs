@@ -1,4 +1,5 @@
 ﻿using Business.Dtos.Requests.UserApplication;
+using Business.Dtos.Responses.Application;
 using Business.Dtos.Responses.UserApplication;
 using Core.DataAccess.Paging;
 
@@ -9,4 +10,6 @@ public interface IUserApplicationService
     Task<DeletedUserApplicationResponse> DeleteAsync(DeleteUserApplicationRequest deleteUserApplicationRequest);
     Task<GetUserApplicationResponse> GetByIdAsync(GetUserApplicationRequest getUserApplicationRequest);
     Task<IPaginate<GetListUserApplicationResponse>> GetListAsync(PageRequest pageRequest);
+    Task<IPaginate<GetListApplicationResponse>> GetListByUserIdAsync(Guid userId, PageRequest pageRequest);
+
 }

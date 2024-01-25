@@ -1,5 +1,8 @@
 ﻿using Business.Abstracts;
 using Business.Dtos.Requests.Application;
+using Business.Dtos.Requests.UserApplication;
+using Business.Dtos.Responses.Application;
+using Business.Dtos.Responses.UserApplication;
 using Core.DataAccess.Paging;
 using Microsoft.AspNetCore.Mvc;
 
@@ -44,6 +47,20 @@ namespace WebApi.Controllers
         public async Task<IActionResult> Update([FromBody] UpdateApplicationRequest updateApplicationRequest)
         {
             var result = await _applicationService.UpdateAsync(updateApplicationRequest);
+            return Ok(result);
+        }
+
+        [HttpGet("getlistbyuserid")]
+        public async Task<IActionResult> GetListByUserId ([FromQuery] PageRequest pageRequest, Guid userId )
+        {
+            var result = await _applicationService.GetListByUserIdAsync(userId, pageRequest);
+            return Ok(result);
+        }
+
+        [HttpPost("assignapplication")]
+        public async Task<IActionResult> AssignApplicationAsync([FromBody] CreateUserApplicationRequest createUserApplicationRequest)
+        {
+            var result = await _applicationService.AssignApplicationAsync(createUserApplicationRequest);
             return Ok(result);
         }
     }
