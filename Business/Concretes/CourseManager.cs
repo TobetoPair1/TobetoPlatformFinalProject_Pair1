@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using Business.Abstracts;
 using Business.Dtos.Requests.Course;
+using Business.Dtos.Requests.UserCourse;
 using Business.Dtos.Responses.Course;
+using Business.Dtos.Responses.UserCourse;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
 using Entities.Concretes;
@@ -13,10 +15,12 @@ public class CourseManager : ICourseService
 {
     ICourseDal _courseDal;
     IMapper _mapper;
-	public CourseManager(ICourseDal courseDal, IMapper mapper)
+    IUserCourseService _userCourseService;
+	public CourseManager(ICourseDal courseDal, IMapper mapper, IUserCourseService userCourseService)
 	{
 		_courseDal = courseDal;
 		_mapper = mapper;
+		_userCourseService = userCourseService;
 	}
 
 	public async Task<CreatedCourseResponse> AddAsync(CreateCourseRequest createCourseRequest)
@@ -26,7 +30,12 @@ public class CourseManager : ICourseService
         return _mapper.Map<CreatedCourseResponse>(addedCourse);
     }
 
-    public async Task<DeletedCourseResponse> DeleteAsync(DeleteCourseRequest deleteCourseRequest)
+	public async Task<CreatedUserCourseResponse> AssignCourseAsync(CreateUserCourseRequest createUserCourseRequest)
+	{
+		return await _userCourseService.AddAsync(createUserCourseRequest);
+	}	
+
+	public async Task<DeletedCourseResponse> DeleteAsync(DeleteCourseRequest deleteCourseRequest)
     {
         Course course = _mapper.Map<Course>(deleteCourseRequest);
         Course deletedCourse = await _courseDal.DeleteAsync(course);
@@ -37,7 +46,13 @@ public class CourseManager : ICourseService
     {
         Course course = await _courseDal.GetAsync(c=>c.Id == getCourseRequest.Id, include: c=>c.Include(c=>c.Category).Include(c=>c.Like));
         return _mapper.Map<GetCourseResponse>(course);
-    }    	
+    }
+
+	public async Task<IPaginate<GetListCourseResponse>> GetByUserId(Guid userId, PageRequest pageRequest)
+	{
+		return await _userCourseService.GetListByUserIdAsync(userId, pageRequest);
+	}
+
 	public async Task<IPaginate<GetListCourseResponse>> GetListAsync(PageRequest pageRequest)
     {
         var courses = await _courseDal.GetListAsync(

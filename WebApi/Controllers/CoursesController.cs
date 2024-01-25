@@ -35,8 +35,14 @@ public class CoursesController : ControllerBase
         var result = await _courseService.GetListAsync(pageRequest);
         return Ok(result);
     }
+	[HttpGet("getbyuserid")]
+	public async Task<IActionResult> GetAll([FromQuery] PageRequest pageRequest, Guid userId)
+	{
+		var result = await _courseService.GetByUserId(userId,pageRequest);
+		return Ok(result);
+	}
 
-    [HttpDelete]
+	[HttpDelete]
     public async Task<IActionResult> Delete([FromBody] DeleteCourseRequest deleteCourseRequest)
     {
         var result = await _courseService.DeleteAsync(deleteCourseRequest);

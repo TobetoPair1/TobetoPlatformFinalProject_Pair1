@@ -36,13 +36,7 @@ public class UsersController : ControllerBase
     {
         var result = await _userService.GetByIdAsync(getUserRequest.Id);
         return Ok(result);
-    }
-	[HttpGet("getcourses")]
-	public async Task<IActionResult> GetCourses([FromQuery] PageRequest pageRequest,Guid userId)
-	{
-		var result = await _userService.GetCourses(userId,pageRequest);
-		return Ok(result);
-	}
+    }	
 	[HttpGet("Activate")]
 	public async Task<IActionResult> Activate([FromQuery] string email)
 	{
