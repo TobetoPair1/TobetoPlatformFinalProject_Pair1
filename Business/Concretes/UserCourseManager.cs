@@ -63,9 +63,9 @@ public class UserCourseManager : IUserCourseService
 
 	public async Task<IPaginate<GetListCourseResponse>> GetListByUserIdAsync(Guid userId,PageRequest pageRequest)
 	{
-        var usercourses =  await _userCourseDal.GetListAsync(uc=>uc.UserId==userId,include:uc=>uc.Include(uc=>uc.Course).Include(uc => uc.Course.Category).Include(uc => uc.Course.Like), index:pageRequest.PageIndex,size:pageRequest.PageSize);
+        var userCourses =  await _userCourseDal.GetListAsync(uc=>uc.UserId==userId,include:uc=>uc.Include(uc=>uc.Course).Include(uc => uc.Course.Category).Include(uc => uc.Course.Like), index:pageRequest.PageIndex,size:pageRequest.PageSize);
 
-        var courses = _mapper.Map<Paginate<GetListCourseResponse>>(usercourses);
+        var courses = _mapper.Map<Paginate<GetListCourseResponse>>(userCourses);
 		return courses;
 	}
 }
