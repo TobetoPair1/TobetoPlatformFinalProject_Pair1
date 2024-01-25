@@ -1,9 +1,12 @@
 ﻿using AutoMapper;
 using Business.Abstracts;
 using Business.Dtos.Requests.UserExam;
+using Business.Dtos.Responses.Course;
+using Business.Dtos.Responses.Exam;
 using Business.Dtos.Responses.UserExam;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
+using DataAccess.Concretes.EntityFramework;
 using Entities.Concretes.CrossTables;
 using Microsoft.EntityFrameworkCore;
 
@@ -40,6 +43,14 @@ public class UserExamManager : IUserExamService
     {
         var result = await _userExamDal.GetAsync(ue => ue.UserId == getUserExamRequest.UserId && ue.ExamId == getUserExamRequest.ExamId, include: ue => ue.Include(ue => ue.Exam));
         return _mapper.Map<GetUserExamResponse>(result);
+    }
+
+    public async Task<IPaginate<GetListExamResponse>> GetListByUserIdAsync(Guid userId, PageRequest pageRequest)
+    {
+        var userExams = await _userExamDal.GetListAsync(ue => ue.UserId == userId, include: ue => ue.Include(ue => ue.Exam), index: pageRequest.PageIndex, size: pageRequest.PageSize);
+
+        var exams = _mapper.Map<Paginate<GetListExamResponse>>(userExams);
+        return exams;
     }
 
     public async Task<IPaginate<GetListUserExamResponse>> GetListAsync(PageRequest pageRequest)

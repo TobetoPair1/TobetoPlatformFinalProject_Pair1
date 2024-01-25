@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Business.Abstracts;
 using Business.Dtos.Requests.UserLike;
+using Business.Dtos.Responses.Like;
 using Business.Dtos.Responses.UserLike;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
@@ -51,6 +52,17 @@ public class UserLikeManager : IUserLikeService
             include: ul => ul.Include(ul => ul.Like)
         );
         return _mapper.Map<GetUserLikeResponse>(result);
+    }
+
+    public  async Task<IPaginate<GetListLikeResponse>> GetListByUserIdAsync(Guid userId, PageRequest pageRequest)
+    {
+        var userLikes = await _userLikeDal.GetListAsync(ul => ul.UserId == userId,
+            include: ul => ul.Include(ul => ul.Like),
+            index: pageRequest.PageIndex, size: pageRequest.PageSize);
+
+        var likes = _mapper.Map<Paginate<GetListLikeResponse>>(userLikes);
+        return likes;
+
     }
 
     public async Task<IPaginate<GetListUserLikeResponse>> GetListAsync(PageRequest pageRequest)
