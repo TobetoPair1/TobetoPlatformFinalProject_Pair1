@@ -1,4 +1,5 @@
 ﻿using Business.Abstracts;
+using Business.Dtos.Requests.ExamQuestion;
 using Business.Dtos.Requests.Question;
 using Core.DataAccess.Paging;
 using Microsoft.AspNetCore.Mvc;
@@ -23,6 +24,13 @@ public class QuestionsController : ControllerBase
         return Ok(result);
     }
 
+    [HttpPost("AssignToExam")]
+    public async Task<IActionResult> AssignToExam([FromBody] CreateExamQuestionRequest createExamQuestionRequest)
+    {
+        var result = await _questionService.AssignQuestionAsync(createExamQuestionRequest);
+        return Ok(result);
+    }
+
     [HttpGet("GetAll")]
     public async Task<IActionResult> GetList([FromQuery] PageRequest pageRequest)
     {
@@ -34,6 +42,13 @@ public class QuestionsController : ControllerBase
     public async Task<IActionResult> Get([FromQuery] GetQuestionRequest getQuestionRequest)
     {
         var result = await _questionService.GetByIdAsync(getQuestionRequest);
+        return Ok(result);
+    }
+
+    [HttpGet("GetListByExamId")]
+    public async Task<IActionResult> GetListByExamId([FromQuery] PageRequest pageRequest, Guid examId)
+    {
+        var result = await _questionService.GetListByExamIdAsync(examId, pageRequest);
         return Ok(result);
     }
 
