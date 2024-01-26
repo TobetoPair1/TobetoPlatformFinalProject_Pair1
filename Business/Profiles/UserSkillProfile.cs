@@ -31,4 +31,4 @@ public class UserSkillProfile : Profile
         CreateMap<UserSkill, GetListSkillResponse>().IncludeMembers(us => us.Skill).ForMember(destinationMember: glsr => glsr.Id, memberOptions: opt => opt.MapFrom(us => us.SkillId)).ReverseMap();
     }
 }
-}
+
