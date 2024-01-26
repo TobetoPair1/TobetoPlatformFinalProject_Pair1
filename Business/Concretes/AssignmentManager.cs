@@ -36,7 +36,7 @@ public class AssignmentManager : IAssignmentService
 
     public async Task<GetAssigmentResponse> GetByIdAsync(GetAssigmentRequest getAssigmentRequest)
     {
-        Assignment asg = await _assigmentDal.GetAsync(a=>a.Id==getAssigmentRequest.Id, include: a=>a.Include(a=>a.Course));
+        Assignment asg = await _assigmentDal.GetAsync(a=>a.Id==getAssigmentRequest.Id, include: a=>a.Include(a=>a.Course).Include(a => a.Category).Include(a => a.Like));
         return _mapper.Map<GetAssigmentResponse>(asg);
     }
 
@@ -49,7 +49,7 @@ public class AssignmentManager : IAssignmentService
 
     async Task<IPaginate<GetListAssigmentResponse>> IAssignmentService.GetListAsync(PageRequest pageRequest)
     {
-        var assigments = await _assigmentDal.GetListAsync(index: pageRequest.PageIndex, size: pageRequest.PageSize, include: a=>a.Include(a=>a.Course));
+        var assigments = await _assigmentDal.GetListAsync(index: pageRequest.PageIndex, size: pageRequest.PageSize, include: a=>a.Include(a => a.Course).Include(a => a.Category).Include(a => a.Like));
         return _mapper.Map<Paginate<GetListAssigmentResponse>>(assigments);
     }
 }

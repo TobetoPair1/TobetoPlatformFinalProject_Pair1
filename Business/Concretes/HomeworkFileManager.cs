@@ -1,10 +1,12 @@
 ﻿using AutoMapper;
 using Business.Abstracts;
 using Business.Dtos.Requests.HomeworkFile;
+using Business.Dtos.Responses.File;
 using Business.Dtos.Responses.HomeworkFile;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
 using Entities.Concretes.CrossTables;
+using Microsoft.EntityFrameworkCore;
 
 namespace Business.Concretes;
 
@@ -39,7 +41,14 @@ public class HomeworkFileManager : IHomeworFileService
         return _mapper.Map<Paginate<GetListHomeworkFileResponse>>(homeworkFiles);
     }
 
-    public async Task<UpdatedHomeworkFileResponse> UpdateAsync(UpdateHomeworkFileRequest updateHomeworkFileRequest)
+	public async Task<IPaginate<GetListFileResponse>> GetListByHomeworkIdAsync(Guid homeworkId, PageRequest pageRequest)
+	{
+		var homeworkFile = await _homeworkFileDal.GetListAsync(hm => hm.HomeworkId == homeworkId, include: hm => hm.Include(hm => hm.File), index: pageRequest.PageIndex, size: pageRequest.PageSize);
+		var files = _mapper.Map<Paginate<GetListFileResponse>>(homeworkFile);
+		return files;
+	}
+
+	public async Task<UpdatedHomeworkFileResponse> UpdateAsync(UpdateHomeworkFileRequest updateHomeworkFileRequest)
     {
         HomeworkFile homeworkFile = _mapper.Map<HomeworkFile>(updateHomeworkFileRequest);
         HomeworkFile updatedHomeworkFile = await _homeworkFileDal.UpdateAsync(homeworkFile);

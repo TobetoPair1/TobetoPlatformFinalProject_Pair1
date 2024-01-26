@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Business.Dtos.Requests.HomeworkFile;
+using Business.Dtos.Responses.File;
 using Business.Dtos.Responses.HomeworkFile;
 using Core.DataAccess.Paging;
 using Entities.Concretes.CrossTables;
@@ -21,5 +22,11 @@ public class HomeworkFileProfile : Profile
 
         CreateMap<Paginate<HomeworkFile>, Paginate<GetListHomeworkFileResponse>>().ReverseMap();
         CreateMap<HomeworkFile, GetListHomeworkFileResponse>().ReverseMap();
-    }
+
+		CreateMap<HomeworkFile,GetListFileResponse>()
+            .IncludeMembers(hm=>hm.File)
+            .ForMember(destinationMember:glfr=>glfr.Id, memberOptions:opt=>opt.MapFrom(hm => hm.FileId))
+            .ReverseMap();
+		CreateMap<Paginate<HomeworkFile>, Paginate<GetListFileResponse>>().ReverseMap();
+	}
 }
