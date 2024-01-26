@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using Business.Abstracts;
 using Business.Dtos.Requests.Skill;
+using Business.Dtos.Requests.UserSkill;
 using Business.Dtos.Responses.Skill;
+using Business.Dtos.Responses.UserSkill;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
 using Entities.Concretes;
@@ -12,8 +14,10 @@ public class SkillManager : ISkillService
 {
 	ISkillDal _skillDal;
 	IMapper _mapper;
+	IUserSkillService _userSkillService;
 
-	public SkillManager(ISkillDal skillDal, IMapper mapper)
+
+    public SkillManager(ISkillDal skillDal, IMapper mapper)
 	{
 		_skillDal = skillDal;
 		_mapper = mapper;
@@ -27,7 +31,12 @@ public class SkillManager : ISkillService
 		return createdSkillResponse;
 	}
 
-	public async Task<DeletedSkillResponse> DeleteAsync(DeleteSkillRequest deleteSkillRequest)
+    public async Task<CreatedUserSkillResponse> AssignSkillAsync(CreateUserSkillRequest createUserSkillRequest)
+    {
+		return await _userSkillService.AddAsync(createUserSkillRequest);
+    }
+
+    public async Task<DeletedSkillResponse> DeleteAsync(DeleteSkillRequest deleteSkillRequest)
 	{
 		Skill skill = await _skillDal.GetAsync(s => s.Id == deleteSkillRequest.Id);
 		var deletedSkill = await _skillDal.DeleteAsync(skill);
@@ -41,7 +50,12 @@ public class SkillManager : ISkillService
 		return _mapper.Map<GetSkillResponse>(result);
 	}
 
-	public async Task<IPaginate<GetListSkillResponse>> GetListAsync(PageRequest pageRequest)
+    public async Task<IPaginate<GetListSkillResponse>> GetByUserId(Guid userId, PageRequest pageRequest)
+    {
+        return await _userSkillService.GetListByUserIdAsync(userId, pageRequest);
+    }
+
+    public async Task<IPaginate<GetListSkillResponse>> GetListAsync(PageRequest pageRequest)
 	{			
 		var result = await _skillDal.GetListAsync(index: pageRequest.PageIndex, size: pageRequest.PageSize);
 		return _mapper.Map<Paginate<GetListSkillResponse>>(result);

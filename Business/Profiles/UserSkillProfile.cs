@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Business.Dtos.Requests.UserSkill;
+using Business.Dtos.Responses.Skill;
 using Business.Dtos.Responses.UserSkill;
 using Core.DataAccess.Paging;
 using Entities.Concretes.CrossTables;
@@ -25,5 +26,9 @@ public class UserSkillProfile : Profile
 
         CreateMap<UserSkill, GetUserSkillRequest>().ReverseMap();
         CreateMap<UserSkill, GetUserSkillResponse>().ReverseMap();
+
+        CreateMap<IPaginate<UserSkill>, Paginate<GetListSkillResponse>>().ReverseMap();
+        CreateMap<UserSkill, GetListSkillResponse>().IncludeMembers(us => us.Skill).ForMember(destinationMember: glsr => glsr.Id, memberOptions: opt => opt.MapFrom(us => us.SkillId)).ReverseMap();
     }
 }
+

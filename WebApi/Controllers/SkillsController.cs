@@ -1,5 +1,6 @@
 ﻿using Business.Abstracts;
 using Business.Dtos.Requests.Skill;
+using Business.Dtos.Requests.UserSkill;
 using Core.DataAccess.Paging;
 using Microsoft.AspNetCore.Mvc;
 
@@ -29,12 +30,28 @@ public class SkillsController : ControllerBase
         var result = await _skillService.GetListAsync(pageRequest);
         return Ok(result);
     }
+
     [HttpGet("Get")]
     public async Task<IActionResult> Get([FromQuery] GetSkillRequest getSkillRequest)
     {
         var result = await _skillService.GetByIdAsync(getSkillRequest);
         return Ok(result);
     }
+
+    [HttpGet("GetByUserId")]
+    public async Task<IActionResult> GetAll([FromQuery] PageRequest pageRequest, Guid userId)
+    {
+        var result = await _skillService.GetByUserId(userId, pageRequest);
+        return Ok(result);
+    }
+
+    [HttpPost("AssignSkill")]
+    public async Task<IActionResult> AssignSkill([FromBody] CreateUserSkillRequest createUserSkillRequest)
+    {
+        var result = await _skillService.AssignSkillAsync(createUserSkillRequest);
+        return Ok(result);
+    }
+
     [HttpDelete]
     public async Task<IActionResult> Delete([FromBody] DeleteSkillRequest deleteSkillRequest)
     {
