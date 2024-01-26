@@ -1,10 +1,12 @@
 ﻿using AutoMapper;
 using Business.Abstracts;
 using Business.Dtos.Requests.CourseAsyncContent;
+using Business.Dtos.Responses.AsyncContent;
 using Business.Dtos.Responses.CourseAsyncContent;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
 using Entities.Concretes.CrossTables;
+using Microsoft.EntityFrameworkCore;
 
 namespace Business.Concretes;
 
@@ -47,7 +49,14 @@ public class CourseAsyncContentManager : ICourseAsyncContentService
         return _mapper.Map<Paginate<GetListCourseAsyncContentResponse>>(asyncContents);
     }
 
-    public async Task<UpdatedCourseAsyncContentResponse> UpdateAsync(UpdateCourseAsyncContentRequest updateCourseAsyncContentRequest)
+	public async Task<IPaginate<GetListAsyncContentResponse>> GetListByCourseIdAsync(Guid courseId, PageRequest pageRequest)
+	{
+		var courseAsyncContent = await _courseAsyncDal.GetListAsync(ca => ca.CourseId == courseId, include: ca => ca.Include(ca => ca.AsyncContent).Include(uc => uc.AsyncContent.Category).Include(uc => uc.AsyncContent.Like), index: pageRequest.PageIndex, size: pageRequest.PageSize);
+		var asyncContents = _mapper.Map<Paginate<GetListAsyncContentResponse>>(courseAsyncContent);
+		return asyncContents;
+	}
+
+	public async Task<UpdatedCourseAsyncContentResponse> UpdateAsync(UpdateCourseAsyncContentRequest updateCourseAsyncContentRequest)
     {
         CourseAsyncContent asyncContent = _mapper.Map<CourseAsyncContent>(updateCourseAsyncContentRequest);
         CourseAsyncContent updatedAsyncContent = await _courseAsyncDal.UpdateAsync(asyncContent);

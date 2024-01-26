@@ -1,4 +1,5 @@
 ﻿using Business.Dtos.Requests.CourseAsyncContent;
+using Business.Dtos.Responses.AsyncContent;
 using Business.Dtos.Responses.CourseAsyncContent;
 using Core.DataAccess.Paging;
 
@@ -8,6 +9,7 @@ public interface ICourseAsyncContentService
 {
     Task<CreatedCourseAsyncContentResponse> AddAsync(CreateCourseAsyncContentRequest createCourseAsyncContentRequest);
     Task<IPaginate<GetListCourseAsyncContentResponse>> GetListAsync(PageRequest pageRequest);
+    Task<IPaginate<GetListAsyncContentResponse>> GetListByCourseIdAsync(Guid courseId, PageRequest pageRequest);
     Task<GetCourseAyncContentResponse> GetAsync(GetCourseAyncContentRequest getCourseAyncContentRequest);
     Task<UpdatedCourseAsyncContentResponse> UpdateAsync(UpdateCourseAsyncContentRequest updateCourseAsyncContentRequest);
     Task<DeletedCourseAsyncContentResponse> DeleteAsync(DeleteCourseAsyncContentRequest deleteCourseAsyncContentRequest);

@@ -1,5 +1,6 @@
 ﻿using Business.Abstracts;
 using Business.Dtos.Requests.AsyncContent;
+using Business.Dtos.Requests.CourseAsyncContent;
 using Core.DataAccess.Paging;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,7 +22,13 @@ public class AsyncContentsController : ControllerBase
         var result = await _asyncContentService.AddAsync(asyncContentRequest);
         return Ok(result);
     }
-    [HttpGet("Get")]
+	[HttpPost("assigntocourse")]
+	public async Task<IActionResult> AssignToCourse([FromBody] CreateCourseAsyncContentRequest createCourseAsyncContentRequest)
+	{
+		var result = await _asyncContentService.AssignAsyncContentAsync(createCourseAsyncContentRequest);
+		return Ok(result);
+	}
+	[HttpGet("Get")]
     public async Task<IActionResult> Get([FromQuery] GetAsyncContentRequest getAsyncContentRequest)
     {
         var result = await _asyncContentService.GetByIdAsync(getAsyncContentRequest);
@@ -34,8 +41,14 @@ public class AsyncContentsController : ControllerBase
         var result = await _asyncContentService.GetListAsync(pageRequest);
         return Ok(result);
     }
+	[HttpGet("getlistbycourseid")]
+	public async Task<IActionResult> GetListByCourseId([FromQuery] PageRequest pageRequest,Guid courseId)
+	{
+		var result = await _asyncContentService.GetListByCourseIdAsync(courseId,pageRequest);
+		return Ok(result);
+	}
 
-    [HttpDelete]
+	[HttpDelete]
     public async Task<IActionResult> Delete([FromBody] DeleteAsyncContentRequest deleteAsyncContentRequest)
     {
         var result = await _asyncContentService.DeleteAsync(deleteAsyncContentRequest);

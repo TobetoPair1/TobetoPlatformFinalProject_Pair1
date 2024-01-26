@@ -11,18 +11,26 @@ public class CourseAsyncContentProfile : Profile
 {
     public CourseAsyncContentProfile()
     {
-        CreateMap<CreateAsyncContentRequest, CourseAsyncContent>().ReverseMap();
-        CreateMap<CourseAsyncContent, CreatedAsyncContentResponse>().ReverseMap();
+        CreateMap<CourseAsyncContent,CreateCourseAsyncContentRequest>().ReverseMap();
+        CreateMap<CourseAsyncContent, CreatedCourseAsyncContentResponse>().ReverseMap();
 
-        CreateMap<DeleteCourseAsyncContentRequest, CourseAsyncContent>().ReverseMap();
+        CreateMap<CourseAsyncContent,DeleteCourseAsyncContentRequest>().ReverseMap();
         CreateMap<CourseAsyncContent, DeletedCourseAsyncContentResponse>().ReverseMap();
 
         CreateMap<CourseAsyncContent, GetCourseAyncContentResponse>().ReverseMap();
 
-        CreateMap<Paginate<CourseAsyncContent>, Paginate<GetListCourseAsyncContentResponse>>().ReverseMap();
+		CreateMap<CourseAsyncContent, GetListCourseAsyncContentResponse>().ReverseMap();
+		CreateMap<Paginate<CourseAsyncContent>, Paginate<GetListCourseAsyncContentResponse>>().ReverseMap();
 
-        CreateMap<UpdateCourseAsyncContentRequest, CourseAsyncContent>().ReverseMap();
+        CreateMap<CourseAsyncContent,UpdateCourseAsyncContentRequest>().ReverseMap();
         CreateMap<CourseAsyncContent, UpdatedCourseAsyncContentResponse>().ReverseMap();
-    }
+
+		CreateMap<CourseAsyncContent, GetListAsyncContentResponse>()
+            .IncludeMembers(ca=>ca.AsyncContent)
+            .ForMember(destinationMember:glacr=>glacr.Id,memberOptions:opt=>opt.MapFrom(ca => ca.AsyncContentId))
+            .ReverseMap();
+		CreateMap<Paginate<CourseAsyncContent>, Paginate<GetListAsyncContentResponse>>().ReverseMap();
+
+	}
 }
 

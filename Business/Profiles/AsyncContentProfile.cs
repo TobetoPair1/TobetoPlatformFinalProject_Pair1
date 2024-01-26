@@ -1,6 +1,7 @@
 using AutoMapper;
 using Business.Dtos.Requests.AsyncContent;
 using Business.Dtos.Responses.AsyncContent;
+using Core.DataAccess.Paging;
 using Entities.Concretes;
 
 namespace Business.Profiles;
@@ -21,7 +22,11 @@ public class AsyncContentProfile : Profile
         CreateMap<AsyncContent, GetAsyncContentRequest>().ReverseMap();
         CreateMap<AsyncContent, GetAsyncContentResponse>().ReverseMap();
 
-        CreateMap<AsyncContent, GetListAsyncContentResponse>().ReverseMap();
+        CreateMap<AsyncContent, GetListAsyncContentResponse>()
+            .ForMember(destinationMember:glacr=>glacr.CategoryName,memberOptions:opt=>opt.MapFrom(ac=>ac.Category.Name))
+            .ForMember(destinationMember:glacr=>glacr.LikeCount,memberOptions:opt=>opt.MapFrom(ac=>ac.Like.Count))
+            .ReverseMap();
+        CreateMap<Paginate<AsyncContent>, Paginate<GetListAsyncContentResponse>>().ReverseMap();
     }
 
 }
