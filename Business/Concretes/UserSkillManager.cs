@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Business.Abstracts;
 using Business.Dtos.Requests.UserSkill;
+using Business.Dtos.Responses.Skill;
 using Business.Dtos.Responses.UserSkill;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
@@ -56,5 +57,13 @@ public class UserSkillManager : IUserSkillService
     {
         var result = await _userSkillDal.GetListAsync(index: pageRequest.PageIndex, size: pageRequest.PageSize, include: us => us.Include(us => us.Skill));
         return _mapper.Map<Paginate<GetListUserSkillResponse>>(result);
+    }
+
+    public async Task<IPaginate<GetListSkillResponse>> GetListByUserIdAsync(Guid userId, PageRequest pageRequest)
+    {
+        var userSkills = await _userSkillDal.GetListAsync(us => us.UserId == userId, include: us => us.Include(us => us.Skill), index: pageRequest.PageIndex, size: pageRequest.PageSize);
+
+        var skills = _mapper.Map<Paginate<GetListSkillResponse>>(userSkills);
+        return skills;
     }
 }
