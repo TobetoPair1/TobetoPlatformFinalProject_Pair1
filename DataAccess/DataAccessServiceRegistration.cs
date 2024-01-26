@@ -40,6 +40,7 @@ namespace DataAccess
             services.AddScoped<IFavouriteDal, EfFavouriteDal>();
             services.AddScoped<IFileDal, EfFileDal>();
             services.AddScoped<IHomeworkDal, EfHomeworkDal>();
+            services.AddScoped<IHomeworkFileDal, EfHomeworkFileDal>();
             services.AddScoped<IInstructorDal, EfInstructorDal>();
             services.AddScoped<ILikeDal, EfLikeDal>();
             services.AddScoped<ILiveContentDal, EfLiveContentDal>();
