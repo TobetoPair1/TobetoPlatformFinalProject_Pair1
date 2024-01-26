@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using Business.Abstracts;
+using Business.Dtos.Requests.ExamQuestion;
 using Business.Dtos.Requests.Question;
+using Business.Dtos.Responses.ExamQuestion;
 using Business.Dtos.Responses.Question;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
@@ -12,11 +14,13 @@ public class QuestionManager: IQuestionService
 {
     IMapper _mapper;
     IQuestionDal _questionDal;
+    IExamQuestionService _examQuestionService;
 
-    public QuestionManager(IMapper mapper, IQuestionDal questionDal)
+    public QuestionManager(IMapper mapper, IQuestionDal questionDal, IExamQuestionService examQuestionService)
     {
         _mapper = mapper;
         _questionDal = questionDal;
+        _examQuestionService = examQuestionService;
     }
 
     public async Task<CreatedQuestionResponse> AddAsync(CreateQuestionRequest createQuestionRequest)
@@ -25,6 +29,11 @@ public class QuestionManager: IQuestionService
         var createdQuestion = await _questionDal.AddAsync(question);
         CreatedQuestionResponse createdQuestionResponse = _mapper.Map<CreatedQuestionResponse>(createdQuestion);
         return createdQuestionResponse;
+    }
+
+    public async Task<CreatedExamQuestionResponse> AssignQuestionAsync(CreateExamQuestionRequest createExamQuestionRequest)
+    {
+        return await _examQuestionService.AddAsync(createExamQuestionRequest);
     }
 
     public async Task<DeletedQuestionResponse> DeleteAsync(DeleteQuestionRequest deleteQuestionRequest)
@@ -45,6 +54,11 @@ public class QuestionManager: IQuestionService
     {
         var result = await _questionDal.GetListAsync(index: pageRequest.PageIndex, size: pageRequest.PageSize);
         return _mapper.Map<Paginate<GetListQuestionResponse>>(result);
+    }
+
+    public async Task<IPaginate<GetListQuestionResponse>> GetListByExamIdAsync(Guid examId, PageRequest pageRequest)
+    {
+        return await _examQuestionService.GetListByExamIdAsync(examId, pageRequest);
     }
 
     public async Task<UpdatedQuestionResponse> UpdateAsync(UpdateQuestionRequest updateQuestionRequest)

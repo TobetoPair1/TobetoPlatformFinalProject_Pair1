@@ -23,5 +23,7 @@ public class QuestionProfile : Profile
         CreateMap<Question, GetListQuestionResponse>().ReverseMap();
 
         CreateMap<Question, GetQuestionResponse>().ReverseMap();
+        CreateMap<Question, GetQuestionRequest>().ReverseMap();
+
     }
 }
