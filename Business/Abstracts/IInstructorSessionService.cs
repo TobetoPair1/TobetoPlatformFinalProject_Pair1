@@ -1,5 +1,6 @@
 ﻿using Business.Dtos.Requests.InstructorSession;
 using Business.Dtos.Responses.InstructorSession;
+using Business.Dtos.Responses.Session;
 using Core.DataAccess.Paging;
 
 namespace Business.Abstracts
@@ -11,5 +12,7 @@ namespace Business.Abstracts
         Task<DeletedInstructorSessionResponse> DeleteAsync(DeleteInstructorSessionRequest deleteInstructorSessionRequest);
         Task<UpdatedInstructorSessionResponse> UpdateAsync(UpdateInstructorSessionRequest updateInstructorSessionRequest);
         Task<GetInstructorSessionResponse> GetByIdAsync(GetInstructorSessionRequest getInstructorSessionRequest);
+        Task<IPaginate<GetListSessionResponse>> GetListByInstructorIdAsync(Guid instructorId, PageRequest pageRequest);
+
     }
 }

@@ -1,10 +1,14 @@
 ﻿using AutoMapper;
 using Business.Abstracts;
 using Business.Dtos.Requests.InstructorSession;
+using Business.Dtos.Responses.Course;
 using Business.Dtos.Responses.InstructorSession;
+using Business.Dtos.Responses.Session;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
+using Entities.Concretes;
 using Entities.Concretes.CrossTables;
+using Microsoft.EntityFrameworkCore;
 
 namespace Business.Concretes
 {
@@ -12,6 +16,7 @@ namespace Business.Concretes
     {
         IMapper _mapper;
         IInstructorSessionDal _instructorSessionDal;
+
         public InstructorSessionManager(IMapper mapper, IInstructorSessionDal instructorSessionDal)
         {
             _mapper = mapper;
@@ -43,6 +48,14 @@ namespace Business.Concretes
         {
             var result = await _instructorSessionDal.GetListAsync(index: pageRequest.PageIndex, size: pageRequest.PageSize);
             return _mapper.Map<Paginate<GetListInstructorSessionResponse>>(result);
+        }
+
+        public async Task<IPaginate<GetListSessionResponse>> GetListByInstructorIdAsync(Guid instructorId, PageRequest pageRequest)
+        {
+            var instructorSessions = await _instructorSessionDal.GetListAsync(ins => ins.InstructorId == instructorId, include: ins => ins.Include(ins => ins.Session).Include(ins => ins.Session.LiveContent), index: pageRequest.PageIndex, size: pageRequest.PageSize);
+
+            var sessions = _mapper.Map<Paginate<GetListSessionResponse>>(instructorSessions);
+            return sessions;
         }
 
         public async Task<UpdatedInstructorSessionResponse> UpdateAsync(UpdateInstructorSessionRequest updateInstructorSessionRequest)
