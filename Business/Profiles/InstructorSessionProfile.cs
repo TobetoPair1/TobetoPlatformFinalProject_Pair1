@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Business.Dtos.Requests.Instructor;
 using Business.Dtos.Requests.InstructorSession;
 using Business.Dtos.Responses.Instructor;
 using Business.Dtos.Responses.InstructorSession;
@@ -22,12 +21,13 @@ public class InstructorSessionProfile : Profile
 			.ForMember(destinationMember: i => i.InstructorFullName, memberOptions: opt => opt.MapFrom(cisr => cisr.FullName))
 			.ReverseMap();
 
-		CreateMap<IPaginate<Instructor>, Paginate<GetListInstructorResponse>>();
+		CreateMap<Paginate<Instructor>, Paginate<GetListInstructorResponse>>();
 		CreateMap<Instructor, GetListInstructorSessionResponse>()
 			.ForMember(destinationMember: i => i.InstructorFullName, memberOptions: opt => opt.MapFrom(cisr => cisr.FullName))
 			.ReverseMap();
 
-		CreateMap<Instructor, GetInstructorSessionResponse>()
+		CreateMap<Instructor, GetInstructorSessionRequest>().ReverseMap();
+        CreateMap<Instructor, GetInstructorSessionResponse>()
 			.ForMember(destinationMember: i => i.InstructorFullName, memberOptions: opt => opt.MapFrom(cisr => cisr.FullName))
 			.ReverseMap();
 	}
