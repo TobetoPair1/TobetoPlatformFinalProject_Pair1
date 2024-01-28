@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using Business.Abstracts;
+using Business.Dtos.Requests.InstructorSession;
 using Business.Dtos.Requests.Session;
+using Business.Dtos.Responses.InstructorSession;
 using Business.Dtos.Responses.Session;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
@@ -13,6 +15,7 @@ public class SessionManager : ISessionService
 {
     IMapper _mapper;
     ISessionDal _sessionDal;
+    IInstructorSessionService _instructorSessionService;
 
     public SessionManager(IMapper mapper, ISessionDal sessionDal)
     {
@@ -26,6 +29,17 @@ public class SessionManager : ISessionService
         var createdSession = await _sessionDal.AddAsync(session);
         CreatedSessionResponse result = _mapper.Map<CreatedSessionResponse>(session);
         return result;
+    }
+
+    public async Task<CreatedInstructorSessionResponse> AssignSessionAsync(CreateInstructorSessionRequest createInstructorSessionRequest)
+    {
+        return await _instructorSessionService.AddAsync(createInstructorSessionRequest);
+    }
+
+
+    public async Task<IPaginate<GetListSessionResponse>> GetListByInstructorIdAsync(Guid instructorId, PageRequest pageRequest)
+    {
+        return await _instructorSessionService.GetListByInstructorIdAsync(instructorId, pageRequest);
     }
 
     public async Task<DeletedSessionResponse> DeleteAsync(DeleteSessionRequest deleteSessionRequest)

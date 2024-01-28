@@ -1,4 +1,6 @@
-﻿using Business.Dtos.Requests.Session;
+﻿using Business.Dtos.Requests.InstructorSession;
+using Business.Dtos.Requests.Session;
+using Business.Dtos.Responses.InstructorSession;
 using Business.Dtos.Responses.Session;
 using Core.DataAccess.Paging;
 
@@ -11,4 +13,6 @@ public interface ISessionService
     Task<DeletedSessionResponse> DeleteAsync(DeleteSessionRequest deleteSessionRequest);
     Task<UpdatedSessionResponse> UpdateAsync(UpdateSessionRequest updateSessionRequest);
     Task<GetSessionResponse> GetByIdAsync(GetSessionRequest getSessionRequest);
+    Task<IPaginate<GetListSessionResponse>> GetListByInstructorIdAsync(Guid instructorId, PageRequest pageRequest);
+    Task<CreatedInstructorSessionResponse> AssignSessionAsync(CreateInstructorSessionRequest createInstructorSessionRequest);
 }
