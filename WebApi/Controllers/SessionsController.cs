@@ -1,4 +1,5 @@
 ﻿using Business.Abstracts;
+using Business.Dtos.Requests.InstructorSession;
 using Business.Dtos.Requests.Session;
 using Core.DataAccess.Paging;
 using Microsoft.AspNetCore.Mvc;
@@ -23,6 +24,13 @@ namespace WebApi.Controllers
             return Ok(result);
         }
 
+        [HttpPost("AssignToInstructor")]
+        public async Task<IActionResult> AssignSessionToSession([FromBody] CreateInstructorSessionRequest createInstructorSessionRequest)
+        {
+            var result = await _sessionService.AssignSessionAsync(createInstructorSessionRequest);
+            return Ok(result);
+        }
+
         [HttpGet("GetAll")]
         public async Task<IActionResult> GetAll([FromQuery] PageRequest pageRequest)
         {
@@ -41,6 +49,13 @@ namespace WebApi.Controllers
         public async Task<IActionResult> Update([FromBody] UpdateSessionRequest updateSessionRequest)
         {
             var result = await _sessionService.UpdateAsync(updateSessionRequest);
+            return Ok(result);
+        }
+
+        [HttpGet("GetListByInstructorId")]
+        public async Task<IActionResult> GetListByInstructorId([FromQuery] PageRequest pageRequest, Guid instructorId)
+        {
+            var result = await _sessionService.GetListByInstructorIdAsync(instructorId, pageRequest);
             return Ok(result);
         }
 
