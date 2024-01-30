@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using Business.Abstracts;
 using Business.Dtos.Requests.Calendar;
+using Business.Dtos.Requests.UserCalendar;
 using Business.Dtos.Responses.Calender;
+using Business.Dtos.Responses.UserCalendar;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
 using Entities.Concretes;
@@ -12,12 +14,15 @@ public class CalendarManager : ICalendarService
 {
     ICalendarDal _calendarDal;
     IMapper _mapper;
+    IUserCalendarService _userCalendarService;
 
-    public CalendarManager(ICalendarDal calendarDal, IMapper mapper)
+    public CalendarManager(ICalendarDal calendarDal, IMapper mapper, IUserCalendarService userCalendarService)
     {
         _calendarDal = calendarDal;
         _mapper = mapper;
+        _userCalendarService = userCalendarService;
     }
+
 
     public async Task<CreatedCalendarResponse> AddAsync(CreateCalendarRequest createCalendarRequest)
     {
@@ -41,6 +46,18 @@ public class CalendarManager : ICalendarService
         Calendar cal = await _calendarDal.GetAsync(c => c.Id == getCalendarRequest.Id);
         return _mapper.Map<GetCalendarResponse>(cal);
     }
+
+    public async Task<IPaginate<GetListCalendarResponse>> GetByUserId(Guid userId, PageRequest pageRequest)
+    {
+        return await _userCalendarService.GetListByUserIdAsync(userId, pageRequest);
+    }
+
+
+    public async Task<CreatedUserCalendarResponse> AssignCalendarAsync(CreateUserCalendarRequest createUserCalendarRequest)
+    {
+        return await _userCalendarService.AddAsync(createUserCalendarRequest);
+    }
+
 
     public async Task<IPaginate<GetListCalendarResponse>> GetListAsync(PageRequest pageRequest)
     {

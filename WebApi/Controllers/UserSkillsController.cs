@@ -11,9 +11,9 @@ public class UserSkillsController : ControllerBase
 {
 
     IUserSkillService _userSkillService;
-    public UserSkillsController(IUserSkillService iuserSkillService)
+    public UserSkillsController(IUserSkillService userSkillService)
     {
-        _userSkillService = iuserSkillService;
+        _userSkillService = userSkillService;
     }
 
     [HttpPost]
