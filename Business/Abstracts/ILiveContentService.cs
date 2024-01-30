@@ -1,4 +1,6 @@
-﻿using Business.Dtos.Requests.LiveContent;
+﻿using Business.Dtos.Requests.CourseLiveContent;
+using Business.Dtos.Requests.LiveContent;
+using Business.Dtos.Responses.CourseLiveContent;
 using Business.Dtos.Responses.LiveContent;
 using Core.DataAccess.Paging;
 
@@ -11,5 +13,9 @@ public interface ILiveContentService
     Task<UpdatedLiveContentResponse> UpdateAsync(UpdateLiveContentRequest updateAsyncContentRequest);
     Task<GetLiveContentResponse> GetByIdAsync(GetLiveContentRequest getLiveContentRequest);  
     Task<IPaginate<GetListLiveContentResponse>> GetListAsync(PageRequest pageRequest);
+
+
+    Task<IPaginate<GetListLiveContentResponse>> GetListByCourseIdAsync(Guid courseId, PageRequest pageRequest);
+    Task<CreatedCourseLiveContentResponse> AssignContentAsync(CreateCourseLiveContentRequest createCourseLiveContentRequest);
 
 }

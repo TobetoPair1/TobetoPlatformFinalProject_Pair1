@@ -2,12 +2,15 @@
 using Business.Abstracts;
 using Business.Dtos.Requests.CourseLiveContent;
 using Business.Dtos.Responses.CourseLiveContent;
+using Business.Dtos.Responses.LiveContent;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
+using DataAccess.Concretes.EntityFramework;
 using Entities.Concretes.CrossTables;
+using Microsoft.EntityFrameworkCore;
 
 namespace Business.Concretes;
-public class CourseLiveContentManager:ICourseLiveContentService
+public class CourseLiveContentManager : ICourseLiveContentService
 {
     IMapper _mapper;
     ICourseLiveContentDal _courseLiveContentDal;
@@ -40,8 +43,19 @@ public class CourseLiveContentManager:ICourseLiveContentService
 
     public async Task<IPaginate<GetListCourseLiveContentResponse>> GetListAsync(PageRequest pageRequest)
     {
-        var courseLiveContent = await _courseLiveContentDal.GetListAsync(index: pageRequest.PageIndex, size:pageRequest.PageSize);
+        var courseLiveContent = await _courseLiveContentDal.GetListAsync(index: pageRequest.PageIndex, size: pageRequest.PageSize);
         return _mapper.Map<Paginate<GetListCourseLiveContentResponse>>(courseLiveContent);
+    }
+
+    public async Task<IPaginate<GetListLiveContentResponse>> GetListByCourseIdAsync(Guid courseId, PageRequest pageRequest)
+    {
+        var liveContentCourses = await _courseLiveContentDal
+            .GetListAsync(clc => clc.CourseId == courseId, include: clc => clc.Include(clc => clc.LiveContent)
+            .Include(clc => clc.LiveContent.Category)
+            .Include(clc => clc.LiveContent.Like),
+            index: pageRequest.PageIndex, size: pageRequest.PageSize);
+        return _mapper.Map<Paginate<GetListLiveContentResponse>>(liveContentCourses);
+
     }
 
     public async Task<UpdatedCourseLiveContentResponse> UpdateAsync(UpdateCourseLiveContentRequest updateCourseLiveContentRequest)
