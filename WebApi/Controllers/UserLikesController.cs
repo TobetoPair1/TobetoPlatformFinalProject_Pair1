@@ -9,12 +9,13 @@ namespace WebApi.Controllers;
 [ApiController]
 public class UserLikesController : ControllerBase
 {
-    private readonly IUserLikeService _userLikeService;
+    IUserLikeService _userLikeService;
 
     public UserLikesController(IUserLikeService userLikeService)
     {
-        _userLikeService = userLikeService ?? throw new ArgumentNullException(nameof(userLikeService));
+        _userLikeService = userLikeService;
     }
+
 
     [HttpPost]
     public async Task<IActionResult> Add([FromBody] CreateUserLikeRequest createUserLikeRequest)

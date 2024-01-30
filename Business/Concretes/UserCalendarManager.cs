@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Business.Abstracts;
 using Business.Dtos.Requests.UserCalendar;
+using Business.Dtos.Responses.Calender;
 using Business.Dtos.Responses.UserCalendar;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
@@ -38,6 +39,16 @@ public class UserCalendarManager : IUserCalendarService
 		DeletedUserCalendarResponse deletedUserCalendarResponse = _mapper.Map<DeletedUserCalendarResponse>(deletedUserCalendar);
 		return deletedUserCalendarResponse;
 	}
+	
+	
+	public async Task<IPaginate<GetListCalendarResponse>> GetListByUserIdAsync(Guid userId, PageRequest pageRequest)
+	{
+		var userCalendars = await _userCalendarDal.GetListAsync(uc => uc.UserId == userId, index: pageRequest.PageIndex, size: pageRequest.PageSize);
+
+		var calendars = _mapper.Map<Paginate<GetListCalendarResponse>>(userCalendars);
+		return calendars;
+	}
+
 
 	public async Task<GetUserCalendarResponse> GetByIdAsync(GetUserCalendarRequest getUserCalendarRequest)
 	{
