@@ -63,7 +63,8 @@ public class FileManager : IFileService
 
 	public async Task<UpdatedFileResponse> UpdateAsync(UpdateFileRequest updateFileRequest)
     {
-        File file = _mapper.Map<File>(updateFileRequest);
+        File file = await _fileDal.GetAsync(f => f.Id == updateFileRequest.Id);
+        _mapper.Map(updateFileRequest, file);
         var updatedFile = await _fileDal.UpdateAsync(file);
         UpdatedFileResponse updatedFileResponse = _mapper.Map<UpdatedFileResponse>(updatedFile);
         return updatedFileResponse;

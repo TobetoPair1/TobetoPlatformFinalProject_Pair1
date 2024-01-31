@@ -47,7 +47,8 @@ public class HomeworkManager : IHomeworkService
 
     public async Task<UpdatedHomeworkResponse> UpdateAsync(UpdateHomeworkRequest updateHomeworkRequest)
     {
-        Homework homework = _mapper.Map<Homework>(updateHomeworkRequest);
+        Homework homework = await _homeworkDal.GetAsync(h => h.Id == updateHomeworkRequest.Id);
+        _mapper.Map(updateHomeworkRequest, homework);
         var updatedHomework = await _homeworkDal.UpdateAsync(homework);
         UpdatedHomeworkResponse updatedHomeworkResponse = _mapper.Map<UpdatedHomeworkResponse>(updatedHomework);
         return updatedHomeworkResponse;
