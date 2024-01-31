@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using Business.Abstracts;
+using Business.Dtos.Requests.CourseLiveContent;
 using Business.Dtos.Requests.LiveContent;
+using Business.Dtos.Responses.CourseLiveContent;
 using Business.Dtos.Responses.LiveContent;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
@@ -12,11 +14,13 @@ public class LiveContentManager : ILiveContentService
 {
     IMapper _mapper;
     ILiveContentDal _liveContentDal;
+    ICourseLiveContentService _courseLiveContentService;
 
-    public LiveContentManager(IMapper mapper, ILiveContentDal liveContentDal)
+    public LiveContentManager(IMapper mapper, ILiveContentDal liveContentDal, ICourseLiveContentService courseLiveContentService)
     {
         _mapper = mapper;
         _liveContentDal = liveContentDal;
+        _courseLiveContentService = courseLiveContentService;
     }
 
     public async Task<CreatedLiveContentResponse> AddAsync(CreateLiveContentRequest createLiveContentRequest)
@@ -25,6 +29,11 @@ public class LiveContentManager : ILiveContentService
         var createdLiveContent = await _liveContentDal.AddAsync(liveContent);
         CreatedLiveContentResponse result = _mapper.Map<CreatedLiveContentResponse>(liveContent);
         return result;
+    }
+
+    public async Task<CreatedCourseLiveContentResponse> AssignContentAsync(CreateCourseLiveContentRequest createCourseLiveContentRequest)
+    {
+        return await _courseLiveContentService.AddAsync(createCourseLiveContentRequest);
     }
 
     public async Task<DeletedLiveContentResponse> DeleteAsync(DeleteLiveContentRequest deleteLiveContentRequest)
@@ -45,6 +54,11 @@ public class LiveContentManager : ILiveContentService
     {
         var result = await _liveContentDal.GetListAsync(index: pageRequest.PageIndex, size: pageRequest.PageSize);
         return _mapper.Map<Paginate<GetListLiveContentResponse>>(result);
+    }
+
+    public async Task<IPaginate<GetListLiveContentResponse>> GetListByCourseIdAsync(Guid courseId, PageRequest pageRequest)
+    {
+        return await _courseLiveContentService.GetListByCourseIdAsync(courseId, pageRequest);
     }
 
     public async Task<UpdatedLiveContentResponse> UpdateAsync(UpdateLiveContentRequest updateLiveContentRequest)

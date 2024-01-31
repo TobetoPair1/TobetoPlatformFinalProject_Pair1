@@ -1,5 +1,8 @@
 ﻿using Business.Abstracts;
+using Business.Dtos.Requests.CourseLiveContent;
 using Business.Dtos.Requests.LiveContent;
+using Business.Dtos.Responses.CourseLiveContent;
+using Business.Dtos.Responses.LiveContent;
 using Core.DataAccess.Paging;
 using Microsoft.AspNetCore.Mvc;
 
@@ -50,5 +53,20 @@ namespace WebApi.Controllers
             var result = await _liveContentService.DeleteAsync(deleteLiveContentRequest);
             return Ok(result);
         }
+
+        [HttpGet("getlistbycourseid")]
+        public async Task<IActionResult> GetListByCourseIdAsync([FromQuery]PageRequest pageRequest, [FromQuery]Guid courseId)
+        {
+            var result = await _liveContentService.GetListByCourseIdAsync(courseId, pageRequest);
+            return Ok(result);
+        }
+
+        [HttpPost("assigncontentasync")]
+        public async Task<IActionResult> AssignContentAsync(CreateCourseLiveContentRequest createCourseLiveContentRequest)
+        {
+            var result = await _liveContentService.AssignContentAsync(createCourseLiveContentRequest);
+            return Ok(result);
+        }
+
     }
 }
