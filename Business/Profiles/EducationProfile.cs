@@ -13,8 +13,9 @@ public class EducationProfile : Profile
         CreateMap<Education, CreateEducationRequest>().ReverseMap();
         CreateMap<Education, CreatedEducationResponse>().ReverseMap();
 
-        CreateMap<Education, UpdateEducationRequest>().ReverseMap();
-        CreateMap<Education, UpdatedEducationResponse>().ReverseMap();
+        CreateMap<Education, UpdateEducationRequest>().ReverseMap()
+			.ForMember(destinationMember: a => a.UserId, memberOptions: opt => opt.UseDestinationValue());
+		CreateMap<Education, UpdatedEducationResponse>().ReverseMap();
 
         CreateMap<Education, DeleteEducationRequest>().ReverseMap();
         CreateMap<Education, DeletedEducationResponse>().ReverseMap();
