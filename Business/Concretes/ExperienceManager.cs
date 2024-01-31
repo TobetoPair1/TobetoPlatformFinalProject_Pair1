@@ -49,7 +49,8 @@ public class ExperienceManager : IExperienceService
 
     public async Task<UpdatedExperienceResponse> UpdateAsync(UpdateExperienceRequest updateExperienceRequest)
     {
-        Experience experience = _mapper.Map<Experience>(updateExperienceRequest);
+        Experience experience = await _experienceDal.GetAsync(e => e.Id == updateExperienceRequest.Id);
+        _mapper.Map(updateExperienceRequest, experience);
         var updatedExperience= await _experienceDal.UpdateAsync(experience);
         UpdatedExperienceResponse updatedExperienceResponse=_mapper.Map<UpdatedExperienceResponse>(updatedExperience);
         return updatedExperienceResponse;
