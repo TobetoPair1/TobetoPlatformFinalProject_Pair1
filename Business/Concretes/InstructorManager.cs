@@ -49,7 +49,8 @@ public class InstructorManager : IInstructorService
 
     public async Task<UpdatedInstructorResponse> UpdateAsync(UpdateInstructorRequest updateInstructorRequest)
     {
-        Instructor instructor = _mapper.Map<Instructor>(updateInstructorRequest);
+        Instructor instructor = await _instructorDal.GetAsync(i => i.Id == updateInstructorRequest.Id);
+        _mapper.Map(updateInstructorRequest, instructor);
         var updatedInstructor = await _instructorDal.UpdateAsync(instructor);
         UpdatedInstructorResponse updatedInstructorResponse = _mapper.Map<UpdatedInstructorResponse>(updatedInstructor);
         return updatedInstructorResponse;
