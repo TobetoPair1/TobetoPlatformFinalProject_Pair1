@@ -80,5 +80,11 @@ public class UserManager : IUserService
 	public List<IOperationClaim> GetClaims(IUser user)
     {
         return _userDal.GetClaims(user);
-    }	
+    }
+
+	public async Task<GetByMailUserResponse> GetByMailUserAsync(string mail)
+	{
+		User result = await _userDal.GetAsync(u => u.Email == mail);
+		return _mapper.Map<GetByMailUserResponse>(result);
+	}
 }

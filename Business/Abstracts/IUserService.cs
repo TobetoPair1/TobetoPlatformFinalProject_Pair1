@@ -14,6 +14,7 @@ namespace Business.Abstracts
         Task<UpdatedUserResponse> UpdateAsync(UpdateUserRequest updateUserRequest);
         Task<GetUserResponse> GetByIdAsync(Guid? id);
         Task<User> GetByMailAsync(string mail,bool withDeleted);
+        Task<GetByMailUserResponse> GetByMailUserAsync(string mail);
         List<IOperationClaim> GetClaims(IUser user);
         Task<bool> ActivateUserAsync(string email);
 	}

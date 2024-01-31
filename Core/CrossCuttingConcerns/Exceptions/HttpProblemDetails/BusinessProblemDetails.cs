@@ -10,6 +10,6 @@ public class BusinessProblemDetails : ProblemDetails
         Title = title;
         Detail = detail;
         Status = StatusCodes.Status401Unauthorized;
-        Type = "Business Exception";
+        Type = "Business_Exception";
     }
 }

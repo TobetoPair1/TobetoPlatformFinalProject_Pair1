@@ -22,6 +22,7 @@ public class UserProfile : Profile
         CreateMap<IPaginate<User>, Paginate<GetListUserResponse>>();
         CreateMap<User, GetListUserResponse>().ReverseMap();
         CreateMap<User, GetUserResponse>().ReverseMap();
+        CreateMap<User, GetByMailUserResponse>().ReverseMap();
 
         CreateMap<GetUserResponse, LoginResponse>().ReverseMap();
         CreateMap<CreatedUserResponse, RegisterResponse>();

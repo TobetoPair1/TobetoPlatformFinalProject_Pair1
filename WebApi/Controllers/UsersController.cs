@@ -36,8 +36,14 @@ public class UsersController : ControllerBase
     {
         var result = await _userService.GetByIdAsync(getUserRequest.Id);
         return Ok(result);
-    }	
-	[HttpGet("Activate")]
+    }
+    [HttpGet("GetByMail")]
+    public async Task<IActionResult> GetByMail([FromQuery] string mail)
+    {
+        var result = await _userService.GetByMailUserAsync(mail);
+        return Ok(result);
+    }
+    [HttpGet("Activate")]
 	public async Task<IActionResult> Activate([FromQuery] string email)
 	{
 		var result = await _userService.ActivateUserAsync(email);
