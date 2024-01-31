@@ -21,6 +21,8 @@ namespace DataAccess.EntityConfigurations
             
             builder.HasMany(l => l.Sessions).WithOne(s => s.LiveContent).HasForeignKey(s => s.LiveContentId);
 			builder.HasMany(l => l.Courses).WithOne(cl => cl.LiveContent).HasForeignKey(cl => cl.LiveContentId);
+			builder.HasMany(l => l.LikedByUsers).WithOne(cl => cl.LiveContent).HasForeignKey(cl => cl.ContentId);
+			builder.HasMany(l => l.Homeworks).WithOne(cl => cl.LiveContent).HasForeignKey(cl => cl.LiveContentId);
         }
     }
 }

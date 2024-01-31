@@ -46,8 +46,6 @@ public static class BusinessServiceRegistration
         services.AddScoped<IUserApplicationService, UserApplicationManager>();
         services.AddScoped<IUserCourseService, UserCourseManager>();
         services.AddScoped<IUserExamService, UserExamManager>();
-        services.AddScoped<IUserFavouriteService, UserFavouriteManager>();
-        services.AddScoped<IUserLikeService, UserLikeManager>();
         services.AddScoped<IUserSurveyService, UserSurveyManager>();
 
         var assembly = Assembly.GetExecutingAssembly();

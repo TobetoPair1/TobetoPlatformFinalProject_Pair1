@@ -3,8 +3,6 @@
 public class CreateAssigmentRequest
 {
     public Guid CourseId { get; set; }
-	public Guid CategoryId { get; set; }
-	public Guid LikeId { get; set; }
 	public string VideoUrl { get; set; }
 	public string Name { get; set; }
 	public string Title { get; set; }

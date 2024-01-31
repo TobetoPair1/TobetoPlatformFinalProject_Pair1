@@ -31,6 +31,7 @@ namespace DataAccess.EntityConfigurations
 			builder.HasMany(c => c.AsyncContents).WithOne(ca => ca.Course).HasForeignKey(ca => ca.CourseId).OnDelete(DeleteBehavior.NoAction);
 			builder.HasMany(c => c.LiveContents).WithOne(cl => cl.Course).HasForeignKey(cl => cl.CourseId).OnDelete(DeleteBehavior.NoAction);
 			builder.HasMany(c => c.Calendars).WithOne(c => c.Course).HasForeignKey(c => c.CourseId);
+			builder.HasMany(c => c.LikedByUsers).WithOne(clbu => clbu.Course).HasForeignKey(clbu => clbu.CourseId);
 		}
 	}
 }

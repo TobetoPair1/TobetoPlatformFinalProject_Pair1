@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Business.Abstracts;
 using Business.Dtos.Requests.Course;
+using Business.Dtos.Requests.Like;
 using Business.Dtos.Requests.UserCourse;
 using Business.Dtos.Responses.Course;
 using Business.Dtos.Responses.UserCourse;
@@ -16,16 +17,19 @@ public class CourseManager : ICourseService
     ICourseDal _courseDal;
     IMapper _mapper;
     IUserCourseService _userCourseService;
-	public CourseManager(ICourseDal courseDal, IMapper mapper, IUserCourseService userCourseService)
+    ILikeService _likeService;
+	public CourseManager(ICourseDal courseDal, IMapper mapper, IUserCourseService userCourseService, ILikeService likeService)
 	{
 		_courseDal = courseDal;
 		_mapper = mapper;
 		_userCourseService = userCourseService;
+		_likeService = likeService;
 	}
 
 	public async Task<CreatedCourseResponse> AddAsync(CreateCourseRequest createCourseRequest)
     {
         Course course = _mapper.Map<Course>(createCourseRequest);
+        course.LikeId = (await _likeService.AddAsync(new CreateLikeRequest())).Id;
         Course addedCourse = await _courseDal.AddAsync(course);
         return _mapper.Map<CreatedCourseResponse>(addedCourse);
     }

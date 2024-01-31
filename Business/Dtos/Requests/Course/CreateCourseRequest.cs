@@ -3,7 +3,6 @@
 public class CreateCourseRequest
 {
     public Guid CategoryId { get; set; }
-    public Guid LikeId { get; set; }
     public string Name { get; set; }
     public string ImageUrl { get; set; }
     public DateTime StartOfDate { get; set; }

@@ -4,15 +4,15 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace DataAccess.EntityConfigurations
 {
-    public class UserFavouriteConfiguration : IEntityTypeConfiguration<UserFavourite>
+	public class CourseFavouritedByUserConfiguration : IEntityTypeConfiguration<CourseFavouritedByUser>
     {
-        public void Configure(EntityTypeBuilder<UserFavourite> builder)
+        public void Configure(EntityTypeBuilder<CourseFavouritedByUser> builder)
         {
             builder.Ignore(uf => uf.Id);
-            builder.ToTable("UserFavourites").HasKey(uf => new { uf.UserId, uf.FavouriteId });
+            builder.ToTable("CourseFavouritedByUsers").HasKey(uf => new { uf.UserId, uf.CourseId });
 
             builder.Property(uf => uf.UserId).HasColumnName("UserId").IsRequired();
-            builder.Property(uf => uf.FavouriteId).HasColumnName("FavouriteId").IsRequired();
+            builder.Property(uf => uf.CourseId).HasColumnName("CourseId").IsRequired();
 
             builder.HasQueryFilter(uf => !uf.DeletedDate.HasValue);
         }
