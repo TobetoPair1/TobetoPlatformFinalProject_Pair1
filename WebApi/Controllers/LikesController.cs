@@ -1,6 +1,6 @@
 using Business.Abstracts;
 using Business.Dtos.Requests.Like;
-using Business.Dtos.Requests.UserLike;
+
 using Core.DataAccess.Paging;
 using Microsoft.AspNetCore.Mvc;
 
@@ -39,18 +39,13 @@ public class LikesController : ControllerBase
     }
     
     [HttpGet("getbyuserid")]
-    public async Task<IActionResult> GetAll([FromQuery] PageRequest pageRequest, Guid userId)
+    /*public async Task<IActionResult> GetAll([FromQuery] PageRequest pageRequest, Guid userId)
     {
         var result = await _likeService.GetByUserId(userId, pageRequest);
         return Ok(result);
-    }
+    }*/
     
-    [HttpPost("assignlike")]
-    public async Task<IActionResult> AssignLike([FromBody] CreateUserLikeRequest createUserLikeRequest)
-    {
-        var result = await _likeService.AssignLikeAsync(createUserLikeRequest);
-        return Ok(result);
-    }
+    
 
 
 

@@ -1,6 +1,6 @@
 ﻿using Business.Abstracts;
 using Business.Dtos.Requests.Favourite;
-using Business.Dtos.Requests.UserFavourite;
+
 using Core.DataAccess.Paging;
 using Microsoft.AspNetCore.Mvc;
 
@@ -22,12 +22,7 @@ namespace WebApi.Controllers
             var result = await _favouriteService.AddAsync(createFavouriteRequest);
             return Ok(result);
         }
-		[HttpPost("assigntouser")]
-		public async Task<IActionResult> AssignToUser([FromBody] CreateUserFavouriteRequest createUserFavouriteRequest)
-		{
-			var result = await _favouriteService.AssignFavoriteAsync(createUserFavouriteRequest);
-			return Ok(result);
-		}
+		
 		[HttpGet("get")]
         public async Task<IActionResult> Get([FromQuery] GetFavouriteRequest getFavouriteRequest)
         {
@@ -42,11 +37,11 @@ namespace WebApi.Controllers
             return Ok(result);
         }
 		[HttpGet("getlistbyuserid")]
-		public async Task<IActionResult> GetListByUserId([FromQuery] PageRequest pageRequest,Guid userId)
+		/*public async Task<IActionResult> GetListByUserId([FromQuery] PageRequest pageRequest,Guid userId)
 		{
 			var result = await _favouriteService.GetListByUserIdAsync(userId,pageRequest);
 			return Ok(result);
-		}
+		}*/
 
 		[HttpDelete]
         public async Task<IActionResult> Delete([FromBody] DeleteFavouriteRequest deleteFavouriteRequest)
