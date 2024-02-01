@@ -13,7 +13,8 @@ namespace Business.Profiles
            CreateMap<Survey, CreateSurveyRequest>().ReverseMap();
            CreateMap<Survey, CreatedSurveyResponse>().ReverseMap();
 
-           CreateMap<Survey, UpdateSurveyRequest>().ReverseMap();
+            CreateMap<Survey, UpdateSurveyRequest>().ReverseMap()
+                 .ForMember(destinationMember: s => s.Id, memberOptions: opt => opt.UseDestinationValue());
            CreateMap<Survey, UpdatedSurveyResponse>().ReverseMap();
 
            CreateMap<Survey, DeleteSurveyRequest>().ReverseMap();

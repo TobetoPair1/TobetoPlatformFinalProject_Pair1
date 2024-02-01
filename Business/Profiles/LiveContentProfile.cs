@@ -12,7 +12,8 @@ public class LiveContentProfile : Profile
         CreateMap<LiveContent, CreateLiveContentRequest>().ReverseMap();
         CreateMap<LiveContent, CreatedLiveContentResponse>().ReverseMap();
 
-        CreateMap<LiveContent, UpdateLiveContentRequest>().ReverseMap();
+        CreateMap<LiveContent, UpdateLiveContentRequest>().ReverseMap()
+            .ForMember(destinationMember: lc => lc.Id, memberOptions: opt => opt.UseDestinationValue());
         CreateMap<LiveContent, UpdatedLiveContentResponse>().ReverseMap();
 
         CreateMap<LiveContent, DeleteLiveContentRequest>().ReverseMap();

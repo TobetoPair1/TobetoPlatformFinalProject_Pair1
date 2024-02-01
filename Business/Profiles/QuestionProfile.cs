@@ -13,7 +13,8 @@ public class QuestionProfile : Profile
         CreateMap<Question, CreateQuestionRequest>().ReverseMap();
         CreateMap<Question, CreatedQuestionResponse>().ReverseMap();
 
-        CreateMap<Question, UpdateQuestionRequest>().ReverseMap();
+        CreateMap<Question, UpdateQuestionRequest>().ReverseMap()
+            .ForMember(destinationMember: q => q.Id, memberOptions: opt => opt.UseDestinationValue());
         CreateMap<Question, UpdatedQuestionResponse>().ReverseMap();
 
         CreateMap<Question, DeleteQuestionRequest>().ReverseMap();
