@@ -14,8 +14,9 @@ namespace Business.Abstracts
     public interface ICourseLikedByUserService
     {
         Task<CreatedCourseLikedByUserResponse> AddAsync(CreateCourseLikedByUserRequest createCourseLikedByUserRequest);
-        Task<IPaginate<GetListCourseLikedByUserResponse>> GetListAsync(PageRequest pageRequest);
-        Task<DeletedCourseLikedByUserResponse> DeleteAsync(DeleteAnnouncementRequest deleteAnnouncementRequest);
+        Task<DeletedCourseLikedByUserResponse> DeleteAsync(DeleteCourseLikedByUserRequest deleteCourseLikedByUserRequest);
         Task<GetCourseLikedByUserResponse> GetByIdAsync(GetCourseLikedByUserRequest getCourseLikedByUserRequest);
+        
+
     }
 }

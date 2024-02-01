@@ -38,8 +38,18 @@ public class UserManager : IUserService
 
     public async Task<DeletedUserResponse> DeleteAsync(DeleteUserRequest deleteUserRequest)
     {
-        User user = await _userDal.GetAsync(u => u.Id == deleteUserRequest.Id);
-        var deletedUser = await _userDal.DeleteAsync(user);
+        User user;
+
+		if (deleteUserRequest.Id!=null)
+        {
+			user = await _userDal.GetAsync(u => u.Id == deleteUserRequest.Id);
+
+		}
+        else
+        {
+			user = await _userDal.GetAsync(u => u.Email == deleteUserRequest.Email);
+		}
+		var deletedUser = await _userDal.DeleteAsync(user);
         DeletedUserResponse deletedUserResponse = _mapper.Map<DeletedUserResponse>(deletedUser);
         return deletedUserResponse;
     }
