@@ -44,10 +44,6 @@ public class FavouriteManager : IFavouriteService
         return _mapper.Map<GetFavouriteResponse>(fav);
     }
 
-	/*public async Task<IPaginate<GetListFavouriteResponse>> GetListByUserIdAsync(Guid userId, PageRequest pageRequest)
-	{
-        return await _userFavouriteService.GetListByUserIdAsync(userId, pageRequest);
-	}*/
 
 	public async Task<IPaginate<GetListFavouriteResponse>> GetListAsync(PageRequest pageRequest)
     {

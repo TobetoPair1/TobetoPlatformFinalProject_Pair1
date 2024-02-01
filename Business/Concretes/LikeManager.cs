@@ -43,15 +43,6 @@ public class LikeManager : ILikeService
         return _mapper.Map<GetLikeResponse>(result);
     }
 
-    /*public async Task<IPaginate<GetListLikeResponse>> GetByUserId(Guid userId, PageRequest pageRequest)
-    {
-        return await _userLikeService.GetListByUserIdAsync(userId, pageRequest);
-    }*/
-
-
-    
-
-
     public async Task<IPaginate<GetListLikeResponse>> GetListAsync(PageRequest pageRequest)
     {
         var result = await _likeDal.GetListAsync(index: pageRequest.PageIndex, size: pageRequest.PageSize);

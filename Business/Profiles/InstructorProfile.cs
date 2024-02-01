@@ -13,8 +13,7 @@ public class InstructorProfile : Profile
         CreateMap<Instructor, CreateInstructorRequest>().ReverseMap();
         CreateMap<Instructor, CreatedInstructorResponse>().ReverseMap();
 
-        CreateMap<Instructor, UpdateInstructorRequest>().ReverseMap()
-            .ForMember(destinationMember: i => i.Id, memberOptions: opt => opt.UseDestinationValue());
+        CreateMap<Instructor, UpdateInstructorRequest>().ReverseMap();
         CreateMap<Instructor, UpdatedInstructorResponse>().ReverseMap();
 
         CreateMap<Instructor, DeleteInstructorRequest>().ReverseMap();

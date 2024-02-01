@@ -14,7 +14,7 @@ public class ForeignLanguageProfile : Profile
         CreateMap<ForeignLanguage, CreatedForeignLanguageResponse>().ReverseMap();
 
         CreateMap<ForeignLanguage, UpdateForeignLanguageRequest>().ReverseMap()
-            .ForMember(destinationMember: fl => fl.Id, memberOptions: opt => opt.UseDestinationValue());
+            .ForMember(destinationMember: fl => fl.UserId, memberOptions: opt => opt.UseDestinationValue());
         CreateMap<ForeignLanguage, UpdatedForeignLanguageResponse>().ReverseMap();
 
         CreateMap<ForeignLanguage, DeleteForeignLanguageRequest>().ReverseMap();

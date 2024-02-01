@@ -14,7 +14,7 @@ public class SocialMediaProfile : Profile
         CreateMap<SocialMedia, CreatedSocialMediaResponse>().ReverseMap();
 
         CreateMap<SocialMedia, UpdateSocialMediaRequest>().ReverseMap()
-            .ForMember(destinationMember: sm => sm.Id, memberOptions: opt => opt.UseDestinationValue());
+            .ForMember(destinationMember: sm => sm.UserId, memberOptions: opt => opt.UseDestinationValue());
         CreateMap<SocialMedia, UpdatedSocialMediaResponse>().ReverseMap();
 
         CreateMap<SocialMedia, DeleteSocialMediaRequest>().ReverseMap();
