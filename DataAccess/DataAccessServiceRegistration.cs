@@ -57,7 +57,7 @@ namespace DataAccess
             services.AddScoped<IInstructorSessionDal, EfInstructorSessionDal>();
             services.AddScoped<ICourseLikedByUserDal, EfCourseLikedByUserDal>();
             services.AddScoped<IContentLikedByUserDal, EfContentLikedByUserDal>();
-            services.AddScoped<ICourseFavouritedByUser, EfCourseFavouritedByUserDal>();
+            services.AddScoped<ICourseFavouritedByUserDal, EfCourseFavouritedByUserDal>();
 
 
             return services;

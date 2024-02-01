@@ -5,7 +5,7 @@ using Entities.Concretes.CrossTables;
 
 namespace DataAccess.Concretes.EntityFramework
 {
-	public class EfCourseFavouritedByUserDal : EfRepositoryBase<CourseFavouritedByUser, Guid, TobetoPlatformContext>, ICourseFavouritedByUser
+	public class EfCourseFavouritedByUserDal : EfRepositoryBase<CourseFavouritedByUser, Guid, TobetoPlatformContext>, ICourseFavouritedByUserDal
 	{
 		public EfCourseFavouritedByUserDal(TobetoPlatformContext context) : base(context)
 		{
