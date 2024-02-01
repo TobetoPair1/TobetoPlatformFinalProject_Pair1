@@ -22,6 +22,9 @@ public class CategoryProfile : Profile
 
         CreateMap<Category, GetListCategoryResponse>().ReverseMap();
 
+        CreateMap<Category, UpdateCategoryRequest>().ReverseMap();
+
+
     }
 }
 
