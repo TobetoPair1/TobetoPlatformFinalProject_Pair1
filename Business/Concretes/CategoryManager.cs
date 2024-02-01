@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
 using Business.Abstracts;
 using Business.Dtos.Requests.Category;
+using Business.Dtos.Responses.Calender;
 using Business.Dtos.Responses.Category;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
+using DataAccess.Concretes.EntityFramework;
 using Entities.Concretes;
 
 namespace Business.Concretes;
@@ -53,11 +55,12 @@ public class CategoryManager : ICategoryService
 
     public async Task<UpdatedCategoryResponse> UpdateAsync(UpdateCategoryRequest updateCategoryRequest)
     {
-        Category cat = _mapper.Map<Category>(updateCategoryRequest);
+        Category cat = await _categoryDal.GetAsync(c=>c.Id == updateCategoryRequest.Id);
+        _mapper.Map(updateCategoryRequest, cat);
         Category updateDcat = await _categoryDal.UpdateAsync(cat);
-
         UpdatedCategoryResponse updateDcatResponse = _mapper.Map<UpdatedCategoryResponse>(updateDcat);
         return updateDcatResponse;
     }
+ 
 }
 
