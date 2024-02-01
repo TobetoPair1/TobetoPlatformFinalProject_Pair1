@@ -1,9 +1,7 @@
 ﻿using AutoMapper;
 using Business.Abstracts;
 using Business.Dtos.Requests.Like;
-
 using Business.Dtos.Responses.Like;
-
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
 using Entities.Concretes;
@@ -62,7 +60,8 @@ public class LikeManager : ILikeService
 
     public async Task<UpdatedLikeResponse> UpdateAsync(UpdateLikeRequest updateLikeRequest)
     {
-        Like like = _mapper.Map<Like>(updateLikeRequest);
+        Like like = await _likeDal.GetAsync(l => l.Id == updateLikeRequest.Id);
+        _mapper.Map(updateLikeRequest, like);
         var updatedLike = await _likeDal.UpdateAsync(like);
         UpdatedLikeResponse updatedLikeResponse = _mapper.Map<UpdatedLikeResponse>(updatedLike);
         return updatedLikeResponse;

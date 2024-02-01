@@ -1,9 +1,7 @@
 ﻿using AutoMapper;
 using Business.Abstracts;
 using Business.Dtos.Requests.Favourite;
-
 using Business.Dtos.Responses.Favourite;
-
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
 using Entities.Concretes;
@@ -57,9 +55,10 @@ public class FavouriteManager : IFavouriteService
         return _mapper.Map<Paginate<GetListFavouriteResponse>>(favs);
     }
 
-    public async Task<UpdatedFavouriteResponse> UpdateAsync(UpdateFavouriteRequest updateFvouriteRequest)
+    public async Task<UpdatedFavouriteResponse> UpdateAsync(UpdateFavouriteRequest updateFavouriteRequest)
     {
-        Favourite fav= _mapper.Map<Favourite>(updateFvouriteRequest);
+        Favourite fav = await _favouriteDal.GetAsync(f => f.Id == updateFavouriteRequest.Id);
+        _mapper.Map(updateFavouriteRequest, fav);
         Favourite updatedFav = await _favouriteDal.UpdateAsync(fav);
         return _mapper.Map<UpdatedFavouriteResponse>(updatedFav);
     }
