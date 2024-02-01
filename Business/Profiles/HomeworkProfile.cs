@@ -13,7 +13,8 @@ public class HomeworkProfile : Profile
         CreateMap<Homework, CreateHomeworkRequest>().ReverseMap();
         CreateMap<Homework, CreatedHomeworkResponse>().ReverseMap();
 
-        CreateMap<Homework, UpdateHomeworkRequest>().ReverseMap();
+        CreateMap<Homework, UpdateHomeworkRequest>().ReverseMap()
+            .ForMember(destinationMember: h => h.Id, memberOptions: opt => opt.UseDestinationValue());
         CreateMap<Homework, UpdatedHomeworkResponse>().ReverseMap();
 
         CreateMap<Homework, DeleteHomeworkRequest>().ReverseMap();

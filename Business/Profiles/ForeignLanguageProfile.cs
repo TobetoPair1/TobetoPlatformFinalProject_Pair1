@@ -13,7 +13,8 @@ public class ForeignLanguageProfile : Profile
         CreateMap<ForeignLanguage, CreateForeignLanguageRequest>().ReverseMap();
         CreateMap<ForeignLanguage, CreatedForeignLanguageResponse>().ReverseMap();
 
-        CreateMap<ForeignLanguage, UpdateForeignLanguageRequest>().ReverseMap();
+        CreateMap<ForeignLanguage, UpdateForeignLanguageRequest>().ReverseMap()
+            .ForMember(destinationMember: fl => fl.Id, memberOptions: opt => opt.UseDestinationValue());
         CreateMap<ForeignLanguage, UpdatedForeignLanguageResponse>().ReverseMap();
 
         CreateMap<ForeignLanguage, DeleteForeignLanguageRequest>().ReverseMap();
