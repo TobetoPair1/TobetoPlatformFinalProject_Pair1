@@ -63,7 +63,8 @@ public class LiveContentManager : ILiveContentService
 
     public async Task<UpdatedLiveContentResponse> UpdateAsync(UpdateLiveContentRequest updateLiveContentRequest)
     {
-        LiveContent liveContent = _mapper.Map<LiveContent>(updateLiveContentRequest);
+        LiveContent liveContent = await _liveContentDal.GetAsync(lc => lc.Id == updateLiveContentRequest.Id);
+        _mapper.Map(updateLiveContentRequest, liveContent);
         var updatedLiveContent = await _liveContentDal.UpdateAsync(liveContent);
         UpdatedLiveContentResponse updatedLiveContentResponse = _mapper.Map<UpdatedLiveContentResponse>(updatedLiveContent);
         return updatedLiveContentResponse;
