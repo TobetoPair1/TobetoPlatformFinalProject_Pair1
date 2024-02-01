@@ -34,7 +34,7 @@ public class UsersController : ControllerBase
     [HttpGet("Get")]
     public async Task<IActionResult> Get([FromQuery] GetUserRequest getUserRequest)
     {
-        var result = await _userService.GetByIdAsync(getUserRequest.Id);
+        var result = await _userService.GetAsync(getUserRequest);
         return Ok(result);
     }
     [HttpGet("GetByMail")]

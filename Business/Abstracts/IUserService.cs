@@ -12,7 +12,7 @@ namespace Business.Abstracts
         Task<IPaginate<GetListUserResponse>> GetListAsync(PageRequest pageRequest);
         Task<DeletedUserResponse> DeleteAsync(DeleteUserRequest deleteUserRequest);
         Task<UpdatedUserResponse> UpdateAsync(UpdateUserRequest updateUserRequest);
-        Task<GetUserResponse> GetByIdAsync(Guid? id);
+        Task<GetUserResponse> GetAsync(GetUserRequest getUserRequest);
         Task<User> GetByMailAsync(string mail,bool withDeleted);
         Task<GetByMailUserResponse> GetByMailUserAsync(string mail);
         List<IOperationClaim> GetClaims(IUser user);
