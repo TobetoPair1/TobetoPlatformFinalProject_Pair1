@@ -15,8 +15,7 @@ public class UserProfile : Profile
         CreateMap<User, CreateUserRequest>().ReverseMap();
         CreateMap<User, CreatedUserResponse>().ReverseMap();
 
-        CreateMap<User, UpdateUserRequest>().ReverseMap()
-            .ForMember(destinationMember: u => u.Id, memberOptions: opt => opt.UseDestinationValue());
+        CreateMap<User, UpdateUserRequest>().ReverseMap();
         CreateMap<User, UpdatedUserResponse>().ReverseMap();
 
         CreateMap<User, DeleteUserRequest>().ReverseMap();

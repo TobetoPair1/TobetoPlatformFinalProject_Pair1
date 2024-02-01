@@ -13,7 +13,8 @@ public class LiveContentProfile : Profile
         CreateMap<LiveContent, CreatedLiveContentResponse>().ReverseMap();
 
         CreateMap<LiveContent, UpdateLiveContentRequest>().ReverseMap()
-            .ForMember(destinationMember: lc => lc.Id, memberOptions: opt => opt.UseDestinationValue());
+            .ForMember(destinationMember: lc => lc.CategoryId, memberOptions: opt => opt.Condition(ulcr=>ulcr.CategoryId!=null))
+            .ForMember(destinationMember: lc => lc.LikeId, memberOptions: opt => opt.UseDestinationValue());
         CreateMap<LiveContent, UpdatedLiveContentResponse>().ReverseMap();
 
         CreateMap<LiveContent, DeleteLiveContentRequest>().ReverseMap();

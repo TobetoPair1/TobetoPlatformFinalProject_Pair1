@@ -9,7 +9,7 @@ using DataAccess.Concretes.EntityFramework;
 using Entities.Concretes;
 
 namespace Business.Concretes;
-
+//aynı kategori eklenemez iş kuralı
 public class CategoryManager : ICategoryService
 {
     ICategoryDal _categoryDal;

@@ -22,6 +22,8 @@ public class InstructorSessionProfile : Profile
 		CreateMap<Instructor, DeletedInstructorSessionResponse>()
 			.ForMember(destinationMember: i => i.InstructorFullName, memberOptions: opt => opt.MapFrom(cisr => cisr.FullName))
 			.ReverseMap();
+		CreateMap<Instructor, UpdateInstructorSessionRequest>().ReverseMap();
+		CreateMap<Instructor, UpdatedInstructorSessionResponse>().ReverseMap();
 
 		CreateMap<Paginate<Instructor>, Paginate<GetListInstructorResponse>>();
 		CreateMap<Instructor, GetListInstructorSessionResponse>()

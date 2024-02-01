@@ -2,7 +2,6 @@
 using Business.Dtos.Requests.UserApplication;
 using Business.Dtos.Responses.Application;
 using Business.Dtos.Responses.UserApplication;
-using Business.Dtos.Responses.UserCourse;
 using Core.DataAccess.Paging;
 using Entities.Concretes.CrossTables;
 

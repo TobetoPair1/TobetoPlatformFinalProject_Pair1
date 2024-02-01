@@ -2,6 +2,7 @@ using AutoMapper;
 using Business.Abstracts;
 using Business.Dtos.Requests.AsyncContent;
 using Business.Dtos.Requests.CourseAsyncContent;
+using Business.Dtos.Requests.Like;
 using Business.Dtos.Responses.AsyncContent;
 using Business.Dtos.Responses.CourseAsyncContent;
 using Core.DataAccess.Paging;
@@ -15,16 +16,19 @@ public class AsyncContentManager : IAsyncContentService
     IMapper _mapper;
     IAsyncContentDal _asyncContentDal;
     ICourseAsyncContentService _courseAsyncContentService;
-	public AsyncContentManager(IMapper mapper, IAsyncContentDal asyncContentDal, ICourseAsyncContentService courseAsyncContentService)
+	ILikeService _likeService;
+	public AsyncContentManager(IMapper mapper, IAsyncContentDal asyncContentDal, ICourseAsyncContentService courseAsyncContentService, ILikeService likeService)
 	{
 		_asyncContentDal = asyncContentDal;
 		_mapper = mapper;
 		_courseAsyncContentService = courseAsyncContentService;
+		_likeService = likeService;
 	}
 	public async Task<CreatedAsyncContentResponse> AddAsync(CreateAsyncContentRequest createAsyncContentRequest)
     {
         AsyncContent asyncContent = _mapper.Map<AsyncContent>(createAsyncContentRequest);
-        var createdAsyncContent = await _asyncContentDal.AddAsync(asyncContent);
+		asyncContent.LikeId = (await _likeService.AddAsync(new CreateLikeRequest())).Id;
+		var createdAsyncContent = await _asyncContentDal.AddAsync(asyncContent);
         CreatedAsyncContentResponse result = _mapper.Map<CreatedAsyncContentResponse>(createdAsyncContent);
         return result;
     }
@@ -61,7 +65,8 @@ public class AsyncContentManager : IAsyncContentService
 
 	public async Task<UpdatedAsyncContentResponse> UpdateAsync(UpdateAsyncContentRequest updateAsyncContentRequest)
     {
-        AsyncContent asyncContent = _mapper.Map<AsyncContent>(updateAsyncContentRequest);
+		AsyncContent asyncContent = await _asyncContentDal.GetAsync(a => a.Id == updateAsyncContentRequest.Id);
+		_mapper.Map(updateAsyncContentRequest,asyncContent);
         var updatedAsyncContent = await _asyncContentDal.UpdateAsync(asyncContent);
         UpdatedAsyncContentResponse updatedAsyncContentResponse = _mapper.Map<UpdatedAsyncContentResponse>(updatedAsyncContent);
         return updatedAsyncContentResponse;

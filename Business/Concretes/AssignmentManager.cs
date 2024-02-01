@@ -42,12 +42,13 @@ public class AssignmentManager : IAssignmentService
 
     public async Task<UpdatedAssigmentResponse> UpdateAsync(UpdateAssigmentRequest updateAssigmentRequest)
     {
-        Assignment asg = _mapper.Map<Assignment>(updateAssigmentRequest);
+		Assignment asg = await _assigmentDal.GetAsync(a => a.Id == updateAssigmentRequest.Id);
+		_mapper.Map(updateAssigmentRequest,asg);
         Assignment updatedAsg = await _assigmentDal.UpdateAsync(asg);
         return _mapper.Map<UpdatedAssigmentResponse>(updatedAsg);
     }
 
-    async Task<IPaginate<GetListAssigmentResponse>> IAssignmentService.GetListAsync(PageRequest pageRequest)
+    public async Task<IPaginate<GetListAssigmentResponse>> GetListAsync(PageRequest pageRequest)
     {
         var assigments = await _assigmentDal.GetListAsync(index: pageRequest.PageIndex, size: pageRequest.PageSize, include: a=>a.Include(a => a.Course));
         return _mapper.Map<Paginate<GetListAssigmentResponse>>(assigments);

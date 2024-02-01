@@ -7,7 +7,6 @@ public class CreateAsyncContentRequest
     public string SubType { get; set; }
     public string Company { get; set; }
     public string Description { get; set; }
-    public Guid LikeId { get; set; }
     public string Name { get; set; }
     public Guid CategoryId { get; set; }
     public string Title { get; set; }

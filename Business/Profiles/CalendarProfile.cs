@@ -13,7 +13,11 @@ public class CalendarProfile : Profile
         CreateMap<Calendar, CreateCalendarRequest>().ReverseMap();
         CreateMap<Calendar, CreatedCalendarResponse>().ReverseMap();
 
-        CreateMap<Calendar, UpdateCalendarRequest>().ReverseMap();
+        CreateMap<Calendar, UpdateCalendarRequest>()
+            .ReverseMap()
+            .ForMember(destinationMember:c=>c.CourseId,memberOptions:opt=>opt.Condition(ucr=>ucr.CourseId!=null))
+            .ForMember(destinationMember:c=>c.InstructorId,memberOptions:opt=>opt.Condition(ucr=>ucr.InstructorId!=null))
+            ;
         CreateMap<Calendar, UpdatedCalendarResponse>().ReverseMap();
 
         CreateMap<Calendar, DeleteCalendarRequest>().ReverseMap();

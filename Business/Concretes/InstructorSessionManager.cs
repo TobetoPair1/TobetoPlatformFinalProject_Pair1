@@ -1,18 +1,16 @@
 ﻿using AutoMapper;
 using Business.Abstracts;
 using Business.Dtos.Requests.InstructorSession;
-using Business.Dtos.Responses.Course;
 using Business.Dtos.Responses.InstructorSession;
 using Business.Dtos.Responses.Session;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
-using Entities.Concretes;
 using Entities.Concretes.CrossTables;
 using Microsoft.EntityFrameworkCore;
 
 namespace Business.Concretes
 {
-    public class InstructorSessionManager : IInstructorSessionService
+	public class InstructorSessionManager : IInstructorSessionService
     {
         IMapper _mapper;
         IInstructorSessionDal _instructorSessionDal;

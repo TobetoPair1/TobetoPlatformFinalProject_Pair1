@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Business.Abstracts;
 using Business.Dtos.Requests.CourseLiveContent;
+using Business.Dtos.Requests.Like;
 using Business.Dtos.Requests.LiveContent;
 using Business.Dtos.Responses.CourseLiveContent;
 using Business.Dtos.Responses.LiveContent;
@@ -15,19 +16,21 @@ public class LiveContentManager : ILiveContentService
     IMapper _mapper;
     ILiveContentDal _liveContentDal;
     ICourseLiveContentService _courseLiveContentService;
+	ILikeService _likeService;
+	public LiveContentManager(IMapper mapper, ILiveContentDal liveContentDal, ICourseLiveContentService courseLiveContentService, ILikeService likeService)
+	{
+		_mapper = mapper;
+		_liveContentDal = liveContentDal;
+		_courseLiveContentService = courseLiveContentService;
+		_likeService = likeService;
+	}
 
-    public LiveContentManager(IMapper mapper, ILiveContentDal liveContentDal, ICourseLiveContentService courseLiveContentService)
-    {
-        _mapper = mapper;
-        _liveContentDal = liveContentDal;
-        _courseLiveContentService = courseLiveContentService;
-    }
-
-    public async Task<CreatedLiveContentResponse> AddAsync(CreateLiveContentRequest createLiveContentRequest)
+	public async Task<CreatedLiveContentResponse> AddAsync(CreateLiveContentRequest createLiveContentRequest)
     {
         LiveContent liveContent = _mapper.Map<LiveContent>(createLiveContentRequest);
-        var createdLiveContent = await _liveContentDal.AddAsync(liveContent);
-        CreatedLiveContentResponse result = _mapper.Map<CreatedLiveContentResponse>(liveContent);
+		liveContent.LikeId = (await _likeService.AddAsync(new CreateLikeRequest())).Id;
+		var createdLiveContent = await _liveContentDal.AddAsync(liveContent);
+        CreatedLiveContentResponse result = _mapper.Map<CreatedLiveContentResponse>(createdLiveContent);
         return result;
     }
 

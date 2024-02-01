@@ -2,7 +2,6 @@
 using Business.Abstracts;
 using Business.Dtos.Requests.Application;
 using Business.Dtos.Requests.UserApplication;
-using Business.Dtos.Requests.UserCourse;
 using Business.Dtos.Responses.Application;
 using Business.Dtos.Responses.UserApplication;
 using Core.DataAccess.Paging;
