@@ -16,8 +16,11 @@ public class AsyncContentProfile : Profile
         CreateMap<AsyncContent, DeleteAsyncContentRequest>().ReverseMap();
         CreateMap<AsyncContent, DeletedAsyncContentResponse>().ReverseMap();
 
-        CreateMap<AsyncContent, UpdateAsyncContentRequest>().ReverseMap();
-        CreateMap<AsyncContent, UpdatedAsyncContentResponse>().ReverseMap();
+        CreateMap<AsyncContent, UpdateAsyncContentRequest>()
+            .ReverseMap()
+            .ForMember(destinationMember:ac=>ac.LikeId,memberOptions:opt=>opt.UseDestinationValue())
+            .ForMember(destinationMember:ac=>ac.CategoryId,memberOptions:opt=>opt.Condition(uacr=>uacr.CategoryId!=null));
+		CreateMap<AsyncContent, UpdatedAsyncContentResponse>().ReverseMap();
 
         CreateMap<AsyncContent, GetAsyncContentRequest>().ReverseMap();
         CreateMap<AsyncContent, GetAsyncContentResponse>().ReverseMap();

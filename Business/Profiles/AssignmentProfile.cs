@@ -25,8 +25,11 @@ public class AssignmentProfile : Profile
 			.ForMember(destinationMember: ca => ca.CourseName, memberOptions: opt => opt.MapFrom(a => a.Course.Name))
 			.ReverseMap();
 
-        CreateMap<UpdateAssigmentRequest, Assignment>().ReverseMap();
-        CreateMap<Assignment, UpdatedAssigmentResponse>()
+        CreateMap<Assignment,UpdateAssigmentRequest>()
+            .ReverseMap()
+			.ForMember(destinationMember: a => a.CourseId, memberOptions: opt => opt.Condition(uar=>uar.CourseId!=null))
+			;
+		CreateMap<Assignment, UpdatedAssigmentResponse>()
 			.ForMember(destinationMember: ca => ca.CourseName, memberOptions: opt => opt.MapFrom(a => a.Course.Name))
 			.ReverseMap();
 

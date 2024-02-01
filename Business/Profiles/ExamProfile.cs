@@ -13,8 +13,7 @@ public class ExamProfile : Profile
         CreateMap<Exam, CreateExamRequest>().ReverseMap();
         CreateMap<Exam, CreatedExamResponse>().ReverseMap();
 
-        CreateMap<Exam, UpdateExamRequest>().ReverseMap()
-            .ForMember(destinationMember: e => e.Id, memberOptions: opt => opt.UseDestinationValue());
+        CreateMap<Exam, UpdateExamRequest>().ReverseMap();
         CreateMap<Exam, UpdatedExamResponse>().ReverseMap();
 
         CreateMap<Exam, DeleteExamRequest>().ReverseMap();

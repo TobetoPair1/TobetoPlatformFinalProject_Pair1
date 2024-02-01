@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Business.Abstracts;
 using Business.Dtos.Requests.Course;
+using Business.Dtos.Requests.Favourite;
 using Business.Dtos.Requests.Like;
 using Business.Dtos.Requests.UserCourse;
 using Business.Dtos.Responses.Course;
@@ -18,18 +19,24 @@ public class CourseManager : ICourseService
     IMapper _mapper;
     IUserCourseService _userCourseService;
     ILikeService _likeService;
-	public CourseManager(ICourseDal courseDal, IMapper mapper, IUserCourseService userCourseService, ILikeService likeService)
+    IFavouriteService _favouriteService;
+	public CourseManager(ICourseDal courseDal, IMapper mapper, IUserCourseService userCourseService, ILikeService likeService, IFavouriteService favouriteService)
 	{
 		_courseDal = courseDal;
 		_mapper = mapper;
 		_userCourseService = userCourseService;
 		_likeService = likeService;
+		_favouriteService = favouriteService;
 	}
 
 	public async Task<CreatedCourseResponse> AddAsync(CreateCourseRequest createCourseRequest)
     {
         Course course = _mapper.Map<Course>(createCourseRequest);
         course.LikeId = (await _likeService.AddAsync(new CreateLikeRequest())).Id;
+        await _favouriteService.AddAsync(new CreateFavouriteRequest
+        {
+            CourseId = course.Id,
+        });
         Course addedCourse = await _courseDal.AddAsync(course);
         return _mapper.Map<CreatedCourseResponse>(addedCourse);
     }
@@ -69,7 +76,8 @@ public class CourseManager : ICourseService
 
     public async Task<UpdatedCourseResponse> UpdateAsync(UpdateCourseRequest updateCourseRequest)
     {
-        Course course = _mapper.Map<Course>(updateCourseRequest);
+		Course course = await _courseDal.GetAsync(c => c.Id == updateCourseRequest.Id);
+		_mapper.Map(updateCourseRequest,course);
         Course updatedCourse = await _courseDal.UpdateAsync(course);
         return _mapper.Map<UpdatedCourseResponse>(updatedCourse);
     }

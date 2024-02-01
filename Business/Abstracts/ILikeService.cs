@@ -13,11 +13,6 @@ public interface ILikeService
     Task<DeletedLikeResponse> DeleteAsync(DeleteLikeRequest deleteLikeRequest);
     Task<UpdatedLikeResponse> UpdateAsync(UpdateLikeRequest updateLikeRequest);
     Task<GetLikeResponse> GetByIdAsync(GetLikeRequest getLikeRequest);
-    
-    //Task<IPaginate<GetListLikeResponse>> GetByUserId(Guid userId, PageRequest pageRequest);
-    
-    
-
 
 }
 

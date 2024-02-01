@@ -28,9 +28,9 @@ public class PersonalInfoProfile : Profile
         CreateMap<IPaginate<PersonalInfo>, Paginate<GetListPersonalInfoResponse>>();
 
         CreateMap<PersonalInfo, GetListPersonalInfoResponse>()
-            .ForMember(destinationMember: pi => pi.Name, memberOptions: opt => opt.MapFrom(pi => pi.User.FirstName))
-            .ForMember(destinationMember: pi => pi.LastName, memberOptions: opt => opt.MapFrom(pi => pi.User.LastName))
-            .ForMember(destinationMember: pi => pi.Email, memberOptions: opt => opt.MapFrom(pi => pi.User.Email))
+            .ForMember(destinationMember: glpir => glpir.Name, memberOptions: opt => opt.MapFrom(pi => pi.User.FirstName))
+            .ForMember(destinationMember: glpir => glpir.LastName, memberOptions: opt => opt.MapFrom(pi => pi.User.LastName))
+            .ForMember(destinationMember: glpir => glpir.Email, memberOptions: opt => opt.MapFrom(pi => pi.User.Email))
             .ReverseMap();
 
         CreateMap<PersonalInfo, GetListPersonalInfoResponse>().ReverseMap();

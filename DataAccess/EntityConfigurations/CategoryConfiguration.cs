@@ -20,7 +20,6 @@ namespace DataAccess.EntityConfigurations
 			builder.HasMany(c => c.Courses).WithOne(c => c.Category).HasForeignKey(c => c.CategoryId);
 			builder.HasMany(c => c.LiveContents).WithOne(lc => lc.Category).HasForeignKey(lc => lc.CategoryId);
 			builder.HasMany(c => c.AsyncContents).WithOne(ac => ac.Category).HasForeignKey(ac => ac.CategoryId);
-			//builder.HasMany(c => c.Assignments).WithOne(a => a.Category).HasForeignKey(a => a.CategoryId);
 		}
     }
 

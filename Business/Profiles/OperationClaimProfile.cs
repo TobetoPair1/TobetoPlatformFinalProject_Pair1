@@ -13,8 +13,7 @@ public class OperationClaimProfile : Profile
         CreateMap<OperationClaim, CreateOperationClaimRequest>().ReverseMap();
         CreateMap<OperationClaim, CreatedOperationClaimResponse>().ReverseMap();
 
-        CreateMap<OperationClaim, UpdateOperationClaimRequest>().ReverseMap()
-            .ForMember(destinationMember: oc => oc.Id, memberOptions: opt => opt.UseDestinationValue());
+        CreateMap<OperationClaim, UpdateOperationClaimRequest>().ReverseMap();
         CreateMap<OperationClaim, UpdatedOperationClaimResponse>().ReverseMap();
 
         CreateMap<OperationClaim, DeleteOperationClaimRequest>().ReverseMap();

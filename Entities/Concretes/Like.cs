@@ -8,6 +8,5 @@ namespace Entities.Concretes
         public Course Course { get; set;}
         public AsyncContent AsyncContent { get; set; }
         public LiveContent LiveContent { get; set; }
-        public Assignment Assignment { get; set; }
     }
 }

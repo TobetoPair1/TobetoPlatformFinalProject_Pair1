@@ -16,7 +16,11 @@ public class CourseProfile : Profile
 		CreateMap<DeleteCourseRequest, Course>().ReverseMap();
 		CreateMap<Course, DeletedCourseResponse>().ReverseMap();
 
-		CreateMap<UpdateCourseRequest, Course>().ReverseMap();
+		CreateMap<Course,UpdateCourseRequest>()
+			.ReverseMap()
+			.ForMember(destinationMember: c => c.CategoryId, memberOptions: opt => opt.Condition(cr => cr.CategoryId!=null))
+			.ForMember(destinationMember: cr => cr.LikeId, memberOptions: opt => opt.UseDestinationValue())
+			;
 		CreateMap<Course, UpdatedCourseResponse>().ReverseMap();
 
 		CreateMap<GetCourseResponse, Course>().ReverseMap();

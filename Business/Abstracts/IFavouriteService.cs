@@ -12,8 +12,6 @@ public interface IFavouriteService
     Task<IPaginate<GetListFavouriteResponse>> GetListAsync(PageRequest pageRequest);
     Task<DeletedFavouriteResponse> DeleteAsync(DeleteFavouriteRequest deleteFavouriteRequest);
     Task<UpdatedFavouriteResponse> UpdateAsync(UpdateFavouriteRequest updateFavouriteRequest);
-    Task<GetFavouriteResponse> GetByIdAsync(GetFavouriteRequest getFavouriteRequest);
-    //Task<IPaginate<GetListFavouriteResponse>> GetListByUserIdAsync(Guid userId, PageRequest pageRequest);
-    
+    Task<GetFavouriteResponse> GetByIdAsync(GetFavouriteRequest getFavouriteRequest);    
 }
 
