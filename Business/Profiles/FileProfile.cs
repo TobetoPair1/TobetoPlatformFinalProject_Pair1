@@ -13,7 +13,8 @@ public class FileProfile : Profile
         CreateMap<File, CreateFileRequest>().ReverseMap();
         CreateMap<File, CreatedFileResponse>().ReverseMap();
 
-        CreateMap<File, UpdateFileRequest>().ReverseMap();
+        CreateMap<File, UpdateFileRequest>().ReverseMap()
+            .ForMember(destinationMember: f => f.Id, memberOptions: opt => opt.UseDestinationValue());
         CreateMap<File, UpdatedFileResponse>().ReverseMap();
 
         CreateMap<File, DeleteFileRequest>().ReverseMap();

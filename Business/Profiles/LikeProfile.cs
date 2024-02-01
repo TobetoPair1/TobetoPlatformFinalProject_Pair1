@@ -13,7 +13,8 @@ public class LikeProfile : Profile
         CreateMap<Like, CreateLikeRequest>().ReverseMap();
         CreateMap<Like, CreatedLikeResponse>().ReverseMap();
 
-        CreateMap<Like, UpdateLikeRequest>().ReverseMap();
+        CreateMap<Like, UpdateLikeRequest>().ReverseMap()
+            .ForMember(destinationMember: l => l.Id, memberOptions: opt => opt.UseDestinationValue());
         CreateMap<Like, UpdatedLikeResponse>().ReverseMap();
 
         CreateMap<Like, DeleteLikeRequest>().ReverseMap();

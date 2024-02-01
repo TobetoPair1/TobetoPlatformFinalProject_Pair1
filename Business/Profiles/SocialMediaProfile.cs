@@ -12,13 +12,17 @@ public class SocialMediaProfile : Profile
     {
         CreateMap<SocialMedia, CreateSocialMediaRequest>().ReverseMap();
         CreateMap<SocialMedia, CreatedSocialMediaResponse>().ReverseMap();
-        CreateMap<SocialMedia, UpdateSocialMediaRequest>().ReverseMap();
+
+        CreateMap<SocialMedia, UpdateSocialMediaRequest>().ReverseMap()
+            .ForMember(destinationMember: sm => sm.Id, memberOptions: opt => opt.UseDestinationValue());
         CreateMap<SocialMedia, UpdatedSocialMediaResponse>().ReverseMap();
 
         CreateMap<SocialMedia, DeleteSocialMediaRequest>().ReverseMap();
         CreateMap<SocialMedia, DeletedSocialMediaResponse>().ReverseMap();
+
         CreateMap<IPaginate<SocialMedia>, Paginate<GetListSocialMediaResponse>>();
         CreateMap<SocialMedia, GetListSocialMediaResponse>().ReverseMap();
+
         CreateMap<SocialMedia, GetSocialMediaResponse>().ReverseMap();
     }
 }

@@ -13,7 +13,8 @@ public class SessionProfile : Profile
         CreateMap<Session, CreateSessionRequest>().ReverseMap();
         CreateMap<Session, CreatedSessionResponse>().ReverseMap();
 
-        CreateMap<Session, UpdateSessionRequest>().ReverseMap();
+        CreateMap<Session, UpdateSessionRequest>().ReverseMap()
+            .ForMember(destinationMember: s => s.Id, memberOptions: opt => opt.UseDestinationValue());
         CreateMap<Session, UpdatedSessionResponse>().ReverseMap();
 
         CreateMap<Session, DeleteSessionRequest>().ReverseMap();

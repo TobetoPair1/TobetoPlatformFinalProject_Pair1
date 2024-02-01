@@ -50,7 +50,8 @@ public class SocialMediaManager: ISocialMediaService
 
     public async Task<UpdatedSocialMediaResponse> UpdateAsync(UpdateSocialMediaRequest updateSocialMediaRequest)
     {
-        SocialMedia socialMedia = _mapper.Map<SocialMedia>(updateSocialMediaRequest);
+        SocialMedia socialMedia = await _socialMediaDal.GetAsync(sm => sm.Id == updateSocialMediaRequest.Id);
+        _mapper.Map(updateSocialMediaRequest, socialMedia);
         var updatedSocialMedia = await _socialMediaDal.UpdateAsync(socialMedia);
         UpdatedSocialMediaResponse updatedSocialMediaResponse = _mapper.Map<UpdatedSocialMediaResponse>(updatedSocialMedia);
         return updatedSocialMediaResponse;

@@ -47,7 +47,8 @@ public class OperationClaimManager : IOperationClaimService
 
     public async Task<UpdatedOperationClaimResponse> UpdateAsync(UpdateOperationClaimRequest updateOperationClaimRequest)
     {
-        OperationClaim operationClaim = _mapper.Map<OperationClaim>(updateOperationClaimRequest);
+        OperationClaim operationClaim = await _operationClaimDal.GetAsync(oc => oc.Id == updateOperationClaimRequest.Id);
+        _mapper.Map(updateOperationClaimRequest, operationClaim);
         var updatedOperationClaim = await _operationClaimDal.UpdateAsync(operationClaim);
         UpdatedOperationClaimResponse updatedOperationClaimResponse = _mapper.Map<UpdatedOperationClaimResponse>(updatedOperationClaim);
         return updatedOperationClaimResponse;

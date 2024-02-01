@@ -7,5 +7,7 @@ namespace Entities.Concretes
     {        
         public ICollection<Session> Sessions { get; set; }
         public ICollection<CourseLiveContent> Courses { get; set; }
-    }
+		public ICollection<Homework> Homeworks{ get; set; }
+
+	}
 }

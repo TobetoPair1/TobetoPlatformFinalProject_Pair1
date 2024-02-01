@@ -13,7 +13,8 @@ public class SkillProfile : Profile
         CreateMap<Skill, CreateSkillRequest>().ReverseMap();
         CreateMap<Skill, CreatedSkillResponse>().ReverseMap();
 
-        CreateMap<Skill, UpdateSkillRequest>().ReverseMap();
+        CreateMap<Skill, UpdateSkillRequest>().ReverseMap()
+            .ForMember(destinationMember: s => s.Id, memberOptions: opt => opt.UseDestinationValue());
         CreateMap<Skill, UpdatedSkillResponse>().ReverseMap();
 
         CreateMap<Skill, DeleteSkillRequest>().ReverseMap();

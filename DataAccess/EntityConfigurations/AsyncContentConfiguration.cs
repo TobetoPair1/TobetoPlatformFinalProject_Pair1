@@ -25,6 +25,7 @@ namespace DataAccess.EntityConfigurations
 			builder.HasQueryFilter(ac => !ac.DeletedDate.HasValue);
 			
 			builder.HasMany(ac => ac.Courses).WithOne(ca => ca.AsyncContent).HasForeignKey(ca => ca.AsyncContentId);
+			builder.HasMany(ac => ac.LikedByUsers).WithOne(lbu => lbu.AsyncContent).HasForeignKey(lbu => lbu.ContentId);
 		}
 	}
 }

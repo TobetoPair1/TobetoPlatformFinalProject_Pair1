@@ -51,12 +51,13 @@ namespace DataAccess
             services.AddScoped<IUserCourseDal, EfUserCourseDal>();
             services.AddScoped<IUserSurveyDal, EfUserSurveyDal>();
             services.AddScoped<IUserExamDal, EfUserExamDal>();
-            services.AddScoped<IUserFavouriteDal, EfUserFavouriteDal>();
-            services.AddScoped<IUserLikeDal, EfUserLikeDal>();
             services.AddScoped<IUserOperationClaimDal, EfUserOperationClaimDal>();
             services.AddScoped<ICalendarDal, EfCalendarDal>();
             services.AddScoped<IUserCalendarDal, EfUserCalendarDal>();
             services.AddScoped<IInstructorSessionDal, EfInstructorSessionDal>();
+            services.AddScoped<ICourseLikedByUserDal, EfCourseLikedByUserDal>();
+            services.AddScoped<IContentLikedByUserDal, EfContentLikedByUserDal>();
+            services.AddScoped<ICourseFavouritedByUser, EfCourseFavouritedByUserDal>();
 
 
             return services;

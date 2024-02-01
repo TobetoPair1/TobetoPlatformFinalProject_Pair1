@@ -1,9 +1,7 @@
 ﻿using AutoMapper;
 using Business.Abstracts;
 using Business.Dtos.Requests.Like;
-using Business.Dtos.Requests.UserLike;
 using Business.Dtos.Responses.Like;
-using Business.Dtos.Responses.UserLike;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
 using Entities.Concretes;
@@ -14,13 +12,12 @@ public class LikeManager : ILikeService
 {
     ILikeDal _likeDal;
     IMapper _mapper;
-    IUserLikeService _userLikeService;
+   
 
-    public LikeManager(ILikeDal likeDal, IMapper mapper, IUserLikeService userLikeService)
+    public LikeManager(ILikeDal likeDal, IMapper mapper)
     {
         _likeDal = likeDal;
         _mapper = mapper;
-        _userLikeService = userLikeService;
     }
 
 
@@ -46,16 +43,13 @@ public class LikeManager : ILikeService
         return _mapper.Map<GetLikeResponse>(result);
     }
 
-    public async Task<IPaginate<GetListLikeResponse>> GetByUserId(Guid userId, PageRequest pageRequest)
+    /*public async Task<IPaginate<GetListLikeResponse>> GetByUserId(Guid userId, PageRequest pageRequest)
     {
         return await _userLikeService.GetListByUserIdAsync(userId, pageRequest);
-    }
+    }*/
 
 
-    public async Task<CreatedUserLikeResponse> AssignLikeAsync(CreateUserLikeRequest createUserLikeRequest)
-    {
-        return await _userLikeService.AddAsync(createUserLikeRequest);
-    }
+    
 
 
     public async Task<IPaginate<GetListLikeResponse>> GetListAsync(PageRequest pageRequest)
@@ -66,7 +60,8 @@ public class LikeManager : ILikeService
 
     public async Task<UpdatedLikeResponse> UpdateAsync(UpdateLikeRequest updateLikeRequest)
     {
-        Like like = _mapper.Map<Like>(updateLikeRequest);
+        Like like = await _likeDal.GetAsync(l => l.Id == updateLikeRequest.Id);
+        _mapper.Map(updateLikeRequest, like);
         var updatedLike = await _likeDal.UpdateAsync(like);
         UpdatedLikeResponse updatedLikeResponse = _mapper.Map<UpdatedLikeResponse>(updatedLike);
         return updatedLikeResponse;

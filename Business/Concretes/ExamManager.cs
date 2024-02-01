@@ -60,7 +60,8 @@ public class ExamManager : IExamService
     }
 	public async Task<UpdatedExamResponse> UpdateAsync(UpdateExamRequest updateExamRequest)
     {
-        Exam exam = _mapper.Map<Exam>(updateExamRequest);
+        Exam exam = await _examDal.GetAsync(e => e.Id== updateExamRequest.Id);
+        _mapper.Map(updateExamRequest, exam);
         var updatedExam = await _examDal.UpdateAsync(exam);
         UpdatedExamResponse updatedExamResponse = _mapper.Map<UpdatedExamResponse>(updatedExam);
         return updatedExamResponse;

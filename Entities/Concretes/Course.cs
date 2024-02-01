@@ -1,10 +1,9 @@
 ﻿using Core.Entities;
 using Entities.Concretes.CrossTables;
-using System.Globalization;
 
 namespace Entities.Concretes
 {
-	public class Course:Entity<Guid>
+    public class Course:Entity<Guid>
     {
         public Guid CategoryId { get; set; }
         public Guid LikeId { get; set; }
@@ -24,5 +23,7 @@ namespace Entities.Concretes
         public ICollection<Assignment> Assignments { get; set; }
         public ICollection<Calendar> Calendars { get; set; }
         public Like Like { get; set; }
+        public ICollection<CourseLikedByUser> LikedByUsers { get; set; }
+        public ICollection<CourseFavouritedByUser> FavouritedByUsers { get; set; }
     }
 }

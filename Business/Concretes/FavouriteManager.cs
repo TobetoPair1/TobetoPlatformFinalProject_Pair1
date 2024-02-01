@@ -1,9 +1,7 @@
 ﻿using AutoMapper;
 using Business.Abstracts;
 using Business.Dtos.Requests.Favourite;
-using Business.Dtos.Requests.UserFavourite;
 using Business.Dtos.Responses.Favourite;
-using Business.Dtos.Responses.UserFavourite;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
 using Entities.Concretes;
@@ -15,13 +13,13 @@ public class FavouriteManager : IFavouriteService
 {
     IFavouriteDal _favouriteDal;
     IMapper _mapper;
-    IUserFavouriteService _userFavouriteService;
+    
 
-	public FavouriteManager(IFavouriteDal favouriteDal, IMapper mapper, IUserFavouriteService userFavouriteService)
+	public FavouriteManager(IFavouriteDal favouriteDal, IMapper mapper)
 	{
 		_favouriteDal = favouriteDal;
 		_mapper = mapper;
-		_userFavouriteService = userFavouriteService;
+		
 	}
 
 	public async Task<CreatedFavouritetResponse> AddAsync(CreateFavouriteRequest createFavouriteRequest)
@@ -31,10 +29,7 @@ public class FavouriteManager : IFavouriteService
         return _mapper.Map<CreatedFavouritetResponse>(addedFav);
     }
 
-	public async Task<CreatedUserFavouriteResponse> AssignFavoriteAsync(CreateUserFavouriteRequest createUserFavouriteRequest)
-	{
-        return await _userFavouriteService.AddAsync(createUserFavouriteRequest);
-	}
+	
 
 	public async Task<DeletedFavouriteResponse> DeleteAsync(DeleteFavouriteRequest deleteFavouriteRequest)
     {
@@ -49,10 +44,10 @@ public class FavouriteManager : IFavouriteService
         return _mapper.Map<GetFavouriteResponse>(fav);
     }
 
-	public async Task<IPaginate<GetListFavouriteResponse>> GetListByUserIdAsync(Guid userId, PageRequest pageRequest)
+	/*public async Task<IPaginate<GetListFavouriteResponse>> GetListByUserIdAsync(Guid userId, PageRequest pageRequest)
 	{
         return await _userFavouriteService.GetListByUserIdAsync(userId, pageRequest);
-	}
+	}*/
 
 	public async Task<IPaginate<GetListFavouriteResponse>> GetListAsync(PageRequest pageRequest)
     {
@@ -60,9 +55,10 @@ public class FavouriteManager : IFavouriteService
         return _mapper.Map<Paginate<GetListFavouriteResponse>>(favs);
     }
 
-    public async Task<UpdatedFavouriteResponse> UpdateAsync(UpdateFavouriteRequest updateFvouriteRequest)
+    public async Task<UpdatedFavouriteResponse> UpdateAsync(UpdateFavouriteRequest updateFavouriteRequest)
     {
-        Favourite fav= _mapper.Map<Favourite>(updateFvouriteRequest);
+        Favourite fav = await _favouriteDal.GetAsync(f => f.Id == updateFavouriteRequest.Id);
+        _mapper.Map(updateFavouriteRequest, fav);
         Favourite updatedFav = await _favouriteDal.UpdateAsync(fav);
         return _mapper.Map<UpdatedFavouriteResponse>(updatedFav);
     }

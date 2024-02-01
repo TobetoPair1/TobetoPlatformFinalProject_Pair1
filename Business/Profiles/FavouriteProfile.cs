@@ -10,10 +10,10 @@ public class FavouriteProfile : Profile
 {
     public FavouriteProfile()
     {
-        CreateMap<CreateFavouriteRequest, Favourite>().ReverseMap();
+        CreateMap<Favourite, CreateFavouriteRequest>().ReverseMap();
         CreateMap<Favourite, CreatedFavouritetResponse>().ReverseMap();
 
-        CreateMap<DeleteFavouriteRequest, Favourite>().ReverseMap();
+        CreateMap<Favourite, DeleteFavouriteRequest>().ReverseMap();
         CreateMap<Favourite, DeletedFavouriteResponse>().ReverseMap();
 
         CreateMap<Favourite, GetFavouriteResponse>()
@@ -25,7 +25,8 @@ public class FavouriteProfile : Profile
             .ForMember(destinationMember: gf => gf.CourseName, memberOptions: opt => opt.MapFrom(f => f.Course.Name))
             .ReverseMap();
 
-        CreateMap<UpdateFavouriteRequest, Favourite>().ReverseMap();
+        CreateMap<Favourite, UpdateFavouriteRequest>().ReverseMap()
+            .ForMember(destinationMember: f => f.Id, memberOptions: opt => opt.UseDestinationValue());
         CreateMap<Favourite, UpdatedFavouriteResponse>().ReverseMap();
 
     }

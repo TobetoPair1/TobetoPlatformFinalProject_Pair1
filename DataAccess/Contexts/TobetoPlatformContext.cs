@@ -45,11 +45,12 @@ namespace DataAccess.Contexts
         public DbSet<UserApplication> UserApplications { get; set; }
         public DbSet<UserCourse> UserCourses { get; set; }
         public DbSet<UserExam> UserExams { get; set; }
-        public DbSet<UserFavourite> UserFavourites { get; set; }
-        public DbSet<UserLike> UserLikes { get; set; }
         public DbSet<Calendar> Calendars { get; set; }
         public DbSet<UserCalendar> UserCalendars { get; set; }
         public DbSet<InstructorSession> InstructorSessions { get; set; }
+        public DbSet<CourseLikedByUser> CourseLikedByUsers { get; set; }
+        public DbSet<ContentLikedByUser> ContentLikedByUsers { get; set; }
+        public DbSet<CourseFavouritedByUser> CourseFavouritedByUsers { get; set; }
 
 
 

@@ -14,14 +14,19 @@ public class UserProfile : Profile
     {
         CreateMap<User, CreateUserRequest>().ReverseMap();
         CreateMap<User, CreatedUserResponse>().ReverseMap();
-        CreateMap<User, UpdateUserRequest>().ReverseMap();
+
+        CreateMap<User, UpdateUserRequest>().ReverseMap()
+            .ForMember(destinationMember: u => u.Id, memberOptions: opt => opt.UseDestinationValue());
         CreateMap<User, UpdatedUserResponse>().ReverseMap();
 
         CreateMap<User, DeleteUserRequest>().ReverseMap();
         CreateMap<User, DeletedUserResponse>().ReverseMap();
+
         CreateMap<IPaginate<User>, Paginate<GetListUserResponse>>();
         CreateMap<User, GetListUserResponse>().ReverseMap();
+
         CreateMap<User, GetUserResponse>().ReverseMap();
+
         CreateMap<User, GetByMailUserResponse>().ReverseMap();
 
         CreateMap<GetUserResponse, LoginResponse>().ReverseMap();

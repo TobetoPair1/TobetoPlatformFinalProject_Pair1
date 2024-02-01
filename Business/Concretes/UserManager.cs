@@ -64,7 +64,8 @@ public class UserManager : IUserService
 
     public async Task<UpdatedUserResponse> UpdateAsync(UpdateUserRequest updateUserRequest)
     {
-        User user = _mapper.Map<User>(updateUserRequest);
+        User user = await _userDal.GetAsync(u => u.Id == updateUserRequest.Id);
+        _mapper.Map(updateUserRequest, user);
         var updatedUser = await _userDal.UpdateAsync(user);
         UpdatedUserResponse updatedUserResponse = _mapper.Map<UpdatedUserResponse>(updatedUser);
         return updatedUserResponse;

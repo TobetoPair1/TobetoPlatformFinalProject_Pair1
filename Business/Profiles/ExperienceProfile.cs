@@ -13,7 +13,8 @@ public class ExperienceProfile : Profile
         CreateMap<Experience, CreateExperienceRequest>().ReverseMap();
         CreateMap<Experience, CreatedExperienceResponse>().ReverseMap();
 
-        CreateMap<Experience, UpdateExperienceRequest>().ReverseMap();
+        CreateMap<Experience, UpdateExperienceRequest>().ReverseMap()
+            .ForMember(destinationMember: e => e.Id, memberOptions: opt => opt.UseDestinationValue());
         CreateMap<Experience, UpdatedExperienceResponse>().ReverseMap();
 
         CreateMap<Experience, DeleteExperienceRequest>().ReverseMap();

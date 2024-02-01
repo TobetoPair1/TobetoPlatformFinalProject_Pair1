@@ -63,8 +63,9 @@ public class SkillManager : ISkillService
 
 	public async Task<UpdatedSkillResponse> UpdateAsync(UpdateSkillRequest UpdateSkillRequest)
 	{
-		Skill skill = _mapper.Map<Skill>(UpdateSkillRequest);
-		var updatedUser = await _skillDal.UpdateAsync(skill);
+		Skill skill = await _skillDal.GetAsync(s => s.Id ==  UpdateSkillRequest.Id);
+        _mapper.Map(UpdateSkillRequest, skill);
+        var updatedUser = await _skillDal.UpdateAsync(skill);
 		UpdatedSkillResponse UpdatedSkillResponse = _mapper.Map<UpdatedSkillResponse>(updatedUser);
 		return UpdatedSkillResponse;
 	}

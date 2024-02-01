@@ -33,12 +33,13 @@ namespace DataAccess.EntityConfigurations
 			builder.HasMany(u => u.Exams).WithOne(ue => ue.User).HasForeignKey(ue => ue.UserId);
 			builder.HasMany(u => u.Surveys).WithOne(us => us.User).HasForeignKey(us => us.UserId);
 			builder.HasMany(u => u.Courses).WithOne(uc => uc.User).HasForeignKey(e => e.UserId);
-			builder.HasMany(u => u.Likes).WithOne(ul => ul.User).HasForeignKey(ul => ul.UserId);
+			builder.HasMany(u => u.LikedCoursesByUser).WithOne(clbu => clbu.User).HasForeignKey(clbu => clbu.UserId);
 			builder.HasMany(u => u.Skills).WithOne(us => us.User).HasForeignKey(us => us.UserId);
-			builder.HasMany(u => u.Favorites).WithOne(uf => uf.User).HasForeignKey(uf => uf.UserId);
+			builder.HasMany(u => u.FavouritedCoursesByUser).WithOne(fcbu => fcbu.User).HasForeignKey(fcbu => fcbu.UserId);
 			builder.HasMany(u => u.Claims).WithOne(uc => uc.User).HasForeignKey(uc => uc.UserId);
 			builder.HasMany(u => u.Files).WithOne(f => f.User).HasForeignKey(f => f.UserId);
 			builder.HasMany(u => u.Calenders).WithOne(uc => uc.User).HasForeignKey(uc => uc.UserId);
+			builder.HasMany(u => u.ContentsLikedByUser).WithOne(clbu => clbu.User).HasForeignKey(clbu => clbu.UserId);
 		}
 	}
 }

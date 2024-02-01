@@ -25,8 +25,9 @@ namespace Entities.Concretes
         public ICollection<UserApplication> Applications { get; set; }
         public ICollection<UserExam> Exams { get; set; }
         public ICollection<UserSurvey> Surveys { get; set; }
-        public ICollection<UserLike> Likes { get; set; }
-        public ICollection<UserFavourite> Favorites { get; set; }
+        public ICollection<CourseLikedByUser> LikedCoursesByUser { get; set; }
+        public ICollection<CourseFavouritedByUser> FavouritedCoursesByUser { get; set; }
+        public ICollection<ContentLikedByUser> ContentsLikedByUser { get; set; }
         public ICollection<File> Files { get; set; }
         public ICollection<UserCalendar> Calenders { get; set; }
     }

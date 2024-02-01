@@ -15,8 +15,7 @@ namespace DataAccess.EntityConfigurations
             builder.Property(f => f.Count).HasColumnName("Count").IsRequired();
 
             builder.HasQueryFilter(f => !f.DeletedDate.HasValue);
-
-			builder.HasMany(f => f.Users).WithOne(uf => uf.Favourite).HasForeignKey(uf => uf.FavouriteId);
+			
 		}
     }
 
