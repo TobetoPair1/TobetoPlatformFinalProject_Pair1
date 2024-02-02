@@ -45,6 +45,12 @@ public class EducationManager : IEducationService
         return _mapper.Map<Paginate<GetListEducationResponse>>(result);
     }
 
+    public async Task<IPaginate<GetListEducationResponse>> GetListByUserIdAsync(Guid userId, PageRequest pageRequest)
+    {
+        var result = await _educationDal.GetListAsync(e => e.UserId == userId, index: pageRequest.PageIndex, size: pageRequest.PageSize);
+        return _mapper.Map<Paginate<GetListEducationResponse>>(result);
+    }
+
     public async Task<UpdatedEducationResponse> UpdateAsync(UpdateEducationRequest updateEducationRequest)
     {
         Education education = await _educationDal.GetAsync(e => e.UserId == updateEducationRequest.UserId);

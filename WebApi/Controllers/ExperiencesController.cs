@@ -30,6 +30,13 @@ public class ExperiencesController : ControllerBase
         return Ok(result);
     }
 
+    [HttpGet("getlistbyuserid")]
+    public async Task<IActionResult> GetListByUserIdAsync([FromQuery] PageRequest pageRequest, Guid userId)
+    {
+        var result = await _experienceService.GetListByUserIdAsync(userId, pageRequest);
+        return Ok(result);
+    }
+
     [HttpGet("Get")]
     public async Task<IActionResult> Get([FromQuery] GetExperienceRequest getExperienceRequest)
     {

@@ -1,4 +1,5 @@
 ﻿using Business.Abstracts;
+using Business.Dtos.Requests.Course;
 using Business.Dtos.Requests.Education;
 using Core.DataAccess.Paging;
 using Microsoft.AspNetCore.Mvc;
@@ -19,6 +20,19 @@ public class EducationsController : ControllerBase
     public async Task<IActionResult> Add([FromBody] CreateEducationRequest createEducationRequest)
     {
         var result = await _educationService.AddAsync(createEducationRequest);
+        return Ok(result);
+    }
+
+    [HttpGet("getlistbyuserid")]
+    public async Task<IActionResult> GetListByUserIdAsync([FromQuery] PageRequest pageRequest, Guid userId)
+    {
+        var result = await _educationService.GetListByUserIdAsync(userId, pageRequest);
+        return Ok(result);
+    }
+    [HttpDelete]
+    public async Task<IActionResult> Delete([FromBody] DeleteEducationRequest deleteEducationRequest)
+    {
+        var result = await _educationService.DeleteAsync(deleteEducationRequest);
         return Ok(result);
     }
 

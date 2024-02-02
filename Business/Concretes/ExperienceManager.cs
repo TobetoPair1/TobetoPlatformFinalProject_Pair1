@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
 using Business.Abstracts;
 using Business.Dtos.Requests.Experience;
+using Business.Dtos.Responses.Education;
 using Business.Dtos.Responses.Experience;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
+using DataAccess.Concretes.EntityFramework;
 using Entities.Concretes;
 
 namespace Business.Concretes;
@@ -44,6 +46,12 @@ public class ExperienceManager : IExperienceService
     public async Task<IPaginate<GetListExperienceResponse>> GetListAsync(PageRequest pageRequest)
     {
         var result = await _experienceDal.GetListAsync(index: pageRequest.PageIndex, size: pageRequest.PageSize);
+        return _mapper.Map<Paginate<GetListExperienceResponse>>(result);
+    }
+
+    public async Task<IPaginate<GetListExperienceResponse>> GetListByUserIdAsync(Guid userId, PageRequest pageRequest)
+    {
+        var result = await _experienceDal.GetListAsync(e => e.UserId == userId, index: pageRequest.PageIndex, size: pageRequest.PageSize);
         return _mapper.Map<Paginate<GetListExperienceResponse>>(result);
     }
 
