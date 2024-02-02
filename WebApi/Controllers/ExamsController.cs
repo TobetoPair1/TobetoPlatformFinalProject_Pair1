@@ -1,6 +1,7 @@
 ﻿using Business.Abstracts;
 using Business.Dtos.Requests.Course;
 using Business.Dtos.Requests.Exam;
+using Business.Dtos.Requests.Experience;
 using Business.Dtos.Requests.UserExam;
 using Core.DataAccess.Paging;
 using Microsoft.AspNetCore.Mvc;
@@ -24,28 +25,28 @@ public class ExamsController : ControllerBase
         return Ok(result);
     }
 
-    [HttpPost("AssignToUser")]
+    [HttpPost("assigntouser")]
     public async Task<IActionResult> AssignToUser([FromBody] CreateUserExamRequest createUserExamRequest)
     {
         var result = await _examService.AssignExamAsync(createUserExamRequest);
         return Ok(result);
     }
 
-    [HttpGet("Get")]
+    [HttpGet("get")]
     public async Task<IActionResult> Get([FromQuery] GetExamRequest getExamRequest)
     {
         var result = await _examService.GetByIdAsync(getExamRequest);
         return Ok(result);
     }
 
-    [HttpGet("GetListByUserId")]
+    [HttpGet("getlistbyuserid")]
     public async Task<IActionResult> GetListByUserIdAsync([FromQuery] PageRequest pageRequest, Guid userId)
     {
         var result = await _examService.GetListByUserIdAsync(userId, pageRequest);
         return Ok(result);
     }
 
-    [HttpGet("GetAll")]
+    [HttpGet("getall")]
     public async Task<IActionResult> GetAll([FromQuery] PageRequest pageRequest)
     {
         var result = await _examService.GetListAsync(pageRequest);
@@ -58,4 +59,10 @@ public class ExamsController : ControllerBase
         var result = await _examService.DeleteAsync(deleteExamRequest);
         return Ok(result);
     }
+	[HttpPut]
+	public async Task<IActionResult> Update([FromBody] UpdateExamRequest updateExamRequest)
+	{
+		var result = await _examService.UpdateAsync(updateExamRequest);
+		return Ok(result);
+	}
 }
