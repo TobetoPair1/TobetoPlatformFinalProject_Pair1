@@ -2,6 +2,7 @@
 using Business.Abstracts;
 using Business.Dtos.Requests.Auth;
 using Business.Dtos.Requests.User;
+using Business.Dtos.Responses.User;
 using Business.Rules;
 using Business.ValudationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
@@ -40,8 +41,8 @@ public class AuthManager : IAuthService
 			HashingHelper.CreatePasswordHash(registerRequest.Password, out registerRequest._passwordHash, out registerRequest._passwordSalt);
 			User user = _mapper.Map<User>(registerRequest);
 			CreateUserRequest createUserRequest = _mapper.Map<CreateUserRequest>(user);
-			await _userService.AddAsync(createUserRequest);
-			return user;
+			CreatedUserResponse createdUserResponse = await _userService.AddAsync(createUserRequest);
+			return _mapper.Map<User>(createdUserResponse);
 		}
 		else
 		{
