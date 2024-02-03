@@ -23,13 +23,13 @@ public class ForeignLanguagesController : ControllerBase
         return Ok(result);
     }
 
-    [HttpGet("GetAll")]
+    [HttpGet("getall")]
     public async Task<IActionResult> GetList([FromQuery] PageRequest pageRequest)
     {
         var result = await _foreignLanguageService.GetListAsync(pageRequest);
         return Ok(result);
     }
-    [HttpGet("Get")]
+    [HttpGet("get")]
     public async Task<IActionResult> Get([FromQuery] GetForeignLanguageRequest getForeignLanguageRequest)
     {
         var result = await _foreignLanguageService.GetByIdAsync(getForeignLanguageRequest);
