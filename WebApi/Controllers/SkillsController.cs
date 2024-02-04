@@ -24,28 +24,28 @@ public class SkillsController : ControllerBase
         return Ok(result);
     }
 
-    [HttpGet("GetAll")]
+    [HttpGet("getall")]
     public async Task<IActionResult> GetList([FromQuery] PageRequest pageRequest)
     {
         var result = await _skillService.GetListAsync(pageRequest);
         return Ok(result);
     }
 
-    [HttpGet("Get")]
+    [HttpGet("get")]
     public async Task<IActionResult> Get([FromQuery] GetSkillRequest getSkillRequest)
     {
         var result = await _skillService.GetByIdAsync(getSkillRequest);
         return Ok(result);
     }
 
-    [HttpGet("GetByUserId")]
+    [HttpGet("getbyuserid")]
     public async Task<IActionResult> GetAll([FromQuery] PageRequest pageRequest, Guid userId)
     {
         var result = await _skillService.GetByUserId(userId, pageRequest);
         return Ok(result);
     }
 
-    [HttpPost("AssignSkill")]
+    [HttpPost("assignskill")]
     public async Task<IActionResult> AssignSkill([FromBody] CreateUserSkillRequest createUserSkillRequest)
     {
         var result = await _skillService.AssignSkillAsync(createUserSkillRequest);
