@@ -32,7 +32,7 @@ public class CertificateManager : ICertificateService
 
     public async Task<GetCertificateResponse> GetAsync(GetCertificateRequest getCertificateRequest)
     {
-        Certificate certificate = await _certificateDal.GetAsync(c => c.Id == getCertificateRequest.id);
+        Certificate certificate = await _certificateDal.GetAsync(c => c.Id == getCertificateRequest.Id);
         return _mapper.Map<GetCertificateResponse>(certificate);
 
     }

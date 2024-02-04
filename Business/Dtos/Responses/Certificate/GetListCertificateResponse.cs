@@ -1,5 +1,10 @@
-﻿namespace Business.Dtos.Responses.Certificate
-{
-	public record GetListCertificateResponse(Guid Id, string Name, Guid UserId, string FilePath, string FileType);
+﻿namespace Business.Dtos.Responses.Certificate;
 
+public class GetListCertificateResponse
+{
+	public Guid Id { get; set; }
+	public string Name { get; set; }
+	public Guid UserId { get; set; }
+	public string FilePath { get; set; }
+	public string FileType { get; set; }
 }

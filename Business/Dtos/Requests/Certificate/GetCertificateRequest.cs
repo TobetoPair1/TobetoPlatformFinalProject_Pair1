@@ -1,4 +1,11 @@
-﻿namespace Business.Dtos.Requests.Certificate
+﻿namespace Business.Dtos.Requests.Certificate;
+
+public class GetCertificateRequest
 {
-	public record GetCertificateRequest(Guid id);
+    public Guid Id { get; set; }
 }
+
+
+    
+    
+    
