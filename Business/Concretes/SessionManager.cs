@@ -17,10 +17,11 @@ public class SessionManager : ISessionService
     ISessionDal _sessionDal;
     IInstructorSessionService _instructorSessionService;
 
-    public SessionManager(IMapper mapper, ISessionDal sessionDal)
+    public SessionManager(IMapper mapper, ISessionDal sessionDal, IInstructorSessionService instructorSessionService)
     {
         _mapper = mapper;
         _sessionDal = sessionDal;
+        _instructorSessionService = instructorSessionService;
     }
 
     public async Task<CreatedSessionResponse> AddAsync(CreateSessionRequest createSessionRequest)

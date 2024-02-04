@@ -18,7 +18,7 @@ namespace Business.Concretes
         public InstructorSessionManager(IMapper mapper, IInstructorSessionDal instructorSessionDal)
         {
             _mapper = mapper;
-            _instructorSessionDal = _instructorSessionDal;
+            _instructorSessionDal = instructorSessionDal;
         }
         public async Task<CreatedInstructorSessionResponse> AddAsync(CreateInstructorSessionRequest createInstructorSessionRequest)
         {
