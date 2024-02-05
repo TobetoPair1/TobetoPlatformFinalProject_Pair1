@@ -68,7 +68,7 @@ public class AsyncContentManager : IAsyncContentService
 
 	public async Task<UpdatedAsyncContentResponse> UpdateAsync(UpdateAsyncContentRequest updateAsyncContentRequest)
     {
-		AsyncContent asyncContent = await _asyncContentDal.GetAsync(a => a.Id == updateAsyncContentRequest.Id);
+        AsyncContent asyncContent = await _asyncContentBusinessRules.CheckIfExistsById(updateAsyncContentRequest.Id);
 		_mapper.Map(updateAsyncContentRequest,asyncContent);
         var updatedAsyncContent = await _asyncContentDal.UpdateAsync(asyncContent);
         UpdatedAsyncContentResponse updatedAsyncContentResponse = _mapper.Map<UpdatedAsyncContentResponse>(updatedAsyncContent);

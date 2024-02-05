@@ -27,7 +27,6 @@ public class AuthsController : ControllerBase
     [HttpPost("register")]
     public async Task<IActionResult> Register(RegisterRequest registerRequest)
     {
-
         var registeredUser = await _authService.Register(registerRequest);
         if (registeredUser==null)
         {
@@ -36,7 +35,5 @@ public class AuthsController : ControllerBase
 		}
 		var result = _authService.CreateAccessToken(registeredUser);
 		return Ok(result);
-
 	}
 }
-

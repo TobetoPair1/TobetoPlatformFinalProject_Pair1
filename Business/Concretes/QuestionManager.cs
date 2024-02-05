@@ -4,6 +4,7 @@ using Business.Dtos.Requests.ExamQuestion;
 using Business.Dtos.Requests.Question;
 using Business.Dtos.Responses.ExamQuestion;
 using Business.Dtos.Responses.Question;
+using Business.Rules;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
 using Entities.Concretes;
@@ -15,12 +16,14 @@ public class QuestionManager: IQuestionService
     IMapper _mapper;
     IQuestionDal _questionDal;
     IExamQuestionService _examQuestionService;
+    QuestionBusinessRules _questionBusinessRules;
 
-    public QuestionManager(IMapper mapper, IQuestionDal questionDal, IExamQuestionService examQuestionService)
+    public QuestionManager(IMapper mapper, IQuestionDal questionDal, IExamQuestionService examQuestionService, QuestionBusinessRules questionBusinessRules)
     {
         _mapper = mapper;
         _questionDal = questionDal;
         _examQuestionService = examQuestionService;
+        _questionBusinessRules = questionBusinessRules;
     }
 
     public async Task<CreatedQuestionResponse> AddAsync(CreateQuestionRequest createQuestionRequest)

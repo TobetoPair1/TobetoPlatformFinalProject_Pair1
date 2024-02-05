@@ -2,20 +2,18 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace DataAccess.EntityConfigurations
-{
-	public class UserExamConfiguration : IEntityTypeConfiguration<UserExam>
-	{
-		public void Configure(EntityTypeBuilder<UserExam> builder)
-		{
-			builder.Ignore(ue=>ue.Id);
-			builder.ToTable("UserExams").HasKey(ue => new { ue.ExamId,ue.UserId});
-			
-			builder.Property(ue => ue.UserId).HasColumnName("UserId").IsRequired();
-			builder.Property(ue => ue.ExamId).HasColumnName("ExamId").IsRequired();
+namespace DataAccess.EntityConfigurations;
 
-			builder.HasQueryFilter(u => !u.DeletedDate.HasValue);
-						
-		}
+public class UserExamConfiguration : IEntityTypeConfiguration<UserExam>
+{
+	public void Configure(EntityTypeBuilder<UserExam> builder)
+	{
+		builder.Ignore(ue=>ue.Id);
+		builder.ToTable("UserExams").HasKey(ue => new { ue.ExamId,ue.UserId});
+		
+		builder.Property(ue => ue.UserId).HasColumnName("UserId").IsRequired();
+		builder.Property(ue => ue.ExamId).HasColumnName("ExamId").IsRequired();
+
+		builder.HasQueryFilter(u => !u.DeletedDate.HasValue);					
 	}
 }

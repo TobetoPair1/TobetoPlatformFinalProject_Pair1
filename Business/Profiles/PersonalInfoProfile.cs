@@ -34,7 +34,5 @@ public class PersonalInfoProfile : Profile
             .ReverseMap();
 
         CreateMap<PersonalInfo, GetListPersonalInfoResponse>().ReverseMap();
-
-
     }
 }

@@ -7,7 +7,6 @@ using Core.DataAccess.Paging;
 using Entities.Concretes;
 
 namespace Business.Profiles;
-
 public class UserProfile : Profile
 {
     public UserProfile()
@@ -35,11 +34,9 @@ public class UserProfile : Profile
         CreateMap<GetUserResponse, LoginResponse>().ReverseMap();
         CreateMap<CreatedUserResponse, RegisterResponse>();
 
-
         CreateMap<User, RegisterRequest>()
         .ReverseMap()
         .ForMember(destinationMember: u => u.PasswordHash, memberOptions: opt => opt.MapFrom(r => r._passwordHash))
         .ForMember(destinationMember: u => u.PasswordSalt, memberOptions: opt => opt.MapFrom(r => r._passwordSalt));
-
     }
 }

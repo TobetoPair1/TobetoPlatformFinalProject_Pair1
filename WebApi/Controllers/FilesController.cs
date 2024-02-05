@@ -30,7 +30,7 @@ public class FilesController : ControllerBase
 		return Ok(result);
 	}
 
-	[HttpGet("GetAll")]
+	[HttpGet("getall")]
 	public async Task<IActionResult> GetList([FromQuery] PageRequest pageRequest)
 	{
 		var result = await _fileService.GetListAsync(pageRequest);
@@ -43,7 +43,7 @@ public class FilesController : ControllerBase
 		return Ok(result);
 	}
 
-	[HttpGet("Get")]
+	[HttpGet("get")]
 	public async Task<IActionResult> Get([FromQuery] GetFileRequest getFileRequest)
 	{
 		var result = await _fileService.GetByIdAsync(getFileRequest);
@@ -64,4 +64,3 @@ public class FilesController : ControllerBase
 		return Ok(result);
 	}
 }
-

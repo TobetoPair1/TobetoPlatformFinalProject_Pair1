@@ -23,14 +23,14 @@ public class UserSurveysController : ControllerBase
         return Ok(result);
     }
 
-    [HttpGet("GetAll")]
+    [HttpGet("getall")]
     public async Task<IActionResult> GetList([FromQuery] PageRequest pageRequest)
     {
         var result = await _userSurveyService.GetListAsync(pageRequest);
         return Ok(result);
     }
 
-    [HttpGet("Get")]
+    [HttpGet("get")]
     public async Task<IActionResult> Get([FromQuery] GetUserSurveyRequest getUserSurveyRequest)
     {
         var result = await _userSurveyService.GetByIdAsync(getUserSurveyRequest);

@@ -1,4 +1,5 @@
 ﻿using Core.Entities;
+
 namespace Entities.Concretes;
 
 public class Favourite : Entity<Guid>
@@ -7,4 +8,3 @@ public class Favourite : Entity<Guid>
     public int Count { get; set; }
     public Course Course { get; set; }
 }
-

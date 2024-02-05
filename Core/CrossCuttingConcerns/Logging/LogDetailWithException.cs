@@ -1,7 +1,5 @@
-﻿namespace Core.CrossCuttingConcerns.Logging
+﻿namespace Core.CrossCuttingConcerns.Logging;
+public class LogDetailWithException : LogDetail
 {
-    public class LogDetailWithException : LogDetail
-    {
-        public string ExceptionMessage { get; set; }
-    }
+    public string ExceptionMessage { get; set; }
 }

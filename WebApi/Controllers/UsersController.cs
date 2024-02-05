@@ -18,32 +18,32 @@ public class UsersController : ControllerBase
         _userService = userService;
     }
 
-    [HttpPost("Add")]
+    [HttpPost("add")]
     public async Task<IActionResult> Add([FromBody] CreateUserRequest createUserRequest)
     {
         var result = await _userService.AddAsync(createUserRequest);
         return Ok(result);
     }
 
-    [HttpGet("GetAll")]
+    [HttpGet("getall")]
     public async Task<IActionResult> GetList([FromQuery] PageRequest pageRequest)
     {
         var result = await _userService.GetListAsync(pageRequest);
         return Ok(result);
     }
-    [HttpGet("Get")]
+    [HttpGet("get")]
     public async Task<IActionResult> Get([FromQuery] GetUserRequest getUserRequest)
     {
         var result = await _userService.GetAsync(getUserRequest);
         return Ok(result);
     }
-    [HttpGet("GetByMail")]
+    [HttpGet("getbymail")]
     public async Task<IActionResult> GetByMail([FromQuery] string mail)
     {
         var result = await _userService.GetByMailUserAsync(mail);
         return Ok(result);
     }
-    [HttpGet("Activate")]
+    [HttpGet("activate")]
 	public async Task<IActionResult> Activate([FromQuery] string email)
 	{
 		var result = await _userService.ActivateUserAsync(email);

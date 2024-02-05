@@ -23,14 +23,14 @@ public class UserExamsController : ControllerBase
         return Ok(result);
     }
 
-    [HttpGet("GetAll")]
+    [HttpGet("getall")]
     public async Task<IActionResult> GetList([FromQuery] PageRequest pageRequest)
     {
         var result = await _userExamService.GetListAsync(pageRequest);
         return Ok(result);
     }
 
-    [HttpGet("Get")]
+    [HttpGet("get")]
     public async Task<IActionResult> Get([FromQuery] GetUserExamRequest getUserExamRequest)
     {
         var result = await _userExamService.GetByIdAsync(getUserExamRequest);

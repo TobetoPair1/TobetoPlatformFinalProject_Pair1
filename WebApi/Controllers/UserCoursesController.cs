@@ -23,13 +23,13 @@ public class UserCoursesController : ControllerBase
         return Ok(result);
     }
 
-    [HttpGet("GetAll")]
+    [HttpGet("getall")]
     public async Task<IActionResult> GetList([FromQuery] PageRequest pageRequest)
     {
         var result = await _userCourseService.GetListAsync(pageRequest);
         return Ok(result);
     }
-    [HttpGet("Get")]
+    [HttpGet("get")]
     public async Task<IActionResult> Get([FromQuery] GetUserCourseRequest cetUserCourseRequest)
     {
         var result = await _userCourseService.GetByIdAsync(cetUserCourseRequest);

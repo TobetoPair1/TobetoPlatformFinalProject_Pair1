@@ -1,9 +1,7 @@
 ﻿using Core.DataAccess.Repositories;
 using Entities.Concretes;
 
-namespace DataAccess.Abstracts
+namespace DataAccess.Abstracts;
+public interface IForeignLanguageDal : IAsyncRepository<ForeignLanguage, Guid>, IRepository<ForeignLanguage, Guid>
 {
-	public interface IForeignLanguageDal : IAsyncRepository<ForeignLanguage, Guid>, IRepository<ForeignLanguage, Guid>
-	{
-	}
 }

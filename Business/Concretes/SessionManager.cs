@@ -68,7 +68,7 @@ public class SessionManager : ISessionService
 
     public async Task<UpdatedSessionResponse> UpdateAsync(UpdateSessionRequest updateSessionRequest)
     {
-        Session session = await _sessionDal.GetAsync(s => s.Id == updateSessionRequest.Id);
+        Session session = await _sessionBusinessRules.CheckIfExistsById(updateSessionRequest.Id);
         _mapper.Map(updateSessionRequest, session);
         var updatedSession = await _sessionDal.UpdateAsync(session);
         UpdatedSessionResponse updatedSessionResponse = _mapper.Map<UpdatedSessionResponse>(updatedSession);

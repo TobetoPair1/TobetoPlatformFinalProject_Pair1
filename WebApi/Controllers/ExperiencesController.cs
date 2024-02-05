@@ -23,7 +23,7 @@ public class ExperiencesController : ControllerBase
         return Ok(result);
     }
 
-    [HttpGet("GetAll")]
+    [HttpGet("getall")]
     public async Task<IActionResult> GetList([FromQuery] PageRequest pageRequest)
     {
         var result = await _experienceService.GetListAsync(pageRequest);
@@ -37,7 +37,7 @@ public class ExperiencesController : ControllerBase
         return Ok(result);
     }
 
-    [HttpGet("Get")]
+    [HttpGet("get")]
     public async Task<IActionResult> Get([FromQuery] GetExperienceRequest getExperienceRequest)
     {
         var result = await _experienceService.GetByIdAsync(getExperienceRequest);
@@ -57,5 +57,4 @@ public class ExperiencesController : ControllerBase
         var result = await _experienceService.UpdateAsync(updateExperienceRequest);
         return Ok(result);
     }
-
 }

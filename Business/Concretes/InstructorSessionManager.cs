@@ -3,6 +3,7 @@ using Business.Abstracts;
 using Business.Dtos.Requests.InstructorSession;
 using Business.Dtos.Responses.InstructorSession;
 using Business.Dtos.Responses.Session;
+using Business.Rules;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
 using Entities.Concretes.CrossTables;
@@ -14,12 +15,15 @@ namespace Business.Concretes
     {
         IMapper _mapper;
         IInstructorSessionDal _instructorSessionDal;
+        InstructorSessionBusinessRules _instructorSessionBusinessRules;
 
-        public InstructorSessionManager(IMapper mapper, IInstructorSessionDal instructorSessionDal)
+        public InstructorSessionManager(IMapper mapper, IInstructorSessionDal instructorSessionDal, InstructorSessionBusinessRules instructorSessionBusinessRules)
         {
             _mapper = mapper;
             _instructorSessionDal = instructorSessionDal;
+            _instructorSessionBusinessRules = instructorSessionBusinessRules;
         }
+
         public async Task<CreatedInstructorSessionResponse> AddAsync(CreateInstructorSessionRequest createInstructorSessionRequest)
         {
             InstructorSession instructorSession = _mapper.Map<InstructorSession>(createInstructorSessionRequest);

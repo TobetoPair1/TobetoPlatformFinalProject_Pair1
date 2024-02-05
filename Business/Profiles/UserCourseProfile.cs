@@ -40,6 +40,5 @@ public class UserCourseProfile : Profile
 			.ReverseMap();
 
 		CreateMap<Paginate<UserCourse>, Paginate<GetListCourseResponse>>().ReverseMap();
-
 	}
 }

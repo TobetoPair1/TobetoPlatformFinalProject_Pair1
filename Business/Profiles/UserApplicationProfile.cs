@@ -25,6 +25,5 @@ public class UserApplicationProfile : Profile
 
         CreateMap<UserApplication, GetListApplicationResponse>().IncludeMembers(ua=>ua.Application).ForMember(destinationMember: lua => lua.Id, memberOptions: opt => opt.MapFrom(ua => ua.ApplicationId)).ReverseMap();
         CreateMap<Paginate<UserApplication>, Paginate<GetListApplicationResponse>>().ReverseMap();
-
     }
 }

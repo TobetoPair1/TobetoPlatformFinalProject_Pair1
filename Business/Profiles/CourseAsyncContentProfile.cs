@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Business.Dtos.Requests.AsyncContent;
 using Business.Dtos.Requests.CourseAsyncContent;
 using Business.Dtos.Responses.AsyncContent;
 using Business.Dtos.Responses.CourseAsyncContent;
@@ -33,4 +32,3 @@ public class CourseAsyncContentProfile : Profile
 
 	}
 }
-

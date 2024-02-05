@@ -1,9 +1,7 @@
-﻿namespace Core.CrossCuttingConcerns.Logging.Log4Net.Loggers
+﻿namespace Core.CrossCuttingConcerns.Logging.Log4Net.Loggers;
+public class DatabaseLogger:LoggerServiceBase
 {
-    public class DatabaseLogger:LoggerServiceBase
+    public DatabaseLogger() : base("DatabaseLogger")
     {
-        public DatabaseLogger() : base("DatabaseLogger")
-        {
-        }
     }
 }
