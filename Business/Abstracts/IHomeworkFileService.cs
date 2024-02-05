@@ -1,11 +1,11 @@
-﻿using Business.Dtos.Requests.HomeworkFile;
+using Business.Dtos.Requests.HomeworkFile;
 using Business.Dtos.Responses.File;
 using Business.Dtos.Responses.HomeworkFile;
 using Core.DataAccess.Paging;
 
 namespace Business.Abstracts;
 
-public interface IHomeworFileService
+public interface IHomeworkFileService
 {
     Task<CreatedHomeworkFileResponse> AddAsync(CreateHomeworkFileRequest createHomeworkFileRequest);
     Task<IPaginate<GetListHomeworkFileResponse>> GetListAsync(PageRequest pageRequest);

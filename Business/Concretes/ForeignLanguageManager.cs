@@ -2,6 +2,7 @@
 using Business.Abstracts;
 using Business.Dtos.Requests.ForeignLanguage;
 using Business.Dtos.Responses.ForeignLanguage;
+using Business.Rules;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
 using Entities.Concretes;
@@ -12,11 +13,14 @@ public class ForeignLanguageManager : IForeignLanguageService
 {
 	IForeignLanguageDal _foreignLanguageDal;
 	IMapper _mapper;
+	ForeignLanguageBusinessRules _foreignLanguageBusinessRules;
 
-	public ForeignLanguageManager(IForeignLanguageDal foreignLanguageDal, IMapper mapper)
+	public ForeignLanguageManager(IForeignLanguageDal foreignLanguageDal, IMapper mapper,
+		ForeignLanguageBusinessRules foreignLanguageBusinessRules)
 	{
 		_foreignLanguageDal = foreignLanguageDal;
 		_mapper = mapper;
+		_foreignLanguageBusinessRules = foreignLanguageBusinessRules;
 	}
 
 	public async Task<CreatedForeignLanguageResponse> AddAsync(CreateForeignLanguageRequest createForeignLanguageRequest)
@@ -29,11 +33,12 @@ public class ForeignLanguageManager : IForeignLanguageService
 
 	public async Task<DeletedForeignLanguageResponse> DeleteAsync(DeleteForeignLanguageRequest deleteForeignLanguageRequest)
 	{
-		ForeignLanguage foreignLanguage = await _foreignLanguageDal.GetAsync(f => f.Id == deleteForeignLanguageRequest.Id);
+		ForeignLanguage foreignLanguage = await _foreignLanguageBusinessRules.CheckIfExistsById(deleteForeignLanguageRequest.Id);
 		var deletedForeignLanguage = await _foreignLanguageDal.DeleteAsync(foreignLanguage);
 		DeletedForeignLanguageResponse deletedForeignLanguageResponse = _mapper.Map<DeletedForeignLanguageResponse>(deletedForeignLanguage);
-		return deletedForeignLanguageResponse;
+		return deletedForeignLanguageResponse; 
 	}
+
 
 	public async Task<GetForeignLanguageResponse> GetByIdAsync(GetForeignLanguageRequest getForeignLanguageRequest)
 	{

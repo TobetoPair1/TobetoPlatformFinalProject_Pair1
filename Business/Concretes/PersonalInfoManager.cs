@@ -2,6 +2,7 @@
 using Business.Abstracts;
 using Business.Dtos.Requests.PersonalInfo;
 using Business.Dtos.Responses.PersonalInfo;
+using Business.Rules;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
 using Entities.Concretes;
@@ -13,11 +14,13 @@ public class PersonalInfoManager : IPersonalInfoService
 {
     IMapper _mapper;
     IPersonalInfoDal _personalInfoDal;
+    PersonalInfoBusinessRules _personalInfoBusinessRules;
 
-    public PersonalInfoManager(IMapper mapper, IPersonalInfoDal personalInfoDal)
+    public PersonalInfoManager(IMapper mapper, IPersonalInfoDal personalInfoDal, PersonalInfoBusinessRules personalInfoBusinessRules)
     {
         _mapper = mapper;
         _personalInfoDal = personalInfoDal;
+        _personalInfoBusinessRules = personalInfoBusinessRules;
     }
 
     public async Task<CreatedPersonalInfoResponse> AddAsync(CreatePersonalInfoRequest createPersonalInfoRequest)

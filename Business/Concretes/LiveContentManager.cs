@@ -5,6 +5,7 @@ using Business.Dtos.Requests.Like;
 using Business.Dtos.Requests.LiveContent;
 using Business.Dtos.Responses.CourseLiveContent;
 using Business.Dtos.Responses.LiveContent;
+using Business.Rules;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
 using Entities.Concretes;
@@ -17,15 +18,18 @@ public class LiveContentManager : ILiveContentService
     ILiveContentDal _liveContentDal;
     ICourseLiveContentService _courseLiveContentService;
 	ILikeService _likeService;
-	public LiveContentManager(IMapper mapper, ILiveContentDal liveContentDal, ICourseLiveContentService courseLiveContentService, ILikeService likeService)
-	{
-		_mapper = mapper;
-		_liveContentDal = liveContentDal;
-		_courseLiveContentService = courseLiveContentService;
-		_likeService = likeService;
-	}
+    LiveContentBusinessRules _liveContentBusinessRules;
 
-	public async Task<CreatedLiveContentResponse> AddAsync(CreateLiveContentRequest createLiveContentRequest)
+    public LiveContentManager(IMapper mapper, ILiveContentDal liveContentDal, ICourseLiveContentService courseLiveContentService, ILikeService likeService, LiveContentBusinessRules liveContentBusinessRules)
+    {
+        _mapper = mapper;
+        _liveContentDal = liveContentDal;
+        _courseLiveContentService = courseLiveContentService;
+        _likeService = likeService;
+        _liveContentBusinessRules = liveContentBusinessRules;
+    }
+
+    public async Task<CreatedLiveContentResponse> AddAsync(CreateLiveContentRequest createLiveContentRequest)
     {
         LiveContent liveContent = _mapper.Map<LiveContent>(createLiveContentRequest);
 		liveContent.LikeId = (await _likeService.AddAsync(new CreateLikeRequest())).Id;

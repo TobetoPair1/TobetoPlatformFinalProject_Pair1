@@ -2,6 +2,7 @@
 using Business.Abstracts;
 using Business.Dtos.Requests.Instructor;
 using Business.Dtos.Responses.Instructor;
+using Business.Rules;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
 using Entities.Concretes;
@@ -12,11 +13,13 @@ public class InstructorManager : IInstructorService
 {
     IMapper _mapper;
     IInstructorDal _instructorDal;
+    InstructorBusinessRules _instructorBusinessRules;
 
-    public InstructorManager(IMapper mapper, IInstructorDal instructorDal)
+    public InstructorManager(IMapper mapper, IInstructorDal instructorDal, InstructorBusinessRules instructorBusinessRules)
     {
         _mapper = mapper;
         _instructorDal = instructorDal;
+        _instructorBusinessRules = instructorBusinessRules;
     }
 
     public async Task<CreatedInstructorResponse> AddAsync(CreateInstructorRequest createInstructorRequest)
