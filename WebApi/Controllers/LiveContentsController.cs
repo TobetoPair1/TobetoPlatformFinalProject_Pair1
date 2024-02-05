@@ -26,14 +26,14 @@ namespace WebApi.Controllers
             return Ok(result);
         }
 
-        [HttpGet("GetAll")]
+        [HttpGet("getall")]
         public async Task<IActionResult> GetAll([FromQuery] PageRequest pageRequest)
         {
             var result = await _liveContentService.GetListAsync(pageRequest);
             return Ok(result);
         }
 
-        [HttpGet("Get")]
+        [HttpGet("get")]
         public async Task<IActionResult> Get([FromQuery] GetLiveContentRequest getLiveContentRequest)
         {
             var result = await _liveContentService.GetByIdAsync(getLiveContentRequest);

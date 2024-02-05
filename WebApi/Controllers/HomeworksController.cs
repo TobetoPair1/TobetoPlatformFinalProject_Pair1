@@ -20,14 +20,14 @@ public class HomeworksController : ControllerBase
         var result = await _homeworkService.AddAsync(homeworkRequest);
         return Ok(result);
     }
-    [HttpGet("Get")]
+    [HttpGet("get")]
     public async Task<IActionResult> Get([FromQuery] GetHomeworkRequest getHomeworkRequest)
     {
         var result = await _homeworkService.GetByIdAsync(getHomeworkRequest);
         return Ok(result);
     }
 
-    [HttpGet("GetAll")]
+    [HttpGet("getall")]
     public async Task<IActionResult> GetAll([FromQuery] PageRequest pageRequest)
     {
         var result = await _homeworkService.GetListAsync(pageRequest);
