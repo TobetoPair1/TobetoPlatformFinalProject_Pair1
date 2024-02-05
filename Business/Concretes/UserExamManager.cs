@@ -4,6 +4,7 @@ using Business.Dtos.Requests.UserExam;
 using Business.Dtos.Responses.Course;
 using Business.Dtos.Responses.Exam;
 using Business.Dtos.Responses.UserExam;
+using Business.Rules;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
 using DataAccess.Concretes.EntityFramework;
@@ -16,11 +17,13 @@ public class UserExamManager : IUserExamService
 {
     IMapper _mapper;
     IUserExamDal _userExamDal;
+    UserExamRules _userExamRules;
 
-    public UserExamManager(IMapper mapper, IUserExamDal userExamDal)
+    public UserExamManager(IMapper mapper, IUserExamDal userExamDal, UserExamRules userExamRules)
     {
         _mapper = mapper;
         _userExamDal = userExamDal;
+        _userExamRules = userExamRules;
     }
 
     public async Task<CreatedUserExamResponse> AddAsync(CreateUserExamRequest createUserExamRequest)
@@ -33,7 +36,7 @@ public class UserExamManager : IUserExamService
 
     public async Task<DeletedUserExamResponse> DeleteAsync(DeleteUserExamRequest deleteUserExamRequest)
     {
-        UserExam userExam = await _userExamDal.GetAsync(ue => ue.UserId == deleteUserExamRequest.UserId && ue.ExamId == deleteUserExamRequest.ExamId);
+        UserExam userExam = await _userExamRules.CheckIfExistsById(deleteUserExamRequest.UserId, deleteUserExamRequest.ExamId);
         var deletedUserExam = await _userExamDal.DeleteAsync(userExam, true);
         DeletedUserExamResponse deletedUserExamResponse = _mapper.Map<DeletedUserExamResponse>(deletedUserExam);
         return deletedUserExamResponse;
