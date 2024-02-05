@@ -54,10 +54,12 @@ public class HomeworkFileManager : IHomeworkFileService
 		return files;
 	}
 
-	public async Task<UpdatedHomeworkFileResponse> UpdateAsync(UpdateHomeworkFileRequest updateHomeworkFileRequest)
+    public async Task<UpdatedHomeworkFileResponse> UpdateAsync(UpdateHomeworkFileRequest updateHomeworkFileRequest)
     {
-        HomeworkFile homeworkFile = _mapper.Map<HomeworkFile>(updateHomeworkFileRequest);
-        HomeworkFile updatedHomeworkFile = await _homeworkFileDal.UpdateAsync(homeworkFile);
-        return _mapper.Map<UpdatedHomeworkFileResponse>(updatedHomeworkFile);
+        HomeworkFile homeworkFile = await _homeworkFileBusinessRules.CheckIfExistsWithForeignKey(updateHomeworkFileRequest.HomeworkId, updateHomeworkFileRequest.FileId);
+        var updatedHomeworkFile = await _homeworkFileDal.UpdateAsync(homeworkFile);
+        UpdatedHomeworkFileResponse updatedHomeworkFileResponse = _mapper.Map<UpdatedHomeworkFileResponse>(updatedHomeworkFile);
+        return updatedHomeworkFileResponse;
     }
+
 }

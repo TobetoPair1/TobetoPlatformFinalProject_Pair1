@@ -56,11 +56,12 @@ public class FavouriteManager : IFavouriteService
         return _mapper.Map<Paginate<GetListFavouriteResponse>>(favs);
     }
 
-    public async Task<UpdatedFavouriteResponse> UpdateAsync(UpdateFavouriteRequest updateFavouriteRequest)
-    {
-        Favourite fav = await _favouriteDal.GetAsync(f => f.Id == updateFavouriteRequest.Id);
-        _mapper.Map(updateFavouriteRequest, fav);
-        Favourite updatedFav = await _favouriteDal.UpdateAsync(fav);
-        return _mapper.Map<UpdatedFavouriteResponse>(updatedFav);
-    }
+	public async Task<UpdatedFavouriteResponse> UpdateAsync(UpdateFavouriteRequest updateFavouriteRequest)
+	{
+		Favourite favourite = await _favouriteBusinessRules.CheckIfExistsById(updateFavouriteRequest.Id);
+		var updatedFavourite = await _favouriteDal.UpdateAsync(favourite);
+		UpdatedFavouriteResponse updatedFavouriteResponse = _mapper.Map<UpdatedFavouriteResponse>(updatedFavourite);
+		return updatedFavouriteResponse; 
+	}
+
 }

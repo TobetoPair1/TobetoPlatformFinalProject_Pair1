@@ -61,14 +61,13 @@ public class ExperienceManager : IExperienceService
         var result = await _experienceDal.GetListAsync(e => e.UserId == userId, index: pageRequest.PageIndex, size: pageRequest.PageSize);
         return _mapper.Map<Paginate<GetListExperienceResponse>>(result);
     }
-
+    
     public async Task<UpdatedExperienceResponse> UpdateAsync(UpdateExperienceRequest updateExperienceRequest)
     {
-        Experience experience = await _experienceDal.GetAsync(e => e.Id == updateExperienceRequest.Id);
-        _mapper.Map(updateExperienceRequest, experience);
-        var updatedExperience= await _experienceDal.UpdateAsync(experience);
-        UpdatedExperienceResponse updatedExperienceResponse=_mapper.Map<UpdatedExperienceResponse>(updatedExperience);
-        return updatedExperienceResponse;
-
+        Experience experience = await _experienceBusinessRules.CheckIfExistsById(updateExperienceRequest.Id);
+        var updatedExperience = await _experienceDal.UpdateAsync(experience);
+        UpdatedExperienceResponse updatedExperienceResponse = _mapper.Map<UpdatedExperienceResponse>(updatedExperience);
+        return updatedExperienceResponse; 
     }
+
 }
