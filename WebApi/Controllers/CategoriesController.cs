@@ -28,10 +28,10 @@ public class CategoriesController : ControllerBase
         return Ok(await _categoryService.GetListAsync(pageRequest));
     }
 
-    [HttpGet("get")]
-    public async Task<IActionResult> Get(GetCategoryRequest getCategoryRequest)
+    [HttpGet("getbyid")]
+    public async Task<IActionResult> Get(Guid id)
     {
-        return Ok(await _categoryService.GetByIdAsync(getCategoryRequest));
+        return Ok(await _categoryService.GetByIdAsync(id));
     }
 
     [HttpDelete]

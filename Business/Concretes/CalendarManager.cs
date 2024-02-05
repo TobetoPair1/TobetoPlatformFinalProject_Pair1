@@ -70,6 +70,8 @@ public class CalendarManager : ICalendarService
 
     public async Task<UpdatedCalendarResponse> UpdateAsync(UpdateCalendarRequest updateCalendarRequest)
     {
+        await _calendarBusinessRules.CheckIfInstructorExists(updateCalendarRequest.InstructorId);
+        await _calendarBusinessRules.CheckIfCourseExists(updateCalendarRequest.CourseId);
         Calendar calendar = await _calendarBusinessRules.CheckIfExistsById(updateCalendarRequest.Id);
         _mapper.Map(updateCalendarRequest, calendar);
         var updatedCal = await _calendarDal.UpdateAsync(calendar);

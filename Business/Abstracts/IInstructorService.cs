@@ -10,5 +10,5 @@ public interface IInstructorService
     Task<IPaginate<GetListInstructorResponse>> GetListAsync(PageRequest pageRequest);
     Task<DeletedInstructorResponse> DeleteAsync(DeleteInstructorRequest deleteInstructorRequest);
     Task<UpdatedInstructorResponse> UpdateAsync(UpdateInstructorRequest updateInstructorRequest);
-    Task<GetInstructorResponse> GetByIdAsync(GetInstructorRequest getInstructorRequest);
+    Task<GetInstructorResponse> GetByIdAsync(Guid id);
 }

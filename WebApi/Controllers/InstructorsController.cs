@@ -28,10 +28,10 @@ public class InstructorsController : ControllerBase
         var result = await _instructorService.GetListAsync(pageRequest);
         return Ok(result);
     }
-    [HttpGet("get")]
-    public async Task<IActionResult> Get([FromQuery] GetInstructorRequest getInstructorRequest)
+    [HttpGet("getbyid")]
+    public async Task<IActionResult> Get([FromQuery] Guid id)
     {
-        var result = await _instructorService.GetByIdAsync(getInstructorRequest);
+        var result = await _instructorService.GetByIdAsync(id);
         return Ok(result);
     }
     [HttpDelete]
