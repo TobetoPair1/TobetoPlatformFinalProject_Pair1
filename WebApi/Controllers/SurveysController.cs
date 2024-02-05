@@ -21,28 +21,28 @@ public class SurveysController : ControllerBase
         var result = await _surveyService.AddAsync(surveyRequest);
         return Ok(result);
     }
-    [HttpGet("Get")]
+    [HttpGet("get")]
     public async Task<IActionResult> Get([FromQuery] GetSurveyRequest getSurveyRequest)
     {
         var result = await _surveyService.GetByIdAsync(getSurveyRequest);
         return Ok(result);
     }
 
-    [HttpGet("GetAll")]
+    [HttpGet("getall")]
     public async Task<IActionResult> GetAll([FromQuery] PageRequest pageRequest)
     {
         var result = await _surveyService.GetListAsync(pageRequest);
         return Ok(result);
     }
 
-    [HttpGet("GetByUserId")]
+    [HttpGet("getbyuserid")]
     public async Task<IActionResult> GetAll([FromQuery] PageRequest pageRequest, Guid userId)
     {
         var result = await _surveyService.GetByUserId(userId, pageRequest);
         return Ok(result);
     }
 
-    [HttpPost("AssignUser")]
+    [HttpPost("assignuser")]
     public async Task<IActionResult> AssignLike([FromBody] CreateUserSurveyRequest createUserSurveyRequest)
     {
         var result = await _surveyService.AssignSurveyAsync(createUserSurveyRequest);
