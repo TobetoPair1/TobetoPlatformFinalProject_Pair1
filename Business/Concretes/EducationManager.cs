@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Business.Abstracts;
+using Business.Dtos.Requests.Course;
 using Business.Dtos.Requests.Education;
 using Business.Dtos.Responses.Education;
 using Business.Rules;
@@ -56,6 +57,7 @@ public class EducationManager : IEducationService
 
     public async Task<UpdatedEducationResponse> UpdateAsync(UpdateEducationRequest updateEducationRequest)
     {
+        await _educationBusinessRules.CheckUserIfExists(updateEducationRequest.UserId);
         Education education = await _educationBusinessRules.CheckIfExistsById(updateEducationRequest.Id);
         _mapper.Map(updateEducationRequest, education);
         var updatedEducation = await _educationDal.UpdateAsync(education);

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Business.Abstracts;
+using Business.Dtos.Requests.Answer;
 using Business.Dtos.Requests.File;
 using Business.Dtos.Requests.HomeworkFile;
 using Business.Dtos.Responses.File;
@@ -18,15 +19,15 @@ public class FileManager : IFileService
     IMapper _mapper;
     FileBusinessRules _fileBusinessRules;
 
-	public FileManager(IFileDal fileDal, IMapper mapper, IHomeworkFileService homeworFileService, FileBusinessRules fileBusinessRules)
-	{
-		_fileDal = fileDal;
-		_mapper = mapper;
-		_homeworkFileService = homeworFileService;
-		_fileBusinessRules = fileBusinessRules;
-	}
+    public FileManager(IFileDal fileDal, IMapper mapper, IHomeworkFileService homeworFileService, FileBusinessRules fileBusinessRules)
+    {
+        _fileDal = fileDal;
+        _mapper = mapper;
+        _homeworkFileService = homeworFileService;
+        _fileBusinessRules = fileBusinessRules;
+    }
 
-	public async Task<CreatedFileResponse> AddAsync(CreateFileRequest createFileRequest)
+    public async Task<CreatedFileResponse> AddAsync(CreateFileRequest createFileRequest)
     {
         File file = _mapper.Map<File>(createFileRequest);
         var createdFile = await _fileDal.AddAsync(file);
@@ -47,7 +48,6 @@ public class FileManager : IFileService
 		return deletedFileResponse; 
 	}
 
-
     public async Task<GetFileResponse> GetByIdAsync(GetFileRequest getFileRequest)
     {
         var result = await _fileDal.GetAsync(f => f.Id == getFileRequest.Id);
@@ -67,10 +67,11 @@ public class FileManager : IFileService
 
 	public async Task<UpdatedFileResponse> UpdateAsync(UpdateFileRequest updateFileRequest)
 	{
-		File file = await _fileBusinessRules.CheckIfExistsById(updateFileRequest.Id);
+        await _fileBusinessRules.CheckUserIfExists(updateFileRequest._UserId);
+        await _fileBusinessRules.CheckAssignmentIfExists(updateFileRequest.AssignmentId);
+        File file = await _fileBusinessRules.CheckIfExistsById(updateFileRequest.Id);
 		var updatedFile = await _fileDal.UpdateAsync(file);
 		UpdatedFileResponse updatedFileResponse = _mapper.Map<UpdatedFileResponse>(updatedFile);
 		return updatedFileResponse; 
 	}
-
 }

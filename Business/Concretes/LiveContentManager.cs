@@ -52,9 +52,9 @@ public class LiveContentManager : ILiveContentService
         return result;
     }
 
-    public async Task<GetLiveContentResponse> GetByIdAsync(GetLiveContentRequest getLiveContentRequest)
+    public async Task<GetLiveContentResponse> GetByIdAsync(Guid id)
     {
-        var result = await _liveContentDal.GetAsync(l => l.Id == getLiveContentRequest.Id);
+        var result = await _liveContentDal.GetAsync(l => l.Id == id);
         return _mapper.Map<GetLiveContentResponse>(result);
     }
 
@@ -71,6 +71,7 @@ public class LiveContentManager : ILiveContentService
 
     public async Task<UpdatedLiveContentResponse> UpdateAsync(UpdateLiveContentRequest updateLiveContentRequest)
     {
+        await _liveContentBusinessRules.CheckCategoryIfExists(updateLiveContentRequest.CategoryId);
         LiveContent liveContent = await _liveContentBusinessRules.CheckIfExistsById(updateLiveContentRequest.Id);
         _mapper.Map(updateLiveContentRequest, liveContent);
         var updatedLiveContent = await _liveContentDal.UpdateAsync(liveContent);

@@ -37,9 +37,9 @@ public class AssignmentManager : IAssignmentService
         return _mapper.Map<DeletedAssigmentResponse>(deletedAsg);
     }
 
-    public async Task<GetAssigmentResponse> GetByIdAsync(GetAssigmentRequest getAssigmentRequest)
+    public async Task<GetAssigmentResponse> GetByIdAsync(Guid id)
     {
-        Assignment asg = await _assigmentDal.GetAsync(a=>a.Id==getAssigmentRequest.Id, include: a=>a.Include(a=>a.Course));
+        Assignment asg = await _assigmentDal.GetAsync(a=>a.Id==id, include: a=>a.Include(a=>a.Course));
         return _mapper.Map<GetAssigmentResponse>(asg);
     }
 

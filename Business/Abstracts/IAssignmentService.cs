@@ -10,5 +10,5 @@ public interface IAssignmentService
     Task<IPaginate<GetListAssigmentResponse>> GetListAsync(PageRequest pageRequest);
     Task<DeletedAssigmentResponse> DeleteAsync(DeleteAssigmentRequest deleteAssigmentRequest);
     Task<UpdatedAssigmentResponse> UpdateAsync(UpdateAssigmentRequest updateAssigmentRequest);
-    Task<GetAssigmentResponse> GetByIdAsync(GetAssigmentRequest getAssigmentRequest);
+    Task<GetAssigmentResponse> GetByIdAsync(Guid id);
 }
