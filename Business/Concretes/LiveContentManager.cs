@@ -71,6 +71,7 @@ public class LiveContentManager : ILiveContentService
 
     public async Task<UpdatedLiveContentResponse> UpdateAsync(UpdateLiveContentRequest updateLiveContentRequest)
     {
+        await _liveContentBusinessRules.CheckCategoryIfExists(updateLiveContentRequest.CategoryId);
         LiveContent liveContent = await _liveContentBusinessRules.CheckIfExistsById(updateLiveContentRequest.Id);
         _mapper.Map(updateLiveContentRequest, liveContent);
         var updatedLiveContent = await _liveContentDal.UpdateAsync(liveContent);

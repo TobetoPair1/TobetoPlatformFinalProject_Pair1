@@ -18,13 +18,14 @@ public class SessionManager : ISessionService
     ISessionDal _sessionDal;
     IInstructorSessionService _instructorSessionService;
     SessionBusinessRules _sessionBusinessRules;
-
-    public SessionManager(IMapper mapper, ISessionDal sessionDal, IInstructorSessionService instructorSessionService, SessionBusinessRules sessionBusinessRules)
+    LiveContentBusinessRules _liveContentBusinessRules;
+    public SessionManager(IMapper mapper, ISessionDal sessionDal, IInstructorSessionService instructorSessionService, SessionBusinessRules sessionBusinessRules, LiveContentBusinessRules liveContentBusinessRules)
     {
         _mapper = mapper;
         _sessionDal = sessionDal;
         _instructorSessionService = instructorSessionService;
         _sessionBusinessRules = sessionBusinessRules;
+        _liveContentBusinessRules = liveContentBusinessRules;
     }
 
     public async Task<CreatedSessionResponse> AddAsync(CreateSessionRequest createSessionRequest)
@@ -68,6 +69,7 @@ public class SessionManager : ISessionService
 
     public async Task<UpdatedSessionResponse> UpdateAsync(UpdateSessionRequest updateSessionRequest)
     {
+        await _sessionBusinessRules.CheckLiveContentIfExists(updateSessionRequest.Id);
         Session session = await _sessionBusinessRules.CheckIfExistsById(updateSessionRequest.Id);
         _mapper.Map(updateSessionRequest, session);
         var updatedSession = await _sessionDal.UpdateAsync(session);

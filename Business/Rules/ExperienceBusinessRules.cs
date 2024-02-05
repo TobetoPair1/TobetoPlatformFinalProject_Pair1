@@ -1,5 +1,4 @@
 using Business.Abstracts;
-using Business.Dtos.Requests.User;
 using Business.Dtos.Responses.User;
 using Core.Business.Rules;
 using Core.CrossCuttingConcerns.Exceptions.Types;
@@ -8,7 +7,6 @@ using DataAccess.Abstracts;
 using Entities.Concretes;
 
 namespace Business.Rules;
-
 public class ExperienceBusinessRules : BaseBusinessRules<Experience>
 {
     IExperienceDal _experienceDal;

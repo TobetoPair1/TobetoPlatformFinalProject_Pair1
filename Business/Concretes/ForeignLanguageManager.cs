@@ -54,7 +54,8 @@ public class ForeignLanguageManager : IForeignLanguageService
 
 	public async Task<UpdatedForeignLanguageResponse> UpdateAsync(UpdateForeignLanguageRequest updateForeignLanguageRequest)
 	{
-		ForeignLanguage foreignLanguage = await _foreignLanguageBusinessRules.CheckIfExistsById(updateForeignLanguageRequest.Id);
+        await _foreignLanguageBusinessRules.CheckUserIfExists(updateForeignLanguageRequest.UserId);
+        ForeignLanguage foreignLanguage = await _foreignLanguageBusinessRules.CheckIfExistsById(updateForeignLanguageRequest.Id);
 		var updatedForeignLanguage = await _foreignLanguageDal.UpdateAsync(foreignLanguage);
 		UpdatedForeignLanguageResponse updatedForeignLanguageResponse = _mapper.Map<UpdatedForeignLanguageResponse>(updatedForeignLanguage);
 		return updatedForeignLanguageResponse; 
