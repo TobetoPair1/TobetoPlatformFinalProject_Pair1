@@ -1,11 +1,13 @@
 ﻿using AutoMapper;
 using Business.Abstracts;
+using Business.Dtos.Requests.Instructor;
 using Business.Dtos.Requests.InstructorSession;
 using Business.Dtos.Responses.InstructorSession;
 using Business.Dtos.Responses.Session;
 using Business.Rules;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
+using Entities.Concretes;
 using Entities.Concretes.CrossTables;
 using Microsoft.EntityFrameworkCore;
 
@@ -62,7 +64,8 @@ namespace Business.Concretes
 
         public async Task<UpdatedInstructorSessionResponse> UpdateAsync(UpdateInstructorSessionRequest updateInstructorSessionRequest)
         {
-            InstructorSession instructorSession = _mapper.Map<InstructorSession>(updateInstructorSessionRequest);
+            InstructorSession instructorSession = await _instructorSessionBusinessRules.CheckIfExistsById(updateInstructorSessionRequest.InstructorId);
+            _mapper.Map(updateInstructorSessionRequest, instructorSession);
             var updatedInstructorSession = await _instructorSessionDal.UpdateAsync(instructorSession);
             UpdatedInstructorSessionResponse updatedInstructorSessionResponse = _mapper.Map<UpdatedInstructorSessionResponse>(updatedInstructorSession);
             return updatedInstructorSessionResponse;

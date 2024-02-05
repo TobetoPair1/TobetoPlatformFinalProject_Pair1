@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Business.Abstracts;
 using Business.Dtos.Requests.CourseLiveContent;
+using Business.Dtos.Requests.File;
 using Business.Dtos.Requests.Like;
 using Business.Dtos.Requests.LiveContent;
 using Business.Dtos.Responses.CourseLiveContent;
@@ -70,7 +71,7 @@ public class LiveContentManager : ILiveContentService
 
     public async Task<UpdatedLiveContentResponse> UpdateAsync(UpdateLiveContentRequest updateLiveContentRequest)
     {
-        LiveContent liveContent = await _liveContentDal.GetAsync(lc => lc.Id == updateLiveContentRequest.Id);
+        LiveContent liveContent = await _liveContentBusinessRules.CheckIfExistsById(updateLiveContentRequest.Id);
         _mapper.Map(updateLiveContentRequest, liveContent);
         var updatedLiveContent = await _liveContentDal.UpdateAsync(liveContent);
         UpdatedLiveContentResponse updatedLiveContentResponse = _mapper.Map<UpdatedLiveContentResponse>(updatedLiveContent);
