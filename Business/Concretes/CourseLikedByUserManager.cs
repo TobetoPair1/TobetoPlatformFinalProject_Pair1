@@ -1,10 +1,9 @@
 
 using AutoMapper;
 using Business.Abstracts;
-using Business.Dtos.Requests.Announcement;
 using Business.Dtos.Requests.CourseLikedByUser;
 using Business.Dtos.Responses.CourseLikedByUser;
-using Core.DataAccess.Paging;
+using Business.Rules;
 using DataAccess.Abstracts;
 using Entities.Concretes.CrossTables;
 
@@ -15,7 +14,16 @@ public class CourseLikedByUserManager : ICourseLikedByUserService
 {
     IMapper _mapper;
     ICourseLikedByUserDal _courseLikedByUserDal;
-    public async Task<CreatedCourseLikedByUserResponse> AddAsync(CreateCourseLikedByUserRequest createCourseLikedByUserRequest)
+    CourseLikedByUserBusinessRules _courseLikedByUserBusinessRules;
+
+	public CourseLikedByUserManager(IMapper mapper, ICourseLikedByUserDal courseLikedByUserDal, CourseLikedByUserBusinessRules courseLikedByUserBusinessRules)
+	{
+		_mapper = mapper;
+		_courseLikedByUserDal = courseLikedByUserDal;
+		_courseLikedByUserBusinessRules = courseLikedByUserBusinessRules;
+	}
+
+	public async Task<CreatedCourseLikedByUserResponse> AddAsync(CreateCourseLikedByUserRequest createCourseLikedByUserRequest)
     {
         CourseLikedByUser courseLikedByUser = _mapper.Map<CourseLikedByUser>(createCourseLikedByUserRequest);
         var createdCourseLikedByUser = await _courseLikedByUserDal.AddAsync(courseLikedByUser);
@@ -26,7 +34,7 @@ public class CourseLikedByUserManager : ICourseLikedByUserService
     
     public async Task<DeletedCourseLikedByUserResponse> DeleteAsync(DeleteCourseLikedByUserRequest deleteLikedByUserRequest)
     {
-        CourseLikedByUser courseLikedByUser = await _courseLikedByUserDal.GetAsync(c => c.UserId == deleteLikedByUserRequest.UserId && c.CourseId == deleteLikedByUserRequest.CourseId);
+        CourseLikedByUser courseLikedByUser = await _courseLikedByUserBusinessRules.CheckIfExistsWithForeignKey(deleteLikedByUserRequest.UserId, deleteLikedByUserRequest.CourseId);
         var deletedCourseLikedByUser = await _courseLikedByUserDal.DeleteAsync(courseLikedByUser);
         DeletedCourseLikedByUserResponse deletedCourseLikedByUserResponse = _mapper.Map<DeletedCourseLikedByUserResponse>(deletedCourseLikedByUser);
         return deletedCourseLikedByUserResponse;

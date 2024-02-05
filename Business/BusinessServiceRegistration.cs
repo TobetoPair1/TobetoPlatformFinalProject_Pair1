@@ -48,8 +48,11 @@ public static class BusinessServiceRegistration
         services.AddScoped<IUserCourseService, UserCourseManager>();
         services.AddScoped<IUserExamService, UserExamManager>();
         services.AddScoped<IUserSurveyService, UserSurveyManager>();
+        services.AddScoped<IContentLikedByUserService, ContentLikedByUserManager>();
+        services.AddScoped<ICourseFavouritedByUserService, CourseFavouritedByUserManager>();
+        services.AddScoped<ICourseLikedByUserService, CourseLikedByUserManager>();
 
-        var assembly = Assembly.GetExecutingAssembly();
+		var assembly = Assembly.GetExecutingAssembly();
         services.AddAutoMapper(assembly);
         services.AddSubClassesOfType(assembly, typeof(BaseBusinessRules<Entity<Guid>>));
         return services;
