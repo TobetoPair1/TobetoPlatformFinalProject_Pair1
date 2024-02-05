@@ -63,12 +63,12 @@ public class SkillManager : ISkillService
         return _mapper.Map<Paginate<GetListSkillResponse>>(result);
     }
 
-    public async Task<UpdatedSkillResponse> UpdateAsync(UpdateSkillRequest UpdateSkillRequest)
+    public async Task<UpdatedSkillResponse> UpdateAsync(UpdateSkillRequest updateSkillRequest)
     {
-        Skill skill = await _skillDal.GetAsync(s => s.Id == UpdateSkillRequest.Id);
-        _mapper.Map(UpdateSkillRequest, skill);
+        Skill skill = await _skillBusinessRules.CheckIfExistsById(updateSkillRequest.Id);
+        _mapper.Map(updateSkillRequest, skill);
         var updatedUser = await _skillDal.UpdateAsync(skill);
-        UpdatedSkillResponse UpdatedSkillResponse = _mapper.Map<UpdatedSkillResponse>(updatedUser);
-        return UpdatedSkillResponse;
+        UpdatedSkillResponse updatedSkillResponse = _mapper.Map<UpdatedSkillResponse>(updatedUser);
+        return updatedSkillResponse;
     }
 }

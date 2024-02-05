@@ -1,13 +1,11 @@
 ﻿using AutoMapper;
 using Business.Abstracts;
 using Business.Dtos.Requests.UserExam;
-using Business.Dtos.Responses.Course;
 using Business.Dtos.Responses.Exam;
 using Business.Dtos.Responses.UserExam;
 using Business.Rules;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
-using DataAccess.Concretes.EntityFramework;
 using Entities.Concretes.CrossTables;
 using Microsoft.EntityFrameworkCore;
 
