@@ -35,7 +35,7 @@ public static class BusinessServiceRegistration
         services.AddScoped<IExamQuestionService, ExamQuestionManager>();
         services.AddScoped<IFavouriteService, FavouriteManager>();
         services.AddScoped<IFileService, FileManager>();
-        services.AddScoped<IHomeworFileService, HomeworkFileManager>();
+        services.AddScoped<IHomeworkFileService, HomeworkFileManager>();
         services.AddScoped<IHomeworkService, HomeworkManager>();
         services.AddScoped<ICourseAsyncContentService, CourseAsyncContentManager>();
         services.AddScoped<IInstructorService, InstructorManager>();

@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Business.Concretes;
 
-public class HomeworkFileManager : IHomeworFileService
+public class HomeworkFileManager : IHomeworkFileService
 {
     IHomeworkFileDal _homeworkFileDal;
     IMapper _mapper;

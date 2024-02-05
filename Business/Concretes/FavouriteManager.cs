@@ -2,6 +2,7 @@
 using Business.Abstracts;
 using Business.Dtos.Requests.Favourite;
 using Business.Dtos.Responses.Favourite;
+using Business.Rules;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
 using Entities.Concretes;
@@ -13,12 +14,14 @@ public class FavouriteManager : IFavouriteService
 {
     IFavouriteDal _favouriteDal;
     IMapper _mapper;
+    FavouriteBusinessRules _favouriteBusinessRules;
     
 
-	public FavouriteManager(IFavouriteDal favouriteDal, IMapper mapper)
+	public FavouriteManager(IFavouriteDal favouriteDal, IMapper mapper, FavouriteBusinessRules favouriteBusinessRules)
 	{
 		_favouriteDal = favouriteDal;
 		_mapper = mapper;
+		_favouriteBusinessRules = favouriteBusinessRules;
 		
 	}
 
@@ -32,11 +35,13 @@ public class FavouriteManager : IFavouriteService
 	
 
 	public async Task<DeletedFavouriteResponse> DeleteAsync(DeleteFavouriteRequest deleteFavouriteRequest)
-    {
-        Favourite fav = _mapper.Map<Favourite>(deleteFavouriteRequest);
-        Favourite deletedFav = await _favouriteDal.DeleteAsync(fav);
-        return _mapper.Map<DeletedFavouriteResponse>(deletedFav);
-    }
+	{
+		Favourite favourite = await _favouriteBusinessRules.CheckIfExistsById(deleteFavouriteRequest.Id);
+		var deletedFavourite = await _favouriteDal.DeleteAsync(favourite);
+		DeletedFavouriteResponse deletedFavouriteResponse = _mapper.Map<DeletedFavouriteResponse>(deletedFavourite);
+		return deletedFavouriteResponse; 
+	}
+
 
     public async Task<GetFavouriteResponse> GetByIdAsync(GetFavouriteRequest getFavouriteRequest)
     {
