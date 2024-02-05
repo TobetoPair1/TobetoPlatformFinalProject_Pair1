@@ -45,6 +45,7 @@ public class AssignmentManager : IAssignmentService
 
     public async Task<UpdatedAssigmentResponse> UpdateAsync(UpdateAssigmentRequest updateAssigmentRequest)
     {
+        await _assignmentBusinessRules.CheckCourseIfExists(updateAssigmentRequest.CourseId);
         Assignment asg = await _assignmentBusinessRules.CheckIfExistsById(updateAssigmentRequest.Id);
 		_mapper.Map(updateAssigmentRequest,asg);
         Assignment updatedAsg = await _assigmentDal.UpdateAsync(asg);

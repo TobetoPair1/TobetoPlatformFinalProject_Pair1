@@ -10,17 +10,19 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Business.Concretes;
 
-    public class AnswerManager : IAnswerService
+public class AnswerManager : IAnswerService
 {
 	IAnswerDal _answerDal;
 	IMapper _mapper;
+	IQuestionService _questionService;
 	AnswerBusinessRules _answerBusinessRules;
 
-    public AnswerManager(IAnswerDal answerDal, IMapper mapper, AnswerBusinessRules answerBusinessRules)
+    public AnswerManager(IAnswerDal answerDal, IMapper mapper, AnswerBusinessRules answerBusinessRules, IQuestionService questionService)
     {
         _answerDal = answerDal;
         _mapper = mapper;
         _answerBusinessRules = answerBusinessRules;
+        _questionService = questionService;
     }
 
     public async Task<CreatedAnswerResponse> AddAsync(CreateAnswerRequest createAnswerRequest)
@@ -59,7 +61,8 @@ namespace Business.Concretes;
 
 	public async Task<UpdatedAnswerResponse> UpdateAsync(UpdateAnswerRequest updateAnswerRequest)
 	{
-		Answer answer = await _answerBusinessRules.CheckIfExistsById(updateAnswerRequest.Id);
+        await _answerBusinessRules.CheckQuestionIfExists(updateAnswerRequest.Id);
+        Answer answer = await _answerBusinessRules.CheckIfExistsById(updateAnswerRequest.Id);
 		_mapper.Map(updateAnswerRequest,answer);
 		var updatedAnswer = await _answerDal.UpdateAsync(answer);
 		UpdatedAnswerResponse updatedAnswerResponse = _mapper.Map<UpdatedAnswerResponse>(updatedAnswer);

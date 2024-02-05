@@ -52,19 +52,10 @@ public class UserManager : IUserService
 		return deletedUserResponse;
 	}
 
-	public async Task<GetUserResponse> GetAsync(GetUserRequest getUserRequest)
+	public async Task<GetUserResponse> GetByIdAsync(Guid id)
     {
-        User user;
-        if (getUserRequest.Id!=null)
-        {
-			user = await _userDal.GetAsync(u => u.Id == getUserRequest.Id);
-
-		}
-        else
-        {
-			user = await _userDal.GetAsync(u => u.Email == getUserRequest.Email);
-
-		}
+        User user = await _userDal.GetAsync(u => u.Id == id);
+		
 		return _mapper.Map<GetUserResponse>(user);
     }
 
