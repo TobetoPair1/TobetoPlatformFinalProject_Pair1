@@ -11,7 +11,7 @@ public interface ILiveContentService
     Task<CreatedLiveContentResponse> AddAsync(CreateLiveContentRequest createLiveContentRequest);
     Task<DeletedLiveContentResponse> DeleteAsync(DeleteLiveContentRequest deleteLiveContentRequest);
     Task<UpdatedLiveContentResponse> UpdateAsync(UpdateLiveContentRequest updateAsyncContentRequest);
-    Task<GetLiveContentResponse> GetByIdAsync(GetLiveContentRequest getLiveContentRequest);  
+    Task<GetLiveContentResponse> GetByIdAsync(Guid id);  
     Task<IPaginate<GetListLiveContentResponse>> GetListAsync(PageRequest pageRequest);
     Task<IPaginate<GetListLiveContentResponse>> GetListByCourseIdAsync(Guid courseId, PageRequest pageRequest);
     Task<CreatedCourseLiveContentResponse> AssignContentAsync(CreateCourseLiveContentRequest createCourseLiveContentRequest);
