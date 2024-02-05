@@ -22,13 +22,13 @@ public class AnswersController : ControllerBase
         return Ok(result);
     }
 
-    [HttpGet("GetAll")]
+    [HttpGet("getall")]
     public async Task<IActionResult> GetList([FromQuery] PageRequest pageRequest)
     {
         var result = await _answerService.GetListAsync(pageRequest);
         return Ok(result);
     }
-    [HttpGet("Get")]
+    [HttpGet("get")]
     public async Task<IActionResult> Get([FromQuery] GetAnswerRequest getAnswerRequest)
     {
         var result = await _answerService.GetByIdAsync(getAnswerRequest);

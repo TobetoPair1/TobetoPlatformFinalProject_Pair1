@@ -1,4 +1,10 @@
-﻿namespace Business.Dtos.Requests.Certificate
+﻿namespace Business.Dtos.Requests.Certificate;
+
+	
+public class CreateCertificateRequest
 {
-	public record CreateCertificateRequest (string Name, Guid UserId, string FilePath, string FileType);
+	public string Name { get; set; }
+	public Guid UserId { get; set; }
+	public string FilePath { get; set; }
+	public string FileType { get; set; }
 }

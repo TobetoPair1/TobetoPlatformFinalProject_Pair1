@@ -21,14 +21,14 @@ public class AnnouncementsController : ControllerBase
         var result = await _announcementService.AddAsync(announcementRequest);
         return Ok(result);
     }
-    [HttpGet("Get")]
+    [HttpGet("get")]
     public async Task<IActionResult> Get([FromQuery] GetAnnouncementRequest getAnnouncementRequest)
     {
         var result = await _announcementService.GetByIdAsync(getAnnouncementRequest);
         return Ok(result);
     }
 
-    [HttpGet("GetAll")]
+    [HttpGet("getall")]
     public async Task<IActionResult> GetAll([FromQuery] PageRequest pageRequest)
     {
         var result = await _announcementService.GetListAsync(pageRequest);

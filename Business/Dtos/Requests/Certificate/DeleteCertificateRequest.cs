@@ -1,4 +1,9 @@
-﻿namespace Business.Dtos.Requests.Certificate
+﻿namespace Business.Dtos.Requests.Certificate;
+
+public class DeleteCertificateRequest
 {
-	public record DeleteCertificateRequest(Guid Id);
+    public Guid Id { get; set; }
 }
+
+    
+

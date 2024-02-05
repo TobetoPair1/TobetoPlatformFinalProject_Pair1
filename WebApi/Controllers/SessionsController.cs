@@ -24,21 +24,21 @@ namespace WebApi.Controllers
             return Ok(result);
         }
 
-        [HttpPost("AssignToInstructor")]
+        [HttpPost("assigntoinstructor")]
         public async Task<IActionResult> AssignSessionToSession([FromBody] CreateInstructorSessionRequest createInstructorSessionRequest)
         {
             var result = await _sessionService.AssignSessionAsync(createInstructorSessionRequest);
             return Ok(result);
         }
 
-        [HttpGet("GetAll")]
+        [HttpGet("getall")]
         public async Task<IActionResult> GetAll([FromQuery] PageRequest pageRequest)
         {
             var result = await _sessionService.GetListAsync(pageRequest);
             return Ok(result);
         }
 
-        [HttpGet("Get")]
+        [HttpGet("get")]
         public async Task<IActionResult> Get([FromQuery] GetSessionRequest getSessionRequest)
         {
             var result = await _sessionService.GetByIdAsync(getSessionRequest);
@@ -52,7 +52,7 @@ namespace WebApi.Controllers
             return Ok(result);
         }
 
-        [HttpGet("GetListByInstructorId")]
+        [HttpGet("getlistbyinstructorid")]
         public async Task<IActionResult> GetListByInstructorId([FromQuery] PageRequest pageRequest, Guid instructorId)
         {
             var result = await _sessionService.GetListByInstructorIdAsync(instructorId, pageRequest);

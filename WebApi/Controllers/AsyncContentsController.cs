@@ -28,14 +28,14 @@ public class AsyncContentsController : ControllerBase
 		var result = await _asyncContentService.AssignAsyncContentAsync(createCourseAsyncContentRequest);
 		return Ok(result);
 	}
-	[HttpGet("Get")]
+	[HttpGet("get")]
     public async Task<IActionResult> Get([FromQuery] GetAsyncContentRequest getAsyncContentRequest)
     {
         var result = await _asyncContentService.GetByIdAsync(getAsyncContentRequest);
         return Ok(result);
     }
 
-    [HttpGet("GetAll")]
+    [HttpGet("getall")]
     public async Task<IActionResult> GetAll([FromQuery] PageRequest pageRequest)
     {
         var result = await _asyncContentService.GetListAsync(pageRequest);

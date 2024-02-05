@@ -21,14 +21,14 @@ public class OperationClaimsController : ControllerBase
         var result = await _operationClaimService.AddAsync(operationClaimRequest);
         return Ok(result);
     }
-    [HttpGet("Get")]
+    [HttpGet("get")]
     public async Task<IActionResult> Get([FromQuery] GetOperationClaimRequest getOperationClaimRequest)
     {
         var result = await _operationClaimService.GetByIdAsync(getOperationClaimRequest);
         return Ok(result);
     }
 
-    [HttpGet("GetAll")]
+    [HttpGet("getall")]
     public async Task<IActionResult> GetAll([FromQuery] PageRequest pageRequest)
     {
         var result = await _operationClaimService.GetListAsync(pageRequest);

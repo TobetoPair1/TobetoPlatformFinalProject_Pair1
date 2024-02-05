@@ -24,28 +24,28 @@ public class QuestionsController : ControllerBase
         return Ok(result);
     }
 
-    [HttpPost("AssignToExam")]
+    [HttpPost("assigntoexam")] 
     public async Task<IActionResult> AssignToExam([FromBody] CreateExamQuestionRequest createExamQuestionRequest)
     {
         var result = await _questionService.AssignQuestionAsync(createExamQuestionRequest);
         return Ok(result);
     }
 
-    [HttpGet("GetAll")]
+    [HttpGet("getall")]
     public async Task<IActionResult> GetList([FromQuery] PageRequest pageRequest)
     {
         var result = await _questionService.GetListAsync(pageRequest);
         return Ok(result);
     }
 
-    [HttpGet("Get")]
+    [HttpGet("get")]
     public async Task<IActionResult> Get([FromQuery] GetQuestionRequest getQuestionRequest)
     {
         var result = await _questionService.GetByIdAsync(getQuestionRequest);
         return Ok(result);
     }
 
-    [HttpGet("GetListByExamId")]
+    [HttpGet("getlistbyexamid")] 
     public async Task<IActionResult> GetListByExamId([FromQuery] PageRequest pageRequest, Guid examId)
     {
         var result = await _questionService.GetListByExamIdAsync(examId, pageRequest);
