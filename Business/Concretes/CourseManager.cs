@@ -79,6 +79,7 @@ public class CourseManager : ICourseService
 
     public async Task<UpdatedCourseResponse> UpdateAsync(UpdateCourseRequest updateCourseRequest)
     {
+        await _courseBusinessRules.CheckCategoryIfExists(updateCourseRequest.CategoryId);
         Course course = await _courseBusinessRules.CheckIfExistsById(updateCourseRequest.Id);
 		_mapper.Map(updateCourseRequest,course);
         Course updatedCourse = await _courseDal.UpdateAsync(course);
