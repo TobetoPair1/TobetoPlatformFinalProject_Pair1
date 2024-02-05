@@ -1,5 +1,4 @@
 ﻿using Business.Abstracts;
-using Business.Dtos.Requests.Category;
 using Business.Dtos.Responses.Category;
 using Core.Business.Rules;
 using Core.CrossCuttingConcerns.Exceptions.Types;
@@ -9,7 +8,7 @@ using Entities.Concretes;
 
 namespace Business.Rules
 {
-    public class LiveContentBusinessRules : BaseBusinessRules<LiveContent>
+	public class LiveContentBusinessRules : BaseBusinessRules<LiveContent>
     {
         ILiveContentDal _liveContentDal;
         ICategoryService _categoryService;
@@ -20,7 +19,7 @@ namespace Business.Rules
         
         public async Task CheckCategoryIfExists(Guid categoryId)
         {
-            GetCategoryResponse category = await _categoryService.GetByIdAsync(new GetCategoryRequest { Id=categoryId});
+            GetCategoryResponse category = await _categoryService.GetByIdAsync(categoryId);
             if (category==null)
             {
                 throw new BusinessException(BusinessCoreMessages.CannotFindEntityError, BusinessCoreTitles.CannotFindError);

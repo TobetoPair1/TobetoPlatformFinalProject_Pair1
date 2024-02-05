@@ -21,10 +21,10 @@ public class AssignmentsController : ControllerBase
         var result = await _assignmentService.AddAsync(createAssigmentRequest);
         return Ok(result);
     }
-    [HttpGet("get")]
-    public async Task<IActionResult> Get([FromQuery] GetAssigmentRequest getAssigmentRequest)
+    [HttpGet("getbyid")]
+    public async Task<IActionResult> Get([FromQuery] Guid id)
     {
-        var result = await _assignmentService.GetByIdAsync(getAssigmentRequest);
+        var result = await _assignmentService.GetByIdAsync(id);
         return Ok(result);
     }
 

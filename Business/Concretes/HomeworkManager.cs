@@ -59,5 +59,4 @@ public class HomeworkManager : IHomeworkService
         UpdatedHomeworkResponse updatedHomeworkResponse = _mapper.Map<UpdatedHomeworkResponse>(updatedHomework);
         return updatedHomeworkResponse; 
     }
-
 }

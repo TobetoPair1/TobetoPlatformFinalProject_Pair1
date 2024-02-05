@@ -19,7 +19,7 @@ public class AsyncContentBusinessRules:BaseBusinessRules<AsyncContent>
     }
     public async Task CheckCategoryIfExists(Guid categoryId)
     {
-        GetCategoryResponse category = await _categoryService.GetByIdAsync(new GetCategoryRequest { Id=categoryId});
+        GetCategoryResponse category = await _categoryService.GetByIdAsync(categoryId);
         if (category==null)
         {
             throw new BusinessException(BusinessCoreMessages.CannotFindEntityError, BusinessCoreTitles.CannotFindError);

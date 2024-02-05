@@ -58,4 +58,3 @@ public class AssignmentManager : IAssignmentService
         return _mapper.Map<Paginate<GetListAssigmentResponse>>(assigments);
     }
 }
-
