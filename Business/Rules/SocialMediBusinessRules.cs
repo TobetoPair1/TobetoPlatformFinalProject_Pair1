@@ -2,13 +2,14 @@
 using Core.Business.Rules;
 using Core.CrossCuttingConcerns.Exceptions.Types;
 using DataAccess.Abstracts;
+using Entities.Concretes;
 
 namespace Business.Rules;
 
-public class SocialMediaBusinessRules : BaseBusinessRules
+public class SocialMediaBusinessRules : BaseBusinessRules<SocialMedia>
 {
     private readonly ISocialMediaDal _socialMediaDal;
-    public SocialMediaBusinessRules(ISocialMediaDal socialMediaDal)
+    public SocialMediaBusinessRules(ISocialMediaDal socialMediaDal):base(socialMediaDal)
     {
         _socialMediaDal = socialMediaDal;
     }
@@ -17,7 +18,7 @@ public class SocialMediaBusinessRules : BaseBusinessRules
     {
         var result = await _socialMediaDal.GetListAsync(sm => sm.UserId == userId);
 
-        if (result.Count > 3)
+        if (result.Count >= 3)
         {
             throw new BusinessException(BusinessMessages.SocialMediLimit, BusinessTitles.SocialMediaError);
         }

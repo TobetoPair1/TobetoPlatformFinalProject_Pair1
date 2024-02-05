@@ -4,15 +4,16 @@ using Business.Dtos.Requests.Auth;
 using Core.Business.Rules;
 using Core.CrossCuttingConcerns.Exceptions.Types;
 using Core.Utilities.Security.Hashing;
+using DataAccess.Abstracts;
 using Entities.Concretes;
 
 namespace Business.Rules;
 
-public class AuthBusinessRules : BaseBusinessRules
+public class AuthBusinessRules : BaseBusinessRules<User>
 {
 
 	IUserService _userService;
-	public AuthBusinessRules(IUserService userService)
+	public AuthBusinessRules(IUserService userService,IUserDal userDal):base(userDal)
 	{
 		_userService = userService;
 	}

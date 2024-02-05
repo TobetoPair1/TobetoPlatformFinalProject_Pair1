@@ -1,6 +1,7 @@
 ﻿using Business.Abstracts;
 using Business.Concretes;
 using Core.Business.Rules;
+using Core.Entities;
 using Core.Utilities.Security.Jwt;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
@@ -50,7 +51,7 @@ public static class BusinessServiceRegistration
 
         var assembly = Assembly.GetExecutingAssembly();
         services.AddAutoMapper(assembly);
-        services.AddSubClassesOfType(assembly, typeof(BaseBusinessRules));
+        services.AddSubClassesOfType(assembly, typeof(BaseBusinessRules<Entity<Guid>>));
         return services;
     }
 

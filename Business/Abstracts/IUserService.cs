@@ -10,7 +10,8 @@ namespace Business.Abstracts
     {
         Task<CreatedUserResponse> AddAsync(CreateUserRequest createUserRequest);
         Task<IPaginate<GetListUserResponse>> GetListAsync(PageRequest pageRequest);
-        Task<DeletedUserResponse> DeleteAsync(DeleteUserRequest deleteUserRequest);
+        Task<DeletedUserResponse> DeleteByIdAsync(Guid id);
+        Task<DeletedUserResponse> DeleteByMailAsync(string email);
         Task<UpdatedUserResponse> UpdateAsync(UpdateUserRequest updateUserRequest);
         Task<GetUserResponse> GetAsync(GetUserRequest getUserRequest);
         Task<User> GetByMailAsync(string mail,bool withDeleted);

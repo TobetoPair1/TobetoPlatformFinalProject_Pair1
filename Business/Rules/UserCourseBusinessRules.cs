@@ -7,11 +7,11 @@ using Entities.Concretes.CrossTables;
 
 namespace Business.Rules;
 
-public class UserCourseBusinessRules:BaseBusinessRules
+public class UserCourseBusinessRules:BaseBusinessRules<UserCourse>
 {
     IUserCourseDal _userCourseDal;
 
-    public UserCourseBusinessRules(IUserCourseDal userCourseDal)
+    public UserCourseBusinessRules(IUserCourseDal userCourseDal):base(userCourseDal)
     {
         _userCourseDal = userCourseDal;
     }

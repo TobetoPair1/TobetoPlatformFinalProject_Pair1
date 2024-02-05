@@ -2,6 +2,7 @@
 using Business.Abstracts;
 using Business.Dtos.Requests.Announcement;
 using Business.Dtos.Responses.Announcement;
+using Business.Rules;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
 using Entities.Concretes;
@@ -12,13 +13,14 @@ public class AnnouncementManager : IAnnouncementService
 {
     IMapper _mapper;
     IAnnouncementDal _announcementDal;
-
-    public AnnouncementManager(IMapper mapper, IAnnouncementDal announcementDal)
-    {
-        _mapper = mapper;
-        _announcementDal = announcementDal;
-    }    
-    public async Task<CreatedAnnouncementResponse> AddAsync(CreateAnnouncementRequest createAnnouncementRequest)
+    AnnouncementBusinessRules _announcementBusinessRules;
+	public AnnouncementManager(IMapper mapper, IAnnouncementDal announcementDal, AnnouncementBusinessRules announcementBusinessRules)
+	{
+		_mapper = mapper;
+		_announcementDal = announcementDal;
+		_announcementBusinessRules = announcementBusinessRules;
+	}
+	public async Task<CreatedAnnouncementResponse> AddAsync(CreateAnnouncementRequest createAnnouncementRequest)
     {
         Announcement announcement = _mapper.Map<Announcement>(createAnnouncementRequest);
         var createdAnnouncement = await _announcementDal.AddAsync(announcement);
@@ -28,7 +30,7 @@ public class AnnouncementManager : IAnnouncementService
 
     public async Task<DeletedAnnouncementResponse> DeleteAsync(DeleteAnnouncementRequest deleteAnnouncementRequest)
     {
-        Announcement announcement = await _announcementDal.GetAsync(a => a.Id == deleteAnnouncementRequest.Id);
+        Announcement announcement = await _announcementBusinessRules.CheckIfExistsById(deleteAnnouncementRequest.Id);
         var deletedAnnouncement = await _announcementDal.DeleteAsync(announcement);
         DeletedAnnouncementResponse deletedAnnouncementResponse = _mapper.Map<DeletedAnnouncementResponse>(deletedAnnouncement);
         return deletedAnnouncementResponse; 

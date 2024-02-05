@@ -27,8 +27,7 @@ public class UserManager : IUserService
 	}
 
 	public async Task<CreatedUserResponse> AddAsync(CreateUserRequest createUserRequest)
-    {
-        await _userBusinessRules.MaxCount();
+    {        
         User user = _mapper.Map<User>(createUserRequest);
         var createdUser = await _userDal.AddAsync(user);
         CreatedUserResponse result = _mapper.Map<CreatedUserResponse>(createdUser);
@@ -36,25 +35,24 @@ public class UserManager : IUserService
         return result;
     }
 
-    public async Task<DeletedUserResponse> DeleteAsync(DeleteUserRequest deleteUserRequest)
+    public async Task<DeletedUserResponse> DeleteByIdAsync(Guid id)
     {
         User user;
-
-		if (deleteUserRequest.Id!=null)
-        {
-			user = await _userDal.GetAsync(u => u.Id == deleteUserRequest.Id);
-
-		}
-        else
-        {
-			user = await _userDal.GetAsync(u => u.Email == deleteUserRequest.Email);
-		}
+        user = await _userBusinessRules.CheckIfExistsById(id);		
 		var deletedUser = await _userDal.DeleteAsync(user);
         DeletedUserResponse deletedUserResponse = _mapper.Map<DeletedUserResponse>(deletedUser);
         return deletedUserResponse;
     }
+	public async Task<DeletedUserResponse> DeleteByMailAsync(string email)
+	{
+		User user;
+        user = await _userBusinessRules.CheckIfExistsByMail(email);
+		var deletedUser = await _userDal.DeleteAsync(user);
+		DeletedUserResponse deletedUserResponse = _mapper.Map<DeletedUserResponse>(deletedUser);
+		return deletedUserResponse;
+	}
 
-    public async Task<GetUserResponse> GetAsync(GetUserRequest getUserRequest)
+	public async Task<GetUserResponse> GetAsync(GetUserRequest getUserRequest)
     {
         User user;
         if (getUserRequest.Id!=null)

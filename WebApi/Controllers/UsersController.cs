@@ -49,13 +49,19 @@ public class UsersController : ControllerBase
 		var result = await _userService.ActivateUserAsync(email);
 		return Ok(result);
 	}
-	[HttpDelete]
-    public async Task<IActionResult> Delete([FromBody] DeleteUserRequest deleteUserRequest)
+	[HttpDelete("deletebyid")]
+    public async Task<IActionResult> DeleteById([FromBody] Guid id)
     {
-        var result = await _userService.DeleteAsync(deleteUserRequest);
+        var result = await _userService.DeleteByIdAsync(id);
         return Ok(result);
     }
-    [HttpPut]
+	[HttpDelete("deletebymail")]
+	public async Task<IActionResult> DeleteByMail([FromBody] string email)
+	{
+		var result = await _userService.DeleteByMailAsync(email);
+		return Ok(result);
+	}
+	[HttpPut]
     public async Task<IActionResult> Update([FromBody] UpdateUserRequest UpdateUserRequest)
     {
         var result = await _userService.UpdateAsync(UpdateUserRequest);
