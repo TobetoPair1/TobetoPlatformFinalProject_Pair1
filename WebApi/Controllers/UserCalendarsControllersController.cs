@@ -24,14 +24,14 @@ public class UserCalendarsController : ControllerBase
         return Ok(result);
     }
 
-    [HttpGet("GetAll")]
+    [HttpGet("getall")]
     public async Task<IActionResult> GetList([FromQuery] PageRequest pageRequest)
     {
         var result = await _userCalendarService.GetListAsync(pageRequest);
         return Ok(result);
     }
 
-    [HttpGet("Get")]
+    [HttpGet("get")]
     public async Task<IActionResult> Get([FromQuery] GetUserCalendarRequest getUserCalendarRequest)
     {
         var result = await _userCalendarService.GetByIdAsync(getUserCalendarRequest);
