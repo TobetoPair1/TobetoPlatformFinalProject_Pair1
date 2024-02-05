@@ -8,7 +8,6 @@ using DataAccess.Abstracts;
 using Entities.Concretes;
 
 namespace Business.Concretes;
-//aynı kategori eklenemez iş kuralı
 public class CategoryManager : ICategoryService
 {
     ICategoryDal _categoryDal;
@@ -40,9 +39,9 @@ public class CategoryManager : ICategoryService
         return deletedCatResponse;
     }
 
-    public async Task<GetCategoryResponse> GetByIdAsync(GetCategoryRequest getCategoryRequest)
+    public async Task<GetCategoryResponse> GetByIdAsync(Guid id)
     {
-        Category cat = await _categoryDal.GetAsync(c => c.Id == getCategoryRequest.Id);
+        Category cat = await _categoryDal.GetAsync(c => c.Id == id);
         return _mapper.Map<GetCategoryResponse>(cat);
 
     }

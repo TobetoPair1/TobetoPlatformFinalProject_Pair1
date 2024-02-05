@@ -1,4 +1,5 @@
 ﻿using Core.Entities;
+using Entities.Concretes.CrossTables;
 
 namespace Entities.Concretes;
 public class OperationClaim : Entity<Guid>, IOperationClaim

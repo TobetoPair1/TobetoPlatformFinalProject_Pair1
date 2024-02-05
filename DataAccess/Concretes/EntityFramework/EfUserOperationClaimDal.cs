@@ -1,7 +1,7 @@
 ﻿using Core.DataAccess.Repositories;
 using DataAccess.Abstracts;
 using DataAccess.Contexts;
-using Entities.Concretes;
+using Entities.Concretes.CrossTables;
 
 namespace DataAccess.Concretes.EntityFramework;
 public class EfUserOperationClaimDal : EfRepositoryBase<UserOperationClaim, Guid, TobetoPlatformContext>, IUserOperationClaimDal

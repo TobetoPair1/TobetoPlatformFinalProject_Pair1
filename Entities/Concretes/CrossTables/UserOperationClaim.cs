@@ -1,6 +1,6 @@
 ﻿using Core.Entities;
 
-namespace Entities.Concretes;
+namespace Entities.Concretes.CrossTables;
 
 public class UserOperationClaim : Entity<Guid>
 {

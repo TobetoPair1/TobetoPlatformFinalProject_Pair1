@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Business.Abstracts;
-using Business.Dtos.Requests.Announcement;
 using Business.Dtos.Requests.Instructor;
 using Business.Dtos.Responses.Instructor;
 using Business.Rules;
@@ -39,9 +38,9 @@ public class InstructorManager : IInstructorService
         return deletedInstructorResponse;
     }
 
-    public async Task<GetInstructorResponse> GetByIdAsync(GetInstructorRequest getInstructorRequest)
+    public async Task<GetInstructorResponse> GetByIdAsync(Guid id)
     {
-        var result = await _instructorDal.GetAsync(i => i.Id == getInstructorRequest.Id);
+        var result = await _instructorDal.GetAsync(i => i.Id == id);
         return _mapper.Map<GetInstructorResponse>(result);
     }
 
