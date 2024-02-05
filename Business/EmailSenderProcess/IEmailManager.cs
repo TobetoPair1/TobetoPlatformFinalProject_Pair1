@@ -1,11 +1,10 @@
-namespace Business.EmailSenderProcess
+namespace Business.EmailSenderProcess;
+
+public interface IEmailManager
 {
-    public interface IEmailManager
-    {
-        bool SendEmail(EmailMessageModel model);
+    bool SendEmail(EmailMessageModel model);
 
-        Task SendMailAsync(EmailMessageModel model);
+    Task SendMailAsync(EmailMessageModel model);
 
-        bool SendEmailGmail(EmailMessageModel model);
-    }
+    bool SendEmailGmail(EmailMessageModel model);
 }

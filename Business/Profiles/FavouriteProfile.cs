@@ -28,6 +28,5 @@ public class FavouriteProfile : Profile
         CreateMap<Favourite, UpdateFavouriteRequest>().ReverseMap()
             .ForMember(destinationMember: f => f.CourseId, memberOptions: opt => opt.UseDestinationValue());
         CreateMap<Favourite, UpdatedFavouriteResponse>().ReverseMap();
-
     }
 }

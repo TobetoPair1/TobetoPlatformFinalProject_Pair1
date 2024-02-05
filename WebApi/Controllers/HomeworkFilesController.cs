@@ -43,4 +43,3 @@ public class HomeworkFilesController : ControllerBase
         return Ok(result);
     }
 }
-

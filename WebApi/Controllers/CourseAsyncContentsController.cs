@@ -46,4 +46,3 @@ public class CourseAsyncContentsController : ControllerBase
         return Ok(await _courseAsyncContentService.DeleteAsync(deleteCourseAsyncContentRequest));
     }
 }
-

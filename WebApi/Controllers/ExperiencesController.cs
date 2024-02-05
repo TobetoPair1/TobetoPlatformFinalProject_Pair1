@@ -57,5 +57,4 @@ public class ExperiencesController : ControllerBase
         var result = await _experienceService.UpdateAsync(updateExperienceRequest);
         return Ok(result);
     }
-
 }

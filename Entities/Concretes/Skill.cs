@@ -1,11 +1,10 @@
 ﻿using Core.Entities;
 using Entities.Concretes.CrossTables;
 
-namespace Entities.Concretes
+namespace Entities.Concretes;
+
+public class Skill:Entity<Guid>
 {
-    public class Skill:Entity<Guid>
-    {
-        public string Name { get; set; }
-		public ICollection<UserSkill> Users { get; set; }
-	}
+    public string Name { get; set; }
+	public ICollection<UserSkill> Users { get; set; }
 }

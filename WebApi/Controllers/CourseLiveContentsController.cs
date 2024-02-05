@@ -1,7 +1,5 @@
 ﻿using Business.Abstracts;
-using Business.Dtos.Requests.CourseAsyncContent;
 using Business.Dtos.Requests.CourseLiveContent;
-using Business.Dtos.Requests.UserSurvey;
 using Core.DataAccess.Paging;
 using Microsoft.AspNetCore.Mvc;
 

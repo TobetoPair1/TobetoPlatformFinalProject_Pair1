@@ -1,5 +1,4 @@
 ﻿using Business.Abstracts;
-using Business.Dtos.Requests.Course;
 using Business.Dtos.Requests.Education;
 using Core.DataAccess.Paging;
 using Microsoft.AspNetCore.Mvc;

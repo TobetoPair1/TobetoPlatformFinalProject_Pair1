@@ -1,6 +1,5 @@
 using Business.Abstracts;
 using Business.Dtos.Requests.Like;
-
 using Core.DataAccess.Paging;
 using Microsoft.AspNetCore.Mvc;
 
@@ -59,6 +58,3 @@ public class LikesController : ControllerBase
         return Ok(result);
     }
 }
-
-
-

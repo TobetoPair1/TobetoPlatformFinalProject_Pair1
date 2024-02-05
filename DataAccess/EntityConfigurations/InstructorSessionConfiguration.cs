@@ -2,19 +2,17 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace DataAccess.EntityConfigurations
+namespace DataAccess.EntityConfigurations;
+public class InstructorSessionConfiguration : IEntityTypeConfiguration<InstructorSession>
 {
-	public class InstructorSessionConfiguration : IEntityTypeConfiguration<InstructorSession>
+	public void Configure(EntityTypeBuilder<InstructorSession> builder)
 	{
-		public void Configure(EntityTypeBuilder<InstructorSession> builder)
-		{
-			builder.Ignore(ins => ins.Id);
-			builder.ToTable("InstructorSessions").HasKey(ins => new { ins.SessionId, ins.InstructorId});
-			
-			builder.Property(ins => ins.SessionId).HasColumnName("SessionId").IsRequired();
-			builder.Property(ins => ins.InstructorId).HasColumnName("InstructorId").IsRequired();
+		builder.Ignore(ins => ins.Id);
+		builder.ToTable("InstructorSessions").HasKey(ins => new { ins.SessionId, ins.InstructorId});
+		
+		builder.Property(ins => ins.SessionId).HasColumnName("SessionId").IsRequired();
+		builder.Property(ins => ins.InstructorId).HasColumnName("InstructorId").IsRequired();
 
-			builder.HasQueryFilter(ins => !ins.DeletedDate.HasValue);
-		}
+		builder.HasQueryFilter(ins => !ins.DeletedDate.HasValue);
 	}
 }

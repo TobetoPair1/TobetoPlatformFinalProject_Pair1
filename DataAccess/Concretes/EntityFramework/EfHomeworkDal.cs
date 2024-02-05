@@ -3,12 +3,10 @@ using DataAccess.Abstracts;
 using DataAccess.Contexts;
 using Entities.Concretes;
 
-namespace DataAccess.Concretes.EntityFramework
+namespace DataAccess.Concretes.EntityFramework;
+public class EfHomeworkDal : EfRepositoryBase<Homework, Guid, TobetoPlatformContext>, IHomeworkDal
 {
-	public class EfHomeworkDal : EfRepositoryBase<Homework, Guid, TobetoPlatformContext>, IHomeworkDal
+	public EfHomeworkDal(TobetoPlatformContext context) : base(context)
 	{
-		public EfHomeworkDal(TobetoPlatformContext context) : base(context)
-		{
-		}
 	}
 }

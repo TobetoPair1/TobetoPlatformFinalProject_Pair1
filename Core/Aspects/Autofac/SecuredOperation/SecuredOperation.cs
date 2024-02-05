@@ -5,31 +5,29 @@ using Core.Utilities.Messages;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Core.Aspects.Autofac.SecuredOperation
+namespace Core.Aspects.Autofac.SecuredOperation;
+public class SecuredOperation : MethodInterception
 {
-	public class SecuredOperation : MethodInterception
+	private string[] _roles;
+	private IHttpContextAccessor _httpContextAccessor;
+
+	public SecuredOperation(string roles)
 	{
-		private string[] _roles;
-		private IHttpContextAccessor _httpContextAccessor;
+		_roles = roles.Split(',');
+		_httpContextAccessor = CoreServiceRegistration.ServiceProvider.GetService<IHttpContextAccessor>();
 
-		public SecuredOperation(string roles)
+	}
+
+	protected override void OnBefore(IInvocation invocation)
+	{
+		var roleClaims = _httpContextAccessor.HttpContext.User.ClaimRoles();
+		foreach (var role in _roles)
 		{
-			_roles = roles.Split(',');
-			_httpContextAccessor = CoreServiceRegistration.ServiceProvider.GetService<IHttpContextAccessor>();
-
-		}
-
-		protected override void OnBefore(IInvocation invocation)
-		{
-			var roleClaims = _httpContextAccessor.HttpContext.User.ClaimRoles();
-			foreach (var role in _roles)
+			if (roleClaims.Contains(role))
 			{
-				if (roleClaims.Contains(role))
-				{
-					return;
-				}
+				return;
 			}
-			throw new System.Exception(AspectMessages.AccessDenied);
 		}
+		throw new System.Exception(AspectMessages.AccessDenied);
 	}
 }

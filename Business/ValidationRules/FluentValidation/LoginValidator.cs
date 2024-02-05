@@ -12,5 +12,4 @@ public class LoginValidator : AbstractValidator<LoginRequest>
         RuleFor(p => p.Password).NotEmpty();
         RuleFor(p => p.Password).MinimumLength(8);
     }
-
 }

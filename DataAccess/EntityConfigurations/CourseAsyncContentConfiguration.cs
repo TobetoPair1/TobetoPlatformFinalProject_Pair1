@@ -2,23 +2,19 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace DataAccess.EntityConfigurations
+namespace DataAccess.EntityConfigurations;
+
+public class CourseAsyncContentConfiguration : IEntityTypeConfiguration<CourseAsyncContent>
 {
-    public class CourseAsyncContentConfiguration : IEntityTypeConfiguration<CourseAsyncContent>
+    public void Configure(EntityTypeBuilder<CourseAsyncContent> builder)
     {
-        public void Configure(EntityTypeBuilder<CourseAsyncContent> builder)
-        {
 
-            builder.Ignore(ca => ca.Id);
-            builder.ToTable("CourseAsyncContents").HasKey(ca => new { ca.CourseId, ca.AsyncContentId });
+        builder.Ignore(ca => ca.Id);
+        builder.ToTable("CourseAsyncContents").HasKey(ca => new { ca.CourseId, ca.AsyncContentId });
 
-            builder.Property(ca => ca.CourseId).HasColumnName("CourseId").IsRequired();
-            builder.Property(ca => ca.AsyncContentId).HasColumnName("AsyncContentId").IsRequired();
+        builder.Property(ca => ca.CourseId).HasColumnName("CourseId").IsRequired();
+        builder.Property(ca => ca.AsyncContentId).HasColumnName("AsyncContentId").IsRequired();
 
-            builder.HasQueryFilter(ca => !ca.DeletedDate.HasValue);
-
-           
-
-        }
+        builder.HasQueryFilter(ca => !ca.DeletedDate.HasValue);
     }
 }

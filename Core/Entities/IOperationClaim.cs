@@ -1,7 +1,5 @@
-﻿namespace Core.Entities
+﻿namespace Core.Entities;
+public interface IOperationClaim
 {
-    public interface IOperationClaim
-    {
-		string Name { get; set; }
-	}
+	string Name { get; set; }
 }

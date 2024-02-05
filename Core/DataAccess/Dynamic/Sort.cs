@@ -1,20 +1,18 @@
-﻿namespace Core.DataAccess.Dynamic
+﻿namespace Core.DataAccess.Dynamic;
+public class Sort
 {
-    public class Sort
+    public string Field { get; set; }
+    public string Dir { get; set; }
+
+    public Sort()
     {
-        public string Field { get; set; }
-        public string Dir { get; set; }
+        Field = string.Empty;
+        Dir = string.Empty;
+    }
 
-        public Sort()
-        {
-            Field = string.Empty;
-            Dir = string.Empty;
-        }
-
-        public Sort(string field, string dir)
-        {
-            Field = field;
-            Dir = dir;
-        }
+    public Sort(string field, string dir)
+    {
+        Field = field;
+        Dir = dir;
     }
 }
