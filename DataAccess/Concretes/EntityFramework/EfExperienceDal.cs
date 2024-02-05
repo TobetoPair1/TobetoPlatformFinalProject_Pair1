@@ -3,12 +3,10 @@ using DataAccess.Abstracts;
 using DataAccess.Contexts;
 using Entities.Concretes;
 
-namespace DataAccess.Concretes.EntityFramework
+namespace DataAccess.Concretes.EntityFramework;
+public class EfExperienceDal : EfRepositoryBase<Experience, Guid, TobetoPlatformContext>, IExperienceDal
 {
-    public class EfExperienceDal : EfRepositoryBase<Experience, Guid, TobetoPlatformContext>, IExperienceDal
+    public EfExperienceDal(TobetoPlatformContext context) : base(context)
     {
-        public EfExperienceDal(TobetoPlatformContext context) : base(context)
-        {
-        }
     }
 }

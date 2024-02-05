@@ -3,12 +3,11 @@ using DataAccess.Abstracts;
 using DataAccess.Contexts;
 using Entities.Concretes;
 
-namespace DataAccess.Concretes.EntityFramework
+namespace DataAccess.Concretes.EntityFramework;
+
+public class EfCourseDal : EfRepositoryBase<Course, Guid, TobetoPlatformContext>, ICourseDal
 {
-	public class EfCourseDal : EfRepositoryBase<Course, Guid, TobetoPlatformContext>, ICourseDal
+	public EfCourseDal(TobetoPlatformContext context) : base(context)
 	{
-		public EfCourseDal(TobetoPlatformContext context) : base(context)
-		{
-		}
 	}
 }

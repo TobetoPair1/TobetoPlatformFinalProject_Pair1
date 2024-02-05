@@ -1,9 +1,7 @@
 ﻿using Core.DataAccess.Repositories;
 using Entities.Concretes;
 
-namespace DataAccess.Abstracts
+namespace DataAccess.Abstracts;
+public interface ICertificateDal: IAsyncRepository<Certificate,Guid>,IRepository<Certificate,Guid>
 {
-    public interface ICertificateDal: IAsyncRepository<Certificate,Guid>,IRepository<Certificate,Guid>
-    {
-    }
 }

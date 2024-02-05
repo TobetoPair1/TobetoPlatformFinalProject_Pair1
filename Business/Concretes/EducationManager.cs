@@ -2,6 +2,7 @@
 using Business.Abstracts;
 using Business.Dtos.Requests.Education;
 using Business.Dtos.Responses.Education;
+using Business.Rules;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
 using Entities.Concretes;
@@ -12,12 +13,14 @@ public class EducationManager : IEducationService
 {
     IMapper _mapper;
     IEducationDal _educationDal;
-    public EducationManager(IMapper mapper, IEducationDal educationDal)
-    {
-        _mapper = mapper;
-        _educationDal = educationDal;
-    }
-    public async Task<CreatedEducationResponse> AddAsync(CreateEducationRequest createEducationRequest)
+    EducationBusinessRules _educationBusinessRules;
+	public EducationManager(IMapper mapper, IEducationDal educationDal, EducationBusinessRules educationBusinessRules)
+	{
+		_mapper = mapper;
+		_educationDal = educationDal;
+		_educationBusinessRules = educationBusinessRules;
+	}
+	public async Task<CreatedEducationResponse> AddAsync(CreateEducationRequest createEducationRequest)
     {
         Education education = _mapper.Map<Education>(createEducationRequest);
         var createdEducation = await _educationDal.AddAsync(education);
@@ -27,7 +30,7 @@ public class EducationManager : IEducationService
 
     public async Task<DeletedEducationResponse> DeleteAsync(DeleteEducationRequest deleteEducationRequest)
     {
-        Education education = await _educationDal.GetAsync(e => e.Id == deleteEducationRequest.Id);
+        Education education = await _educationBusinessRules.CheckIfExistsById(deleteEducationRequest.Id);
         var deletedEducation = await _educationDal.DeleteAsync(education);
         DeletedEducationResponse result = _mapper.Map<DeletedEducationResponse>(deletedEducation);
         return result;

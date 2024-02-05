@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Http;
 
 namespace Core.CrossCuttingConcerns.Exceptions;
-
 public class ExceptionMiddleware
 {
     private readonly RequestDelegate _next;

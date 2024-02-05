@@ -3,12 +3,10 @@ using DataAccess.Abstracts;
 using DataAccess.Contexts;
 using Entities.Concretes;
 
-namespace DataAccess.Concretes.EntityFramework
+namespace DataAccess.Concretes.EntityFramework;
+public class EfSocialMediaDal : EfRepositoryBase<SocialMedia, Guid, TobetoPlatformContext>, ISocialMediaDal
 {
-    public class EfSocialMediaDal : EfRepositoryBase<SocialMedia, Guid, TobetoPlatformContext>, ISocialMediaDal
+    public EfSocialMediaDal(TobetoPlatformContext context) : base(context)
     {
-        public EfSocialMediaDal(TobetoPlatformContext context) : base(context)
-        {
-        }
     }
 }

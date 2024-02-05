@@ -1,7 +1,5 @@
-﻿namespace Core.DataAccess.Repositories
+﻿namespace Core.DataAccess.Repositories;
+public interface IQuery<T>
 {
-    public interface IQuery<T>
-    {
-        IQueryable<T> Query();
-    }
+    IQueryable<T> Query();
 }

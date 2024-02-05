@@ -26,6 +26,3 @@ public class LikeProfile : Profile
         CreateMap<Like, GetLikeResponse>().ReverseMap();
     }
 }
-
-
-

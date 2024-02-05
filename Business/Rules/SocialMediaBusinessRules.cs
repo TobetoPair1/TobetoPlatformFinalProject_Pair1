@@ -8,7 +8,7 @@ namespace Business.Rules;
 
 public class SocialMediaBusinessRules : BaseBusinessRules<SocialMedia>
 {
-    private readonly ISocialMediaDal _socialMediaDal;
+    ISocialMediaDal _socialMediaDal;
     public SocialMediaBusinessRules(ISocialMediaDal socialMediaDal):base(socialMediaDal)
     {
         _socialMediaDal = socialMediaDal;
@@ -20,7 +20,7 @@ public class SocialMediaBusinessRules : BaseBusinessRules<SocialMedia>
 
         if (result.Count >= 3)
         {
-            throw new BusinessException(BusinessMessages.SocialMediLimit, BusinessTitles.SocialMediaError);
+            throw new BusinessException(BusinessMessages.SocialMediaLimit, BusinessTitles.SocialMediaError);
         }
     }
 

@@ -3,12 +3,10 @@ using DataAccess.Abstracts;
 using DataAccess.Contexts;
 using Entities.Concretes;
 
-namespace DataAccess.Concretes.EntityFramework
+namespace DataAccess.Concretes.EntityFramework;
+public class EfLiveContentDal : EfRepositoryBase<LiveContent, Guid, TobetoPlatformContext>, ILiveContentDal
 {
-    public class EfLiveContentDal : EfRepositoryBase<LiveContent, Guid, TobetoPlatformContext>, ILiveContentDal
+    public EfLiveContentDal(TobetoPlatformContext context) : base(context)
     {
-        public EfLiveContentDal(TobetoPlatformContext context) : base(context)
-        {
-        }
     }
 }

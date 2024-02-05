@@ -1,9 +1,7 @@
 ﻿using Core.DataAccess.Repositories;
 using Entities.Concretes;
 
-namespace DataAccess.Abstracts
+namespace DataAccess.Abstracts;
+public interface ISessionDal : IAsyncRepository<Session, Guid>, IRepository<Session, Guid>
 {
-	public interface ISessionDal : IAsyncRepository<Session, Guid>, IRepository<Session, Guid>
-    {
-    }
 }

@@ -1,10 +1,7 @@
-﻿
-using Core.Entities;
+﻿using Core.Entities;
 
-namespace Core.Utilities.Security.Jwt
+namespace Core.Utilities.Security.Jwt;
+public interface ITokenHelper
 {
-    public interface ITokenHelper
-    {
-        AccessToken CreateToken(IUser user, List<IOperationClaim> operationClaims);
-    }
+    AccessToken CreateToken(IUser user, List<IOperationClaim> operationClaims);
 }

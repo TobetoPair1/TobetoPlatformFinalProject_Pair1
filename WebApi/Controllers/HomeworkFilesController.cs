@@ -9,8 +9,8 @@ namespace WebApi.Controllers;
 [ApiController]
 public class HomeworkFilesController : ControllerBase
 {
-    IHomeworFileService _homeworkFileService;
-    public HomeworkFilesController(IHomeworFileService courseService)
+    IHomeworkFileService _homeworkFileService;
+    public HomeworkFilesController(IHomeworkFileService courseService)
     {
         _homeworkFileService = courseService;
     }
@@ -43,4 +43,3 @@ public class HomeworkFilesController : ControllerBase
         return Ok(result);
     }
 }
-

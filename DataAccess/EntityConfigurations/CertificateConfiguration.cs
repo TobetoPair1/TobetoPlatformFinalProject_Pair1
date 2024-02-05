@@ -2,21 +2,20 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace DataAccess.EntityConfigurations
+namespace DataAccess.EntityConfigurations;
+
+public class CertificateConfiguration : IEntityTypeConfiguration<Certificate>
 {
-    public class CertificateConfiguration : IEntityTypeConfiguration<Certificate>
+    public void Configure(EntityTypeBuilder<Certificate> builder)
     {
-        public void Configure(EntityTypeBuilder<Certificate> builder)
-        {
-            builder.ToTable("Certificates").HasKey(c=>c.Id);
+        builder.ToTable("Certificates").HasKey(c=>c.Id);
 
-            builder.Property(c=>c.Id).HasColumnName("Id").IsRequired();
-            builder.Property(c=>c.Name).HasColumnName("Name").IsRequired();
-            builder.Property(c=>c.UserId).HasColumnName("UserId").IsRequired();
-            builder.Property(c=>c.FilePath).HasColumnName("FilePath").IsRequired();
-            builder.Property(c=>c.FileType).HasColumnName("FileType").IsRequired();
+        builder.Property(c=>c.Id).HasColumnName("Id").IsRequired();
+        builder.Property(c=>c.Name).HasColumnName("Name").IsRequired();
+        builder.Property(c=>c.UserId).HasColumnName("UserId").IsRequired();
+        builder.Property(c=>c.FilePath).HasColumnName("FilePath").IsRequired();
+        builder.Property(c=>c.FileType).HasColumnName("FileType").IsRequired();
 
-            builder.HasQueryFilter(c => !c.DeletedDate.HasValue);
-        }
+        builder.HasQueryFilter(c => !c.DeletedDate.HasValue);
     }
 }

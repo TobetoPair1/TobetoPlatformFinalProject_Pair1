@@ -4,6 +4,7 @@ using Business.Dtos.Requests.InstructorSession;
 using Business.Dtos.Requests.Session;
 using Business.Dtos.Responses.InstructorSession;
 using Business.Dtos.Responses.Session;
+using Business.Rules;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
 using Entities.Concretes;
@@ -16,12 +17,14 @@ public class SessionManager : ISessionService
     IMapper _mapper;
     ISessionDal _sessionDal;
     IInstructorSessionService _instructorSessionService;
+    SessionBusinessRules _sessionBusinessRules;
 
-    public SessionManager(IMapper mapper, ISessionDal sessionDal, IInstructorSessionService instructorSessionService)
+    public SessionManager(IMapper mapper, ISessionDal sessionDal, IInstructorSessionService instructorSessionService, SessionBusinessRules sessionBusinessRules)
     {
         _mapper = mapper;
         _sessionDal = sessionDal;
         _instructorSessionService = instructorSessionService;
+        _sessionBusinessRules = sessionBusinessRules;
     }
 
     public async Task<CreatedSessionResponse> AddAsync(CreateSessionRequest createSessionRequest)
@@ -45,7 +48,7 @@ public class SessionManager : ISessionService
 
     public async Task<DeletedSessionResponse> DeleteAsync(DeleteSessionRequest deleteSessionRequest)
     {
-        Session session = await _sessionDal.GetAsync(s => s.Id == deleteSessionRequest.Id);
+        Session session = await _sessionBusinessRules.CheckIfExistsById(deleteSessionRequest.Id);
         var deletedSession = await _sessionDal.DeleteAsync(session);
         DeletedSessionResponse deletedSessionResponse = _mapper.Map<DeletedSessionResponse>(deletedSession);
         return deletedSessionResponse;

@@ -4,7 +4,6 @@ using Core.CrossCuttingConcerns.Exceptions.Types;
 using Microsoft.AspNetCore.Http;
 
 namespace Core.CrossCuttingConcerns.Exceptions.Handlers;
-
 public class HttpExceptionHandler : ExceptionHandler
 {
     private HttpResponse? _response;

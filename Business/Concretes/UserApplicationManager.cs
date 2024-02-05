@@ -2,11 +2,10 @@
 using Business.Abstracts;
 using Business.Dtos.Requests.UserApplication;
 using Business.Dtos.Responses.Application;
-using Business.Dtos.Responses.Course;
 using Business.Dtos.Responses.UserApplication;
+using Business.Rules;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
-using DataAccess.Concretes.EntityFramework;
 using Entities.Concretes.CrossTables;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,11 +14,13 @@ public class UserApplicationManager : IUserApplicationService
 {
     IMapper _mapper;
     IUserApplicationDal _userApplicationDal;
+    UserApplicationRules _userApplicationRules;
 
-    public UserApplicationManager(IMapper mapper, IUserApplicationDal userApplicationDal)
+    public UserApplicationManager(IMapper mapper, IUserApplicationDal userApplicationDal, UserApplicationRules userApplicationRules)
     {
         _mapper = mapper;
         _userApplicationDal = userApplicationDal;
+        _userApplicationRules = userApplicationRules;
     }
 
     public async Task<CreatedUserApplicationResponse> AddAsync(CreateUserApplicationRequest createUserApplicationRequest)
@@ -32,7 +33,7 @@ public class UserApplicationManager : IUserApplicationService
 
     public async Task<DeletedUserApplicationResponse> DeleteAsync(DeleteUserApplicationRequest deleteUserApplicationRequest)
     {
-        UserApplication userApplication = await _userApplicationDal.GetAsync(ap => ap.UserId == deleteUserApplicationRequest.UserId && ap.ApplicationId == deleteUserApplicationRequest.ApplicationId);
+        UserApplication userApplication = await _userApplicationRules.CheckIfExistsById(deleteUserApplicationRequest.UserId, deleteUserApplicationRequest.ApplicationId);
         var deletedUserApplication = await _userApplicationDal.DeleteAsync(userApplication, true);
         DeletedUserApplicationResponse deletedUserApplicationResponse = _mapper.Map<DeletedUserApplicationResponse>(deletedUserApplication);
         return deletedUserApplicationResponse;

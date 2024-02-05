@@ -1,10 +1,8 @@
 ﻿using Core.Entities;
 
-namespace Entities.Concretes
+namespace Entities.Concretes;
+public class OperationClaim : Entity<Guid>, IOperationClaim
 {
-    public class OperationClaim : Entity<Guid>, IOperationClaim
-    {
-        public string Name { get; set; }
-        public ICollection<UserOperationClaim> Users { get; set; }
-    }
+    public string Name { get; set; }
+    public ICollection<UserOperationClaim> Users { get; set; }
 }

@@ -2,13 +2,10 @@
 using DataAccess.Contexts;
 using Entities.Concretes;
 
-namespace DataAccess.Abstracts
+namespace DataAccess.Abstracts;
+public class EfLikeDal : EfRepositoryBase<Like, Guid, TobetoPlatformContext>, ILikeDal
 {
-    public class EfLikeDal : EfRepositoryBase<Like, Guid, TobetoPlatformContext>, ILikeDal
+    public EfLikeDal(TobetoPlatformContext context) : base(context)
     {
-        public EfLikeDal(TobetoPlatformContext context) : base(context)
-        {
-            
-        }
     }
 }
