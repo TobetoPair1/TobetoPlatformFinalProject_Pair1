@@ -55,7 +55,7 @@ public class CategoryManager : ICategoryService
 
     public async Task<UpdatedCategoryResponse> UpdateAsync(UpdateCategoryRequest updateCategoryRequest)
     {
-        Category cat = await _categoryDal.GetAsync(c=>c.Id == updateCategoryRequest.Id);
+        Category cat = await _categoryBusinessRules.CheckIfExistsById(updateCategoryRequest.Id);
         _mapper.Map(updateCategoryRequest, cat);
         Category updateDcat = await _categoryDal.UpdateAsync(cat);
         UpdatedCategoryResponse updateDcatResponse = _mapper.Map<UpdatedCategoryResponse>(updateDcat);

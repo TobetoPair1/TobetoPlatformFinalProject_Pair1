@@ -63,7 +63,7 @@ public class ApplicationManager:IApplicationService
     }
     public async Task<UpdatedApplicationResponse> UpdateAsync(UpdateApplicationRequest updateApplicationRequest)
     {
-		Application application = await _applicationDal.GetAsync(a => a.Id == updateApplicationRequest.Id);
+        Application application = await _applicationBusinessRules.CheckIfExistsById(updateApplicationRequest.Id);
 		_mapper.Map(updateApplicationRequest,application);
         var updatedApplication = await _applicationDal.UpdateAsync(application);
         UpdatedApplicationResponse updatedApplicationResponse = _mapper.Map<UpdatedApplicationResponse>(updatedApplication);

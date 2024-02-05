@@ -59,7 +59,7 @@ namespace Business.Concretes;
 
 	public async Task<UpdatedAnswerResponse> UpdateAsync(UpdateAnswerRequest updateAnswerRequest)
 	{
-		Answer answer = await _answerDal.GetAsync(a => a.Id == updateAnswerRequest.Id);
+		Answer answer = await _answerBusinessRules.CheckIfExistsById(updateAnswerRequest.Id);
 		_mapper.Map(updateAnswerRequest,answer);
 		var updatedAnswer = await _answerDal.UpdateAsync(answer);
 		UpdatedAnswerResponse updatedAnswerResponse = _mapper.Map<UpdatedAnswerResponse>(updatedAnswer);

@@ -70,7 +70,7 @@ public class CalendarManager : ICalendarService
 
     public async Task<UpdatedCalendarResponse> UpdateAsync(UpdateCalendarRequest updateCalendarRequest)
     {
-        Calendar calendar = await _calendarDal.GetAsync(c => c.Id == updateCalendarRequest.Id);
+        Calendar calendar = await _calendarBusinessRules.CheckIfExistsById(updateCalendarRequest.Id);
         _mapper.Map(updateCalendarRequest, calendar);
         var updatedCal = await _calendarDal.UpdateAsync(calendar);
         UpdatedCalendarResponse updatedCalendarResponse = _mapper.Map<UpdatedCalendarResponse>(updatedCal);
