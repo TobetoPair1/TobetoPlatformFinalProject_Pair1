@@ -31,10 +31,10 @@ public class UsersController : ControllerBase
         var result = await _userService.GetListAsync(pageRequest);
         return Ok(result);
     }
-    [HttpGet("get")]
-    public async Task<IActionResult> Get([FromQuery] GetUserRequest getUserRequest)
+    [HttpGet("getbyid")]
+    public async Task<IActionResult> Get([FromQuery] Guid id)
     {
-        var result = await _userService.GetAsync(getUserRequest);
+        var result = await _userService.GetByIdAsync(id);
         return Ok(result);
     }
     [HttpGet("getbymail")]
