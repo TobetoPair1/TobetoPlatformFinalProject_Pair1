@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Business.Abstracts;
+using Business.Dtos.Requests.Answer;
 using Business.Dtos.Requests.Experience;
 using Business.Dtos.Responses.Education;
 using Business.Dtos.Responses.Experience;
@@ -15,16 +16,18 @@ public class ExperienceManager : IExperienceService
 {
     IMapper _mapper;
     IExperienceDal _experienceDal;
+    IUserService _userService;
     ExperienceBusinessRules _experienceBusinessRules;
 
 
     public ExperienceManager(IMapper mapper, IExperienceDal experienceDal,
         ExperienceBusinessRules experienceBusinessRules
-    )
+, IUserService userService)
     {
         _experienceDal = experienceDal;
         _mapper = mapper;
         _experienceBusinessRules = experienceBusinessRules;
+        _userService = userService;
     }
 
     public async Task<CreatedExperienceResponse> AddAsync(CreateExperienceRequest createExperienceRequest)
@@ -64,10 +67,10 @@ public class ExperienceManager : IExperienceService
     
     public async Task<UpdatedExperienceResponse> UpdateAsync(UpdateExperienceRequest updateExperienceRequest)
     {
+        await _experienceBusinessRules.CheckUserIfExists(updateExperienceRequest.Id);
         Experience experience = await _experienceBusinessRules.CheckIfExistsById(updateExperienceRequest.Id);
         var updatedExperience = await _experienceDal.UpdateAsync(experience);
         UpdatedExperienceResponse updatedExperienceResponse = _mapper.Map<UpdatedExperienceResponse>(updatedExperience);
         return updatedExperienceResponse; 
     }
-
 }
