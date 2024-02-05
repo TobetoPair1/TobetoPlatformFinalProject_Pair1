@@ -5,6 +5,7 @@ using Business.Dtos.Requests.CourseAsyncContent;
 using Business.Dtos.Requests.Like;
 using Business.Dtos.Responses.AsyncContent;
 using Business.Dtos.Responses.CourseAsyncContent;
+using Business.Rules;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
 using Entities.Concretes;
@@ -17,14 +18,16 @@ public class AsyncContentManager : IAsyncContentService
     IAsyncContentDal _asyncContentDal;
     ICourseAsyncContentService _courseAsyncContentService;
 	ILikeService _likeService;
-	public AsyncContentManager(IMapper mapper, IAsyncContentDal asyncContentDal, ICourseAsyncContentService courseAsyncContentService, ILikeService likeService)
-	{
-		_asyncContentDal = asyncContentDal;
-		_mapper = mapper;
-		_courseAsyncContentService = courseAsyncContentService;
-		_likeService = likeService;
-	}
-	public async Task<CreatedAsyncContentResponse> AddAsync(CreateAsyncContentRequest createAsyncContentRequest)
+    AsyncContentBusinessRules _asyncContentBusinessRules;
+    public AsyncContentManager(IMapper mapper, IAsyncContentDal asyncContentDal, ICourseAsyncContentService courseAsyncContentService, ILikeService likeService, AsyncContentBusinessRules asyncContentBusinessRules)
+    {
+        _asyncContentDal = asyncContentDal;
+        _mapper = mapper;
+        _courseAsyncContentService = courseAsyncContentService;
+        _likeService = likeService;
+        _asyncContentBusinessRules = asyncContentBusinessRules;
+    }
+    public async Task<CreatedAsyncContentResponse> AddAsync(CreateAsyncContentRequest createAsyncContentRequest)
     {
         AsyncContent asyncContent = _mapper.Map<AsyncContent>(createAsyncContentRequest);
 		asyncContent.LikeId = (await _likeService.AddAsync(new CreateLikeRequest())).Id;
@@ -40,7 +43,7 @@ public class AsyncContentManager : IAsyncContentService
 
 	public async Task<DeletedAsyncContentResponse> DeleteAsync(DeleteAsyncContentRequest deleteAsyncContentRequest)
     {
-        AsyncContent asyncContent = await _asyncContentDal.GetAsync(a => a.Id == deleteAsyncContentRequest.Id);
+        AsyncContent asyncContent = await _asyncContentBusinessRules.CheckIfExistsById(deleteAsyncContentRequest.Id);
         var deletedAsyncContent = await _asyncContentDal.DeleteAsync(asyncContent);
         DeletedAsyncContentResponse result = _mapper.Map<DeletedAsyncContentResponse>(deletedAsyncContent);
         return result;

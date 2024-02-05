@@ -15,6 +15,4 @@ public interface IApplicationService
     Task<GetApplicationResponse> GetByIdAsync(GetApplicationRequest getApplicationRequest);
     Task<IPaginate<GetListApplicationResponse>> GetListByUserIdAsync(Guid userId, PageRequest pageRequest);
     Task<CreatedUserApplicationResponse> AssignApplicationAsync(CreateUserApplicationRequest createUserApplicationRequest);
-
-
 }

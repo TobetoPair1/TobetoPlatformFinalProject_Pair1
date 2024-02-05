@@ -4,6 +4,7 @@ using Business.Dtos.Requests.Calendar;
 using Business.Dtos.Requests.UserCalendar;
 using Business.Dtos.Responses.Calender;
 using Business.Dtos.Responses.UserCalendar;
+using Business.Rules;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
 using Entities.Concretes;
@@ -15,12 +16,14 @@ public class CalendarManager : ICalendarService
     ICalendarDal _calendarDal;
     IMapper _mapper;
     IUserCalendarService _userCalendarService;
+    CalendarBusinessRules _calendarBusinessRules;
 
-    public CalendarManager(ICalendarDal calendarDal, IMapper mapper, IUserCalendarService userCalendarService)
+    public CalendarManager(ICalendarDal calendarDal, IMapper mapper, IUserCalendarService userCalendarService, CalendarBusinessRules calendarBusinessRules)
     {
         _calendarDal = calendarDal;
         _mapper = mapper;
         _userCalendarService = userCalendarService;
+        _calendarBusinessRules = calendarBusinessRules;
     }
 
 
@@ -35,7 +38,7 @@ public class CalendarManager : ICalendarService
 
     public async Task<DeletedCalendarResponse> DeleteAsync(DeleteCalendarRequest deleteCalendarRequest)
     {
-        Calendar cal = await _calendarDal.GetAsync(c => c.Id == deleteCalendarRequest.Id);
+        Calendar cal = await _calendarBusinessRules.CheckIfExistsById(deleteCalendarRequest.Id);
         var deletedCal = await _calendarDal.DeleteAsync(cal);
         DeletedCalendarResponse deletedCalResponse = _mapper.Map<DeletedCalendarResponse>(deletedCal);
         return deletedCalResponse;

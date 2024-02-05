@@ -1,11 +1,10 @@
 ﻿using AutoMapper;
 using Business.Abstracts;
 using Business.Dtos.Requests.Category;
-using Business.Dtos.Responses.Calender;
 using Business.Dtos.Responses.Category;
+using Business.Rules;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
-using DataAccess.Concretes.EntityFramework;
 using Entities.Concretes;
 
 namespace Business.Concretes;
@@ -14,11 +13,12 @@ public class CategoryManager : ICategoryService
 {
     ICategoryDal _categoryDal;
     IMapper _mapper;
-
-    public CategoryManager(ICategoryDal categoryManager, IMapper mapper)
+    CategoryBusinessRules _categoryBusinessRules;
+    public CategoryManager(ICategoryDal categoryManager, IMapper mapper, CategoryBusinessRules categoryBusinessRules)
     {
         _categoryDal = categoryManager;
         _mapper = mapper;
+        _categoryBusinessRules = categoryBusinessRules;
     }
 
     public async Task<CreatedCategoryResponse> AddAsync(CreateCategoryRequest createCategoryRequest)
@@ -32,7 +32,7 @@ public class CategoryManager : ICategoryService
 
     public async Task<DeletedCategoryResponse> DeleteAsync(DeleteCategoryRequest deleteCategoryRequest)
     {
-        Category cat = _mapper.Map<Category>(deleteCategoryRequest);
+        Category cat = await _categoryBusinessRules.CheckIfExistsById(deleteCategoryRequest.Id);
         Category deletedCat = await _categoryDal.DeleteAsync(cat, true);
 
         DeletedCategoryResponse deletedCatResponse = _mapper.Map<DeletedCategoryResponse>(deletedCat);

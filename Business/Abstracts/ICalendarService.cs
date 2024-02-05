@@ -15,5 +15,4 @@ public interface ICalendarService
     Task<GetCalendarResponse> GetByIdAsync(GetCalendarRequest getCalendarRequest);
     Task<IPaginate<GetListCalendarResponse>> GetByUserId(Guid userId, PageRequest pageRequest);
     Task<CreatedUserCalendarResponse> AssignCalendarAsync(CreateUserCalendarRequest createUserCalendarRequest);
-
 }

@@ -13,6 +13,3 @@ public interface IAnswerService
     Task<DeletedAnswerResponse> DeleteAsync(DeleteAnswerRequest deleteAnswerRequest);
     Task<UpdatedAnswerResponse> UpdateAsync(UpdateAnswerRequest updateAnswerRequest);
 }
-
-
-
