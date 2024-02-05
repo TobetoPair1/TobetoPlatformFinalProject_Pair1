@@ -20,7 +20,7 @@ public class SessionBusinessRules : BaseBusinessRules<Session>
     }
     public async Task CheckLiveContentIfExists(Guid liveContentId)
     {
-        GetLiveContentResponse liveContent = await _liveContentService.GetByIdAsync(new GetLiveContentRequest { Id = liveContentId });
+        GetLiveContentResponse liveContent = await _liveContentService.GetByIdAsync(liveContentId);
         if (liveContent == null)
         {
             throw new BusinessException(BusinessCoreMessages.CannotFindEntityError, BusinessCoreTitles.CannotFindError);
