@@ -1,4 +1,6 @@
-﻿using Core.Business.Rules;
+﻿using Business.Constants.Messages;
+using Core.Business.Rules;
+using Core.CrossCuttingConcerns.Exceptions.Types;
 using DataAccess.Abstracts;
 using Entities.Concretes;
 
@@ -11,4 +13,12 @@ public class CategoryBusinessRules:BaseBusinessRules<Category>
     {
         _categoryDal = categoryDal;
     }
+	public async Task AlreadyExixsts(string name)
+	{
+		var entity = await _categoryDal.GetAsync(c => c.Name == name);
+		if (entity != null)
+		{
+			throw new BusinessException(BusinessMessages.CategoryAlreadyExists, BusinessTitles.AlreadyExistsError);
+		}		
+	}
 }

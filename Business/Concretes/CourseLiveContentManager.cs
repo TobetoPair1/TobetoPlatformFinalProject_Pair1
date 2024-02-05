@@ -62,7 +62,7 @@ public class CourseLiveContentManager : ICourseLiveContentService
 
     public async Task<UpdatedCourseLiveContentResponse> UpdateAsync(UpdateCourseLiveContentRequest updateCourseLiveContentRequest)
     {
-        CourseLiveContent courseLiveContent = _mapper.Map<CourseLiveContent>(updateCourseLiveContentRequest);
+        CourseLiveContent courseLiveContent = await _courseLiveContentBusinessRules.CheckIfExistsWithForeignKey(updateCourseLiveContentRequest.CourseId, updateCourseLiveContentRequest.LiveContentId);
         CourseLiveContent updatedCourseLiveContent = await _courseLiveContentDal.UpdateAsync(courseLiveContent);
 
         return _mapper.Map<UpdatedCourseLiveContentResponse>(updatedCourseLiveContent);

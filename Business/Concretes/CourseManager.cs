@@ -6,6 +6,7 @@ using Business.Dtos.Requests.Like;
 using Business.Dtos.Requests.UserCourse;
 using Business.Dtos.Responses.Course;
 using Business.Dtos.Responses.UserCourse;
+using Business.Rules;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
 using Entities.Concretes;
@@ -20,13 +21,15 @@ public class CourseManager : ICourseService
     IUserCourseService _userCourseService;
     ILikeService _likeService;
     IFavouriteService _favouriteService;
-	public CourseManager(ICourseDal courseDal, IMapper mapper, IUserCourseService userCourseService, ILikeService likeService, IFavouriteService favouriteService)
+    CourseBusinessRules _courseBusinessRules;
+	public CourseManager(ICourseDal courseDal, IMapper mapper, IUserCourseService userCourseService, ILikeService likeService, IFavouriteService favouriteService, CourseBusinessRules courseBusinessRules)
 	{
 		_courseDal = courseDal;
 		_mapper = mapper;
 		_userCourseService = userCourseService;
 		_likeService = likeService;
 		_favouriteService = favouriteService;
+		_courseBusinessRules = courseBusinessRules;
 	}
 
 	public async Task<CreatedCourseResponse> AddAsync(CreateCourseRequest createCourseRequest)
@@ -48,7 +51,7 @@ public class CourseManager : ICourseService
 
 	public async Task<DeletedCourseResponse> DeleteAsync(DeleteCourseRequest deleteCourseRequest)
     {
-        Course course = _mapper.Map<Course>(deleteCourseRequest);
+        Course course = await _courseBusinessRules.CheckIfExistsById(deleteCourseRequest.Id);
         Course deletedCourse = await _courseDal.DeleteAsync(course);
         return _mapper.Map<DeletedCourseResponse>(deletedCourse);
     }
@@ -76,7 +79,7 @@ public class CourseManager : ICourseService
 
     public async Task<UpdatedCourseResponse> UpdateAsync(UpdateCourseRequest updateCourseRequest)
     {
-		Course course = await _courseDal.GetAsync(c => c.Id == updateCourseRequest.Id);
+        Course course = await _courseBusinessRules.CheckIfExistsById(updateCourseRequest.Id);
 		_mapper.Map(updateCourseRequest,course);
         Course updatedCourse = await _courseDal.UpdateAsync(course);
         return _mapper.Map<UpdatedCourseResponse>(updatedCourse);

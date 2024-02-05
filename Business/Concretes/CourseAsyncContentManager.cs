@@ -60,7 +60,7 @@ public class CourseAsyncContentManager : ICourseAsyncContentService
 
 	public async Task<UpdatedCourseAsyncContentResponse> UpdateAsync(UpdateCourseAsyncContentRequest updateCourseAsyncContentRequest)
     {
-        CourseAsyncContent asyncContent = _mapper.Map<CourseAsyncContent>(updateCourseAsyncContentRequest);
+        CourseAsyncContent asyncContent = await _courseAsyncContentBusinessRules.CheckIfExistsWithForeignKey(updateCourseAsyncContentRequest.CourseId, updateCourseAsyncContentRequest.AsyncContentId);
         CourseAsyncContent updatedAsyncContent = await _courseAsyncDal.UpdateAsync(asyncContent);
 
         return _mapper.Map<UpdatedCourseAsyncContentResponse>(updatedAsyncContent);

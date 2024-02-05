@@ -19,9 +19,7 @@ namespace DataAccess.EntityConfigurations
 			builder.Property(c => c.EndOfDate).HasColumnName("EndOfDate").IsRequired();
 			builder.Property(c => c.TimeSpent).HasColumnName("TimeSpent").IsRequired();
 			builder.Property(c => c.ContentCount).HasColumnName("ContentCount").IsRequired();
-			builder.Property(c => c.ProducingCompany).HasColumnName("ProducingCompany").IsRequired();
-
-			builder.HasIndex(c => c.Name, "UK_Courses_Name").IsUnique();
+			builder.Property(c => c.ProducingCompany).HasColumnName("ProducingCompany").IsRequired();			
 
 
 			builder.HasQueryFilter(c => !c.DeletedDate.HasValue);

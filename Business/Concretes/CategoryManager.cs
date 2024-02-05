@@ -23,6 +23,7 @@ public class CategoryManager : ICategoryService
 
     public async Task<CreatedCategoryResponse> AddAsync(CreateCategoryRequest createCategoryRequest)
     {
+        await _categoryBusinessRules.AlreadyExixsts(createCategoryRequest.Name);
         Category cat = _mapper.Map<Category>(createCategoryRequest);
         Category createdCat = await _categoryDal.AddAsync(cat);
 

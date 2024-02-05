@@ -56,7 +56,7 @@ public class EducationManager : IEducationService
 
     public async Task<UpdatedEducationResponse> UpdateAsync(UpdateEducationRequest updateEducationRequest)
     {
-        Education education = await _educationDal.GetAsync(e => e.UserId == updateEducationRequest.UserId);
+        Education education = await _educationBusinessRules.CheckIfExistsById(updateEducationRequest.Id);
         _mapper.Map(updateEducationRequest, education);
         var updatedEducation = await _educationDal.UpdateAsync(education);
         UpdatedEducationResponse updatedEducationResponse = _mapper.Map<UpdatedEducationResponse>(updatedEducation);
