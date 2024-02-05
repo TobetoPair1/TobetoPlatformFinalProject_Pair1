@@ -66,12 +66,13 @@ public class ExamManager : IExamService
         var result = await _examDal.GetListAsync(index: pageRequest.PageIndex, size: pageRequest.PageSize);
         return _mapper.Map<Paginate<GetListExamResponse>>(result);
     }
-	public async Task<UpdatedExamResponse> UpdateAsync(UpdateExamRequest updateExamRequest)
+    
+    public async Task<UpdatedExamResponse> UpdateAsync(UpdateExamRequest updateExamRequest)
     {
-        Exam exam = await _examDal.GetAsync(e => e.Id== updateExamRequest.Id);
-        _mapper.Map(updateExamRequest, exam);
+        Exam exam = await _examBusinessRules.CheckIfExistsById(updateExamRequest.Id);
         var updatedExam = await _examDal.UpdateAsync(exam);
         UpdatedExamResponse updatedExamResponse = _mapper.Map<UpdatedExamResponse>(updatedExam);
-        return updatedExamResponse;
+        return updatedExamResponse; 
     }
+
 }
