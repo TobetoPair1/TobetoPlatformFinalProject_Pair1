@@ -2,6 +2,7 @@
 using Business.Abstracts;
 using Business.Dtos.Requests.Like;
 using Business.Dtos.Responses.Like;
+using Business.Rules;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
 using Entities.Concretes;
@@ -12,14 +13,14 @@ public class LikeManager : ILikeService
 {
     ILikeDal _likeDal;
     IMapper _mapper;
-   
+    LikeBusinessRules _likeBusinessRules;
 
-    public LikeManager(ILikeDal likeDal, IMapper mapper)
+    public LikeManager(ILikeDal likeDal, IMapper mapper, LikeBusinessRules likeBusinessRules)
     {
         _likeDal = likeDal;
         _mapper = mapper;
+        _likeBusinessRules = likeBusinessRules;
     }
-
 
     public async Task<CreatedLikeResponse> AddAsync(CreateLikeRequest createLikeRequest)
     {

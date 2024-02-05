@@ -2,6 +2,7 @@
 using Business.Abstracts;
 using Business.Dtos.Requests.OperationClaim;
 using Business.Dtos.Responses.OperationClaim;
+using Business.Rules;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
 using Entities.Concretes;
@@ -12,11 +13,15 @@ public class OperationClaimManager : IOperationClaimService
 {
     IMapper _mapper;
     IOperationClaimDal _operationClaimDal;
-    public OperationClaimManager(IMapper mapper, IOperationClaimDal operationClaimDal)
+    OperationClaimBusinessRules _operationClaimBusinessRules;
+
+    public OperationClaimManager(IMapper mapper, IOperationClaimDal operationClaimDal, OperationClaimBusinessRules operationClaimBusinessRules)
     {
         _mapper = mapper;
         _operationClaimDal = operationClaimDal;
+        _operationClaimBusinessRules = operationClaimBusinessRules;
     }
+
     public async Task<CreatedOperationClaimResponse> AddAsync(CreateOperationClaimRequest createOperationClaimRequest)
     {
         OperationClaim operationClaim = _mapper.Map<OperationClaim>(createOperationClaimRequest);
