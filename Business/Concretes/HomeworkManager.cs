@@ -52,6 +52,8 @@ public class HomeworkManager : IHomeworkService
 
     public async Task<UpdatedHomeworkResponse> UpdateAsync(UpdateHomeworkRequest updateHomeworkRequest)
     {
+        await _homeworkBusinessRules.CheckCourseIfExists(updateHomeworkRequest.CourseId);
+        await _homeworkBusinessRules.CheckLiveContentIfExists(updateHomeworkRequest.LiveContentId);
         Homework homework = await _homeworkBusinessRules.CheckIfExistsById(updateHomeworkRequest.Id);
         var updatedHomework = await _homeworkDal.UpdateAsync(homework);
         UpdatedHomeworkResponse updatedHomeworkResponse = _mapper.Map<UpdatedHomeworkResponse>(updatedHomework);

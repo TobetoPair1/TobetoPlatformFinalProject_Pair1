@@ -31,9 +31,9 @@ public class LiveContentsController : ControllerBase
     }
 
     [HttpGet("get")]
-    public async Task<IActionResult> Get([FromQuery] GetLiveContentRequest getLiveContentRequest)
+    public async Task<IActionResult> GetById([FromQuery] Guid id)
     {
-        var result = await _liveContentService.GetByIdAsync(getLiveContentRequest);
+        var result = await _liveContentService.GetByIdAsync(id);
         return Ok(result);
     }
 

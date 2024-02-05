@@ -52,9 +52,9 @@ public class LiveContentManager : ILiveContentService
         return result;
     }
 
-    public async Task<GetLiveContentResponse> GetByIdAsync(GetLiveContentRequest getLiveContentRequest)
+    public async Task<GetLiveContentResponse> GetByIdAsync(Guid id)
     {
-        var result = await _liveContentDal.GetAsync(l => l.Id == getLiveContentRequest.Id);
+        var result = await _liveContentDal.GetAsync(l => l.Id == id);
         return _mapper.Map<GetLiveContentResponse>(result);
     }
 
