@@ -50,6 +50,7 @@ public class SocialMediaManager: ISocialMediaService
 
     public async Task<UpdatedSocialMediaResponse> UpdateAsync(UpdateSocialMediaRequest updateSocialMediaRequest)
     {
+        await _socialMediaBusinessRules.CheckUserIfExists(updateSocialMediaRequest.UserId);
         SocialMedia socialMedia = await _socialMediaBusinessRules.CheckIfExistsById(id: updateSocialMediaRequest.Id);
         _mapper.Map(updateSocialMediaRequest, socialMedia);
         var updatedSocialMedia = await _socialMediaDal.UpdateAsync(socialMedia);
