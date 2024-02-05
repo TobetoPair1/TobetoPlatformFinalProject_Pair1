@@ -32,7 +32,7 @@ public class SocialMediaBusinessRules : BaseBusinessRules<SocialMedia>
 
     public async Task CheckUserIfExists(Guid userId)
     {
-        GetUserResponse user = await _userService.GetByIdAsync(new GetUserRequest { Id=userId});
+        GetUserResponse user = await _userService.GetByIdAsync(userId);
         if (user == null)
         {
             throw new BusinessException(BusinessCoreMessages.CannotFindEntityError, BusinessCoreTitles.CannotFindError);
