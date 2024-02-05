@@ -1,9 +1,7 @@
 ﻿using Core.DataAccess.Repositories;
 using Entities.Concretes.CrossTables;
 
-namespace DataAccess.Abstracts
+namespace DataAccess.Abstracts;
+public interface IUserApplicationDal : IAsyncRepository<UserApplication, Guid>, IRepository<UserApplication, Guid>
 {
-    public interface IUserApplicationDal : IAsyncRepository<UserApplication, Guid>, IRepository<UserApplication, Guid>
-    {
-    }
 }

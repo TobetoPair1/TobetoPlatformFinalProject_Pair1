@@ -24,6 +24,5 @@ public class ExperienceProfile : Profile
         CreateMap<Experience, GetListExperienceResponse>();
 
         CreateMap<Experience, GetExperienceResponse>().ReverseMap();
-
     }
 }

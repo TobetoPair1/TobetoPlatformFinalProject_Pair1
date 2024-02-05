@@ -3,6 +3,7 @@ using Business.Abstracts;
 using Business.Dtos.Requests.Experience;
 using Business.Dtos.Responses.Education;
 using Business.Dtos.Responses.Experience;
+using Business.Rules;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
 using DataAccess.Concretes.EntityFramework;
@@ -14,11 +15,16 @@ public class ExperienceManager : IExperienceService
 {
     IMapper _mapper;
     IExperienceDal _experienceDal;
+    ExperienceBusinessRules _experienceBusinessRules;
 
-    public ExperienceManager(IMapper mapper, IExperienceDal experienceDal)
+
+    public ExperienceManager(IMapper mapper, IExperienceDal experienceDal,
+        ExperienceBusinessRules experienceBusinessRules
+    )
     {
-        _mapper = mapper;
         _experienceDal = experienceDal;
+        _mapper = mapper;
+        _experienceBusinessRules = experienceBusinessRules;
     }
 
     public async Task<CreatedExperienceResponse> AddAsync(CreateExperienceRequest createExperienceRequest)
@@ -31,11 +37,12 @@ public class ExperienceManager : IExperienceService
 
     public async Task<DeletedExperienceResponse> DeleteAsync(DeleteExperienceRequest deleteExperienceRequest)
     {
-        Experience experience = await _experienceDal.GetAsync(e => e.Id == deleteExperienceRequest.Id);
+        Experience experience = await _experienceBusinessRules.CheckIfExistsById(deleteExperienceRequest.Id);
         var deletedExperience = await _experienceDal.DeleteAsync(experience);
         DeletedExperienceResponse deletedExperienceResponse = _mapper.Map<DeletedExperienceResponse>(deletedExperience);
-        return deletedExperienceResponse;
+        return deletedExperienceResponse; 
     }
+
 
     public async Task<GetExperienceResponse> GetByIdAsync(GetExperienceRequest getExperienceRequest)
     {

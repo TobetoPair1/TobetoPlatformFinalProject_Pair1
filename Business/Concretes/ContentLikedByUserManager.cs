@@ -2,6 +2,7 @@
 using Business.Abstracts;
 using Business.Dtos.Requests.ContentLikedByUser;
 using Business.Dtos.Responses.ContentLikedByUser;
+using Business.Rules;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
 using Entities.Concretes.CrossTables;
@@ -12,12 +13,14 @@ namespace Business.Concretes
     {
         IMapper _mapper;
         IContentLikedByUserDal _contentLikedByUserDal;
-        public ContentLikedByUserManager(IMapper mapper, IContentLikedByUserDal contentLikedByUserDal)
-        {
-            _mapper = mapper;
-            _contentLikedByUserDal = contentLikedByUserDal;
-        }
-        public async Task<CreatedContentLikedByUserResponse> AddAsync(CreateContentLikedByUserRequest createContentLikedByUserRequest)
+        ContentLikedByUserBusinessRules _contentLikedByUserBusinessRules;
+		public ContentLikedByUserManager(IMapper mapper, IContentLikedByUserDal contentLikedByUserDal, ContentLikedByUserBusinessRules contentLikedByUserBusinessRules)
+		{
+			_mapper = mapper;
+			_contentLikedByUserDal = contentLikedByUserDal;
+			_contentLikedByUserBusinessRules = contentLikedByUserBusinessRules;
+		}
+		public async Task<CreatedContentLikedByUserResponse> AddAsync(CreateContentLikedByUserRequest createContentLikedByUserRequest)
         {
             ContentLikedByUser contentLikedByUser = _mapper.Map<ContentLikedByUser>(createContentLikedByUserRequest);
             var createdContentLikedByUser = await _contentLikedByUserDal.AddAsync(contentLikedByUser);
@@ -27,7 +30,7 @@ namespace Business.Concretes
 
         public async Task<DeletedContentLikedByUserResponse> DeleteAsync(DeleteContentLikedByUserRequest deleteContentLikedByUserRequest)
         {
-            ContentLikedByUser contentLikedByUser = await _contentLikedByUserDal.GetAsync(clbu => clbu.ContentId == deleteContentLikedByUserRequest.ContentId && clbu.UserId == deleteContentLikedByUserRequest.UserId);
+            ContentLikedByUser contentLikedByUser = await _contentLikedByUserBusinessRules.CheckIfExistsWithForeignKey(deleteContentLikedByUserRequest.UserId, deleteContentLikedByUserRequest.ContentId);
             var deleteContentLikedByUser = await _contentLikedByUserDal.DeleteAsync(contentLikedByUser);
             DeletedContentLikedByUserResponse deletedContentLikedByUserResponse = _mapper.Map<DeletedContentLikedByUserResponse>(deleteContentLikedByUser);
             return deletedContentLikedByUserResponse;

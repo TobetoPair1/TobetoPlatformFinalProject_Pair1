@@ -1,9 +1,7 @@
 ﻿using Core.DataAccess.Repositories;
 using Entities.Concretes;
 
-namespace DataAccess.Abstracts
+namespace DataAccess.Abstracts;
+public interface IUserOperationClaimDal : IAsyncRepository<UserOperationClaim, Guid>,IRepository<UserOperationClaim, Guid>
 {
-    public interface IUserOperationClaimDal : IAsyncRepository<UserOperationClaim, Guid>,IRepository<UserOperationClaim, Guid>
-    {
-    }
 }

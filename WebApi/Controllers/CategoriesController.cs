@@ -46,4 +46,3 @@ public class CategoriesController : ControllerBase
         return Ok(await _categoryService.UpdateAsync(updateCategoryRequest));
     }
 }
-

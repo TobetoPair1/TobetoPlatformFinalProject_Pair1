@@ -41,6 +41,5 @@ public class InstructorSessionProfile : Profile
            .ReverseMap();
 
         CreateMap<Paginate<InstructorSession>, Paginate<GetListSessionResponse>>().ReverseMap();
-
     }
 }

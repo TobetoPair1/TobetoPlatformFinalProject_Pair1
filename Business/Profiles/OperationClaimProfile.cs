@@ -23,6 +23,5 @@ public class OperationClaimProfile : Profile
         CreateMap<OperationClaim, GetListOperationClaimResponse>().ReverseMap();
 
         CreateMap<OperationClaim, GetListOperationClaimResponse>().ReverseMap();
-
     }
 }

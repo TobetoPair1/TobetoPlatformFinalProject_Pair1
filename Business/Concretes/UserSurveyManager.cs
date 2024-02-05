@@ -3,6 +3,7 @@ using Business.Abstracts;
 using Business.Dtos.Requests.UserSurvey;
 using Business.Dtos.Responses.Survey;
 using Business.Dtos.Responses.UserSurvey;
+using Business.Rules;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
 using Entities.Concretes.CrossTables;
@@ -13,7 +14,7 @@ public class UserSurveyManager : IUserSurveyService
 {
     IMapper _mapper;
     IUserSurveyDal _userSurveyDal;
-
+    UserSurveyBusinessRules _userSurveyBusinessRules;
     public UserSurveyManager(IMapper mapper, IUserSurveyDal userSurveyDal)
     {
         _mapper = mapper;
@@ -30,7 +31,7 @@ public class UserSurveyManager : IUserSurveyService
 
     public async Task<DeletedUserSurveyResponse> DeleteAsync(DeleteUserSurveyRequest deleteUserSurveyRequest)
     {
-        UserSurvey userSurvey = await _userSurveyDal.GetAsync(us => us.UserId == deleteUserSurveyRequest.UserId && us.SurveyId == deleteUserSurveyRequest.SurveyId);
+        UserSurvey userSurvey = await _userSurveyBusinessRules.CheckIfExistsWithForeignKey(deleteUserSurveyRequest.UserId, deleteUserSurveyRequest.SurveyId);
         var deletedUserSurvey = await _userSurveyDal.DeleteAsync(userSurvey, true);
         DeletedUserSurveyResponse deletedUserSurveyResponse = _mapper.Map<DeletedUserSurveyResponse>(deletedUserSurvey);
         return deletedUserSurveyResponse;

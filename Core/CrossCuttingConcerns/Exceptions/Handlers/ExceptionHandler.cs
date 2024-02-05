@@ -1,7 +1,6 @@
 ﻿using Core.CrossCuttingConcerns.Exceptions.Types;
 
 namespace Core.CrossCuttingConcerns.Exceptions.Handlers;
-
 public abstract class ExceptionHandler
 {
     public Task HandleExceptionAsync(Exception exception) =>
@@ -15,5 +14,4 @@ public abstract class ExceptionHandler
     protected abstract Task HandleException(BusinessException businessException);
     //protected abstract Task HandleException(ValidationException validationException);
     //protected abstract Task HandleException(Exception exception);
-
 }

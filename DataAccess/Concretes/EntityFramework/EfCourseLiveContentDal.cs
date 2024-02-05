@@ -3,12 +3,11 @@ using DataAccess.Abstracts;
 using DataAccess.Contexts;
 using Entities.Concretes.CrossTables;
 
-namespace DataAccess.Concretes.EntityFramework
+namespace DataAccess.Concretes.EntityFramework;
+
+public class EfCourseLiveContentDal : EfRepositoryBase<CourseLiveContent, Guid, TobetoPlatformContext>, ICourseLiveContentDal
 {
-    public class EfCourseLiveContentDal : EfRepositoryBase<CourseLiveContent, Guid, TobetoPlatformContext>, ICourseLiveContentDal
+    public EfCourseLiveContentDal(TobetoPlatformContext context) : base(context)
     {
-        public EfCourseLiveContentDal(TobetoPlatformContext context) : base(context)
-        {
-        }
     }
 }

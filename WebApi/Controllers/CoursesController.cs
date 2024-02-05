@@ -63,7 +63,3 @@ public class CoursesController : ControllerBase
         return Ok(result);
     }
 }
-
-
-
-

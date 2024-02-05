@@ -4,6 +4,7 @@ using Business.Dtos.Requests.File;
 using Business.Dtos.Requests.HomeworkFile;
 using Business.Dtos.Responses.File;
 using Business.Dtos.Responses.HomeworkFile;
+using Business.Rules;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
 using File = Entities.Concretes.File;
@@ -12,15 +13,17 @@ namespace Business.Concretes;
 
 public class FileManager : IFileService
 {
-    private readonly IFileDal _fileDal;
-    private readonly IHomeworFileService _homeworFileService;
-    private readonly IMapper _mapper;
+    IFileDal _fileDal;
+    IHomeworkFileService _homeworkFileService;
+    IMapper _mapper;
+    FileBusinessRules _fileBusinessRules;
 
-	public FileManager(IFileDal fileDal, IMapper mapper, IHomeworFileService homeworFileService)
+	public FileManager(IFileDal fileDal, IMapper mapper, IHomeworkFileService homeworFileService, FileBusinessRules fileBusinessRules)
 	{
 		_fileDal = fileDal;
 		_mapper = mapper;
-		_homeworFileService = homeworFileService;
+		_homeworkFileService = homeworFileService;
+		_fileBusinessRules = fileBusinessRules;
 	}
 
 	public async Task<CreatedFileResponse> AddAsync(CreateFileRequest createFileRequest)
@@ -33,16 +36,17 @@ public class FileManager : IFileService
 
 	public async Task<CreatedHomeworkFileResponse> AssignHomework(CreateHomeworkFileRequest createHomeworkFileRequest)
 	{
-        return await _homeworFileService.AddAsync(createHomeworkFileRequest);
+        return await _homeworkFileService.AddAsync(createHomeworkFileRequest);
 	}
 
 	public async Task<DeletedFileResponse> DeleteAsync(DeleteFileRequest deleteFileRequest)
-    {
-        File file = await _fileDal.GetAsync(f => f.Id == deleteFileRequest.Id);
-        var deletedFile = await _fileDal.DeleteAsync(file);
-        DeletedFileResponse deletedFileResponse = _mapper.Map<DeletedFileResponse>(deletedFile);
-        return deletedFileResponse;
-    }
+	{
+		File file = await _fileBusinessRules.CheckIfExistsById(deleteFileRequest.Id);
+		var deletedFile = await _fileDal.DeleteAsync(file);
+		DeletedFileResponse deletedFileResponse = _mapper.Map<DeletedFileResponse>(deletedFile);
+		return deletedFileResponse; 
+	}
+
 
     public async Task<GetFileResponse> GetByIdAsync(GetFileRequest getFileRequest)
     {
@@ -58,7 +62,7 @@ public class FileManager : IFileService
 
 	public async Task<IPaginate<GetListFileResponse>> GetListByHomeworkIdAsync(Guid homeworkId, PageRequest pageRequest)
 	{
-        return await _homeworFileService.GetListByHomeworkIdAsync(homeworkId,pageRequest);
+        return await _homeworkFileService.GetListByHomeworkIdAsync(homeworkId,pageRequest);
 	}
 
 	public async Task<UpdatedFileResponse> UpdateAsync(UpdateFileRequest updateFileRequest)

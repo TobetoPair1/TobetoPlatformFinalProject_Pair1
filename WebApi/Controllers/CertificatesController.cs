@@ -41,5 +41,4 @@ public class CertificatesController : ControllerBase
         var result = await _certificateService.DeleteAsync(deleteCertificateRequest);
         return Ok(result);
     }
-
 }

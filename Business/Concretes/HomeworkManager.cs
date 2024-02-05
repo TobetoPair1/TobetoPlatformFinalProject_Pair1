@@ -2,6 +2,7 @@
 using Business.Abstracts;
 using Business.Dtos.Requests.Homework;
 using Business.Dtos.Responses.Homework;
+using Business.Rules;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
 using Entities.Concretes;
@@ -12,10 +13,13 @@ public class HomeworkManager : IHomeworkService
 {
     IMapper _mapper;
     IHomeworkDal _homeworkDal;
-    public HomeworkManager(IMapper mapper, IHomeworkDal homeworkDal)
+    HomeworkBusinessRules _homeworkBusinessRules;
+    public HomeworkManager(IMapper mapper, IHomeworkDal homeworkDal,
+        HomeworkBusinessRules homeworkBusinessRules)
     {
         _mapper = mapper;
         _homeworkDal = homeworkDal;
+        _homeworkBusinessRules = homeworkBusinessRules;
     }
     public async Task<CreatedHomeworkResponse> AddAsync(CreateHomeworkRequest createHomeworkRequest)
     {
@@ -27,11 +31,12 @@ public class HomeworkManager : IHomeworkService
 
     public async Task<DeletedHomeworkResponse> DeleteAsync(DeleteHomeworkRequest deleteHomeworkRequest)
     {
-        Homework homework = await _homeworkDal.GetAsync(h => h.Id == deleteHomeworkRequest.Id);
+        Homework homework = await _homeworkBusinessRules.CheckIfExistsById(deleteHomeworkRequest.Id);
         var deletedHomework = await _homeworkDal.DeleteAsync(homework);
-        DeletedHomeworkResponse result = _mapper.Map<DeletedHomeworkResponse>(deletedHomework);
-        return result;
+        DeletedHomeworkResponse deletedHomeworkResponse = _mapper.Map<DeletedHomeworkResponse>(deletedHomework);
+        return deletedHomeworkResponse; 
     }
+
 
     public async Task<GetHomeworkResponse> GetByIdAsync(GetHomeworkRequest getHomeworkRequest)
     {

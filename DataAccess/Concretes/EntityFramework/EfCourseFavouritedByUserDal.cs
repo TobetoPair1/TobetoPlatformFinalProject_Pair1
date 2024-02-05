@@ -3,12 +3,11 @@ using DataAccess.Abstracts;
 using DataAccess.Contexts;
 using Entities.Concretes.CrossTables;
 
-namespace DataAccess.Concretes.EntityFramework
+namespace DataAccess.Concretes.EntityFramework;
+
+public class EfCourseFavouritedByUserDal : EfRepositoryBase<CourseFavouritedByUser, Guid, TobetoPlatformContext>, ICourseFavouritedByUserDal
 {
-	public class EfCourseFavouritedByUserDal : EfRepositoryBase<CourseFavouritedByUser, Guid, TobetoPlatformContext>, ICourseFavouritedByUserDal
+	public EfCourseFavouritedByUserDal(TobetoPlatformContext context) : base(context)
 	{
-		public EfCourseFavouritedByUserDal(TobetoPlatformContext context) : base(context)
-		{
-		}
 	}
 }
