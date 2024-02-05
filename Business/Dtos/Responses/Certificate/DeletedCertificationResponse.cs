@@ -1,4 +1,11 @@
-﻿namespace Business.Dtos.Responses.Certificate
+﻿namespace Business.Dtos.Responses.Certificate;
+
+
+public class DeletedCertificateResponse
 {
-	public record DeletedCertificateResponse(Guid Id, string Name, Guid UserId, string FilePath, string FileType);
+	public Guid Id { get; set; }
+	public bool IsDeleted { get; set; }
 }
+
+
+	
