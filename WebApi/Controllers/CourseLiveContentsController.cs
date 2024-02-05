@@ -23,14 +23,14 @@ public class CourseLiveContentsController : ControllerBase
         return Ok(result);
     }
 
-    [HttpGet("GetAll")]
+    [HttpGet("getAll")]
     public async Task<IActionResult> GetAll([FromQuery] PageRequest pageRequest)
     {
         var result = await _courseLiveContentService.GetListAsync(pageRequest);
         return Ok(result);
     }
 
-    [HttpGet("Get")]
+    [HttpGet("get")]
     public async Task<IActionResult> Get([FromQuery]GetCourseLiveContentRequest getCourseLiveContentRequest)
     {
         var result = await _courseLiveContentService.GetAsync(getCourseLiveContentRequest);

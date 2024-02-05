@@ -23,6 +23,7 @@ public class CategoryManager : ICategoryService
 
     public async Task<CreatedCategoryResponse> AddAsync(CreateCategoryRequest createCategoryRequest)
     {
+        await _categoryBusinessRules.AlreadyExixsts(createCategoryRequest.Name);
         Category cat = _mapper.Map<Category>(createCategoryRequest);
         Category createdCat = await _categoryDal.AddAsync(cat);
 
@@ -55,7 +56,7 @@ public class CategoryManager : ICategoryService
 
     public async Task<UpdatedCategoryResponse> UpdateAsync(UpdateCategoryRequest updateCategoryRequest)
     {
-        Category cat = await _categoryDal.GetAsync(c=>c.Id == updateCategoryRequest.Id);
+        Category cat = await _categoryBusinessRules.CheckIfExistsById(updateCategoryRequest.Id);
         _mapper.Map(updateCategoryRequest, cat);
         Category updateDcat = await _categoryDal.UpdateAsync(cat);
         UpdatedCategoryResponse updateDcatResponse = _mapper.Map<UpdatedCategoryResponse>(updateDcat);

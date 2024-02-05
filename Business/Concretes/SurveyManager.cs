@@ -64,7 +64,7 @@ public class SurveyManager : ISurveyService
 
     public async Task<UpdatedSurveyResponse> UpdateAsync(UpdateSurveyRequest updateSurveyRequest)
     {
-        Survey survey = await _surveyDal.GetAsync(s => s.Id == updateSurveyRequest.Id);
+        Survey survey = await _surveyBusinessRules.CheckIfExistsById(updateSurveyRequest.Id);
         _mapper.Map(updateSurveyRequest, survey);
         var updatedSurvey = await _surveyDal.UpdateAsync(survey);
         UpdatedSurveyResponse updatedSurveyResponse = _mapper.Map<UpdatedSurveyResponse>(updatedSurvey);

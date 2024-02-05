@@ -21,14 +21,14 @@ public class CertificatesController : ControllerBase
         var result = await _certificateService.AddAsync(certificateRequest);
         return Ok(result);
     }
-    [HttpGet("Get")]
+    [HttpGet("get")]
     public async Task<IActionResult> Get([FromQuery] GetCertificateRequest getCertificateRequest)
     {
         var result = await _certificateService.GetAsync(getCertificateRequest);
         return Ok(result);
     }
 
-    [HttpGet("GetAll")]
+    [HttpGet("getAll")]
     public async Task<IActionResult> GetAll([FromQuery] PageRequest pageRequest)
     {
         var result = await _certificateService.GetListAsync(pageRequest);

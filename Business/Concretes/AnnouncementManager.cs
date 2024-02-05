@@ -50,7 +50,7 @@ public class AnnouncementManager : IAnnouncementService
 
     public async Task<UpdatedAnnouncementResponse> UpdateAsync(UpdateAnnouncementRequest updateAnnouncementRequest)
     {
-		Announcement announcement = await _announcementDal.GetAsync(a => a.Id == updateAnnouncementRequest.Id);
+        Announcement announcement = await _announcementBusinessRules.CheckIfExistsById(updateAnnouncementRequest.Id);
 		_mapper.Map(updateAnnouncementRequest,announcement);
         var updatedAnnouncement = await _announcementDal.UpdateAsync(announcement);
         UpdatedAnnouncementResponse updatedAnnouncementResponse = _mapper.Map<UpdatedAnnouncementResponse>(updatedAnnouncement);
