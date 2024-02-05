@@ -12,4 +12,3 @@ public interface ICategoryService
     Task<UpdatedCategoryResponse> UpdateAsync(UpdateCategoryRequest updateCategoryRequest);
     Task<GetCategoryResponse> GetByIdAsync(GetCategoryRequest getCategoryRequest);
 }
-

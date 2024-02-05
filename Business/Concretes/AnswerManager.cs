@@ -2,6 +2,7 @@
 using Business.Abstracts;
 using Business.Dtos.Requests.Answer;
 using Business.Dtos.Responses.Answer;
+using Business.Rules;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
 using Entities.Concretes;
@@ -13,14 +14,16 @@ namespace Business.Concretes;
 {
 	IAnswerDal _answerDal;
 	IMapper _mapper;
+	AnswerBusinessRules _answerBusinessRules;
 
-	public AnswerManager(IAnswerDal answerDal, IMapper mapper)
-	{
-		_answerDal = answerDal;
-		_mapper = mapper;
-	}
+    public AnswerManager(IAnswerDal answerDal, IMapper mapper, AnswerBusinessRules answerBusinessRules)
+    {
+        _answerDal = answerDal;
+        _mapper = mapper;
+        _answerBusinessRules = answerBusinessRules;
+    }
 
-	public async Task<CreatedAnswerResponse> AddAsync(CreateAnswerRequest createAnswerRequest)
+    public async Task<CreatedAnswerResponse> AddAsync(CreateAnswerRequest createAnswerRequest)
 	{			
 		Answer answer = _mapper.Map<Answer>(createAnswerRequest);
 		var createdAnswer = await _answerDal.AddAsync(answer);
@@ -30,7 +33,7 @@ namespace Business.Concretes;
 
 	public async Task<DeletedAnswerResponse> DeleteAsync(DeleteAnswerRequest deleteAnswerRequest)
 	{
-		Answer answer = await _answerDal.GetAsync(a => a.Id == deleteAnswerRequest.Id);
+		Answer answer = await _answerBusinessRules.CheckIfExistsById(deleteAnswerRequest.Id);
 		var deletedAnswer = await _answerDal.DeleteAsync(answer);
 		DeletedAnswerResponse deletedAnswerResponse = _mapper.Map<DeletedAnswerResponse>(deletedAnswer);
 		return deletedAnswerResponse;

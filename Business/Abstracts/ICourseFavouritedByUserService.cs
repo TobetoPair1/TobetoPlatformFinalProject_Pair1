@@ -9,6 +9,3 @@ public interface ICourseFavouritedByUserService
     Task<GetCourseFavouriteByUserResponse> GetByIdAsync(GetFavouriteByUserRequest getFavouriteByUserRequest);
     Task<DeletedCourseFavouriteByUserResponse> DeleteAsync(DeleteFavouriteByUserRequest deleteFavouriteByUserRequest);
 }
-
-
-

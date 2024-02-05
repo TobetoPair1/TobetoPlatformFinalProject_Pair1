@@ -5,7 +5,6 @@ using Business.Dtos.Responses.UserExam;
 using Core.DataAccess.Paging;
 
 namespace Business.Abstracts;
-
 public interface IExamService
 {
     Task<CreatedExamResponse> AddAsync(CreateExamRequest createExamRequest);

@@ -16,5 +16,3 @@ public interface IFileService
 	Task<IPaginate<GetListFileResponse>> GetListByHomeworkIdAsync(Guid homeworkId, PageRequest pageRequest);
 	Task<CreatedHomeworkFileResponse> AssignHomework(CreateHomeworkFileRequest createHomeworkFileRequest);
 }
-
-
