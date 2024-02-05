@@ -22,7 +22,7 @@ public class AssignmentBusinessRules:BaseBusinessRules<Assignment>
 	}
 	public async Task CheckCourseIfExists(Guid courseId)
 	{
-		GetCourseResponse course = await _courseService.GetByIdAsync(new GetCourseRequest { Id=courseId});
+		GetCourseResponse course = await _courseService.GetByIdAsync(courseId);
 		if (course == null)
 		{
 			throw new BusinessException(BusinessCoreMessages.CannotFindEntityError, BusinessCoreTitles.CannotFindError);
