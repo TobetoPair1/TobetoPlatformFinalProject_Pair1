@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Business.Abstracts;
+using Business.Dtos.Requests.OperationClaim;
 using Business.Dtos.Requests.PersonalInfo;
 using Business.Dtos.Responses.PersonalInfo;
 using Business.Rules;
@@ -58,8 +59,8 @@ public class PersonalInfoManager : IPersonalInfoService
 
     public async Task<UpdatedPersonalInfoResponse> UpdateAsync(UpdatePersonalInfoRequest updatePersonalInfoRequest)
     {
-		PersonalInfo personalInfo = await _personalInfoDal.GetAsync(p => p.Id == updatePersonalInfoRequest.Id);
-		_mapper.Map(updatePersonalInfoRequest,personalInfo);
+		PersonalInfo personalInfo = await _personalInfoBusinessRules.CheckIfExistsById(updatePersonalInfoRequest.Id);
+        _mapper.Map(updatePersonalInfoRequest,personalInfo);
         PersonalInfo updatedPersonalInfo = await _personalInfoDal.UpdateAsync(personalInfo);
         return _mapper.Map<UpdatedPersonalInfoResponse>(updatedPersonalInfo);
     }

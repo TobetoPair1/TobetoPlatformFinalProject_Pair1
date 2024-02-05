@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Business.Abstracts;
+using Business.Dtos.Requests.Announcement;
 using Business.Dtos.Requests.Instructor;
 using Business.Dtos.Responses.Instructor;
 using Business.Rules;
@@ -52,7 +53,7 @@ public class InstructorManager : IInstructorService
 
     public async Task<UpdatedInstructorResponse> UpdateAsync(UpdateInstructorRequest updateInstructorRequest)
     {
-        Instructor instructor = await _instructorDal.GetAsync(i => i.Id == updateInstructorRequest.Id);
+        Instructor instructor = await _instructorBusinessRules.CheckIfExistsById(updateInstructorRequest.Id);
         _mapper.Map(updateInstructorRequest, instructor);
         var updatedInstructor = await _instructorDal.UpdateAsync(instructor);
         UpdatedInstructorResponse updatedInstructorResponse = _mapper.Map<UpdatedInstructorResponse>(updatedInstructor);

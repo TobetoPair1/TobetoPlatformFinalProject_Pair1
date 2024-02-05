@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Business.Abstracts;
 using Business.Dtos.Requests.ExamQuestion;
+using Business.Dtos.Requests.PersonalInfo;
 using Business.Dtos.Requests.Question;
 using Business.Dtos.Responses.ExamQuestion;
 using Business.Dtos.Responses.Question;
@@ -66,7 +67,7 @@ public class QuestionManager: IQuestionService
 
     public async Task<UpdatedQuestionResponse> UpdateAsync(UpdateQuestionRequest updateQuestionRequest)
     {
-        Question question = await _questionDal.GetAsync(q => q.Id == updateQuestionRequest.Id);
+        Question question = await _questionBusinessRules.CheckIfExistsById(updateQuestionRequest.Id);
         _mapper.Map(updateQuestionRequest, question);
         var updatedQuestion = await _questionDal.UpdateAsync(question);
         UpdatedQuestionResponse updatedQuestionResponse = _mapper.Map<UpdatedQuestionResponse>(updatedQuestion);

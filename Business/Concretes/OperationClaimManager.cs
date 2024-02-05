@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Business.Abstracts;
+using Business.Dtos.Requests.LiveContent;
 using Business.Dtos.Requests.OperationClaim;
 using Business.Dtos.Responses.OperationClaim;
 using Business.Rules;
@@ -52,7 +53,7 @@ public class OperationClaimManager : IOperationClaimService
 
     public async Task<UpdatedOperationClaimResponse> UpdateAsync(UpdateOperationClaimRequest updateOperationClaimRequest)
     {
-        OperationClaim operationClaim = await _operationClaimDal.GetAsync(oc => oc.Id == updateOperationClaimRequest.Id);
+        OperationClaim operationClaim = await _operationClaimBusinessRules.CheckIfExistsById(updateOperationClaimRequest.Id);
         _mapper.Map(updateOperationClaimRequest, operationClaim);
         var updatedOperationClaim = await _operationClaimDal.UpdateAsync(operationClaim);
         UpdatedOperationClaimResponse updatedOperationClaimResponse = _mapper.Map<UpdatedOperationClaimResponse>(updatedOperationClaim);
