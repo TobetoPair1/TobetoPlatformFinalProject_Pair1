@@ -1,6 +1,4 @@
-﻿
-using Business.Dtos.Requests.ExamQuestion;
-using Business.Dtos.Responses.Exam;
+﻿using Business.Dtos.Requests.ExamQuestion;
 using Business.Dtos.Responses.ExamQuestion;
 using Business.Dtos.Responses.Question;
 using Core.DataAccess.Paging;
@@ -14,5 +12,4 @@ public interface IExamQuestionService
     Task<DeletedExamQuestionResponse> DeleteAsync(DeleteExamQuestionRequest deleteExamQuestionRequest);
     Task<CreatedExamQuestionResponse> AssignExamAsync(CreateExamQuestionRequest createExamQuestionRequest);
     Task<IPaginate<GetListQuestionResponse>> GetListByExamIdAsync(Guid examId, PageRequest pageRequest);
-
 }

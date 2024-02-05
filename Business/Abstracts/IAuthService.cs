@@ -2,7 +2,6 @@
 using Core.Entities;
 using Core.Utilities.Security.Jwt;
 
-
 namespace Business.Abstracts;
 
 public interface IAuthService

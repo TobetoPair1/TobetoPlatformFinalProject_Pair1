@@ -3,6 +3,7 @@ using Business.Abstracts;
 using Business.Dtos.Requests.UserSkill;
 using Business.Dtos.Responses.Skill;
 using Business.Dtos.Responses.UserSkill;
+using Business.Rules;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
 using Entities.Concretes.CrossTables;
@@ -14,6 +15,7 @@ public class UserSkillManager : IUserSkillService
 {
     IUserSkillDal _userSkillDal;
     IMapper _mapper;
+    UserSkillRules _userSkillRules;
 
     public UserSkillManager(IUserSkillDal userSkillDal, IMapper mapper)
     {
@@ -31,11 +33,7 @@ public class UserSkillManager : IUserSkillService
 
     public async Task<DeletedUserSkillResponse> DeleteAsync(DeleteUserSkillRequest deleteUserSkillRequest)
     {
-        UserSkill userSkill = await _userSkillDal.GetAsync(
-            us =>
-            us.UserId == deleteUserSkillRequest.UserId
-            &&
-            us.SkillId == deleteUserSkillRequest.SkillId);
+        UserSkill userSkill = await _userSkillRules.CheckIfExistsById(deleteUserSkillRequest.UserId, deleteUserSkillRequest.SkillId);
         var deletedUserSkill = await _userSkillDal.DeleteAsync(userSkill, true);
         DeletedUserSkillResponse deletedUserSkillResponse = _mapper.Map<DeletedUserSkillResponse>(deletedUserSkill);
         return deletedUserSkillResponse;

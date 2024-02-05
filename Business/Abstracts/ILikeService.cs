@@ -1,11 +1,8 @@
 ﻿using Business.Dtos.Requests.Like;
-
 using Business.Dtos.Responses.Like;
-
 using Core.DataAccess.Paging;
 
 namespace Business.Abstracts;
-
 public interface ILikeService
 {
     Task<CreatedLikeResponse> AddAsync(CreateLikeRequest createLikeRequest);
@@ -13,7 +10,4 @@ public interface ILikeService
     Task<DeletedLikeResponse> DeleteAsync(DeleteLikeRequest deleteLikeRequest);
     Task<UpdatedLikeResponse> UpdateAsync(UpdateLikeRequest updateLikeRequest);
     Task<GetLikeResponse> GetByIdAsync(GetLikeRequest getLikeRequest);
-
 }
-
-

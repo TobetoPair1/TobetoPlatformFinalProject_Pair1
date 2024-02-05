@@ -12,5 +12,4 @@ public interface IUserExamService
     Task<GetUserExamResponse> GetByIdAsync(GetUserExamRequest getUserExamRequest);
     Task<IPaginate<GetListUserExamResponse>> GetListAsync(PageRequest pageRequest);
     Task<IPaginate<GetListExamResponse>> GetListByUserIdAsync(Guid userId, PageRequest pageRequest);
-
 }

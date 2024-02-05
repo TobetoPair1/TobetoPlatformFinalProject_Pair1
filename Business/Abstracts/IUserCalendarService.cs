@@ -12,5 +12,4 @@ public interface IUserCalendarService
 	Task<GetUserCalendarResponse> GetByIdAsync(GetUserCalendarRequest getUserCalendarRequest);
 	Task<DeletedUserCalendarResponse> DeleteAsync(DeleteUserCalendarRequest deleteUserCalendarRequest);
 	Task<IPaginate<GetListCalendarResponse>> GetListByUserIdAsync(Guid userId, PageRequest pageRequest);
-
 }

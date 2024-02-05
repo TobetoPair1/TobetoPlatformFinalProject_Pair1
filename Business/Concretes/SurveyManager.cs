@@ -4,6 +4,7 @@ using Business.Dtos.Requests.Survey;
 using Business.Dtos.Requests.UserSurvey;
 using Business.Dtos.Responses.Survey;
 using Business.Dtos.Responses.UserSurvey;
+using Business.Rules;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
 using Entities.Concretes;
@@ -15,11 +16,13 @@ public class SurveyManager : ISurveyService
     IMapper _mapper;
     ISurveyDal _surveyDal;
     IUserSurveyService _userSurveyService;
-    public SurveyManager(IMapper mapper, ISurveyDal surveyDal, IUserSurveyService userSurveyService)
+    SurveyBusinessRules _surveyBusinessRules;
+    public SurveyManager(IMapper mapper, ISurveyDal surveyDal, IUserSurveyService userSurveyService, SurveyBusinessRules surveyBusinessRules)
     {
         _mapper = mapper;
         _surveyDal = surveyDal;
         _userSurveyService = userSurveyService;
+        _surveyBusinessRules = surveyBusinessRules;
     }
     public async Task<CreatedSurveyResponse> AddAsync(CreateSurveyRequest createSurveyRequest)
     {
@@ -36,7 +39,7 @@ public class SurveyManager : ISurveyService
 
     public async Task<DeletedSurveyResponse> DeleteAsync(DeleteSurveyRequest deleteSurveyRequest)
     {
-        Survey survey = await _surveyDal.GetAsync(s => s.Id == deleteSurveyRequest.Id);
+        Survey survey = await _surveyBusinessRules.CheckIfExistsById(deleteSurveyRequest.Id);
         var deletedSurvey = await _surveyDal.DeleteAsync(survey);
         DeletedSurveyResponse result = _mapper.Map<DeletedSurveyResponse>(deletedSurvey);
         return result;

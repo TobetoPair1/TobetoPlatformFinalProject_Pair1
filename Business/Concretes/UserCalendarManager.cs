@@ -3,6 +3,7 @@ using Business.Abstracts;
 using Business.Dtos.Requests.UserCalendar;
 using Business.Dtos.Responses.Calender;
 using Business.Dtos.Responses.UserCalendar;
+using Business.Rules;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
 using Entities.Concretes.CrossTables;
@@ -13,15 +14,17 @@ public class UserCalendarManager : IUserCalendarService
 {
 	IUserCalendarDal _userCalendarDal;
 	IMapper _mapper;
+	UserCalendarRules _userCalendarRules;
 
-	public UserCalendarManager(IUserCalendarDal userCalendarDal, IMapper mapper)
-	{
-		_userCalendarDal = userCalendarDal;
-		_mapper = mapper;
-	}
-	
+    public UserCalendarManager(IUserCalendarDal userCalendarDal, IMapper mapper, UserCalendarRules userCalendarRules)
+    {
+        _userCalendarDal = userCalendarDal;
+        _mapper = mapper;
+        _userCalendarRules = userCalendarRules;
+    }
 
-	public async Task<CreatedUserCalendarResponse> AddAsync(CreateUserCalendarRequest createUserCalendarRequest)
+
+    public async Task<CreatedUserCalendarResponse> AddAsync(CreateUserCalendarRequest createUserCalendarRequest)
 	{
 		UserCalendar userCalendar = _mapper.Map<UserCalendar>(createUserCalendarRequest);
 		var createdUserCalendar = await _userCalendarDal.AddAsync(userCalendar);
@@ -30,11 +33,7 @@ public class UserCalendarManager : IUserCalendarService
 	}
 	public async Task<DeletedUserCalendarResponse> DeleteAsync(DeleteUserCalendarRequest deleteUserCalendarRequest)
 	{
-		UserCalendar userCalendar = await _userCalendarDal.GetAsync(
-			us =>
-			us.UserId == deleteUserCalendarRequest.UserId
-			&&
-			us.CalenderId == deleteUserCalendarRequest.CalenderId);
+		UserCalendar userCalendar = await _userCalendarRules.CheckIfExistsById(deleteUserCalendarRequest.UserId, deleteUserCalendarRequest.CalenderId);
 		var deletedUserCalendar = await _userCalendarDal.DeleteAsync(userCalendar, true);
 		DeletedUserCalendarResponse deletedUserCalendarResponse = _mapper.Map<DeletedUserCalendarResponse>(deletedUserCalendar);
 		return deletedUserCalendarResponse;

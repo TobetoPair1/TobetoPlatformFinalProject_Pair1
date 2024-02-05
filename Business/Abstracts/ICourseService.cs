@@ -16,5 +16,3 @@ public interface ICourseService
 	Task<IPaginate<GetListCourseResponse>> GetListByUserIdAsync(Guid userId, PageRequest pageRequest);
 	Task<CreatedUserCourseResponse> AssignCourseAsync(CreateUserCourseRequest createUserCourseRequest);
 }
-
-

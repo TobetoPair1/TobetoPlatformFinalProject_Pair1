@@ -2,6 +2,7 @@
 using Business.Abstracts;
 using Business.Dtos.Requests.Assignment;
 using Business.Dtos.Responses.Assignment;
+using Business.Rules;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
 using Entities.Concretes;
@@ -13,11 +14,13 @@ public class AssignmentManager : IAssignmentService
 {
     IAssignmentDal _assigmentDal;
     IMapper _mapper;
+    AssignmentBusinessRules _assignmentBusinessRules;
 
-    public AssignmentManager(IAssignmentDal assigmentDal, IMapper mapper)
+    public AssignmentManager(IAssignmentDal assigmentDal, IMapper mapper, AssignmentBusinessRules assignmentBusinessRules)
     {
         _assigmentDal = assigmentDal;
         _mapper = mapper;
+        _assignmentBusinessRules = assignmentBusinessRules;
     }
 
     public async Task<CreatedAssigmentResponse> AddAsync(CreateAssigmentRequest createAssigmentRequest)
@@ -29,7 +32,7 @@ public class AssignmentManager : IAssignmentService
 
     public async Task<DeletedAssigmentResponse> DeleteAsync(DeleteAssigmentRequest deleteAssigmentRequest)
     {
-        Assignment asg = _mapper.Map<Assignment>(deleteAssigmentRequest);
+        Assignment asg = await _assignmentBusinessRules.CheckIfExistsById(deleteAssigmentRequest.Id);
         Assignment deletedAsg = await _assigmentDal.DeleteAsync(asg);
         return _mapper.Map<DeletedAssigmentResponse>(deletedAsg);
     }
