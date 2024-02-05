@@ -3,6 +3,7 @@ using Business.Abstracts;
 using Business.Dtos.Requests.ExamQuestion;
 using Business.Dtos.Responses.ExamQuestion;
 using Business.Dtos.Responses.Question;
+using Business.Rules;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
 using Entities.Concretes.CrossTables;
@@ -14,11 +15,12 @@ public class ExamQuestionManager : IExamQuestionService
 {
 	IExamQuestionDal _examQuestionDal;
 	IMapper _mapper;
-
-	public ExamQuestionManager(IExamQuestionDal examQuestionDal, IMapper mapper)
+	ExamQuestionBusinessRules _examQuestionBusinessRules;
+	public ExamQuestionManager(IExamQuestionDal examQuestionDal, IMapper mapper, ExamQuestionBusinessRules examQuestionBusinessRules)
 	{
-        _examQuestionDal = examQuestionDal;
+		_examQuestionDal = examQuestionDal;
 		_mapper = mapper;
+		_examQuestionBusinessRules = examQuestionBusinessRules;
 	}
 
 	public async Task<CreatedExamQuestionResponse> AddAsync(CreateExamQuestionRequest createExamQuestionRequest)
@@ -36,11 +38,7 @@ public class ExamQuestionManager : IExamQuestionService
 
     public async Task<DeletedExamQuestionResponse> DeleteAsync(DeleteExamQuestionRequest deleteExamQuestionRequest)
 	{
-		ExamQuestion examQuestion = await _examQuestionDal.GetAsync(
-			eq =>
-			eq.ExamId == deleteExamQuestionRequest.ExamId
-			&&
-			eq.QuestionId == deleteExamQuestionRequest.QuestionId);
+		ExamQuestion examQuestion = await _examQuestionBusinessRules.CheckIfExistsWithForeignKey(deleteExamQuestionRequest.ExamId, deleteExamQuestionRequest.QuestionId);
 		var deletedExamQuestion = await _examQuestionDal.DeleteAsync(examQuestion, true);
 		DeletedExamQuestionResponse deletedExamQuestionResponse = _mapper.Map<DeletedExamQuestionResponse>(deletedExamQuestion);
 		return deletedExamQuestionResponse;

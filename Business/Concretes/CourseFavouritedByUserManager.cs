@@ -2,6 +2,7 @@
 using Business.Abstracts;
 using Business.Dtos.Requests.CourseFavouritedByUser;
 using Business.Dtos.Responses.CourseFavouriteByUser;
+using Business.Rules;
 using DataAccess.Abstracts;
 using Entities.Concretes.CrossTables;
 
@@ -11,7 +12,16 @@ public class CourseFavouritedByUserManager : ICourseFavouritedByUserService
 {
     IMapper _mapper;
     ICourseFavouritedByUserDal _courseFavouritedByUserDal;
-    public async Task<CreatedCourseFavouriteByUserResponse> AddAsync(CreateFavouriteByUserRequest createFavouriteByUserRequest)
+    CourseFavouritedByUserBusinessRules _CourseFavouritedByUserBusinessRules;
+
+	public CourseFavouritedByUserManager(IMapper mapper, ICourseFavouritedByUserDal courseFavouritedByUserDal, CourseFavouritedByUserBusinessRules courseFavouritedByUserBusinessRules)
+	{
+		_mapper = mapper;
+		_courseFavouritedByUserDal = courseFavouritedByUserDal;
+		_CourseFavouritedByUserBusinessRules = courseFavouritedByUserBusinessRules;
+	}
+
+	public async Task<CreatedCourseFavouriteByUserResponse> AddAsync(CreateFavouriteByUserRequest createFavouriteByUserRequest)
     {
         CourseFavouritedByUser courseFavouritedByUser = _mapper.Map<CourseFavouritedByUser>(createFavouriteByUserRequest);
         var createdCourseFavouritedByUser = await _courseFavouritedByUserDal.AddAsync(courseFavouritedByUser);
@@ -21,7 +31,7 @@ public class CourseFavouritedByUserManager : ICourseFavouritedByUserService
 
     public async Task<DeletedCourseFavouriteByUserResponse> DeleteAsync(DeleteFavouriteByUserRequest deleteFavouriteByUserRequest)
     {
-        CourseFavouritedByUser courseFavouritedByUser = await _courseFavouritedByUserDal.GetAsync(c => c.UserId == deleteFavouriteByUserRequest.UserId && c.CourseId == deleteFavouriteByUserRequest.CourseId);
+        CourseFavouritedByUser courseFavouritedByUser = await _CourseFavouritedByUserBusinessRules.CheckIfExistsWithForeignKey(deleteFavouriteByUserRequest.UserId, deleteFavouriteByUserRequest.CourseId);
         var deletedCourseFavouritedByUser = await _courseFavouritedByUserDal.DeleteAsync(courseFavouritedByUser);
 		DeletedCourseFavouriteByUserResponse deletedCourseFavouriteByUserResponse = _mapper.Map<DeletedCourseFavouriteByUserResponse>(deletedCourseFavouritedByUser);
         return deletedCourseFavouriteByUserResponse;

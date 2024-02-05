@@ -3,6 +3,7 @@ using Business.Abstracts;
 using Business.Dtos.Requests.CourseAsyncContent;
 using Business.Dtos.Responses.AsyncContent;
 using Business.Dtos.Responses.CourseAsyncContent;
+using Business.Rules;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
 using Entities.Concretes.CrossTables;
@@ -14,14 +15,15 @@ public class CourseAsyncContentManager : ICourseAsyncContentService
 {
     ICourseAsyncContentDal _courseAsyncDal;
     IMapper _mapper;
+    CourseAsyncContentBusinessRules _courseAsyncContentBusinessRules;
+	public CourseAsyncContentManager(ICourseAsyncContentDal courseAsyncDal, IMapper mapper, CourseAsyncContentBusinessRules courseAsyncContentBusinessRules)
+	{
+		_courseAsyncDal = courseAsyncDal;
+		_mapper = mapper;
+		_courseAsyncContentBusinessRules = courseAsyncContentBusinessRules;
+	}
 
-    public CourseAsyncContentManager(ICourseAsyncContentDal courseAsyncDal, IMapper mapper)
-    {
-        _courseAsyncDal = courseAsyncDal;
-        _mapper = mapper;
-    }
-
-    public async Task<CreatedCourseAsyncContentResponse> AddAsync(CreateCourseAsyncContentRequest createCourseAsyncContentRequest)
+	public async Task<CreatedCourseAsyncContentResponse> AddAsync(CreateCourseAsyncContentRequest createCourseAsyncContentRequest)
     {
         CourseAsyncContent asyncContent = _mapper.Map<CourseAsyncContent>(createCourseAsyncContentRequest);
         CourseAsyncContent createdAsyncContent = await _courseAsyncDal.AddAsync(asyncContent);
@@ -31,7 +33,7 @@ public class CourseAsyncContentManager : ICourseAsyncContentService
 
     public async Task<DeletedCourseAsyncContentResponse> DeleteAsync(DeleteCourseAsyncContentRequest deleteCourseAsyncContentRequest)
     {
-        CourseAsyncContent asyncContent = _mapper.Map<CourseAsyncContent>(deleteCourseAsyncContentRequest);
+        CourseAsyncContent asyncContent = await _courseAsyncContentBusinessRules.CheckIfExistsWithForeignKey(deleteCourseAsyncContentRequest.CourseId, deleteCourseAsyncContentRequest.AsyncContentId);
         CourseAsyncContent deletedAsyncContent = await _courseAsyncDal.DeleteAsync(asyncContent);
 
         return _mapper.Map<DeletedCourseAsyncContentResponse>(deletedAsyncContent);

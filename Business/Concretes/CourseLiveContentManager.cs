@@ -3,9 +3,9 @@ using Business.Abstracts;
 using Business.Dtos.Requests.CourseLiveContent;
 using Business.Dtos.Responses.CourseLiveContent;
 using Business.Dtos.Responses.LiveContent;
+using Business.Rules;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
-using DataAccess.Concretes.EntityFramework;
 using Entities.Concretes.CrossTables;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,13 +14,15 @@ public class CourseLiveContentManager : ICourseLiveContentService
 {
     IMapper _mapper;
     ICourseLiveContentDal _courseLiveContentDal;
+    CourseLiveContentBusinessRules _courseLiveContentBusinessRules;
 
-    public CourseLiveContentManager(IMapper mapper, ICourseLiveContentDal courseLiveContentDal)
-    {
-        _mapper = mapper;
-        _courseLiveContentDal = courseLiveContentDal;
-    }
-    public async Task<CreatedCourseLiveContentResponse> AddAsync(CreateCourseLiveContentRequest createCourseLiveContentRequest)
+	public CourseLiveContentManager(IMapper mapper, ICourseLiveContentDal courseLiveContentDal, CourseLiveContentBusinessRules courseLiveContentBusinessRules)
+	{
+		_mapper = mapper;
+		_courseLiveContentDal = courseLiveContentDal;
+		_courseLiveContentBusinessRules = courseLiveContentBusinessRules;
+	}
+	public async Task<CreatedCourseLiveContentResponse> AddAsync(CreateCourseLiveContentRequest createCourseLiveContentRequest)
     {
         CourseLiveContent courseLiveContent = _mapper.Map<CourseLiveContent>(createCourseLiveContentRequest);
         CourseLiveContent createdCourseLiveContent = await _courseLiveContentDal.AddAsync(courseLiveContent);
@@ -29,7 +31,7 @@ public class CourseLiveContentManager : ICourseLiveContentService
     }
     public async Task<DeletedCourseLiveContentResponse> DeleteAsync(DeleteCourseLiveContentRequest deleteCourseLiveContentRequest)
     {
-        CourseLiveContent courseLiveContent = _mapper.Map<CourseLiveContent>(deleteCourseLiveContentRequest);
+        CourseLiveContent courseLiveContent = await _courseLiveContentBusinessRules.CheckIfExistsWithForeignKey(deleteCourseLiveContentRequest.CourseId,deleteCourseLiveContentRequest.LiveContentId);
         CourseLiveContent deletedCourseLiveContent = await _courseLiveContentDal.DeleteAsync(courseLiveContent);
 
         return _mapper.Map<DeletedCourseLiveContentResponse>(deletedCourseLiveContent);
