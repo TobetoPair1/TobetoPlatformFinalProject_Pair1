@@ -1,6 +1,6 @@
 ﻿using Business.Abstracts;
 using Business.Constants.Messages;
-using Business.Dtos.Requests.Category;
+using Business.Dtos.Requests.User;
 using Business.Dtos.Responses.User;
 using Core.Business.Rules;
 using Core.CrossCuttingConcerns.Exceptions.Types;
@@ -32,7 +32,7 @@ public class SocialMediaBusinessRules : BaseBusinessRules<SocialMedia>
 
     public async Task CheckUserIfExists(Guid userId)
     {
-        GetUserResponse user = await _userService.GetByIdAsync(new GetCategoryRequest { Id = userId });
+        GetUserResponse user = await _userService.GetByIdAsync(new GetUserRequest { Id=userId});
         if (user == null)
         {
             throw new BusinessException(BusinessCoreMessages.CannotFindEntityError, BusinessCoreTitles.CannotFindError);
