@@ -1,6 +1,7 @@
 ﻿using Business.Constants.Messages;
 using Core.Business.Rules;
 using Core.CrossCuttingConcerns.Exceptions.Types;
+using Core.Utilities.Messages;
 using DataAccess.Abstracts;
 using Entities.Concretes.CrossTables;
 
@@ -14,12 +15,12 @@ public class UserCalendarRules : BaseBusinessRules<UserCalendar>
         _userCalendarDal = userCalendarDal;
     }
 
-    public async Task<UserCalendar> CheckIfExistsById(Guid userId, Guid calendarId)
+    public async Task<UserCalendar> CheckIfExistsWithForeignKey(Guid userId, Guid calendarId)
     {
         UserCalendar userCalendar = await _userCalendarDal.GetAsync(uc => uc.UserId == userId && uc.CalenderId == calendarId);
-        if (userCalendar != null)
+        if (userCalendar == null)
         {
-            throw new BusinessException("cal exist", BusinessTitles.AlreadyExistsError);
+            throw new BusinessException(BusinessCoreMessages.CannotFindEntityError, BusinessCoreTitles.CannotFindError);
         }
         return userCalendar;
     }

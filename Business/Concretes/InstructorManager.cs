@@ -26,13 +26,13 @@ public class InstructorManager : IInstructorService
     {
         Instructor instructor = _mapper.Map<Instructor>(createInstructorRequest);
         var createdInstructor=await _instructorDal.AddAsync(instructor);
-        CreatedInstructorResponse result = _mapper.Map<CreatedInstructorResponse>(instructor);
+        CreatedInstructorResponse result = _mapper.Map<CreatedInstructorResponse>(createdInstructor);
         return result;
     }
 
     public async Task<DeletedInstructorResponse> DeleteAsync(DeleteInstructorRequest deleteInstructorRequest)
     {
-        Instructor instructor = await _instructorDal.GetAsync(i => i.Id == deleteInstructorRequest.Id);
+        Instructor instructor = await _instructorBusinessRules.CheckIfExistsById(deleteInstructorRequest.Id);
         var deletedInstructor = await _instructorDal.DeleteAsync(instructor);
         DeletedInstructorResponse deletedInstructorResponse = _mapper.Map<DeletedInstructorResponse>(deletedInstructor);
         return deletedInstructorResponse;

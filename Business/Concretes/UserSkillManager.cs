@@ -33,7 +33,7 @@ public class UserSkillManager : IUserSkillService
 
     public async Task<DeletedUserSkillResponse> DeleteAsync(DeleteUserSkillRequest deleteUserSkillRequest)
     {
-        UserSkill userSkill = await _userSkillRules.CheckIfExistsById(deleteUserSkillRequest.UserId, deleteUserSkillRequest.SkillId);
+        UserSkill userSkill = await _userSkillRules.CheckIfExistsWithForeignKey(deleteUserSkillRequest.UserId, deleteUserSkillRequest.SkillId);
         var deletedUserSkill = await _userSkillDal.DeleteAsync(userSkill, true);
         DeletedUserSkillResponse deletedUserSkillResponse = _mapper.Map<DeletedUserSkillResponse>(deletedUserSkill);
         return deletedUserSkillResponse;

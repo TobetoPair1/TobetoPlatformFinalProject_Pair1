@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Business.Abstracts;
-using Business.Dtos.Requests.LiveContent;
 using Business.Dtos.Requests.OperationClaim;
 using Business.Dtos.Responses.OperationClaim;
 using Business.Rules;
@@ -33,7 +32,7 @@ public class OperationClaimManager : IOperationClaimService
 
     public async Task<DeletedOperationClaimResponse> DeleteAsync(DeleteOperationClaimRequest deleteOperationClaimRequest)
     {
-        OperationClaim operationClaim = await _operationClaimDal.GetAsync(o => o.Id == deleteOperationClaimRequest.Id);
+        OperationClaim operationClaim = await _operationClaimBusinessRules.CheckIfExistsById(deleteOperationClaimRequest.Id);
         var deletedOperationClaim = await _operationClaimDal.DeleteAsync(operationClaim);
         DeletedOperationClaimResponse result = _mapper.Map<DeletedOperationClaimResponse>(deletedOperationClaim);
         return result;

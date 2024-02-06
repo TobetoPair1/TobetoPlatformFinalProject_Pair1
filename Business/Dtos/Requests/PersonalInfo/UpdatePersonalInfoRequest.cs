@@ -3,6 +3,7 @@
     public class UpdatePersonalInfoRequest
     {
 		public Guid Id { get; set; }
+		public Guid userId { get; set; }
 		public string Name { get; set; }
 		public string LastName { get; set; }
 		public string IdentityNumber { get; set; }

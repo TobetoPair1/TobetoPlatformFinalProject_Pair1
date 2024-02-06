@@ -33,7 +33,7 @@ public class UserApplicationManager : IUserApplicationService
 
     public async Task<DeletedUserApplicationResponse> DeleteAsync(DeleteUserApplicationRequest deleteUserApplicationRequest)
     {
-        UserApplication userApplication = await _userApplicationRules.CheckIfExistsById(deleteUserApplicationRequest.UserId, deleteUserApplicationRequest.ApplicationId);
+        UserApplication userApplication = await _userApplicationRules.CheckIfExistsWithForeignKey(deleteUserApplicationRequest.UserId, deleteUserApplicationRequest.ApplicationId);
         var deletedUserApplication = await _userApplicationDal.DeleteAsync(userApplication, true);
         DeletedUserApplicationResponse deletedUserApplicationResponse = _mapper.Map<DeletedUserApplicationResponse>(deletedUserApplication);
         return deletedUserApplicationResponse;

@@ -1,13 +1,10 @@
 ﻿using AutoMapper;
 using Business.Abstracts;
-using Business.Dtos.Requests.Answer;
 using Business.Dtos.Requests.Experience;
-using Business.Dtos.Responses.Education;
 using Business.Dtos.Responses.Experience;
 using Business.Rules;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
-using DataAccess.Concretes.EntityFramework;
 using Entities.Concretes;
 
 namespace Business.Concretes;
@@ -16,18 +13,15 @@ public class ExperienceManager : IExperienceService
 {
     IMapper _mapper;
     IExperienceDal _experienceDal;
-    IUserService _userService;
     ExperienceBusinessRules _experienceBusinessRules;
 
 
     public ExperienceManager(IMapper mapper, IExperienceDal experienceDal,
-        ExperienceBusinessRules experienceBusinessRules
-, IUserService userService)
+        ExperienceBusinessRules experienceBusinessRules)
     {
         _experienceDal = experienceDal;
         _mapper = mapper;
         _experienceBusinessRules = experienceBusinessRules;
-        _userService = userService;
     }
 
     public async Task<CreatedExperienceResponse> AddAsync(CreateExperienceRequest createExperienceRequest)

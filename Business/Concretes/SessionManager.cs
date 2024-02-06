@@ -18,14 +18,12 @@ public class SessionManager : ISessionService
     ISessionDal _sessionDal;
     IInstructorSessionService _instructorSessionService;
     SessionBusinessRules _sessionBusinessRules;
-    LiveContentBusinessRules _liveContentBusinessRules;
-    public SessionManager(IMapper mapper, ISessionDal sessionDal, IInstructorSessionService instructorSessionService, SessionBusinessRules sessionBusinessRules, LiveContentBusinessRules liveContentBusinessRules)
+    public SessionManager(IMapper mapper, ISessionDal sessionDal, IInstructorSessionService instructorSessionService, SessionBusinessRules sessionBusinessRules)
     {
         _mapper = mapper;
         _sessionDal = sessionDal;
         _instructorSessionService = instructorSessionService;
         _sessionBusinessRules = sessionBusinessRules;
-        _liveContentBusinessRules = liveContentBusinessRules;
     }
 
     public async Task<CreatedSessionResponse> AddAsync(CreateSessionRequest createSessionRequest)
@@ -64,7 +62,7 @@ public class SessionManager : ISessionService
     public async Task<IPaginate<GetListSessionResponse>> GetListAsync(PageRequest pageRequest)
     {
         var result = await _sessionDal.GetListAsync(index: pageRequest.PageIndex, size: pageRequest.PageSize);
-        return _mapper.Map<IPaginate<GetListSessionResponse>>(result);
+        return _mapper.Map<Paginate<GetListSessionResponse>>(result);
     }
 
     public async Task<UpdatedSessionResponse> UpdateAsync(UpdateSessionRequest updateSessionRequest)

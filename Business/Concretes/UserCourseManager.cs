@@ -35,11 +35,7 @@ public class UserCourseManager : IUserCourseService
 
     public async Task<DeletedUserCourseResponse> DeleteAsync(DeleteUserCourseRequest deleteUserCourseRequest)
     {
-        UserCourse userCourse = await _userCourseDal.GetAsync(
-            uc =>
-            uc.UserId == deleteUserCourseRequest.UserId
-            &&
-            uc.CourseId == deleteUserCourseRequest.CourseId);
+        UserCourse userCourse = await _userCourseBusinessRules.CheckIfExistsWithForeignKey(deleteUserCourseRequest.UserId,deleteUserCourseRequest.CourseId);
         var deletedUserCourse = await _userCourseDal.DeleteAsync(userCourse, true);
         DeletedUserCourseResponse deletedUserCourseResponse = _mapper.Map<DeletedUserCourseResponse>(deletedUserCourse);
         return deletedUserCourseResponse;

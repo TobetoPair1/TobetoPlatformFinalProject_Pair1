@@ -16,7 +16,7 @@ public class UserSurveyBusinessRules : BaseBusinessRules<UserSurvey>
 	public async Task<UserSurvey> CheckIfExistsWithForeignKey(Guid userId, Guid surveyId)
 	{
 		UserSurvey entity = await _userSurveyDal.GetAsync(clbu => clbu.UserId == userId && clbu.SurveyId == surveyId);
-		if (entity != null)
+		if (entity == null)
 		{
 			throw new BusinessException(BusinessCoreMessages.CannotFindEntityError, BusinessCoreTitles.CannotFindError);
 		}

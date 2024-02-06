@@ -22,9 +22,9 @@ public class CertificatesController : ControllerBase
         return Ok(result);
     }
     [HttpGet("get")]
-    public async Task<IActionResult> Get([FromQuery] GetCertificateRequest getCertificateRequest)
+    public async Task<IActionResult> Get([FromQuery] Guid id)
     {
-        var result = await _certificateService.GetAsync(getCertificateRequest);
+        var result = await _certificateService.GetAsync(id);
         return Ok(result);
     }
 
@@ -36,9 +36,9 @@ public class CertificatesController : ControllerBase
     }
 
     [HttpDelete]
-    public async Task<IActionResult> Delete([FromBody] DeleteCertificateRequest deleteCertificateRequest)
+    public async Task<IActionResult> Delete([FromBody] Guid id)
     {
-        var result = await _certificateService.DeleteAsync(deleteCertificateRequest);
+        var result = await _certificateService.DeleteAsync(id);
         return Ok(result);
     }
 }

@@ -1,13 +1,11 @@
 ﻿using AutoMapper;
 using Business.Abstracts;
-using Business.Dtos.Requests.Instructor;
 using Business.Dtos.Requests.InstructorSession;
 using Business.Dtos.Responses.InstructorSession;
 using Business.Dtos.Responses.Session;
 using Business.Rules;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
-using Entities.Concretes;
 using Entities.Concretes.CrossTables;
 using Microsoft.EntityFrameworkCore;
 
@@ -36,7 +34,7 @@ namespace Business.Concretes
 
         public async Task<DeletedInstructorSessionResponse> DeleteAsync(DeleteInstructorSessionRequest deleteInstructorSessionRequest)
         {
-            InstructorSession instructorSession = await _instructorSessionDal.GetAsync(Is => Is.InstructorId == deleteInstructorSessionRequest.InstructorId && Is.SessionId == deleteInstructorSessionRequest.SessionId);
+            InstructorSession instructorSession = await _instructorSessionBusinessRules.CheckIfExistsWithForeignKey(deleteInstructorSessionRequest.InstructorId, deleteInstructorSessionRequest.SessionId);
             var deletedInstructorSession = await _instructorSessionDal.DeleteAsync(instructorSession);
             DeletedInstructorSessionResponse result = _mapper.Map<DeletedInstructorSessionResponse>(deletedInstructorSession);
             return result;
@@ -64,7 +62,7 @@ namespace Business.Concretes
 
         public async Task<UpdatedInstructorSessionResponse> UpdateAsync(UpdateInstructorSessionRequest updateInstructorSessionRequest)
         {
-            InstructorSession instructorSession = await _instructorSessionBusinessRules.CheckIfExistsById(updateInstructorSessionRequest.InstructorId);
+            InstructorSession instructorSession = await _instructorSessionBusinessRules.CheckIfExistsWithForeignKey(updateInstructorSessionRequest.InstructorId,updateInstructorSessionRequest.SessionId);
             _mapper.Map(updateInstructorSessionRequest, instructorSession);
             var updatedInstructorSession = await _instructorSessionDal.UpdateAsync(instructorSession);
             UpdatedInstructorSessionResponse updatedInstructorSessionResponse = _mapper.Map<UpdatedInstructorSessionResponse>(updatedInstructorSession);

@@ -46,8 +46,8 @@ public class LiveContentManager : ILiveContentService
 
     public async Task<DeletedLiveContentResponse> DeleteAsync(DeleteLiveContentRequest deleteLiveContentRequest)
     {
-        LiveContent liveContent = await _liveContentDal.GetAsync(l => l.Id == deleteLiveContentRequest.Id);
-        var deletedLiveContent = await _liveContentDal.DeleteAsync(liveContent);
+        LiveContent liveContent = await _liveContentBusinessRules.CheckIfExistsById(deleteLiveContentRequest.Id);
+		var deletedLiveContent = await _liveContentDal.DeleteAsync(liveContent);
         DeletedLiveContentResponse result = _mapper.Map<DeletedLiveContentResponse>(deletedLiveContent);
         return result;
     }

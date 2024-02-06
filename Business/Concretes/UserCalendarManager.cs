@@ -33,7 +33,7 @@ public class UserCalendarManager : IUserCalendarService
 	}
 	public async Task<DeletedUserCalendarResponse> DeleteAsync(DeleteUserCalendarRequest deleteUserCalendarRequest)
 	{
-		UserCalendar userCalendar = await _userCalendarRules.CheckIfExistsById(deleteUserCalendarRequest.UserId, deleteUserCalendarRequest.CalenderId);
+		UserCalendar userCalendar = await _userCalendarRules.CheckIfExistsWithForeignKey(deleteUserCalendarRequest.UserId, deleteUserCalendarRequest.CalenderId);
 		var deletedUserCalendar = await _userCalendarDal.DeleteAsync(userCalendar, true);
 		DeletedUserCalendarResponse deletedUserCalendarResponse = _mapper.Map<DeletedUserCalendarResponse>(deletedUserCalendar);
 		return deletedUserCalendarResponse;

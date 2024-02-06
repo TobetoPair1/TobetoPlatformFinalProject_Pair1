@@ -36,6 +36,7 @@ public static class DataAccessServiceRegistration
         services.AddScoped<ICourseDal, EfCourseDal>();
         services.AddScoped<ICourseLiveContentDal, EfCourseLiveContentDal>();
         services.AddScoped<IExamDal, EfExamDal>();
+        services.AddScoped<IExamQuestionDal, EfExamQuestionDal>();
         services.AddScoped<IFavouriteDal, EfFavouriteDal>();
         services.AddScoped<IFileDal, EfFileDal>();
         services.AddScoped<IHomeworkDal, EfHomeworkDal>();
@@ -57,6 +58,7 @@ public static class DataAccessServiceRegistration
         services.AddScoped<ICourseLikedByUserDal, EfCourseLikedByUserDal>();
         services.AddScoped<IContentLikedByUserDal, EfContentLikedByUserDal>();
         services.AddScoped<ICourseFavouritedByUserDal, EfCourseFavouritedByUserDal>();
+        services.AddScoped<ISessionDal, EfSessionDal>();
 
         return services;
     }

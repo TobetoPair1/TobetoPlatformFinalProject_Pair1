@@ -2,6 +2,7 @@
 using Business.Dtos.Requests.UserCourse;
 using Core.Business.Rules;
 using Core.CrossCuttingConcerns.Exceptions.Types;
+using Core.Utilities.Messages;
 using DataAccess.Abstracts;
 using Entities.Concretes.CrossTables;
 
@@ -24,4 +25,13 @@ public class UserCourseBusinessRules:BaseBusinessRules<UserCourse>
         }
         
     }
+	public async Task<UserCourse> CheckIfExistsWithForeignKey(Guid userId, Guid courseId)
+	{
+		UserCourse userCourse = await _userCourseDal.GetAsync(uc => uc.UserId == userId && uc.CourseId == courseId);
+		if (userCourse == null)
+		{
+			throw new BusinessException(BusinessCoreMessages.CannotFindEntityError, BusinessCoreTitles.CannotFindError);
+		}
+		return userCourse;
+	}
 }

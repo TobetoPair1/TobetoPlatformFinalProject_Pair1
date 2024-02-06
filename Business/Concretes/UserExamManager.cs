@@ -34,7 +34,7 @@ public class UserExamManager : IUserExamService
 
     public async Task<DeletedUserExamResponse> DeleteAsync(DeleteUserExamRequest deleteUserExamRequest)
     {
-        UserExam userExam = await _userExamRules.CheckIfExistsById(deleteUserExamRequest.UserId, deleteUserExamRequest.ExamId);
+        UserExam userExam = await _userExamRules.CheckIfExistsWithForeignKey(deleteUserExamRequest.UserId, deleteUserExamRequest.ExamId);
         var deletedUserExam = await _userExamDal.DeleteAsync(userExam, true);
         DeletedUserExamResponse deletedUserExamResponse = _mapper.Map<DeletedUserExamResponse>(deletedUserExam);
         return deletedUserExamResponse;

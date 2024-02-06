@@ -16,7 +16,7 @@ public class CourseLikedByUserBusinessRules : BaseBusinessRules<CourseLikedByUse
 	public async Task<CourseLikedByUser> CheckIfExistsWithForeignKey(Guid userId, Guid courseId)
 	{
 		CourseLikedByUser entity = await _courseLikedByUserDal.GetAsync(clbu => clbu.UserId == userId && clbu.CourseId == courseId);
-		if (entity != null)
+		if (entity == null)
 		{
 			throw new BusinessException(BusinessCoreMessages.CannotFindEntityError, BusinessCoreTitles.CannotFindError);
 		}

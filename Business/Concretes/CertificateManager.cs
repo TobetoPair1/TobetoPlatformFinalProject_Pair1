@@ -26,16 +26,16 @@ public class CertificateManager : ICertificateService
         return _mapper.Map<CreatedCertificateResponse>(await _certificateDal.AddAsync(certificate));
     }
 
-    public async Task<DeletedCertificateResponse> DeleteAsync(DeleteCertificateRequest deleteCertificateRequest)
+    public async Task<DeletedCertificateResponse> DeleteAsync(Guid id)
     {
-        Certificate deletedCertificate = await _certificateBusinessRules.CheckIfExistsById(deleteCertificateRequest.Id);
+        Certificate deletedCertificate = await _certificateBusinessRules.CheckIfExistsById(id);
         await _certificateDal.DeleteAsync(deletedCertificate, true);
         return _mapper.Map<DeletedCertificateResponse>(deletedCertificate);
     }
 
-    public async Task<GetCertificateResponse> GetAsync(GetCertificateRequest getCertificateRequest)
+    public async Task<GetCertificateResponse> GetAsync(Guid id)
     {
-        Certificate certificate = await _certificateDal.GetAsync(c => c.Id == getCertificateRequest.Id);
+        Certificate certificate = await _certificateDal.GetAsync(c => c.Id == id);
         return _mapper.Map<GetCertificateResponse>(certificate);
 
     }

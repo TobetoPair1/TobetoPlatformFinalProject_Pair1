@@ -14,15 +14,13 @@ public class AnswerManager : IAnswerService
 {
 	IAnswerDal _answerDal;
 	IMapper _mapper;
-	IQuestionService _questionService;
 	AnswerBusinessRules _answerBusinessRules;
 
-    public AnswerManager(IAnswerDal answerDal, IMapper mapper, AnswerBusinessRules answerBusinessRules, IQuestionService questionService)
+    public AnswerManager(IAnswerDal answerDal, IMapper mapper, AnswerBusinessRules answerBusinessRules)
     {
         _answerDal = answerDal;
         _mapper = mapper;
         _answerBusinessRules = answerBusinessRules;
-        _questionService = questionService;
     }
 
     public async Task<CreatedAnswerResponse> AddAsync(CreateAnswerRequest createAnswerRequest)

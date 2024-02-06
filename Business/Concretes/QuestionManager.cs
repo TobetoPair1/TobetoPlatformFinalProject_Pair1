@@ -42,7 +42,7 @@ public class QuestionManager: IQuestionService
 
     public async Task<DeletedQuestionResponse> DeleteAsync(DeleteQuestionRequest deleteQuestionRequest)
     {
-        Question question = await _questionDal.GetAsync(q => q.Id == deleteQuestionRequest.Id);
+        Question question = await _questionBusinessRules.CheckIfExistsById(deleteQuestionRequest.Id);
         var deletedQuestion = await _questionDal.DeleteAsync(question);
         DeletedQuestionResponse deletedQuestionResponse = _mapper.Map<DeletedQuestionResponse>(deletedQuestion);
         return deletedQuestionResponse;

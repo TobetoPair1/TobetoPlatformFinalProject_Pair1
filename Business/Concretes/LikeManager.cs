@@ -1,13 +1,11 @@
 ﻿using AutoMapper;
 using Business.Abstracts;
-using Business.Dtos.Requests.InstructorSession;
 using Business.Dtos.Requests.Like;
 using Business.Dtos.Responses.Like;
 using Business.Rules;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
 using Entities.Concretes;
-using Entities.Concretes.CrossTables;
 
 namespace Business.Concretes;
 
@@ -33,9 +31,9 @@ public class LikeManager : ILikeService
     }
 
     public async Task<DeletedLikeResponse> DeleteAsync(DeleteLikeRequest deleteLikeRequest)
-    {
-        Like like = await _likeDal.GetAsync(l => l.Id == deleteLikeRequest.Id);
-        var deletedLike = await _likeDal.DeleteAsync(like);
+	{
+        Like like = await _likeBusinessRules.CheckIfExistsById(deleteLikeRequest.Id);
+		var deletedLike = await _likeDal.DeleteAsync(like);
         DeletedLikeResponse deletedLikeResponse = _mapper.Map<DeletedLikeResponse>(deletedLike);
         return deletedLikeResponse;
     }

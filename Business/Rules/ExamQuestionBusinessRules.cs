@@ -16,7 +16,7 @@ public class ExamQuestionBusinessRules : BaseBusinessRules<ExamQuestion>
 	public async Task<ExamQuestion> CheckIfExistsWithForeignKey(Guid examId, Guid questionId)
 	{
 		ExamQuestion entity = await _examQuestionDal.GetAsync(eq => eq.ExamId == examId && eq.QuestionId == questionId);
-		if (entity != null)
+		if (entity == null)
 		{
 			throw new BusinessException(BusinessCoreMessages.CannotFindEntityError, BusinessCoreTitles.CannotFindError);
 		}

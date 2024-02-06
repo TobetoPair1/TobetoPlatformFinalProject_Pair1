@@ -66,7 +66,7 @@ public static class BusinessServiceRegistration
             Type,
             IServiceCollection>? addWithLifeCycle = null)
     {
-        var types = assembly.GetTypes().Where(t => t.IsSubclassOf(type) && type != t).ToList();
+        var types = assembly.GetTypes().Where(t => t.BaseType?.Name == type.Name && t!=type).ToList();
         foreach (var item in types)
             if (addWithLifeCycle == null)
                 services.AddScoped(item);

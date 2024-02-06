@@ -46,7 +46,7 @@ public class ExamQuestionManager : IExamQuestionService
 
 	public async Task<IPaginate<GetListExamQuestionResponse>> GetListAsync(PageRequest pageRequest)
 	{
-		var result = await _examQuestionDal.GetListAsync(index: pageRequest.PageIndex, size: pageRequest.PageSize, include: eq => eq.Include(eq => new { eq.Exam,eq.Question}));
+		var result = await _examQuestionDal.GetListAsync(index: pageRequest.PageIndex, size: pageRequest.PageSize, include: eq => eq.Include(eq =>eq.Exam).Include(eq=>eq.Question));
 		return _mapper.Map<Paginate<GetListExamQuestionResponse>>(result);
 	}
 

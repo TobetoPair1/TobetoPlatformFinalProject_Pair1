@@ -16,7 +16,7 @@ public class CourseAsyncContentBusinessRules : BaseBusinessRules<CourseAsyncCont
 	public async Task<CourseAsyncContent> CheckIfExistsWithForeignKey(Guid courseId, Guid ContentId)
 	{
 		CourseAsyncContent entity = await _courseAsyncContentDal.GetAsync(cac => cac.CourseId == courseId && cac.AsyncContentId == ContentId);
-		if (entity != null)
+		if (entity == null)
 		{
 			throw new BusinessException(BusinessCoreMessages.CannotFindEntityError, BusinessCoreTitles.CannotFindError);
 		}

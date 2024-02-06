@@ -10,18 +10,9 @@ namespace Business.Rules;
 public class PersonalInfoBusinessRules : BaseBusinessRules<PersonalInfo>
 {
     IPersonalInfoDal _personalInfoDal;
-    IUserService _userService;
-    public PersonalInfoBusinessRules(IPersonalInfoDal personalInfoDal, IUserService userService) : base(personalInfoDal)
+    public PersonalInfoBusinessRules(IPersonalInfoDal personalInfoDal) : base(personalInfoDal)
     {
         _personalInfoDal = personalInfoDal;
-        _userService = userService;
     }
-    public async Task CheckUserIfExists(Guid userId)
-    {
-        GetUserResponse user = await _userService.GetByIdAsync(userId);
-        if (user == null)
-        {
-            throw new BusinessException(BusinessCoreMessages.CannotFindEntityError, BusinessCoreTitles.CannotFindError);
-        }
-    }
+    
 }

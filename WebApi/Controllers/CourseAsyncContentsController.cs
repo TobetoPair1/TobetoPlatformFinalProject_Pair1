@@ -23,13 +23,13 @@ public class CourseAsyncContentsController : ControllerBase
     }
 
     [HttpGet("getall")]
-    public async Task<IActionResult> GetAll(PageRequest pageRequest)
+    public async Task<IActionResult> GetAll([FromQuery] PageRequest pageRequest)
     {
         return Ok(await _courseAsyncContentService.GetListAsync(pageRequest));
     }
 
     [HttpGet("get")]
-    public async Task<IActionResult> Get(GetCourseAyncContentRequest getCourseAyncContentRequest)
+    public async Task<IActionResult> Get([FromQuery] GetCourseAyncContentRequest getCourseAyncContentRequest)
     {
         return Ok(await _courseAsyncContentService.GetAsync(getCourseAyncContentRequest));
     }

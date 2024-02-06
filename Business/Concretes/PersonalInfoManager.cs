@@ -14,15 +14,13 @@ public class PersonalInfoManager : IPersonalInfoService
 {
     IMapper _mapper;
     IPersonalInfoDal _personalInfoDal;
-    IUserService _userService;
     PersonalInfoBusinessRules _personalInfoBusinessRules;
 
-    public PersonalInfoManager(IMapper mapper, IPersonalInfoDal personalInfoDal, PersonalInfoBusinessRules personalInfoBusinessRules, IUserService userService)
+    public PersonalInfoManager(IMapper mapper, IPersonalInfoDal personalInfoDal, PersonalInfoBusinessRules personalInfoBusinessRules)
     {
         _mapper = mapper;
         _personalInfoDal = personalInfoDal;
         _personalInfoBusinessRules = personalInfoBusinessRules;
-        _userService = userService;
     }
 
     public async Task<CreatedPersonalInfoResponse> AddAsync(CreatePersonalInfoRequest createPersonalInfoRequest)
@@ -35,7 +33,7 @@ public class PersonalInfoManager : IPersonalInfoService
 
     public async Task<DeletedPersonalInfoResponse> DeleteAsync(DeletePersonalInfoRequest deletePersonalInfoRequest)
     {
-		PersonalInfo personalInfo = await _personalInfoDal.GetAsync(p => p.Id == deletePersonalInfoRequest.Id);
+        PersonalInfo personalInfo = await _personalInfoBusinessRules.CheckIfExistsById(deletePersonalInfoRequest.Id);
 		PersonalInfo deletedPersonalInfo = await _personalInfoDal.DeleteAsync(personalInfo);
         return _mapper.Map<DeletedPersonalInfoResponse>(deletedPersonalInfo);
     }
@@ -59,8 +57,7 @@ public class PersonalInfoManager : IPersonalInfoService
     }
 
     public async Task<UpdatedPersonalInfoResponse> UpdateAsync(UpdatePersonalInfoRequest updatePersonalInfoRequest)
-    {
-        await _personalInfoBusinessRules.CheckUserIfExists(updatePersonalInfoRequest.Id);
+    {        
         PersonalInfo personalInfo = await _personalInfoBusinessRules.CheckIfExistsById(updatePersonalInfoRequest.Id);
         _mapper.Map(updatePersonalInfoRequest,personalInfo);
         PersonalInfo updatedPersonalInfo = await _personalInfoDal.UpdateAsync(personalInfo);

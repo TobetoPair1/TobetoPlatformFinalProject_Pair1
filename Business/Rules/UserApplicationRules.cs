@@ -1,6 +1,7 @@
 ﻿using Business.Constants.Messages;
 using Core.Business.Rules;
 using Core.CrossCuttingConcerns.Exceptions.Types;
+using Core.Utilities.Messages;
 using DataAccess.Abstracts;
 using Entities.Concretes.CrossTables;
 
@@ -14,12 +15,12 @@ public class UserApplicationRules : BaseBusinessRules<UserApplication>
         _userApplicationDal = userApplicationDal;
     }
 
-    public async Task<UserApplication> CheckIfExistsById(Guid userId, Guid applicationId)
+    public async Task<UserApplication> CheckIfExistsWithForeignKey(Guid userId, Guid applicationId)
     {
         UserApplication userApplication = await _userApplicationDal.GetAsync(ua => ua.UserId == userId && ua.ApplicationId == applicationId);
-        if (userApplication != null)
+        if (userApplication == null)
         {
-            throw new BusinessException("app exist", BusinessTitles.AlreadyExistsError);
+            throw new BusinessException(BusinessCoreMessages.CannotFindEntityError, BusinessCoreTitles.CannotFindError);
         }
         return userApplication;
     }

@@ -16,7 +16,7 @@ public class CourseFavouritedByUserBusinessRules:BaseBusinessRules<CourseFavouri
 	public async Task<CourseFavouritedByUser> CheckIfExistsWithForeignKey(Guid userId, Guid courseId)
 	{
 		CourseFavouritedByUser entity = await _courseFavouritedByUserDal.GetAsync(cfbu => cfbu.UserId == userId && cfbu.CourseId == courseId);
-		if (entity != null)
+		if (entity == null)
 		{
 			throw new BusinessException(BusinessCoreMessages.CannotFindEntityError, BusinessCoreTitles.CannotFindError);
 		}

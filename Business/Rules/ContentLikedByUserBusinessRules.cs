@@ -16,7 +16,7 @@ public class ContentLikedByUserBusinessRules:BaseBusinessRules<ContentLikedByUse
 	public async Task<ContentLikedByUser> CheckIfExistsWithForeignKey(Guid userId,Guid ContentId)
 	{
 		ContentLikedByUser entity = await _contentLikedByUserDal.GetAsync(clbu => clbu.UserId == userId && clbu.ContentId == ContentId);
-		if (entity != null)
+		if (entity == null)
 		{
 			throw new BusinessException(BusinessCoreMessages.CannotFindEntityError, BusinessCoreTitles.CannotFindError);
 		}
