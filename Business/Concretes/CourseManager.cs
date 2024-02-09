@@ -35,13 +35,13 @@ public class CourseManager : ICourseService
 	public async Task<CreatedCourseResponse> AddAsync(CreateCourseRequest createCourseRequest)
     {
         Course course = _mapper.Map<Course>(createCourseRequest);
-        course.LikeId = (await _likeService.AddAsync(new CreateLikeRequest())).Id;
-        await _favouriteService.AddAsync(new CreateFavouriteRequest
-        {
-            CourseId = course.Id,
-        });
+        course.LikeId = (await _likeService.AddAsync(new CreateLikeRequest())).Id;        
         Course addedCourse = await _courseDal.AddAsync(course);
-        return _mapper.Map<CreatedCourseResponse>(addedCourse);
+		await _favouriteService.AddAsync(new CreateFavouriteRequest
+		{
+			CourseId = addedCourse.Id,
+		});
+		return _mapper.Map<CreatedCourseResponse>(addedCourse);
     }
 
 	public async Task<CreatedUserCourseResponse> AssignCourseAsync(CreateUserCourseRequest createUserCourseRequest)
