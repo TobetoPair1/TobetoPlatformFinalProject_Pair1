@@ -1,5 +1,5 @@
 ﻿namespace Business.Constants.Messages;
-public class BusinessMessages
+public static class BusinessMessages
 {
     public static string LoginError = "Kullanıcı adı veya şifre yanlış";
     public static string UserExists = "Kullanıcı kayıtlı";
