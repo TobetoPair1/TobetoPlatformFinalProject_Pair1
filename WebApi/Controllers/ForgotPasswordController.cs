@@ -15,7 +15,7 @@ public class ForgotPasswordController : ControllerBase
     }
 
     [HttpGet("getbyuserid")]
-    public async Task<IActionResult> GetByUserId([FromBody] Guid userId)
+    public async Task<IActionResult> GetByUserId([FromQuery] Guid userId)
     {
         return Ok(await _forgotPasswordService.GetByUserIdAsync(userId));
     }
