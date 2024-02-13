@@ -1,5 +1,6 @@
 ﻿using Business.Abstracts;
 using Business.Dtos.Requests.Auth;
+using Business.Dtos.Requests.ChangePassword;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers;
@@ -30,10 +31,16 @@ public class AuthsController : ControllerBase
         var registeredUser = await _authService.Register(registerRequest);
         if (registeredUser==null)
         {
-			//kullanıcı aktifleştirilsin mi sor?
 		    return Ok(null);
 		}
 		var result = _authService.CreateAccessToken(registeredUser);
 		return Ok(result);
 	}
+
+    [HttpPost("changepassword")]
+    public async Task<IActionResult> ChangePassword(CreateChangePasswordRequest createChangePasswordRequest)
+    {
+        await _authService.ChangePassword(createChangePasswordRequest);
+        return Ok(true);
+    }
 }

@@ -30,4 +30,5 @@ public class User : Entity<Guid>,IUser
     public ICollection<ContentLikedByUser> ContentsLikedByUser { get; set; }
     public ICollection<File> Files { get; set; }
     public ICollection<UserCalendar> Calenders { get; set; }
+    public ICollection<ForgotPassword> ForgotPasswords { get; set; }
 }

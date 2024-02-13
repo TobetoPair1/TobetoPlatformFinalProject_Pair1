@@ -1,5 +1,6 @@
 ﻿using Business.Abstracts;
 using Business.Concretes;
+using Business.EmailSenderProcess;
 using Core.Business.Rules;
 using Core.Entities;
 using Core.Utilities.Security.Jwt;
@@ -51,6 +52,8 @@ public static class BusinessServiceRegistration
         services.AddScoped<IContentLikedByUserService, ContentLikedByUserManager>();
         services.AddScoped<ICourseFavouritedByUserService, CourseFavouritedByUserManager>();
         services.AddScoped<ICourseLikedByUserService, CourseLikedByUserManager>();
+        services.AddScoped<IEmailManager, EmailManager>();
+        services.AddScoped<IForgotPasswordService, ForgotPasswordManager>();
 
 		var assembly = Assembly.GetExecutingAssembly();
         services.AddAutoMapper(assembly);

@@ -51,6 +51,7 @@ public class TobetoPlatformContext:DbContext
     public DbSet<CourseLikedByUser> CourseLikedByUsers { get; set; }
     public DbSet<ContentLikedByUser> ContentLikedByUsers { get; set; }
     public DbSet<CourseFavouritedByUser> CourseFavouritedByUsers { get; set; }
+    public DbSet<ForgotPassword> ForgotPasswords { get; set; }
 
     public TobetoPlatformContext(DbContextOptions options, IConfiguration configuration):base(options)
     {

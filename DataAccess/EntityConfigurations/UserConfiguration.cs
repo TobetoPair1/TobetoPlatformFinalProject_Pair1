@@ -39,5 +39,6 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
 		builder.HasMany(u => u.Files).WithOne(f => f.User).HasForeignKey(f => f.UserId);
 		builder.HasMany(u => u.Calenders).WithOne(uc => uc.User).HasForeignKey(uc => uc.UserId);
 		builder.HasMany(u => u.ContentsLikedByUser).WithOne(clbu => clbu.User).HasForeignKey(clbu => clbu.UserId);
-	}
+        builder.HasMany(u => u.ForgotPasswords).WithOne(fp => fp.User).HasForeignKey(fp => fp.UserId);
+    }
 }

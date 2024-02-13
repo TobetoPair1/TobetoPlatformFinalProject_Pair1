@@ -59,6 +59,7 @@ public static class DataAccessServiceRegistration
         services.AddScoped<IContentLikedByUserDal, EfContentLikedByUserDal>();
         services.AddScoped<ICourseFavouritedByUserDal, EfCourseFavouritedByUserDal>();
         services.AddScoped<ISessionDal, EfSessionDal>();
+        services.AddScoped<IForgotPasswordDal, EfForgotPasswordDal>();
 
         return services;
     }

@@ -50,7 +50,7 @@ public class EmailManager : IEmailManager
     }
 
     
-    public async Task SendMailAsync(EmailMessageModel model)
+    public async Task<bool> SendMailAsync(EmailMessageModel model)
     {
         try
         {
@@ -70,11 +70,13 @@ public class EmailManager : IEmailManager
 
             
             await client.SendMailAsync(message);
+            return true;
         }
         catch (Exception ex)
         {
             
             _logger.LogError(ex, "Email sending failed.");
+            return false;
         }
     }
 
