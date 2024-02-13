@@ -35,7 +35,7 @@ public class SurveysController : ControllerBase
         return Ok(result);
     }
 
-    [HttpGet("getbyuserid")]
+    [HttpGet("getlistbyuserid")]
     public async Task<IActionResult> GetAll([FromQuery] PageRequest pageRequest, Guid userId)
     {
         var result = await _surveyService.GetByUserId(userId, pageRequest);
