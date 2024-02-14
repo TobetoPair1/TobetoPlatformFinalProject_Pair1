@@ -11,4 +11,5 @@ public interface IForeignLanguageService
 	Task<DeletedForeignLanguageResponse> DeleteAsync(DeleteForeignLanguageRequest deleteForeignLanguageRequest);
 	Task<UpdatedForeignLanguageResponse> UpdateAsync(UpdateForeignLanguageRequest updateForeignLanguageRequest);
 	Task<GetForeignLanguageResponse> GetByIdAsync(GetForeignLanguageRequest getForeignLanguageRequest);
+	Task<IPaginate<GetListForeignLanguageResponse>> GetListByUserIdAsync(PageRequest pageRequest, Guid userId);
 }
