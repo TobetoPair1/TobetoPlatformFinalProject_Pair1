@@ -11,5 +11,5 @@ public interface IForgotPasswordService
     Task<GetForgotPasswordResponse> GetByIdAsync(Guid id);
     Task<GetForgotPasswordResponse> GetByUserIdAsync(Guid userId);
     Task<DeletedForgotPasswordResponse> DeleteAsync(DeleteForgotPasswordRequest deleteForgotPasswordRequest);
-    Task<DeletedForgotPasswordResponse> DeleteByUserIdAsync(Guid userId);
+    Task<ICollection<DeletedForgotPasswordResponse>> DeleteByUserIdAsync(Guid userId);
 }

@@ -36,13 +36,13 @@ public class ForgotPasswordManager : IForgotPasswordService
         return deletedForgotPasswordResponse;
     }
 
-    public async Task<DeletedForgotPasswordResponse> DeleteByUserIdAsync(Guid userId)
+    public async Task<ICollection<DeletedForgotPasswordResponse>> DeleteByUserIdAsync(Guid userId)
     {
         await _forgotPasswordBusinessRules.CheckUserIfExists(userId);
-        ForgotPassword forgotPassword = await _forgotPasswordDal.GetAsync(fp => fp.UserId == userId);
-        var deletedForgotPassword = await _forgotPasswordDal.DeleteAsync(forgotPassword);
-        DeletedForgotPasswordResponse deletedForgotPasswordResponse = _mapper.Map<DeletedForgotPasswordResponse>(deletedForgotPassword);
-        return deletedForgotPasswordResponse;
+        ICollection<ForgotPassword> forgotPasswords = (await _forgotPasswordDal.GetListAsync(fp => fp.UserId == userId)).Items;
+        var deletedForgotPassword = await _forgotPasswordDal.DeleteRangeAsync(forgotPasswords);
+        ICollection<DeletedForgotPasswordResponse> deletedForgotPasswordResponses = _mapper.Map<List<DeletedForgotPasswordResponse>>(deletedForgotPassword);
+        return deletedForgotPasswordResponses;
     }
 
     public async Task<GetForgotPasswordResponse> GetByIdAsync(Guid id)
