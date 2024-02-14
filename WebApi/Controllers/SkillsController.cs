@@ -38,8 +38,8 @@ public class SkillsController : ControllerBase
         return Ok(result);
     }
 
-    [HttpGet("getbyuserid")]
-    public async Task<IActionResult> GetAll([FromQuery] PageRequest pageRequest, Guid userId)
+    [HttpGet("getlistbyuserid")]
+    public async Task<IActionResult> GetByUserId([FromQuery] PageRequest pageRequest, Guid userId)
     {
         var result = await _skillService.GetByUserId(userId, pageRequest);
         return Ok(result);

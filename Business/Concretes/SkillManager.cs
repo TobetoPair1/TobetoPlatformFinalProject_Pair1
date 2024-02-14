@@ -18,10 +18,11 @@ public class SkillManager : ISkillService
     IUserSkillService _userSkillService;
     SkillBusinessRules _skillBusinessRules;
 
-    public SkillManager(ISkillDal skillDal, IMapper mapper, SkillBusinessRules skillBusinessRules)
+    public SkillManager(ISkillDal skillDal, IMapper mapper, IUserSkillService userSkillService, SkillBusinessRules skillBusinessRules)
     {
         _skillDal = skillDal;
         _mapper = mapper;
+        _userSkillService = userSkillService;
         _skillBusinessRules = skillBusinessRules;
     }
 
