@@ -34,8 +34,14 @@ public class CertificatesController : ControllerBase
         var result = await _certificateService.GetListAsync(pageRequest);
         return Ok(result);
     }
+	[HttpGet("getlistbyuserid")]
+	public async Task<IActionResult> GetListByUserId([FromQuery] PageRequest pageRequest,Guid userId)
+	{
+		var result = await _certificateService.GetListByUserIdAsync(pageRequest,userId);
+		return Ok(result);
+	}
 
-    [HttpDelete]
+	[HttpDelete]
     public async Task<IActionResult> Delete([FromBody] Guid id)
     {
         var result = await _certificateService.DeleteAsync(id);

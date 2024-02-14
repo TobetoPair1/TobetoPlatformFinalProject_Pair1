@@ -44,4 +44,10 @@ public class CertificateManager : ICertificateService
         var result = await _certificateDal.GetListAsync(index: pageRequest.PageIndex, size: pageRequest.PageSize);
         return _mapper.Map<Paginate<GetListCertificateResponse>>(result);
     }
+
+	public async Task<IPaginate<GetListCertificateResponse>> GetListByUserIdAsync(PageRequest pageRequest, Guid userId)
+	{
+		var result = await _certificateDal.GetListAsync(c=>c.UserId==userId, index: pageRequest.PageIndex, size: pageRequest.PageSize);
+		return _mapper.Map<Paginate<GetListCertificateResponse>>(result);
+	}
 }
