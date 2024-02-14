@@ -19,5 +19,7 @@ public class ForgotPasswordProfile : Profile
         CreateMap<ForgotPassword, GetListForgotPasswordResponse>().ReverseMap();
 
         CreateMap<ForgotPassword, GetForgotPasswordResponse>().ReverseMap();
+
+        CreateMap<ICollection<ForgotPassword>, List<DeletedForgotPasswordResponse>>().ReverseMap();
     }
 }

@@ -52,6 +52,12 @@ public class ForeignLanguageManager : IForeignLanguageService
 		return _mapper.Map<Paginate<GetListForeignLanguageResponse>>(result);
 	}
 
+	public async Task<IPaginate<GetListForeignLanguageResponse>> GetListByUserIdAsync(PageRequest pageRequest, Guid userId)
+	{
+		var result = await _foreignLanguageDal.GetListAsync(fl=>fl.UserId==userId , index: pageRequest.PageIndex, size: pageRequest.PageSize);
+		return _mapper.Map<Paginate<GetListForeignLanguageResponse>>(result);
+	}
+
 	public async Task<UpdatedForeignLanguageResponse> UpdateAsync(UpdateForeignLanguageRequest updateForeignLanguageRequest)
 	{
         await _foreignLanguageBusinessRules.CheckUserIfExists(updateForeignLanguageRequest.UserId);
