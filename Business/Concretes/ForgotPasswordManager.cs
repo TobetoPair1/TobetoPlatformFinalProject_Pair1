@@ -51,9 +51,9 @@ public class ForgotPasswordManager : IForgotPasswordService
         return _mapper.Map<GetForgotPasswordResponse>(result);
     }
 
-    public async Task<GetForgotPasswordResponse> GetByUserIdAsync(Guid userId)
+    public async Task<GetForgotPasswordResponse> GetByUserIdAsync(Guid userId,string code)
     {
-        var result = await _forgotPasswordDal.GetAsync(fp => fp.UserId == userId);
+        var result = await _forgotPasswordDal.GetAsync(fp => fp.UserId == userId && fp.Code==code);
         return _mapper.Map<GetForgotPasswordResponse>(result);
     }
 
