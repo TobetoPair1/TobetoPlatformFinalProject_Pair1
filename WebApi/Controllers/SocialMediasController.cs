@@ -30,6 +30,13 @@ public class SocialMediaController : ControllerBase
         return Ok(result);
     }
 
+    [HttpGet("getlistbyuserid")]
+    public async Task<IActionResult> GetListByUserId([FromQuery] PageRequest pageRequest, Guid userId)
+    {
+        var result = await _socialMediaService.GetListByUserIdAsync(pageRequest, userId);
+        return Ok(result);
+    }
+
     [HttpGet("get")]
     public async Task<IActionResult> Get([FromQuery] GetSocialMediaRequest getSocialMediaRequest)
     {

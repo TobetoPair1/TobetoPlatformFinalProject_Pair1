@@ -47,6 +47,11 @@ public class SocialMediaManager: ISocialMediaService
         return deletedSocialMediaResponse;
     }
 
+    public async Task<IPaginate<GetListSocialMediaResponse>> GetListByUserIdAsync(PageRequest pageRequest, Guid userId)
+    {
+        var result = await _socialMediaDal.GetListAsync(fl => fl.UserId == userId, index: pageRequest.PageIndex, size: pageRequest.PageSize);
+        return _mapper.Map<Paginate<GetListSocialMediaResponse>>(result);
+    }
 
     public async Task<UpdatedSocialMediaResponse> UpdateAsync(UpdateSocialMediaRequest updateSocialMediaRequest)
     {

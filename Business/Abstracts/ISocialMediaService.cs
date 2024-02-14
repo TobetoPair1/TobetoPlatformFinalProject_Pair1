@@ -11,4 +11,7 @@ public interface ISocialMediaService
     Task<DeletedSocialMediaResponse> DeleteAsync(DeleteSocialMediaRequest deleteSocialMediaRequest);
     Task<UpdatedSocialMediaResponse> UpdateAsync(UpdateSocialMediaRequest updateSocialMediaRequest);
     Task<GetSocialMediaResponse> GetByIdAsync(GetSocialMediaRequest getSocialMediaRequest);
+    Task<IPaginate<GetListSocialMediaResponse>> GetListByUserIdAsync(PageRequest pageRequest, Guid userId);
+
+
 }
