@@ -1,6 +1,7 @@
 ﻿using Castle.DynamicProxy;
 using Core.CrossCuttingConcerns.Caching;
 using Core.Utilities.Interceptors;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Core.Aspects.Autofac.Caching;
 public class CacheAspect : MethodInterception
@@ -8,10 +9,10 @@ public class CacheAspect : MethodInterception
 	private int _duration;
 	private ICacheManager _cacheManager;
 
-	public CacheAspect(ICacheManager cacheManager, int duration = 60)
+	public CacheAspect(int duration = 60)
 	{
 		_duration = duration;			
-		_cacheManager = cacheManager;
+		_cacheManager = CoreServiceRegistration.ServiceProvider.GetService<ICacheManager>();
 	}
 
 	public override void Intercept(IInvocation invocation)
