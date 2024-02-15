@@ -35,6 +35,7 @@ public class CourseManager : ICourseService
     [CacheRemoveAspect("ICourseService.Get")]
 	public async Task<CreatedCourseResponse> AddAsync(CreateCourseRequest createCourseRequest)
     {
+        await _courseBusinessRules.CheckCategoryIfExists(createCourseRequest.CategoryId);
         Course course = _mapper.Map<Course>(createCourseRequest);
         course.LikeId = (await _likeService.AddAsync(new CreateLikeRequest())).Id;        
         Course addedCourse = await _courseDal.AddAsync(course);
