@@ -19,7 +19,18 @@ public class CacheAspect : MethodInterception
 	{
 		var methodName = string.Format($"{invocation.Method.ReflectedType.FullName}.{invocation.Method.Name}");
 		var arguments = invocation.Arguments.ToList();
-		var key = $"{methodName}({string.Join(",", arguments.Select(x => x?.ToString() ?? "<Null>"))})";
+		Dictionary<string, string> values = new();
+		foreach (var argument in arguments)
+		{			
+			var argProperties = argument.GetType().GetProperties()
+	.ToDictionary(p => p.Name, p => p.GetValue(argument)?.ToString() ?? "<Null>");
+            foreach (var item in argProperties)
+            {
+				values.Add(item.Key,item.Value);
+            }
+        }
+		
+		var key = $"{methodName}({string.Join(",", arguments.Select(x => x?.ToString() ?? "<Null>"))})({string.Join(",", values.Select(x => x.ToString() ?? "<Null>"))})";
 		if (_cacheManager.IsAdd(key))
 		{
 			invocation.ReturnValue = _cacheManager.Get(key);
