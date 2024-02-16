@@ -41,4 +41,5 @@ public class AnnouncementsController : ControllerBase
         var result = await _announcementService.DeleteAsync(deleteAnnouncementRequest);
         return Ok(result);
     }
+    
 }
