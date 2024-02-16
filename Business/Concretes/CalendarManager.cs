@@ -5,6 +5,7 @@ using Business.Dtos.Requests.UserCalendar;
 using Business.Dtos.Responses.Calender;
 using Business.Dtos.Responses.UserCalendar;
 using Business.Rules;
+using Core.Aspects.Autofac.SecuredOperation;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
 using Entities.Concretes;
@@ -26,7 +27,7 @@ public class CalendarManager : ICalendarService
         _calendarBusinessRules = calendarBusinessRules;
     }
 
-
+    [SecuredOperation("admin")]
     public async Task<CreatedCalendarResponse> AddAsync(CreateCalendarRequest createCalendarRequest)
     {
         Calendar cal = _mapper.Map<Calendar>(createCalendarRequest);
@@ -35,7 +36,7 @@ public class CalendarManager : ICalendarService
         CreatedCalendarResponse createdCalResponse = _mapper.Map<CreatedCalendarResponse>(createdCal);
         return createdCalResponse;
     }
-
+    [SecuredOperation("admin")]
     public async Task<DeletedCalendarResponse> DeleteAsync(DeleteCalendarRequest deleteCalendarRequest)
     {
         Calendar cal = await _calendarBusinessRules.CheckIfExistsById(deleteCalendarRequest.Id);
@@ -55,19 +56,19 @@ public class CalendarManager : ICalendarService
         return await _userCalendarService.GetListByUserIdAsync(userId, pageRequest);
     }
 
-
+    [SecuredOperation("admin")]
     public async Task<CreatedUserCalendarResponse> AssignCalendarAsync(CreateUserCalendarRequest createUserCalendarRequest)
     {
         return await _userCalendarService.AddAsync(createUserCalendarRequest);
     }
 
-
+    [SecuredOperation("admin")]
     public async Task<IPaginate<GetListCalendarResponse>> GetListAsync(PageRequest pageRequest)
     {
         var calendars = await _calendarDal.GetListAsync(index: pageRequest.PageIndex, size: pageRequest.PageSize);
         return _mapper.Map<Paginate<GetListCalendarResponse>>(calendars);
     }
-
+    [SecuredOperation("admin")]
     public async Task<UpdatedCalendarResponse> UpdateAsync(UpdateCalendarRequest updateCalendarRequest)
     {
         await _calendarBusinessRules.CheckIfInstructorExists(updateCalendarRequest.InstructorId);

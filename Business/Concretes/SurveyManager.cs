@@ -5,6 +5,7 @@ using Business.Dtos.Requests.UserSurvey;
 using Business.Dtos.Responses.Survey;
 using Business.Dtos.Responses.UserSurvey;
 using Business.Rules;
+using Core.Aspects.Autofac.SecuredOperation;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
 using Entities.Concretes;
@@ -24,6 +25,8 @@ public class SurveyManager : ISurveyService
         _userSurveyService = userSurveyService;
         _surveyBusinessRules = surveyBusinessRules;
     }
+
+    [SecuredOperation("admin")]
     public async Task<CreatedSurveyResponse> AddAsync(CreateSurveyRequest createSurveyRequest)
     {
         Survey survey = _mapper.Map<Survey>(createSurveyRequest);
@@ -37,6 +40,7 @@ public class SurveyManager : ISurveyService
         return await _userSurveyService.AddAsync(createUserSurveyRequest);
     }
 
+    [SecuredOperation("admin")]
     public async Task<DeletedSurveyResponse> DeleteAsync(DeleteSurveyRequest deleteSurveyRequest)
     {
         Survey survey = await _surveyBusinessRules.CheckIfExistsById(deleteSurveyRequest.Id);
@@ -56,11 +60,14 @@ public class SurveyManager : ISurveyService
         return await _userSurveyService.GetListByUserIdAsync(userId, pageRequest);
     }
 
+    [SecuredOperation("admin")]
     public async Task<IPaginate<GetListSurveyResponse>> GetListAsync(PageRequest pageRequest)
     {
         var result = await _surveyDal.GetListAsync(index: pageRequest.PageIndex, size: pageRequest.PageSize);
         return _mapper.Map<Paginate<GetListSurveyResponse>>(result);
     }
+
+    [SecuredOperation("admin")]
 
     public async Task<UpdatedSurveyResponse> UpdateAsync(UpdateSurveyRequest updateSurveyRequest)
     {

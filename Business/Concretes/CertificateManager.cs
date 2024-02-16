@@ -3,6 +3,7 @@ using Business.Abstracts;
 using Business.Dtos.Requests.Certificate;
 using Business.Dtos.Responses.Certificate;
 using Business.Rules;
+using Core.Aspects.Autofac.SecuredOperation;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
 using Entities.Concretes;
@@ -25,7 +26,6 @@ public class CertificateManager : ICertificateService
         Certificate certificate = _mapper.Map<Certificate>(createCertificateRequest);
         return _mapper.Map<CreatedCertificateResponse>(await _certificateDal.AddAsync(certificate));
     }
-
     public async Task<DeletedCertificateResponse> DeleteAsync(Guid id)
     {
         Certificate deletedCertificate = await _certificateBusinessRules.CheckIfExistsById(id);
@@ -39,6 +39,7 @@ public class CertificateManager : ICertificateService
         return _mapper.Map<GetCertificateResponse>(certificate);
 
     }
+    [SecuredOperation("admin")]
     public async Task<IPaginate<GetListCertificateResponse>> GetListAsync(PageRequest pageRequest)
     {
         var result = await _certificateDal.GetListAsync(index: pageRequest.PageIndex, size: pageRequest.PageSize);

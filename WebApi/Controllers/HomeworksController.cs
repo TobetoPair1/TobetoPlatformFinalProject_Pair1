@@ -26,6 +26,13 @@ public class HomeworksController : ControllerBase
         var result = await _homeworkService.GetByIdAsync(getHomeworkRequest);
         return Ok(result);
     }
+    
+    [HttpPut]
+    public async Task<IActionResult> Update([FromBody] UpdateHomeworkRequest updateHomeworkRequest)
+    {
+        var result = await _homeworkService.UpdateAsync(updateHomeworkRequest);
+        return Ok(result);
+    }
 
     [HttpGet("getall")]
     public async Task<IActionResult> GetAll([FromQuery] PageRequest pageRequest)

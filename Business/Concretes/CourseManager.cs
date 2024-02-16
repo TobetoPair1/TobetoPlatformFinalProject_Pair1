@@ -8,6 +8,7 @@ using Business.Dtos.Responses.Course;
 using Business.Dtos.Responses.UserCourse;
 using Business.Rules;
 using Core.Aspects.Autofac.Caching;
+using Core.Aspects.Autofac.SecuredOperation;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
 using Entities.Concretes;
@@ -32,8 +33,9 @@ public class CourseManager : ICourseService
 		_favouriteService = favouriteService;
 		_courseBusinessRules = courseBusinessRules;
 	}
+    [SecuredOperation("admin")]
     [CacheRemoveAspect("ICourseService.Get")]
-	public async Task<CreatedCourseResponse> AddAsync(CreateCourseRequest createCourseRequest)
+    public async Task<CreatedCourseResponse> AddAsync(CreateCourseRequest createCourseRequest)
     {
         await _courseBusinessRules.CheckCategoryIfExists(createCourseRequest.CategoryId);
         Course course = _mapper.Map<Course>(createCourseRequest);
@@ -45,13 +47,15 @@ public class CourseManager : ICourseService
 		});
 		return _mapper.Map<CreatedCourseResponse>(addedCourse);
     }
-
-	public async Task<CreatedUserCourseResponse> AssignCourseAsync(CreateUserCourseRequest createUserCourseRequest)
+    [SecuredOperation("admin")]
+    public async Task<CreatedUserCourseResponse> AssignCourseAsync(CreateUserCourseRequest createUserCourseRequest)
 	{
 		return await _userCourseService.AddAsync(createUserCourseRequest);
 	}
-	[CacheRemoveAspect("ICourseService.Get")]
-	public async Task<DeletedCourseResponse> DeleteAsync(DeleteCourseRequest deleteCourseRequest)
+
+    [SecuredOperation("admin")]
+    [CacheRemoveAspect("ICourseService.Get")]
+    public async Task<DeletedCourseResponse> DeleteAsync(DeleteCourseRequest deleteCourseRequest)
     {
         Course course = await _courseBusinessRules.CheckIfExistsById(deleteCourseRequest.Id);
         Course deletedCourse = await _courseDal.DeleteAsync(course);
@@ -67,7 +71,7 @@ public class CourseManager : ICourseService
 	public async Task<IPaginate<GetListCourseResponse>> GetListByUserIdAsync(Guid userId, PageRequest pageRequest)
 	{
 		return await _userCourseService.GetListByUserIdAsync(userId, pageRequest);
-	}
+	}    
     [CacheAspect]
 	public async Task<IPaginate<GetListCourseResponse>> GetListAsync(PageRequest pageRequest)
     {
@@ -78,8 +82,10 @@ public class CourseManager : ICourseService
             );
         return _mapper.Map<Paginate<GetListCourseResponse>>(courses);
     }
-	[CacheRemoveAspect("ICourseService.Get")]
-	public async Task<UpdatedCourseResponse> UpdateAsync(UpdateCourseRequest updateCourseRequest)
+
+    [SecuredOperation("admin")]
+    [CacheRemoveAspect("ICourseService.Get")]
+    public async Task<UpdatedCourseResponse> UpdateAsync(UpdateCourseRequest updateCourseRequest)
     {
         await _courseBusinessRules.CheckCategoryIfExists(updateCourseRequest.CategoryId);
         Course course = await _courseBusinessRules.CheckIfExistsById(updateCourseRequest.Id);

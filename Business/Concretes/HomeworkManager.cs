@@ -3,6 +3,7 @@ using Business.Abstracts;
 using Business.Dtos.Requests.Homework;
 using Business.Dtos.Responses.Homework;
 using Business.Rules;
+using Core.Aspects.Autofac.SecuredOperation;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
 using Entities.Concretes;
@@ -21,6 +22,8 @@ public class HomeworkManager : IHomeworkService
         _homeworkDal = homeworkDal;
         _homeworkBusinessRules = homeworkBusinessRules;
     }
+    
+    [SecuredOperation("admin,instructor")]
     public async Task<CreatedHomeworkResponse> AddAsync(CreateHomeworkRequest createHomeworkRequest)
     {
         Homework homework = _mapper.Map<Homework>(createHomeworkRequest);
@@ -29,6 +32,7 @@ public class HomeworkManager : IHomeworkService
         return result;
     }
 
+    [SecuredOperation("admin, instructor")]
     public async Task<DeletedHomeworkResponse> DeleteAsync(DeleteHomeworkRequest deleteHomeworkRequest)
     {
         Homework homework = await _homeworkBusinessRules.CheckIfExistsById(deleteHomeworkRequest.Id);
@@ -50,6 +54,7 @@ public class HomeworkManager : IHomeworkService
         return _mapper.Map<Paginate<GetListHomeworkResponse>>(result);
     }
 
+    [SecuredOperation("admin, instructor")]
     public async Task<UpdatedHomeworkResponse> UpdateAsync(UpdateHomeworkRequest updateHomeworkRequest)
     {
         await _homeworkBusinessRules.CheckCourseIfExists(updateHomeworkRequest.CourseId);

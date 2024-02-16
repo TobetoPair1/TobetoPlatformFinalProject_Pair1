@@ -27,6 +27,13 @@ public class SurveysController : ControllerBase
         var result = await _surveyService.GetByIdAsync(getSurveyRequest);
         return Ok(result);
     }
+    
+    [HttpPut]
+    public async Task<IActionResult> Update([FromBody] UpdateSurveyRequest updateSurveyRequest)
+    {
+        var result = await _surveyService.UpdateAsync(updateSurveyRequest);
+        return Ok(result);
+    }
 
     [HttpGet("getall")]
     public async Task<IActionResult> GetAll([FromQuery] PageRequest pageRequest)

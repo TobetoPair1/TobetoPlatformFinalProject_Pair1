@@ -3,6 +3,7 @@ using Business.Abstracts;
 using Business.Dtos.Requests.ForeignLanguage;
 using Business.Dtos.Responses.ForeignLanguage;
 using Business.Rules;
+using Core.Aspects.Autofac.SecuredOperation;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
 using Entities.Concretes;
@@ -23,6 +24,7 @@ public class ForeignLanguageManager : IForeignLanguageService
 		_foreignLanguageBusinessRules = foreignLanguageBusinessRules;
 	}
 
+	[SecuredOperation("admin")]
 	public async Task<CreatedForeignLanguageResponse> AddAsync(CreateForeignLanguageRequest createForeignLanguageRequest)
 	{
 		ForeignLanguage foreignLanguage = _mapper.Map<ForeignLanguage>(createForeignLanguageRequest);
@@ -31,6 +33,7 @@ public class ForeignLanguageManager : IForeignLanguageService
 		return createdForeignLanguageResponse;
 	}
 
+	[SecuredOperation("admin")]
 	public async Task<DeletedForeignLanguageResponse> DeleteAsync(DeleteForeignLanguageRequest deleteForeignLanguageRequest)
 	{
 		ForeignLanguage foreignLanguage = await _foreignLanguageBusinessRules.CheckIfExistsById(deleteForeignLanguageRequest.Id);
@@ -58,6 +61,7 @@ public class ForeignLanguageManager : IForeignLanguageService
 		return _mapper.Map<Paginate<GetListForeignLanguageResponse>>(result);
 	}
 
+	[SecuredOperation("admin")]
 	public async Task<UpdatedForeignLanguageResponse> UpdateAsync(UpdateForeignLanguageRequest updateForeignLanguageRequest)
 	{
         await _foreignLanguageBusinessRules.CheckUserIfExists(updateForeignLanguageRequest.UserId);

@@ -41,4 +41,18 @@ public class EducationsController : ControllerBase
         var result = await _educationService.GetListAsync(pageRequest);
         return Ok(result);
     }
+    
+    [HttpPut]
+    public async Task<IActionResult> Update([FromBody] UpdateEducationRequest updateEducationRequest)
+    {
+        var result = await _educationService.UpdateAsync(updateEducationRequest);
+        return Ok(result);
+    }
+    
+    [HttpGet("getbyid")]
+    public async Task<IActionResult> GetById([FromQuery] GetEducationRequest getEducationRequest)
+    {
+        var result = await _educationService.GetByIdAsync(getEducationRequest);
+        return Ok(result);
+    }
 }

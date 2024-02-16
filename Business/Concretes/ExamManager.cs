@@ -5,6 +5,7 @@ using Business.Dtos.Requests.UserExam;
 using Business.Dtos.Responses.Exam;
 using Business.Dtos.Responses.UserExam;
 using Business.Rules;
+using Core.Aspects.Autofac.SecuredOperation;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
 using Entities.Concretes;
@@ -28,19 +29,20 @@ public class ExamManager : IExamService
         _examBusinessRules = examBusinessRules;
 
 	}
-	public async Task<CreatedExamResponse> AddAsync(CreateExamRequest createExamRequest)
+    [SecuredOperation("admin")]
+    public async Task<CreatedExamResponse> AddAsync(CreateExamRequest createExamRequest)
     {
         Exam exam = _mapper.Map<Exam>(createExamRequest);
         var createdExam = await _examDal.AddAsync(exam);
         CreatedExamResponse result = _mapper.Map<CreatedExamResponse>(createdExam);
         return result;
     }
-
+    [SecuredOperation("admin")]
     public async Task<CreatedUserExamResponse> AssignExamAsync(CreateUserExamRequest createUserExamRequest)
     {
         return await _userExamService.AddAsync(createUserExamRequest);
     }
-
+    [SecuredOperation("admin")]
     public async Task<DeletedExamResponse> DeleteAsync(DeleteExamRequest deleteExamRequest)
     {
         Exam exam = await _examBusinessRules.CheckIfExistsById(deleteExamRequest.Id);
@@ -48,8 +50,6 @@ public class ExamManager : IExamService
         DeletedExamResponse deletedExamResponse = _mapper.Map<DeletedExamResponse>(deletedExam);
         return deletedExamResponse; 
     }
-
-
     public async Task<GetExamResponse> GetByIdAsync(GetExamRequest getExamRequest)
     {
         var result = await _examDal.GetAsync(a => a.Id == getExamRequest.Id);
@@ -60,13 +60,13 @@ public class ExamManager : IExamService
     {
         return await _userExamService.GetListByUserIdAsync(userId, pageRequest);
     }
-
+    [SecuredOperation("admin")]
     public async Task<IPaginate<GetListExamResponse>> GetListAsync(PageRequest pageRequest)
     {
         var result = await _examDal.GetListAsync(index: pageRequest.PageIndex, size: pageRequest.PageSize);
         return _mapper.Map<Paginate<GetListExamResponse>>(result);
     }
-    
+    [SecuredOperation("admin")]
     public async Task<UpdatedExamResponse> UpdateAsync(UpdateExamRequest updateExamRequest)
     {
         Exam exam = await _examBusinessRules.CheckIfExistsById(updateExamRequest.Id);
@@ -74,5 +74,4 @@ public class ExamManager : IExamService
         UpdatedExamResponse updatedExamResponse = _mapper.Map<UpdatedExamResponse>(updatedExam);
         return updatedExamResponse; 
     }
-
 }

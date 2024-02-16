@@ -6,6 +6,7 @@ using Business.Dtos.Requests.Question;
 using Business.Dtos.Responses.ExamQuestion;
 using Business.Dtos.Responses.Question;
 using Business.Rules;
+using Core.Aspects.Autofac.SecuredOperation;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
 using Entities.Concretes;
@@ -27,6 +28,7 @@ public class QuestionManager: IQuestionService
         _questionBusinessRules = questionBusinessRules;
     }
 
+    [SecuredOperation("admin")]
     public async Task<CreatedQuestionResponse> AddAsync(CreateQuestionRequest createQuestionRequest)
     {
         Question question = _mapper.Map<Question>(createQuestionRequest);
@@ -40,6 +42,7 @@ public class QuestionManager: IQuestionService
         return await _examQuestionService.AddAsync(createExamQuestionRequest);
     }
 
+    [SecuredOperation("admin")]
     public async Task<DeletedQuestionResponse> DeleteAsync(DeleteQuestionRequest deleteQuestionRequest)
     {
         Question question = await _questionBusinessRules.CheckIfExistsById(deleteQuestionRequest.Id);
@@ -54,6 +57,7 @@ public class QuestionManager: IQuestionService
          return _mapper.Map<GetQuestionResponse>(result);
     }
 
+    [SecuredOperation("admin")]
     public async Task<IPaginate<GetListQuestionResponse>> GetListAsync(PageRequest pageRequest)
     {
         var result = await _questionDal.GetListAsync(index: pageRequest.PageIndex, size: pageRequest.PageSize);
@@ -65,6 +69,7 @@ public class QuestionManager: IQuestionService
         return await _examQuestionService.GetListByExamIdAsync(examId, pageRequest);
     }
 
+    [SecuredOperation("admin")]
     public async Task<UpdatedQuestionResponse> UpdateAsync(UpdateQuestionRequest updateQuestionRequest)
     {
         Question question = await _questionBusinessRules.CheckIfExistsById(updateQuestionRequest.Id);

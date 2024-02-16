@@ -45,7 +45,7 @@ public class AnswerManager : IAnswerService
 		var result = await _answerDal.GetAsync(a => a.Id == getAnswerRequest.Id, include: a => a.Include(a => a.Question));
 		return _mapper.Map<GetAnswerResponse>(result);
 	}
-
+	[SecuredOperation("admin")]
 	public async Task<IPaginate<GetListAnswerResponse>> GetListAsync(PageRequest pageRequest)
 	{
 		var result = await _answerDal.GetListAsync(index: pageRequest.PageIndex, size: pageRequest.PageSize, include: a => a.Include(a => a.Question));

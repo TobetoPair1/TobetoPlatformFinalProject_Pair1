@@ -3,6 +3,7 @@ using Business.Abstracts;
 using Business.Dtos.Requests.Category;
 using Business.Dtos.Responses.Category;
 using Business.Rules;
+using Core.Aspects.Autofac.SecuredOperation;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
 using Entities.Concretes;
@@ -19,7 +20,7 @@ public class CategoryManager : ICategoryService
         _mapper = mapper;
         _categoryBusinessRules = categoryBusinessRules;
     }
-
+    [SecuredOperation("admin")]
     public async Task<CreatedCategoryResponse> AddAsync(CreateCategoryRequest createCategoryRequest)
     {
         await _categoryBusinessRules.AlreadyExixsts(createCategoryRequest.Name);
@@ -29,7 +30,7 @@ public class CategoryManager : ICategoryService
         CreatedCategoryResponse createdCatResponse = _mapper.Map<CreatedCategoryResponse>(createdCat);
         return createdCatResponse;
     }
-
+    [SecuredOperation("admin")]
     public async Task<DeletedCategoryResponse> DeleteAsync(DeleteCategoryRequest deleteCategoryRequest)
     {
         Category cat = await _categoryBusinessRules.CheckIfExistsById(deleteCategoryRequest.Id);
@@ -45,14 +46,14 @@ public class CategoryManager : ICategoryService
         return _mapper.Map<GetCategoryResponse>(cat);
 
     }
-
+    [SecuredOperation("admin")]
     public async Task<IPaginate<GetListCategoryResponse>> GetListAsync(PageRequest pageRequest)
     {
         var categories = await _categoryDal.GetListAsync(index: pageRequest.PageIndex, size: pageRequest.PageSize);
         return _mapper.Map<Paginate<GetListCategoryResponse>>(categories);
 
     }
-
+    [SecuredOperation("admin")]
     public async Task<UpdatedCategoryResponse> UpdateAsync(UpdateCategoryRequest updateCategoryRequest)
     {
         Category cat = await _categoryBusinessRules.CheckIfExistsById(updateCategoryRequest.Id);
