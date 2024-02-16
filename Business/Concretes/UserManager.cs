@@ -4,6 +4,7 @@ using Business.Dtos.Requests.PersonalInfo;
 using Business.Dtos.Requests.User;
 using Business.Dtos.Responses.User;
 using Business.Rules;
+using Core.Aspects.Autofac.SecuredOperation;
 using Core.DataAccess.Paging;
 using Core.Entities;
 using DataAccess.Abstracts;
@@ -26,7 +27,7 @@ public class UserManager : IUserService
 		_personalInfoService = personalService;
 	}
 
-	public async Task<CreatedUserResponse> AddAsync(CreateUserRequest createUserRequest)
+    public async Task<CreatedUserResponse> AddAsync(CreateUserRequest createUserRequest)
     {        
         User user = _mapper.Map<User>(createUserRequest);
         var createdUser = await _userDal.AddAsync(user);
@@ -35,6 +36,7 @@ public class UserManager : IUserService
         return result;
     }
 
+    [SecuredOperation("admin")]
     public async Task<DeletedUserResponse> DeleteByIdAsync(Guid id)
     {
         User user;
@@ -43,7 +45,9 @@ public class UserManager : IUserService
         DeletedUserResponse deletedUserResponse = _mapper.Map<DeletedUserResponse>(deletedUser);
         return deletedUserResponse;
     }
-	public async Task<DeletedUserResponse> DeleteByMailAsync(string email)
+
+    [SecuredOperation("admin")]
+    public async Task<DeletedUserResponse> DeleteByMailAsync(string email)
 	{
 		User user;
         user = await _userBusinessRules.CheckIfExistsByMail(email);
@@ -65,12 +69,14 @@ public class UserManager : IUserService
         return result;
     }
 
+    [SecuredOperation("admin")]
     public async Task<IPaginate<GetListUserResponse>> GetListAsync(PageRequest pageRequest)
     {
         var result = await _userDal.GetListAsync(index: pageRequest.PageIndex, size: pageRequest.PageSize);
         return _mapper.Map<Paginate<GetListUserResponse>>(result);
     }
 
+    [SecuredOperation("admin")]
     public async Task<UpdatedUserResponse> UpdateAsync(UpdateUserRequest updateUserRequest)
     {
         User user = await _userBusinessRules.CheckIfExistsById(updateUserRequest.Id);
@@ -79,7 +85,8 @@ public class UserManager : IUserService
         UpdatedUserResponse updatedUserResponse = _mapper.Map<UpdatedUserResponse>(updatedUser);
         return updatedUserResponse;
     }
-	public async Task<bool> ActivateUserAsync(string email)
+
+    public async Task<bool> ActivateUserAsync(string email)
 	{
 		User user = await _userDal.GetAsync(u => u.Email == email,withDeleted:true);
 		user.DeletedDate = null;

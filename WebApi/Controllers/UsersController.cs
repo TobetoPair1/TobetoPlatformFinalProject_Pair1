@@ -18,12 +18,6 @@ public class UsersController : ControllerBase
         _userService = userService;
     }
 
-    [HttpPost("add")]
-    public async Task<IActionResult> Add([FromBody] CreateUserRequest createUserRequest)
-    {
-        var result = await _userService.AddAsync(createUserRequest);
-        return Ok(result);
-    }
 
     [HttpGet("getall")]
     public async Task<IActionResult> GetList([FromQuery] PageRequest pageRequest)
