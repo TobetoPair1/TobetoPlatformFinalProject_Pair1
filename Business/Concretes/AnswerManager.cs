@@ -3,6 +3,7 @@ using Business.Abstracts;
 using Business.Dtos.Requests.Answer;
 using Business.Dtos.Responses.Answer;
 using Business.Rules;
+using Core.Aspects.Autofac.SecuredOperation;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
 using Entities.Concretes;
@@ -22,15 +23,15 @@ public class AnswerManager : IAnswerService
         _mapper = mapper;
         _answerBusinessRules = answerBusinessRules;
     }
-
-    public async Task<CreatedAnswerResponse> AddAsync(CreateAnswerRequest createAnswerRequest)
+	[SecuredOperation("admin")]
+	public async Task<CreatedAnswerResponse> AddAsync(CreateAnswerRequest createAnswerRequest)
 	{			
 		Answer answer = _mapper.Map<Answer>(createAnswerRequest);
 		var createdAnswer = await _answerDal.AddAsync(answer);
 		CreatedAnswerResponse createdAnswerResponse = _mapper.Map<CreatedAnswerResponse>(createdAnswer);
 		return createdAnswerResponse;
 	}
-
+	[SecuredOperation("admin")]
 	public async Task<DeletedAnswerResponse> DeleteAsync(DeleteAnswerRequest deleteAnswerRequest)
 	{
 		Answer answer = await _answerBusinessRules.CheckIfExistsById(deleteAnswerRequest.Id);
@@ -56,7 +57,7 @@ public class AnswerManager : IAnswerService
 		var result = await _answerDal.GetListAsync(index: pageRequest.PageIndex, size: pageRequest.PageSize,include:a=>a.Include(a=>a.Question));
 		return _mapper.Map<Paginate<GetListAnswerResponse>>(result);
 	}
-
+	[SecuredOperation("admin")]
 	public async Task<UpdatedAnswerResponse> UpdateAsync(UpdateAnswerRequest updateAnswerRequest)
 	{
         await _answerBusinessRules.CheckQuestionIfExists(updateAnswerRequest.Id);

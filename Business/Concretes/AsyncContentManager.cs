@@ -6,6 +6,7 @@ using Business.Dtos.Requests.Like;
 using Business.Dtos.Responses.AsyncContent;
 using Business.Dtos.Responses.CourseAsyncContent;
 using Business.Rules;
+using Core.Aspects.Autofac.SecuredOperation;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
 using Entities.Concretes;
@@ -27,7 +28,8 @@ public class AsyncContentManager : IAsyncContentService
         _likeService = likeService;
         _asyncContentBusinessRules = asyncContentBusinessRules;
     }
-    public async Task<CreatedAsyncContentResponse> AddAsync(CreateAsyncContentRequest createAsyncContentRequest)
+	[SecuredOperation("admin")]
+	public async Task<CreatedAsyncContentResponse> AddAsync(CreateAsyncContentRequest createAsyncContentRequest)
     {
         AsyncContent asyncContent = _mapper.Map<AsyncContent>(createAsyncContentRequest);
 		asyncContent.LikeId = (await _likeService.AddAsync(new CreateLikeRequest())).Id;
@@ -35,12 +37,12 @@ public class AsyncContentManager : IAsyncContentService
         CreatedAsyncContentResponse result = _mapper.Map<CreatedAsyncContentResponse>(createdAsyncContent);
         return result;
     }
-
+	[SecuredOperation("admin")]
 	public async Task<CreatedCourseAsyncContentResponse> AssignAsyncContentAsync(CreateCourseAsyncContentRequest createCourseAsyncContentRequest)
 	{
         return await _courseAsyncContentService.AddAsync(createCourseAsyncContentRequest);
 	}
-
+	[SecuredOperation("admin")]
 	public async Task<DeletedAsyncContentResponse> DeleteAsync(DeleteAsyncContentRequest deleteAsyncContentRequest)
     {
         AsyncContent asyncContent = await _asyncContentBusinessRules.CheckIfExistsById(deleteAsyncContentRequest.Id);
@@ -54,8 +56,8 @@ public class AsyncContentManager : IAsyncContentService
         var result = await _asyncContentDal.GetAsync(a => a.Id == getAsyncContentRequest.Id);
         return _mapper.Map<GetAsyncContentResponse>(result);
     }
-
-    public async Task<IPaginate<GetListAsyncContentResponse>> GetListAsync(PageRequest pageRequest)
+	[SecuredOperation("admin")]
+	public async Task<IPaginate<GetListAsyncContentResponse>> GetListAsync(PageRequest pageRequest)
     {
         var result = await _asyncContentDal.GetListAsync(index: pageRequest.PageIndex, size: pageRequest.PageSize);
         return _mapper.Map<Paginate<GetListAsyncContentResponse>>(result);
@@ -65,7 +67,7 @@ public class AsyncContentManager : IAsyncContentService
 	{
         return await _courseAsyncContentService.GetListByCourseIdAsync(courseId,pageRequest);
 	}
-
+	[SecuredOperation("admin")]
 	public async Task<UpdatedAsyncContentResponse> UpdateAsync(UpdateAsyncContentRequest updateAsyncContentRequest)
     {
         await _asyncContentBusinessRules.CheckCategoryIfExists(updateAsyncContentRequest.CategoryId);
