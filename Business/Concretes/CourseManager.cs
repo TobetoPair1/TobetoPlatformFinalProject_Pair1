@@ -71,8 +71,7 @@ public class CourseManager : ICourseService
 	public async Task<IPaginate<GetListCourseResponse>> GetListByUserIdAsync(Guid userId, PageRequest pageRequest)
 	{
 		return await _userCourseService.GetListByUserIdAsync(userId, pageRequest);
-	}
-    [SecuredOperation("admin")]
+	}    
     [CacheAspect]
 	public async Task<IPaginate<GetListCourseResponse>> GetListAsync(PageRequest pageRequest)
     {
