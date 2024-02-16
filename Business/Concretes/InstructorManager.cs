@@ -3,6 +3,7 @@ using Business.Abstracts;
 using Business.Dtos.Requests.Instructor;
 using Business.Dtos.Responses.Instructor;
 using Business.Rules;
+using Core.Aspects.Autofac.SecuredOperation;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
 using Entities.Concretes;
@@ -22,6 +23,7 @@ public class InstructorManager : IInstructorService
         _instructorBusinessRules = instructorBusinessRules;
     }
 
+    [SecuredOperation("admin")]
     public async Task<CreatedInstructorResponse> AddAsync(CreateInstructorRequest createInstructorRequest)
     {
         Instructor instructor = _mapper.Map<Instructor>(createInstructorRequest);
@@ -29,7 +31,8 @@ public class InstructorManager : IInstructorService
         CreatedInstructorResponse result = _mapper.Map<CreatedInstructorResponse>(createdInstructor);
         return result;
     }
-
+    
+    [SecuredOperation("admin")]
     public async Task<DeletedInstructorResponse> DeleteAsync(DeleteInstructorRequest deleteInstructorRequest)
     {
         Instructor instructor = await _instructorBusinessRules.CheckIfExistsById(deleteInstructorRequest.Id);
@@ -50,6 +53,7 @@ public class InstructorManager : IInstructorService
         return _mapper.Map<Paginate<GetListInstructorResponse>>(result);
     }
 
+    [SecuredOperation("admin")]
     public async Task<UpdatedInstructorResponse> UpdateAsync(UpdateInstructorRequest updateInstructorRequest)
     {
         Instructor instructor = await _instructorBusinessRules.CheckIfExistsById(updateInstructorRequest.Id);

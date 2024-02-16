@@ -3,6 +3,7 @@ using Business.Abstracts;
 using Business.Dtos.Requests.Favourite;
 using Business.Dtos.Responses.Favourite;
 using Business.Rules;
+using Core.Aspects.Autofac.SecuredOperation;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
 using Entities.Concretes;
@@ -24,16 +25,17 @@ public class FavouriteManager : IFavouriteService
 		_favouriteBusinessRules = favouriteBusinessRules;
 		
 	}
-
+	
+	[SecuredOperation("admin")]
 	public async Task<CreatedFavouritetResponse> AddAsync(CreateFavouriteRequest createFavouriteRequest)
     {
         Favourite fav = _mapper.Map<Favourite>(createFavouriteRequest);
         Favourite addedFav = await _favouriteDal.AddAsync(fav);
         return _mapper.Map<CreatedFavouritetResponse>(addedFav);
     }
-
 	
 
+	[SecuredOperation("admin")]
 	public async Task<DeletedFavouriteResponse> DeleteAsync(DeleteFavouriteRequest deleteFavouriteRequest)
 	{
 		Favourite favourite = await _favouriteBusinessRules.CheckIfExistsById(deleteFavouriteRequest.Id);
@@ -56,6 +58,7 @@ public class FavouriteManager : IFavouriteService
         return _mapper.Map<Paginate<GetListFavouriteResponse>>(favs);
     }
 
+	[SecuredOperation("admin")]
 	public async Task<UpdatedFavouriteResponse> UpdateAsync(UpdateFavouriteRequest updateFavouriteRequest)
 	{
 		Favourite favourite = await _favouriteBusinessRules.CheckIfExistsById(updateFavouriteRequest.Id);

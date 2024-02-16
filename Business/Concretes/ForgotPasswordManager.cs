@@ -3,6 +3,7 @@ using Business.Abstracts;
 using Business.Dtos.Requests.ForgotPassword;
 using Business.Dtos.Responses.ForgotPassword;
 using Business.Rules;
+using Core.Aspects.Autofac.SecuredOperation;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
 using Entities.Concretes;
@@ -20,6 +21,7 @@ public class ForgotPasswordManager : IForgotPasswordService
         _forgotPasswordBusinessRules = forgotPasswordBusinessRules;
 
     }
+    
     public async Task<CreatedForgotPasswordResponse> AddAsync(CreateForgotPasswordRequest createForgotPasswordRequest)
     {
         ForgotPassword forgotPassword = _mapper.Map<ForgotPassword>(createForgotPasswordRequest);
@@ -57,6 +59,7 @@ public class ForgotPasswordManager : IForgotPasswordService
         return _mapper.Map<GetForgotPasswordResponse>(result);
     }
 
+    [SecuredOperation("admin")]
     public async Task<IPaginate<GetListForgotPasswordResponse>> GetListAsync(PageRequest pageRequest)
     {
         var result = await _forgotPasswordDal.GetListAsync(index: pageRequest.PageIndex, size: pageRequest.PageSize);
