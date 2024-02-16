@@ -45,5 +45,14 @@ public class AnswersController : ControllerBase
     {
         var result = await _answerService.UpdateAsync(updateAnswerRequest);
         return Ok(result);
+    } 
+    
+    [HttpGet("getbyquestionid")]
+    
+    public async Task<IActionResult> GetListByQuestionId([FromQuery] PageRequest pageRequest, Guid questionId)
+    {
+        var result = await _answerService.GetListByQuestionIdAsync(pageRequest, questionId);
+        return Ok(result);
     }
+    
 }
