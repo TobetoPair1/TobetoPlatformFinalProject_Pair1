@@ -46,7 +46,7 @@ public class PersonalInfoManager : IPersonalInfoService
 
 	public async Task<GetPersonalInfoResponse> GetByUserIdAsync(GetPersonalInfoRequest getPersonalInfoRequest)
 	{
-		PersonalInfo personalInfo = await _personalInfoDal.GetAsync(p => p.UserId == getPersonalInfoRequest.UserId);
+		PersonalInfo personalInfo = await _personalInfoDal.GetAsync(p => p.UserId == getPersonalInfoRequest.UserId, include: p=>p.Include(p=>p.User));
 		return _mapper.Map<GetPersonalInfoResponse>(personalInfo);
 	}
 
@@ -58,7 +58,8 @@ public class PersonalInfoManager : IPersonalInfoService
 
     public async Task<UpdatedPersonalInfoResponse> UpdateAsync(UpdatePersonalInfoRequest updatePersonalInfoRequest)
     {        
-        PersonalInfo personalInfo = await _personalInfoBusinessRules.CheckIfExistsById(updatePersonalInfoRequest.Id);
+        await _personalInfoBusinessRules.CheckIfExistsById(updatePersonalInfoRequest.Id);
+        PersonalInfo personalInfo = await _personalInfoDal.GetAsync(p=>p.Id == updatePersonalInfoRequest.Id,include:p=>p.Include(p=>p.User));
         _mapper.Map(updatePersonalInfoRequest,personalInfo);
         PersonalInfo updatedPersonalInfo = await _personalInfoDal.UpdateAsync(personalInfo);
         return _mapper.Map<UpdatedPersonalInfoResponse>(updatedPersonalInfo);

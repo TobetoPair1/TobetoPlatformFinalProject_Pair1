@@ -23,7 +23,7 @@ public class PersonalInfosController : ControllerBase
         return Ok(result);
     }
 
-    [HttpGet("getlist")]
+    [HttpGet("getall")]
     public async Task<IActionResult> GetList([FromQuery] PageRequest pageRequest)
     {
         var result = await _personalInfoService.GetListAsync(pageRequest);
