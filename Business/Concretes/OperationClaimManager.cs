@@ -35,8 +35,8 @@ public class OperationClaimManager : IOperationClaimService
         CreatedOperationClaimResponse result = _mapper.Map<CreatedOperationClaimResponse>(operationClaim);
         return result;
     }
-
-    public async Task<CreatedUserOperationClaimResponse> AssignOperationClaimAsync(CreateUserOperationClaimRequest createUserOperationClaimRequest)
+	[SecuredOperation("admin")]
+	public async Task<CreatedUserOperationClaimResponse> AssignOperationClaimAsync(CreateUserOperationClaimRequest createUserOperationClaimRequest)
     {
         return await _userOperationClaimService.AddAsync(createUserOperationClaimRequest);
     }

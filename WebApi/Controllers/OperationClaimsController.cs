@@ -1,5 +1,6 @@
 ﻿using Business.Abstracts;
 using Business.Dtos.Requests.OperationClaim;
+using Business.Dtos.Requests.UserOperationClaim;
 using Core.DataAccess.Paging;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,7 +22,13 @@ public class OperationClaimsController : ControllerBase
         var result = await _operationClaimService.AddAsync(operationClaimRequest);
         return Ok(result);
     }
-    [HttpGet("get")]
+	[HttpPost("assigntouser")]
+	public async Task<IActionResult> AssigntToUser([FromBody] CreateUserOperationClaimRequest createUserOperationClaimRequest)
+	{
+		var result = await _operationClaimService.AssignOperationClaimAsync(createUserOperationClaimRequest);
+		return Ok(result);
+	}
+	[HttpGet("get")]
     public async Task<IActionResult> Get([FromQuery] GetOperationClaimRequest getOperationClaimRequest)
     {
         var result = await _operationClaimService.GetByIdAsync(getOperationClaimRequest);
