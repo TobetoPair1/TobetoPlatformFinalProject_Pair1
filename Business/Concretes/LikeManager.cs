@@ -3,6 +3,7 @@ using Business.Abstracts;
 using Business.Dtos.Requests.Like;
 using Business.Dtos.Responses.Like;
 using Business.Rules;
+using Core.Aspects.Autofac.SecuredOperation;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
 using Entities.Concretes;
@@ -22,6 +23,7 @@ public class LikeManager : ILikeService
         _likeBusinessRules = likeBusinessRules;
     }
 
+    [SecuredOperation("admin")]
     public async Task<CreatedLikeResponse> AddAsync(CreateLikeRequest createLikeRequest)
     {
         Like like = _mapper.Map<Like>(createLikeRequest);
@@ -30,6 +32,7 @@ public class LikeManager : ILikeService
         return createdLikeResponse;
     }
 
+    [SecuredOperation("admin")]
     public async Task<DeletedLikeResponse> DeleteAsync(DeleteLikeRequest deleteLikeRequest)
 	{
         Like like = await _likeBusinessRules.CheckIfExistsById(deleteLikeRequest.Id);
@@ -50,6 +53,7 @@ public class LikeManager : ILikeService
         return _mapper.Map<Paginate<GetListLikeResponse>>(result);
     }
 
+    [SecuredOperation("admin")]
     public async Task<UpdatedLikeResponse> UpdateAsync(UpdateLikeRequest updateLikeRequest)
     {
         Like like = await _likeBusinessRules.CheckIfExistsById(updateLikeRequest.Id);
