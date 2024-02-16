@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using Business.Abstracts;
 using Business.Dtos.Requests.OperationClaim;
+using Business.Dtos.Requests.UserOperationClaim;
 using Business.Dtos.Responses.OperationClaim;
+using Business.Dtos.Responses.UserOperationClaim;
 using Business.Rules;
 using Core.Aspects.Autofac.SecuredOperation;
 using Core.DataAccess.Paging;
@@ -15,12 +17,14 @@ public class OperationClaimManager : IOperationClaimService
     IMapper _mapper;
     IOperationClaimDal _operationClaimDal;
     OperationClaimBusinessRules _operationClaimBusinessRules;
+    IUserOperationClaimService _userOperationClaimService;
 
-    public OperationClaimManager(IMapper mapper, IOperationClaimDal operationClaimDal, OperationClaimBusinessRules operationClaimBusinessRules)
+    public OperationClaimManager(IMapper mapper, IOperationClaimDal operationClaimDal, OperationClaimBusinessRules operationClaimBusinessRules, IUserOperationClaimService userOperationClaimService)
     {
         _mapper = mapper;
         _operationClaimDal = operationClaimDal;
         _operationClaimBusinessRules = operationClaimBusinessRules;
+        _userOperationClaimService = userOperationClaimService;
     }
 
     [SecuredOperation("admin")]
@@ -30,6 +34,11 @@ public class OperationClaimManager : IOperationClaimService
         var createdAnnouncement = await _operationClaimDal.AddAsync(operationClaim);
         CreatedOperationClaimResponse result = _mapper.Map<CreatedOperationClaimResponse>(operationClaim);
         return result;
+    }
+
+    public async Task<CreatedUserOperationClaimResponse> AssignOperationClaimAsync(CreateUserOperationClaimRequest createUserOperationClaimRequest)
+    {
+        return await _userOperationClaimService.AddAsync(createUserOperationClaimRequest);
     }
 
     [SecuredOperation("admin")]
