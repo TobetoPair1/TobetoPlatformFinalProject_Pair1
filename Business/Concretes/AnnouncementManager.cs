@@ -43,8 +43,8 @@ public class AnnouncementManager : IAnnouncementService
         var result = await _announcementDal.GetAsync(a => a.Id == getAnnouncementRequest.Id);
         return _mapper.Map<GetAnnouncementResponse>(result);
     }
-
-    public async Task<IPaginate<GetListAnnouncementResponse>> GetListAsync(PageRequest pageRequest)
+	[SecuredOperation("admin")]
+	public async Task<IPaginate<GetListAnnouncementResponse>> GetListAsync(PageRequest pageRequest)
     {
         var result = await _announcementDal.GetListAsync(index: pageRequest.PageIndex, size: pageRequest.PageSize);
         return _mapper.Map<Paginate<GetListAnnouncementResponse>>(result);

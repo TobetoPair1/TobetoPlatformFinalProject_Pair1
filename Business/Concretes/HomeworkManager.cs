@@ -23,7 +23,7 @@ public class HomeworkManager : IHomeworkService
         _homeworkBusinessRules = homeworkBusinessRules;
     }
     
-    [SecuredOperation("admin, instructor")]
+    [SecuredOperation("admin,instructor")]
     public async Task<CreatedHomeworkResponse> AddAsync(CreateHomeworkRequest createHomeworkRequest)
     {
         Homework homework = _mapper.Map<Homework>(createHomeworkRequest);
