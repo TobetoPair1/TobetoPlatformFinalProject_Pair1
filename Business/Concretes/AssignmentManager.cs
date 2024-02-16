@@ -3,6 +3,7 @@ using Business.Abstracts;
 using Business.Dtos.Requests.Assignment;
 using Business.Dtos.Responses.Assignment;
 using Business.Rules;
+using Core.Aspects.Autofac.SecuredOperation;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
 using Entities.Concretes;
@@ -22,15 +23,15 @@ public class AssignmentManager : IAssignmentService
         _mapper = mapper;
         _assignmentBusinessRules = assignmentBusinessRules;
     }
-
-    public async Task<CreatedAssigmentResponse> AddAsync(CreateAssigmentRequest createAssigmentRequest)
+	[SecuredOperation("admin")]
+	public async Task<CreatedAssigmentResponse> AddAsync(CreateAssigmentRequest createAssigmentRequest)
     {
         Assignment asg = _mapper.Map<Assignment>(createAssigmentRequest);
         Assignment addedAsg = await _assigmentDal.AddAsync(asg);
         return _mapper.Map<CreatedAssigmentResponse>(addedAsg);
     }
-
-    public async Task<DeletedAssigmentResponse> DeleteAsync(DeleteAssigmentRequest deleteAssigmentRequest)
+	[SecuredOperation("admin")]
+	public async Task<DeletedAssigmentResponse> DeleteAsync(DeleteAssigmentRequest deleteAssigmentRequest)
     {
         Assignment asg = await _assignmentBusinessRules.CheckIfExistsById(deleteAssigmentRequest.Id);
         Assignment deletedAsg = await _assigmentDal.DeleteAsync(asg);
@@ -42,8 +43,8 @@ public class AssignmentManager : IAssignmentService
         Assignment asg = await _assigmentDal.GetAsync(a=>a.Id==id, include: a=>a.Include(a=>a.Course));
         return _mapper.Map<GetAssigmentResponse>(asg);
     }
-
-    public async Task<UpdatedAssigmentResponse> UpdateAsync(UpdateAssigmentRequest updateAssigmentRequest)
+	[SecuredOperation("admin")]
+	public async Task<UpdatedAssigmentResponse> UpdateAsync(UpdateAssigmentRequest updateAssigmentRequest)
     {
         await _assignmentBusinessRules.CheckCourseIfExists(updateAssigmentRequest.CourseId);
         Assignment asg = await _assignmentBusinessRules.CheckIfExistsById(updateAssigmentRequest.Id);
@@ -51,8 +52,8 @@ public class AssignmentManager : IAssignmentService
         Assignment updatedAsg = await _assigmentDal.UpdateAsync(asg);
         return _mapper.Map<UpdatedAssigmentResponse>(updatedAsg);
     }
-
-    public async Task<IPaginate<GetListAssigmentResponse>> GetListAsync(PageRequest pageRequest)
+	[SecuredOperation("admin")]
+	public async Task<IPaginate<GetListAssigmentResponse>> GetListAsync(PageRequest pageRequest)
     {
         var assigments = await _assigmentDal.GetListAsync(index: pageRequest.PageIndex, size: pageRequest.PageSize, include: a=>a.Include(a => a.Course));
         return _mapper.Map<Paginate<GetListAssigmentResponse>>(assigments);

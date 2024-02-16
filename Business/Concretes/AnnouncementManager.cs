@@ -3,6 +3,7 @@ using Business.Abstracts;
 using Business.Dtos.Requests.Announcement;
 using Business.Dtos.Responses.Announcement;
 using Business.Rules;
+using Core.Aspects.Autofac.SecuredOperation;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
 using Entities.Concretes;
@@ -20,6 +21,7 @@ public class AnnouncementManager : IAnnouncementService
 		_announcementDal = announcementDal;
 		_announcementBusinessRules = announcementBusinessRules;
 	}
+	[SecuredOperation("admin")]
 	public async Task<CreatedAnnouncementResponse> AddAsync(CreateAnnouncementRequest createAnnouncementRequest)
     {
         Announcement announcement = _mapper.Map<Announcement>(createAnnouncementRequest);
@@ -27,8 +29,8 @@ public class AnnouncementManager : IAnnouncementService
         CreatedAnnouncementResponse createdAnnouncementResponse = _mapper.Map<CreatedAnnouncementResponse>(createdAnnouncement);
         return createdAnnouncementResponse;
     }
-
-    public async Task<DeletedAnnouncementResponse> DeleteAsync(DeleteAnnouncementRequest deleteAnnouncementRequest)
+	[SecuredOperation("admin")]
+	public async Task<DeletedAnnouncementResponse> DeleteAsync(DeleteAnnouncementRequest deleteAnnouncementRequest)
     {
         Announcement announcement = await _announcementBusinessRules.CheckIfExistsById(deleteAnnouncementRequest.Id);
         var deletedAnnouncement = await _announcementDal.DeleteAsync(announcement);
@@ -47,8 +49,8 @@ public class AnnouncementManager : IAnnouncementService
         var result = await _announcementDal.GetListAsync(index: pageRequest.PageIndex, size: pageRequest.PageSize);
         return _mapper.Map<Paginate<GetListAnnouncementResponse>>(result);
     }
-
-    public async Task<UpdatedAnnouncementResponse> UpdateAsync(UpdateAnnouncementRequest updateAnnouncementRequest)
+	[SecuredOperation("admin")]
+	public async Task<UpdatedAnnouncementResponse> UpdateAsync(UpdateAnnouncementRequest updateAnnouncementRequest)
     {
         Announcement announcement = await _announcementBusinessRules.CheckIfExistsById(updateAnnouncementRequest.Id);
 		_mapper.Map(updateAnnouncementRequest,announcement);

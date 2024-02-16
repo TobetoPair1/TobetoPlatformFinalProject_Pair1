@@ -5,6 +5,7 @@ using Business.Dtos.Requests.UserApplication;
 using Business.Dtos.Responses.Application;
 using Business.Dtos.Responses.UserApplication;
 using Business.Rules;
+using Core.Aspects.Autofac.SecuredOperation;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
 using Entities.Concretes;
@@ -25,20 +26,21 @@ public class ApplicationManager:IApplicationService
         _userApplicationService = userApplicationService;
         _applicationBusinessRules = applicationBusinessRules;
     }
-    public async Task<CreatedApplicationResponse> AddAsync(CreateApplicationRequest createApplicationRequest)
+	[SecuredOperation("admin")]
+	public async Task<CreatedApplicationResponse> AddAsync(CreateApplicationRequest createApplicationRequest)
     {
         Application application = _mapper.Map<Application>(createApplicationRequest);
         var createdApplication = await _applicationDal.AddAsync(application);
         CreatedApplicationResponse result = _mapper.Map<CreatedApplicationResponse>(application);
         return result;
     }
-
-    public async Task<CreatedUserApplicationResponse> AssignApplicationAsync(CreateUserApplicationRequest createUserApplicationRequest)
+	[SecuredOperation("admin")]
+	public async Task<CreatedUserApplicationResponse> AssignApplicationAsync(CreateUserApplicationRequest createUserApplicationRequest)
     {
         return await _userApplicationService.AddAsync(createUserApplicationRequest);
     }
-
-    public async Task<DeletedApplicationResponse> DeleteAsync(DeleteApplicationRequest deleteApplicationRequest)
+	[SecuredOperation("admin")]
+	public async Task<DeletedApplicationResponse> DeleteAsync(DeleteApplicationRequest deleteApplicationRequest)
     {
         Application application = await _applicationBusinessRules.CheckIfExistsById(deleteApplicationRequest.Id);
         var deletedApplication = await _applicationDal.DeleteAsync(application);
@@ -55,13 +57,14 @@ public class ApplicationManager:IApplicationService
     {
         return await _userApplicationService.GetListByUserIdAsync(userId,pageRequest);
     }
-
-    public async Task<IPaginate<GetListApplicationResponse>> GetListAsync(PageRequest pageRequest)
+	[SecuredOperation("admin")]
+	public async Task<IPaginate<GetListApplicationResponse>> GetListAsync(PageRequest pageRequest)
     {
         var result = await _applicationDal.GetListAsync(index: pageRequest.PageIndex, size: pageRequest.PageSize);
         return _mapper.Map<Paginate<GetListApplicationResponse>>(result);
     }
-    public async Task<UpdatedApplicationResponse> UpdateAsync(UpdateApplicationRequest updateApplicationRequest)
+	[SecuredOperation("admin")]
+	public async Task<UpdatedApplicationResponse> UpdateAsync(UpdateApplicationRequest updateApplicationRequest)
     {
         Application application = await _applicationBusinessRules.CheckIfExistsById(updateApplicationRequest.Id);
 		_mapper.Map(updateApplicationRequest,application);
