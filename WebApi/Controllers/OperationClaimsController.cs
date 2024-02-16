@@ -1,6 +1,7 @@
 ﻿using Business.Abstracts;
 using Business.Dtos.Requests.OperationClaim;
 using Business.Dtos.Requests.UserOperationClaim;
+using Business.Dtos.Responses.Announcement;
 using Core.DataAccess.Paging;
 using Microsoft.AspNetCore.Mvc;
 
@@ -34,6 +35,13 @@ public class OperationClaimsController : ControllerBase
         var result = await _operationClaimService.GetByIdAsync(getOperationClaimRequest);
         return Ok(result);
     }
+    
+    [HttpPut]
+    public async Task<IActionResult> Update([FromBody] UpdateOperationClaimRequest updateOperationClaimRequest)
+    {
+        var result = await _operationClaimService.UpdateAsync(updateOperationClaimRequest);
+        return Ok(result);
+    }
 
     [HttpGet("getall")]
     public async Task<IActionResult> GetAll([FromQuery] PageRequest pageRequest)
@@ -48,4 +56,5 @@ public class OperationClaimsController : ControllerBase
         var result = await _operationClaimService.DeleteAsync(deleteOperationClaimRequest);
         return Ok(result);
     }
+    
 }
