@@ -21,9 +21,6 @@ public class CourseConfiguration : IEntityTypeConfiguration<Course>
 		builder.Property(c => c.ContentCount).HasColumnName("ContentCount").IsRequired();
 		builder.Property(c => c.ProducingCompany).HasColumnName("ProducingCompany").IsRequired();
 
-		builder.HasIndex(c => c.Name, "UK_Courses_Name").IsUnique();
-
-
 		builder.HasQueryFilter(c => !c.DeletedDate.HasValue);
 		
 		builder.HasMany(c => c.Homeworks).WithOne(h => h.Course).HasForeignKey(h => h.CourseId).OnDelete(DeleteBehavior.NoAction);
