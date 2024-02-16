@@ -3,6 +3,7 @@ using Business.Abstracts;
 using Business.Dtos.Requests.OperationClaim;
 using Business.Dtos.Responses.OperationClaim;
 using Business.Rules;
+using Core.Aspects.Autofac.SecuredOperation;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
 using Entities.Concretes;
@@ -22,6 +23,7 @@ public class OperationClaimManager : IOperationClaimService
         _operationClaimBusinessRules = operationClaimBusinessRules;
     }
 
+    [SecuredOperation("admin")]
     public async Task<CreatedOperationClaimResponse> AddAsync(CreateOperationClaimRequest createOperationClaimRequest)
     {
         OperationClaim operationClaim = _mapper.Map<OperationClaim>(createOperationClaimRequest);
@@ -30,6 +32,7 @@ public class OperationClaimManager : IOperationClaimService
         return result;
     }
 
+    [SecuredOperation("admin")]
     public async Task<DeletedOperationClaimResponse> DeleteAsync(DeleteOperationClaimRequest deleteOperationClaimRequest)
     {
         OperationClaim operationClaim = await _operationClaimBusinessRules.CheckIfExistsById(deleteOperationClaimRequest.Id);
@@ -44,12 +47,14 @@ public class OperationClaimManager : IOperationClaimService
         return _mapper.Map<GetOperationClaimResponse>(result);
     }
 
+    [SecuredOperation("admin")]
     public async Task<IPaginate<GetListOperationClaimResponse>> GetListAsync(PageRequest pageRequest)
     {
         var result = await _operationClaimDal.GetListAsync(index: pageRequest.PageIndex, size: pageRequest.PageSize);
         return _mapper.Map<Paginate<GetListOperationClaimResponse>>(result);
     }
 
+    [SecuredOperation("admin")]
     public async Task<UpdatedOperationClaimResponse> UpdateAsync(UpdateOperationClaimRequest updateOperationClaimRequest)
     {
         OperationClaim operationClaim = await _operationClaimBusinessRules.CheckIfExistsById(updateOperationClaimRequest.Id);

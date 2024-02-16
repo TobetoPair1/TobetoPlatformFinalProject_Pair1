@@ -5,6 +5,7 @@ using Business.Dtos.Requests.Session;
 using Business.Dtos.Responses.InstructorSession;
 using Business.Dtos.Responses.Session;
 using Business.Rules;
+using Core.Aspects.Autofac.SecuredOperation;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
 using Entities.Concretes;
@@ -26,6 +27,7 @@ public class SessionManager : ISessionService
         _sessionBusinessRules = sessionBusinessRules;
     }
 
+    [SecuredOperation("admin")]
     public async Task<CreatedSessionResponse> AddAsync(CreateSessionRequest createSessionRequest)
     {
         Session session = _mapper.Map<Session>(createSessionRequest);
@@ -45,6 +47,7 @@ public class SessionManager : ISessionService
         return await _instructorSessionService.GetListByInstructorIdAsync(instructorId, pageRequest);
     }
 
+    [SecuredOperation("admin")]
     public async Task<DeletedSessionResponse> DeleteAsync(DeleteSessionRequest deleteSessionRequest)
     {
         Session session = await _sessionBusinessRules.CheckIfExistsById(deleteSessionRequest.Id);
@@ -59,11 +62,15 @@ public class SessionManager : ISessionService
         return _mapper.Map<GetSessionResponse>(result);
     }
 
+    [SecuredOperation("admin")]
+
     public async Task<IPaginate<GetListSessionResponse>> GetListAsync(PageRequest pageRequest)
     {
         var result = await _sessionDal.GetListAsync(index: pageRequest.PageIndex, size: pageRequest.PageSize);
         return _mapper.Map<Paginate<GetListSessionResponse>>(result);
     }
+
+    [SecuredOperation("admin")]
 
     public async Task<UpdatedSessionResponse> UpdateAsync(UpdateSessionRequest updateSessionRequest)
     {

@@ -5,6 +5,7 @@ using Business.Dtos.Requests.UserSkill;
 using Business.Dtos.Responses.Skill;
 using Business.Dtos.Responses.UserSkill;
 using Business.Rules;
+using Core.Aspects.Autofac.SecuredOperation;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
 using Entities.Concretes;
@@ -26,6 +27,7 @@ public class SkillManager : ISkillService
         _skillBusinessRules = skillBusinessRules;
     }
 
+    [SecuredOperation("admin")]
     public async Task<CreatedSkillResponse> AddAsync(CreateSkillRequest createSkillRequest)
     {
         Skill skill = _mapper.Map<Skill>(createSkillRequest);
@@ -39,6 +41,7 @@ public class SkillManager : ISkillService
         return await _userSkillService.AddAsync(createUserSkillRequest);
     }
 
+    [SecuredOperation("admin")]
     public async Task<DeletedSkillResponse> DeleteAsync(DeleteSkillRequest deleteSkillRequest)
     {
         Skill skill = await _skillBusinessRules.CheckIfExistsById(deleteSkillRequest.Id);
@@ -58,12 +61,14 @@ public class SkillManager : ISkillService
         return await _userSkillService.GetListByUserIdAsync(userId, pageRequest);
     }
 
+    [SecuredOperation("admin")]
     public async Task<IPaginate<GetListSkillResponse>> GetListAsync(PageRequest pageRequest)
     {
         var result = await _skillDal.GetListAsync(index: pageRequest.PageIndex, size: pageRequest.PageSize);
         return _mapper.Map<Paginate<GetListSkillResponse>>(result);
     }
 
+    [SecuredOperation("admin")]
     public async Task<UpdatedSkillResponse> UpdateAsync(UpdateSkillRequest updateSkillRequest)
     {
         Skill skill = await _skillBusinessRules.CheckIfExistsById(updateSkillRequest.Id);

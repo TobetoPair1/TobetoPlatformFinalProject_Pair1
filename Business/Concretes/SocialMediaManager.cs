@@ -3,6 +3,7 @@ using Business.Abstracts;
 using Business.Dtos.Requests.SocialMedia;
 using Business.Dtos.Responses.SocialMedia;
 using Business.Rules;
+using Core.Aspects.Autofac.SecuredOperation;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
 using Entities.Concretes;
@@ -21,7 +22,8 @@ public class SocialMediaManager: ISocialMediaService
         _socialMediaDal = socialMediaDal;
         _socialMediaBusinessRules = socialMediaBusinessRules;
     }
-    
+
+    [SecuredOperation("admin")]
     public async Task<CreatedSocialMediaResponse> AddAsync(CreateSocialMediaRequest createSocialMediaRequest)
     {
         await _socialMediaBusinessRules.MaxCountAsync(createSocialMediaRequest.UserId);
@@ -31,6 +33,7 @@ public class SocialMediaManager: ISocialMediaService
         return createdSocialMediaResponse;
     }
 
+    [SecuredOperation("admin")]
 
     public async Task<IPaginate<GetListSocialMediaResponse>> GetListAsync(PageRequest pageRequest)
     {
@@ -38,7 +41,7 @@ public class SocialMediaManager: ISocialMediaService
         return _mapper.Map<Paginate<GetListSocialMediaResponse>>(result);
     }
 
-
+    [SecuredOperation("admin")]
     public async Task<DeletedSocialMediaResponse> DeleteAsync(DeleteSocialMediaRequest deleteSocialMediaRequest)
     {
         SocialMedia socialMedia = await _socialMediaBusinessRules.CheckIfExistsById(deleteSocialMediaRequest.Id);
@@ -53,6 +56,7 @@ public class SocialMediaManager: ISocialMediaService
         return _mapper.Map<Paginate<GetListSocialMediaResponse>>(result);
     }
 
+    [SecuredOperation("admin")]
     public async Task<UpdatedSocialMediaResponse> UpdateAsync(UpdateSocialMediaRequest updateSocialMediaRequest)
     {
         await _socialMediaBusinessRules.CheckUserIfExists(updateSocialMediaRequest.UserId);

@@ -3,6 +3,7 @@ using Business.Abstracts;
 using Business.Dtos.Requests.PersonalInfo;
 using Business.Dtos.Responses.PersonalInfo;
 using Business.Rules;
+using Core.Aspects.Autofac.SecuredOperation;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
 using Entities.Concretes;
@@ -31,6 +32,7 @@ public class PersonalInfoManager : IPersonalInfoService
         return result;
     }
 
+    [SecuredOperation("admin")]
     public async Task<DeletedPersonalInfoResponse> DeleteAsync(DeletePersonalInfoRequest deletePersonalInfoRequest)
     {
         PersonalInfo personalInfo = await _personalInfoBusinessRules.CheckIfExistsById(deletePersonalInfoRequest.Id);
@@ -50,12 +52,14 @@ public class PersonalInfoManager : IPersonalInfoService
 		return _mapper.Map<GetPersonalInfoResponse>(personalInfo);
 	}
 
-	public async Task<IPaginate<GetListPersonalInfoResponse>> GetListAsync(PageRequest pageRequest)
+    [SecuredOperation("admin")]
+    public async Task<IPaginate<GetListPersonalInfoResponse>> GetListAsync(PageRequest pageRequest)
     {
         var result = await _personalInfoDal.GetListAsync(include: pi => pi.Include(pi => pi.User), index: pageRequest.PageIndex, size: pageRequest.PageSize);
         return _mapper.Map<Paginate<GetListPersonalInfoResponse>>(result);
     }
 
+    [SecuredOperation("admin")]
     public async Task<UpdatedPersonalInfoResponse> UpdateAsync(UpdatePersonalInfoRequest updatePersonalInfoRequest)
     {        
         PersonalInfo personalInfo = await _personalInfoBusinessRules.CheckIfExistsById(updatePersonalInfoRequest.Id);
