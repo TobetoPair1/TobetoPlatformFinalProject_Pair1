@@ -8,10 +8,10 @@ namespace WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CalendarsControllersController : ControllerBase
+    public class CalendarsControllers : ControllerBase
     {
         ICalendarService _calendarService;
-        public CalendarsControllersController(ICalendarService calendarService)
+        public CalendarsControllers(ICalendarService calendarService)
         {
             _calendarService = calendarService;
         }
