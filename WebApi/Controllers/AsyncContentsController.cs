@@ -54,4 +54,11 @@ public class AsyncContentsController : ControllerBase
         var result = await _asyncContentService.DeleteAsync(deleteAsyncContentRequest);
         return Ok(result);
     }
+    
+    [HttpPut]
+    public async Task<IActionResult> Update([FromBody] UpdateAsyncContentRequest updateAsyncContentRequest)
+	{
+		var result = await _asyncContentService.UpdateAsync(updateAsyncContentRequest);
+		return Ok(result);
+	}
 }

@@ -1,5 +1,6 @@
 ﻿using Business.Abstracts;
 using Business.Dtos.Requests.ForgotPassword;
+using Core.DataAccess.Paging;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers;
@@ -24,5 +25,23 @@ public class ForgotPasswordController : ControllerBase
     public async Task<IActionResult> Add([FromBody] CreateForgotPasswordRequest createForgotPasswordRequest)
     {
         return Ok(await _forgotPasswordService.AddAsync(createForgotPasswordRequest));
+    }
+    
+    [HttpGet("getlist")]
+    public async Task<IActionResult> GetList([FromQuery] PageRequest pageRequest)
+    {
+        return Ok(await _forgotPasswordService.GetListAsync(pageRequest));
+    }
+    
+    [HttpGet("getbyid")]
+    public async Task<IActionResult> GetById([FromQuery] Guid id)
+    {
+        return Ok(await _forgotPasswordService.GetByIdAsync(id));
+    }
+    
+    [HttpDelete("delete")]
+    public async Task<IActionResult> Delete([FromBody] DeleteForgotPasswordRequest deleteForgotPasswordRequest)
+    {
+        return Ok(await _forgotPasswordService.DeleteAsync(deleteForgotPasswordRequest));
     }
 }

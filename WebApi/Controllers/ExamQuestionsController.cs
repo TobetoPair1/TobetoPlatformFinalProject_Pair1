@@ -36,4 +36,11 @@ public class ExamQuestionsController : ControllerBase
         var result = await _examQuestionService.DeleteAsync(deleteExamQuestionRequest);
         return Ok(result);
     }
+    
+    [HttpPost("assign")]
+    public async Task<IActionResult> AssignExam([FromBody] CreateExamQuestionRequest createExamQuestionRequest)
+    {
+        var result = await _examQuestionService.AssignExamAsync(createExamQuestionRequest);
+        return Ok(result);
+    }
 }
