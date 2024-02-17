@@ -15,10 +15,12 @@ public class UserSurveyManager : IUserSurveyService
     IMapper _mapper;
     IUserSurveyDal _userSurveyDal;
     UserSurveyBusinessRules _userSurveyBusinessRules;
-    public UserSurveyManager(IMapper mapper, IUserSurveyDal userSurveyDal)
+    public UserSurveyManager(IMapper mapper, IUserSurveyDal userSurveyDal,
+        UserSurveyBusinessRules userSurveyBusinessRules)
     {
         _mapper = mapper;
         _userSurveyDal = userSurveyDal;
+        _userSurveyBusinessRules = userSurveyBusinessRules;
     }
 
     public async Task<CreatedUserSurveyResponse> AddAsync(CreateUserSurveyRequest createUserSurveyRequest)

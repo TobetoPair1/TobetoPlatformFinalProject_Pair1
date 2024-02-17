@@ -24,7 +24,8 @@ public class CourseManager : ICourseService
     ILikeService _likeService;
     IFavouriteService _favouriteService;
     CourseBusinessRules _courseBusinessRules;
-	public CourseManager(ICourseDal courseDal, IMapper mapper, IUserCourseService userCourseService, ILikeService likeService, IFavouriteService favouriteService, CourseBusinessRules courseBusinessRules)
+	public CourseManager(ICourseDal courseDal, IMapper mapper, IUserCourseService userCourseService,
+		ILikeService likeService, IFavouriteService favouriteService, CourseBusinessRules courseBusinessRules)
 	{
 		_courseDal = courseDal;
 		_mapper = mapper;

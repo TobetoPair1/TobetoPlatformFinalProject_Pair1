@@ -17,10 +17,11 @@ public class UserSkillManager : IUserSkillService
     IMapper _mapper;
     UserSkillRules _userSkillRules;
 
-    public UserSkillManager(IUserSkillDal userSkillDal, IMapper mapper)
+    public UserSkillManager(IUserSkillDal userSkillDal, IMapper mapper, UserSkillRules userSkillRules)
     {
         _userSkillDal = userSkillDal;
         _mapper = mapper;
+        _userSkillRules = userSkillRules;
     }
 
     public async Task<CreatedUserSkillResponse> AddAsync(CreateUserSkillRequest createUserSkillRequest)

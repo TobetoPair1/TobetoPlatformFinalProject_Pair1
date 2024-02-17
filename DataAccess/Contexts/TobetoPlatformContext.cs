@@ -2,6 +2,8 @@
 using Entities.Concretes.CrossTables;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using File = Entities.Concretes.File;
+
 using System.Reflection;
 
 namespace DataAccess.Contexts;
@@ -34,7 +36,7 @@ public class TobetoPlatformContext:DbContext
     public DbSet<Exam> Exams { get; set; }
     public DbSet<ExamQuestion> ExamQuestions { get; set; }
     public DbSet<Favourite> Favourites { get; set; }
-    public DbSet<Entities.Concretes.File> Files { get; set; }
+    public DbSet<File> Files { get; set; }
     public DbSet<Homework> Homeworks { get; set; }
     public DbSet<HomeworkFile> HomeworkFiles { get; set; }
     public DbSet<Like> Likes { get; set; }
