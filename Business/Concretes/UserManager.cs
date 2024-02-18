@@ -75,8 +75,7 @@ public class UserManager : IUserService
         var result = await _userDal.GetListAsync(index: pageRequest.PageIndex, size: pageRequest.PageSize);
         return _mapper.Map<Paginate<GetListUserResponse>>(result);
     }
-
-    [SecuredOperation("admin")]
+        
     public async Task<UpdatedUserResponse> UpdateAsync(UpdateUserRequest updateUserRequest)
     {
         User user = await _userBusinessRules.CheckIfExistsById(updateUserRequest.Id);
