@@ -85,13 +85,13 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseCors();
+app.UseCors(); 
 
-app.UseAuthentication();
+app.UseAuthentication(); 
 
-app.UseAuthorization();
+app.UseAuthorization(); 
 
-app.ConfigureCustomExceptionMiddleware();
+app.ConfigureCustomExceptionMiddleware(); 
 
 app.MapControllers();
 

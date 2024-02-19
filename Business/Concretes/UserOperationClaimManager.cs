@@ -22,6 +22,10 @@ public class UserOperationClaimManager : IUserOperationClaimService
 	}
 	public async Task<CreatedUserOperationClaimResponse> AddAsync(CreateUserOperationClaimRequest createUserOperationClaimRequest)
     {
+        await
+            _userOperationClaimBusinessRules.CheckIfAlreadyExistsWithForeignKey(createUserOperationClaimRequest.UserId,
+                createUserOperationClaimRequest.OperationClaimId);
+
         UserOperationClaim userOperationClaim = _mapper.Map<UserOperationClaim>(createUserOperationClaimRequest);
         var createdUserOperationClaim = await _userOperationClaimDal.AddAsync(userOperationClaim);
         CreatedUserOperationClaimResponse result = _mapper.Map<CreatedUserOperationClaimResponse>(createdUserOperationClaim);
@@ -31,7 +35,7 @@ public class UserOperationClaimManager : IUserOperationClaimService
     public async Task<DeletedUserOperationClaimResponse> DeleteAsync(DeleteUserOperationClaimRequest deleteUserOperationClaimRequest)
     {
         UserOperationClaim userOperationClaim = await _userOperationClaimBusinessRules.CheckIfExistsWithForeignKey(deleteUserOperationClaimRequest.UserId, deleteUserOperationClaimRequest.OperationClaimId);
-        var deletedUserOperationClaim = await _userOperationClaimDal.DeleteAsync(userOperationClaim);
+        var deletedUserOperationClaim = await _userOperationClaimDal.DeleteAsync(userOperationClaim, true);
         DeletedUserOperationClaimResponse deletedUserOperationClaimResponse = _mapper.Map<DeletedUserOperationClaimResponse>(deletedUserOperationClaim);
         return deletedUserOperationClaimResponse;
     }

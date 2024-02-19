@@ -45,7 +45,7 @@ public class OperationClaimManager : IOperationClaimService
     public async Task<DeletedOperationClaimResponse> DeleteAsync(DeleteOperationClaimRequest deleteOperationClaimRequest)
     {
         OperationClaim operationClaim = await _operationClaimBusinessRules.CheckIfExistsById(deleteOperationClaimRequest.Id);
-        var deletedOperationClaim = await _operationClaimDal.DeleteAsync(operationClaim);
+        var deletedOperationClaim = await _operationClaimDal.DeleteAsync(operationClaim, true);
         DeletedOperationClaimResponse result = _mapper.Map<DeletedOperationClaimResponse>(deletedOperationClaim);
         return result;
     }

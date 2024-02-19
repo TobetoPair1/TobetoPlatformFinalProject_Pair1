@@ -1,4 +1,5 @@
-﻿using Core.Business.Rules;
+﻿using Business.Constants.Messages;
+using Core.Business.Rules;
 using Core.CrossCuttingConcerns.Exceptions.Types;
 using Core.Utilities.Messages;
 using DataAccess.Abstracts;
@@ -21,5 +22,14 @@ public class UserOperationClaimBusinessRules : BaseBusinessRules<UserOperationCl
 			throw new BusinessException(BusinessCoreMessages.CannotFindEntityError, BusinessCoreTitles.CannotFindError);
 		}
 		return entity;
+	}
+	
+	public async Task CheckIfAlreadyExistsWithForeignKey(Guid userId, Guid operationClaimId)
+	{
+		UserOperationClaim entity = await _userOperationClaimDal.GetAsync(eq => eq.UserId == userId && eq.OperationClaimId == operationClaimId);
+		if (entity != null)
+		{
+			throw new BusinessException(BusinessMessages.RoleAlreadyExists, BusinessTitles.AlreadyExistsError);
+		}
 	}
 }

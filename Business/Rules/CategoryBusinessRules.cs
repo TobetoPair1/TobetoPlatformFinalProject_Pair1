@@ -13,7 +13,7 @@ public class CategoryBusinessRules:BaseBusinessRules<Category>
     {
         _categoryDal = categoryDal;
     }
-	public async Task AlreadyExixsts(string name)
+	public async Task AlreadyExists(string name)
 	{
 		var entity = await _categoryDal.GetAsync(c => c.Name == name);
 		if (entity != null)

@@ -39,9 +39,4 @@ public class ForgotPasswordController : ControllerBase
         return Ok(await _forgotPasswordService.GetByIdAsync(id));
     }
     
-    [HttpDelete("delete")]
-    public async Task<IActionResult> Delete([FromBody] DeleteForgotPasswordRequest deleteForgotPasswordRequest)
-    {
-        return Ok(await _forgotPasswordService.DeleteAsync(deleteForgotPasswordRequest));
-    }
 }
