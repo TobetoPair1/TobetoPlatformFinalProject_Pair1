@@ -59,7 +59,7 @@ To set up the Tobeto Backend project locally, follow these steps:
 
 1. Clone the repository to your local machine:
    ```sh
-   git clone https://github.com/mehmetalbyrak/TobetoPlatformFinalProject_Pair1.git
+   git clone https://github.com/TobetoPair1/TobetoPlatformFinalProject_Pair1.git
 
 2. Open terminal & Navigate to the project directory:
 
