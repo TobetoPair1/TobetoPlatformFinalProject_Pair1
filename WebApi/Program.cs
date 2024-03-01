@@ -21,6 +21,7 @@ builder.Services.AddCors(option =>
     {
         configure.AllowAnyOrigin();
         configure.AllowAnyHeader();
+		configure.AllowAnyMethod();
     });
 });
 builder.Services.AddControllers();
